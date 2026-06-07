@@ -502,9 +502,6 @@ export default function Services() {
               <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
               </h2>
-              <p className="mt-5 md:mt-6 editorial-body text-base md:text-lg max-w-2xl leading-[1.75] mx-auto">
-                Scroll to explore each service - one focused story at a time.
-              </p>
             </div>
           </Container>
           <ServicesFallback />
@@ -532,9 +529,6 @@ export default function Services() {
               <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
               </h2>
-              <p className="mt-5 md:mt-6 editorial-body text-base md:text-lg max-w-2xl leading-[1.75] mx-auto text-brand-silver">
-                Scroll to explore each service - one focused story at a time.
-              </p>
             </div>
           </div>
 

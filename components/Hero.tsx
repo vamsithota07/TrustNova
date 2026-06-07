@@ -1,18 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Zap } from "lucide-react";
-import { useHasMounted } from "@/lib/hooks";
-import {
-  btnPrimary,
-  btnSecondary,
-  fadeInUp,
-  staggerContainer,
-  WHATSAPP_URL,
-} from "@/lib/constants";
+import { useLayoutEffect, useRef } from "react";
+import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { btnPrimary, btnSecondary, WHATSAPP_URL } from "@/lib/constants";
+import MagneticButton from "@/components/motion/MagneticButton";
 import Container from "@/components/Container";
-import CircuitBackground from "@/components/CircuitBackground";
 
 const services = [
   "Logo Design & Brand Identity",
@@ -32,117 +24,191 @@ const marqueeItems = [
   "Mobile-First Design",
 ];
 
-export default function Hero() {
-  const mounted = useHasMounted();
+const headlineLines = [
+  { text: "Your Brand.", accent: false },
+  { text: "Your Trust.", accent: false },
+  { text: "Your Growth.", accent: true },
+];
 
-  const headlineLines = [
-    { text: "Your Brand.", color: "text-brand-white" },
-    { text: "Your Trust.", color: "text-brand-white" },
-    { text: "Your Growth.", color: "text-brand-blue" },
-  ];
+export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const linesRef = useRef<HTMLDivElement>(null);
+  const copyRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const blob1Ref = useRef<HTMLDivElement>(null);
+  const blob2Ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    registerGsap();
+    const ctx = gsap.context(() => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const lines = linesRef.current?.querySelectorAll("[data-hero-line]");
+      if (!lines?.length) return;
+
+      try {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.7 })
+          .from(lines, { opacity: 0, y: "110%", rotateX: 12, duration: 1, stagger: 0.11, ease: "power4.out" }, "-=0.35")
+          .from(copyRef.current, { opacity: 0, y: 32, duration: 0.85 }, "-=0.5")
+          .from(ctaRef.current?.children ?? [], { opacity: 0, y: 24, duration: 0.75, stagger: 0.08 }, "-=0.55")
+          .from(cardRef.current, { opacity: 0, y: 60, rotate: -4, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
+          .from(marqueeRef.current, { opacity: 0, y: 16, duration: 0.7 }, "-=0.4");
+
+        if (cardRef.current) {
+          gsap.to(cardRef.current, {
+            y: -10,
+            rotate: -2,
+            duration: 5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        }
+
+        [blob1Ref, blob2Ref].forEach((ref, i) => {
+          if (!ref.current) return;
+          gsap.to(ref.current, {
+            y: i === 0 ? -30 : 24,
+            x: i === 0 ? 20 : -16,
+            duration: 7 + i * 2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        });
+
+        gsap.to(blob1Ref.current, {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+          y: -80,
+          opacity: 0.3,
+        });
+      } catch (error) {
+        console.warn("Hero animation skipped:", error);
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
-      className="relative w-full min-h-screen flex flex-col overflow-hidden bg-gradient-to-br from-brand-black via-brand-black to-brand-dark pt-20 sm:pt-24 md:pt-28 lg:pt-36"
+      className="hero-dot-grid relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-brand-black pt-28 sm:pt-32 md:pt-36"
     >
-      <CircuitBackground id="hero" />
+      <div
+        ref={blob1Ref}
+        className="floating-shape -top-16 right-[8%] h-72 w-72 bg-accent-sage/30 animate-float"
+        aria-hidden
+      />
+      <div
+        ref={blob2Ref}
+        className="floating-shape bottom-[20%] -left-20 h-56 w-56 bg-accent-warm/20 animate-float-delayed"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute top-1/3 right-[15%] hidden lg:block h-24 w-24 rounded-organic border border-brand-rule/80 bg-brand-card/60 shadow-soft rotate-12 animate-float-slow"
+        aria-hidden
+      />
 
-      <Container className="relative z-10 flex-1 py-12 md:py-16 lg:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] lg:grid-cols-2 gap-8 md:gap-6 lg:gap-20 items-center w-full min-w-0">
-          <motion.div
-            className="w-full min-w-0 order-1"
-            initial={false}
-            animate={mounted ? "visible" : false}
-            variants={staggerContainer(0.2)}
-          >
-            <motion.span
-              variants={fadeInUp}
-              className="inline-flex items-center gap-2 px-4 py-2 mb-6 md:mb-8 text-xs sm:text-sm font-semibold text-brand-bluedim bg-brand-accentbg border border-brand-blue/40 rounded-full animate-border-pulse"
+      <Container className="relative z-10 flex-1 flex flex-col justify-center py-12 md:py-16 lg:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 xl:gap-20 items-center w-full min-w-0">
+          <div className="w-full min-w-0 order-1 lg:-mt-6">
+            <span
+              ref={eyebrowRef}
+              className="inline-flex items-center gap-2.5 px-4 py-2 mb-8 md:mb-10 editorial-eyebrow border border-brand-rule rounded-pill bg-brand-card/80 shadow-soft backdrop-blur-sm"
             >
-              <Zap size={14} className="fill-brand-blue text-brand-blue shrink-0" />
+              <span className="h-2 w-2 rounded-full bg-accent-warm shrink-0" />
               India&apos;s Premier Brand & Creative Studio
-            </motion.span>
+            </span>
 
-            <div className="mb-6 md:mb-8 space-y-1">
+            <div ref={linesRef} className="mb-8 md:mb-10 space-y-1 md:space-y-2 overflow-hidden">
               {headlineLines.map((line) => (
-                <motion.h1
-                  key={line.text}
-                  variants={fadeInUp}
-                  className={`font-bold tracking-tight text-[2.5rem] md:text-[3.5rem] lg:text-[5rem] xl:text-[6rem] 2xl:text-[7rem] leading-[1.1] lg:leading-[1.05] ${line.color}`}
-                >
-                  {line.text}
-                </motion.h1>
+                <div key={line.text} className="overflow-hidden py-0.5">
+                  <h1
+                    data-hero-line
+                    className={`font-display font-bold text-display-lg lg:text-display-xl leading-[0.95] tracking-[-0.05em] ${
+                      line.accent ? "text-accent-warm italic" : "text-brand-white"
+                    }`}
+                  >
+                    {line.text}
+                  </h1>
+                </div>
               ))}
             </div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-brand-silver text-base lg:text-lg xl:text-xl mb-8 md:mb-10 leading-relaxed prose-width"
+            <p
+              ref={copyRef}
+              className="editorial-body text-base lg:text-xl mb-10 md:mb-12 max-w-xl leading-[1.75]"
             >
               We design logos that stop the scroll, build identities that command
               respect, and create websites that convert visitors into clients.
-            </motion.p>
+            </p>
 
-            <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full min-w-0"
-            >
-              <a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnPrimary}
-              >
-                Start Your Project →
-              </a>
-              <Link href="/services" className={btnSecondary}>
-                View Our Services
-              </Link>
-            </motion.div>
-          </motion.div>
+            <div ref={ctaRef} className="flex flex-col sm:flex-row flex-wrap gap-4 w-full min-w-0">
+              <MagneticButton href={WHATSAPP_URL} external className={btnPrimary}>
+                <span className="relative z-[1]">Start Your Project →</span>
+              </MagneticButton>
+              <MagneticButton href="/services" className={btnSecondary}>
+                <span className="relative z-[1]">View Our Services</span>
+              </MagneticButton>
+            </div>
+          </div>
 
-          <motion.div
-            className="w-full min-w-0 order-2"
-            initial={false}
-            animate={mounted ? { opacity: 1, y: 0 } : false}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-          >
-            <div className="bg-brand-dark border border-brand-rule rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.06)] animate-float w-full max-w-full md:max-w-none lg:ml-auto">
-              <h2 className="text-brand-white font-bold text-lg mb-4 md:mb-6">
+          <div ref={cardRef} className="w-full min-w-0 order-2 lg:justify-self-end lg:mt-8">
+            <div className="creative-card p-6 sm:p-8 md:p-10 w-full max-w-md lg:ml-auto rotate-[-1.5deg] hover:rotate-0 hover:shadow-card-hover transition-all duration-700 ease-premium">
+              <p className="editorial-eyebrow mb-5">What we do</p>
+              <h2 className="font-display font-bold text-2xl md:text-3xl text-brand-white mb-6 tracking-[-0.03em]">
                 Our Services
               </h2>
-              <ul className="space-y-3 md:space-y-4">
-                {services.map((title) => (
-                  <li key={title} className="flex items-center gap-3 min-w-0">
-                    <span className="text-brand-blue text-lg shrink-0">◆</span>
-                    <p className="text-brand-white font-semibold">{title}</p>
+              <ul className="space-y-4 md:space-y-5">
+                {services.map((title, i) => (
+                  <li key={title} className="flex items-start gap-4 min-w-0 group">
+                    <span className="text-[11px] font-semibold text-brand-dim mt-1 shrink-0 tabular-nums">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-brand-white font-medium text-sm md:text-base leading-snug group-hover:text-accent-warm transition-colors duration-300">
+                      {title}
+                    </p>
                   </li>
                 ))}
               </ul>
-              <div className="border-t border-brand-rule mt-5 md:mt-6 pt-5 md:pt-6">
-                <p className="text-brand-silver text-sm text-center">
+              <div className="border-t border-brand-rule mt-8 pt-6">
+                <p className="text-brand-silver text-xs md:text-sm tracking-wide">
                   Based in Hyderabad · Serving all of India
                 </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </Container>
 
-      <div className="relative z-10 w-full border-y border-brand-rule bg-brand-dark/90 py-3 backdrop-blur-sm md:py-4 overflow-hidden touch-pause-marquee">
+      <div
+        ref={marqueeRef}
+        className="relative z-10 w-full border-t border-brand-rule/80 bg-brand-dark/60 py-4 overflow-hidden touch-pause-marquee backdrop-blur-sm"
+      >
         <div className="flex marquee-track animate-marquee-mobile md:animate-marquee-tablet lg:animate-marquee hover:[animation-play-state:paused]">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
             <span
               key={`${item}-${i}`}
-              className="flex items-center shrink-0 text-brand-silver text-xs md:text-sm tracking-wide whitespace-nowrap"
+              className="flex items-center shrink-0 text-brand-silver text-xs md:text-sm tracking-[0.12em] uppercase whitespace-nowrap font-medium"
             >
-              <span className="mx-4">{item}</span>
-              <span className="text-brand-blue">◆</span>
+              <span className="mx-6 md:mx-8">{item}</span>
+              <span className="text-brand-dim">·</span>
             </span>
           ))}
         </div>
       </div>
     </section>
   );
-};
+}

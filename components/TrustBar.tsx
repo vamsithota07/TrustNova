@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Zap, CheckCircle, Lock, Star } from "lucide-react";
 import Container from "@/components/Container";
-import { fadeInUp, inViewOptions, staggerContainer } from "@/lib/constants";
+import RevealStagger from "@/components/motion/RevealStagger";
 
 const signals = [
   { icon: Zap, label: "Fast Delivery" },
@@ -14,29 +13,25 @@ const signals = [
 
 export default function TrustBar() {
   return (
-    <section className="w-full bg-brand-black border-y border-brand-rule py-6 md:py-8">
+    <section className="w-full bg-brand-card border-y border-brand-rule py-10 md:py-12 overflow-hidden">
       <Container>
-        <motion.div
-          initial={false}
-          whileInView="visible"
-          viewport={inViewOptions}
-          variants={staggerContainer(0.1)}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 min-w-0"
-        >
+        <RevealStagger className="flex gap-4 md:gap-6 overflow-x-auto snap-scroll-x scrollbar-hide pb-2 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible min-w-0">
           {signals.map(({ icon: Icon, label }) => (
-            <motion.div
+            <div
               key={label}
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 justify-center text-center sm:text-left min-w-0"
+              data-reveal-item
+              className="flex flex-col items-center lg:items-start gap-4 text-center lg:text-left min-w-[75vw] sm:min-w-[45vw] md:min-w-0 snap-center shrink-0 md:shrink group creative-card p-6 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:rounded-none hover:shadow-soft md:hover:shadow-none transition-shadow"
             >
-              <Icon className="w-5 h-5 text-brand-blue shrink-0" strokeWidth={2} />
-              <span className="text-brand-silver text-xs sm:text-sm md:text-base font-medium">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-rule bg-brand-dark transition-all duration-500 group-hover:border-accent-sage/40 group-hover:bg-accent-sage/5 group-hover:-rotate-6">
+                <Icon className="w-4 h-4 text-brand-white group-hover:text-accent-sage transition-colors shrink-0" strokeWidth={1.75} />
+              </div>
+              <span className="text-brand-white text-sm md:text-base font-semibold tracking-[-0.01em]">
                 {label}
               </span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </RevealStagger>
       </Container>
     </section>
   );
-};
+}

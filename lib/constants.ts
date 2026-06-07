@@ -93,10 +93,10 @@ export const siteMetadata = {
 };
 
 export const btnPrimary =
-  "inline-flex items-center justify-center min-h-[44px] w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-brand-blue text-white font-semibold text-base sm:text-lg rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-blue-glow active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-black";
+  "btn-magnetic group min-h-[52px] w-full sm:w-auto px-8 sm:px-10 py-4 bg-brand-white text-brand-black font-semibold text-sm sm:text-base rounded-pill shadow-soft transition-all duration-500 ease-premium hover:shadow-card-hover hover:scale-[1.03] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-white focus:ring-offset-2 focus:ring-offset-brand-black";
 
 export const btnSecondary =
-  "inline-flex items-center justify-center min-h-[44px] w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 border border-brand-blue text-brand-white font-semibold text-base sm:text-lg rounded-lg transition-all duration-300 hover:bg-brand-blue hover:text-white active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-black";
+  "btn-magnetic group min-h-[52px] w-full sm:w-auto px-8 sm:px-10 py-4 border-2 border-brand-rule text-brand-white font-semibold text-sm sm:text-base rounded-pill bg-brand-card/50 backdrop-blur-sm transition-all duration-500 ease-premium hover:border-brand-white/30 hover:shadow-soft active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-white/30 focus:ring-offset-2 focus:ring-offset-brand-black";
 
 export const btnOutline =
-  "inline-flex items-center justify-center min-h-[44px] w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-5 border border-brand-blue text-brand-white text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:bg-brand-blue hover:text-white active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 focus:ring-offset-brand-black";
+  "btn-magnetic group min-h-[52px] w-full sm:w-auto px-8 sm:px-10 py-4 border-2 border-brand-white/15 text-brand-white text-sm sm:text-base font-bold rounded-pill transition-all duration-500 ease-premium hover:bg-brand-white hover:text-brand-black active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-brand-white/30 focus:ring-offset-2 focus:ring-offset-brand-black";

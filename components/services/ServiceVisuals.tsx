@@ -58,19 +58,19 @@ function LogoVisual({ reduced }: { reduced: boolean }) {
       />
 
       <div
-        className="relative z-[1] mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-brand-white shadow-[0_8px_32px_rgba(107,130,168,0.2)]"
+        className="relative z-[1] mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-brand-white shadow-[0_8px_32px_rgba(107,143,117,0.2)]"
         style={{ animation: anim(reduced, "svc-logo-pulse 3s ease-in-out infinite") }}
       >
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden>
           <path
             d="M18 4L32 12V24L18 32L4 24V12L18 4Z"
-            stroke="#6B82A8"
+            stroke="#6B8F75"
             strokeWidth="1.5"
             fill="none"
           />
           <path
             d="M18 4V18M18 18L4 12M18 18L32 12"
-            stroke="rgba(107,130,168,0.6)"
+            stroke="rgba(107,143,117,0.6)"
             strokeWidth="1"
           />
         </svg>
@@ -100,7 +100,7 @@ function LogoVisual({ reduced }: { reduced: boolean }) {
 }
 
 function BrandVisual({ reduced }: { reduced: boolean }) {
-  const colors = ["#0D1117", "#6B82A8", "#3A4A5A", "#DDE1E9", "#F4F6F9"];
+  const colors = ["#0D1117", "#6B8F75", "#5A7A62", "#E8F0EA", "#F4F8F5"];
 
   return (
     <div className="flex h-[260px] flex-col gap-3.5 overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-7">
@@ -316,7 +316,7 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
       <div className="grid grid-cols-2 gap-2.5" style={fadeUpStyle(reduced, "0.5s")}>
         {[
           { label: "Uptime", value: "99.9%", color: "#27AE60" },
-          { label: "Backups", value: "Daily", color: "#6B82A8" },
+          { label: "Backups", value: "Daily", color: "#6B8F75" },
         ].map((stat) => (
           <div
             key={stat.label}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Space_Grotesk, Syne } from "next/font/google";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -16,6 +17,13 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  weight: ["500", "600", "700", "800"],
+  display: "swap",
+});
+
 export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
@@ -24,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={spaceGrotesk.variable}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${syne.variable}`}>
       <head>
         <JsonLd data={structuredDataGraph()} />
         <script
@@ -42,16 +50,14 @@ export default function RootLayout({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
-            alt=""
-            className="h-52 sm:h-56 md:h-60 w-auto invert object-contain animate-loader-blink"
+            alt="TrustNova"
+            className="h-32 sm:h-36 md:h-40 w-auto object-contain animate-loader-blink invert"
           />
-          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-muted">
-            <div className="h-full w-1/3 bg-brand-blue animate-pulse" />
-          </div>
         </div>
         <MotionProvider>
           <LoadingScreen />
-          <div id="site-content" className="w-full max-w-[100vw] overflow-x-clip min-w-0">
+          <div id="site-content" className="relative w-full max-w-[100vw] overflow-x-clip min-w-0">
+            <div className="pointer-events-none fixed inset-0 z-[1] grain-overlay opacity-40" aria-hidden />
             <ScrollProgress />
             <Navbar />
             {children}

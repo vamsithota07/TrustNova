@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Reveal from "@/components/motion/Reveal";
 
 interface SectionHeaderProps {
   eyebrow: string;
@@ -8,6 +8,8 @@ interface SectionHeaderProps {
   subtext?: string;
   className?: string;
   align?: "center" | "left";
+  size?: "default" | "large";
+  highlight?: string;
 }
 
 export default function SectionHeader({
@@ -16,41 +18,47 @@ export default function SectionHeader({
   subtext,
   className = "",
   align = "center",
+  size = "default",
+  highlight,
 }: SectionHeaderProps) {
   const alignClass = align === "center" ? "text-center" : "text-left";
+  const headingSize =
+    size === "large"
+      ? "text-display-sm md:text-display-md lg:text-[4.5rem]"
+      : "text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm";
+
+  const renderHeading = () => {
+    if (highlight && heading.includes(highlight)) {
+      const [before, after] = heading.split(highlight);
+      return (
+        <>
+          {before}
+          <span className="italic text-accent-warm">{highlight}</span>
+          {after}
+        </>
+      );
+    }
+    return heading;
+  };
 
   return (
-    <div className={`${alignClass} mb-10 md:mb-12 lg:mb-16 min-w-0 ${className}`}>
-      <motion.p
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-brand-bluedim text-xs sm:text-sm font-semibold tracking-widest uppercase mb-3 md:mb-4"
-      >
-        {eyebrow}
-      </motion.p>
-      <motion.h2
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-        className="text-brand-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-balance"
-      >
-        {heading}
-      </motion.h2>
+    <div className={`${alignClass} mb-12 md:mb-16 lg:mb-20 min-w-0 ${className}`}>
+      <Reveal delay={0}>
+        <p className="editorial-eyebrow mb-4 md:mb-5">{eyebrow}</p>
+      </Reveal>
+      <Reveal delay={0.08} y={64}>
+        <h2 className={`editorial-heading ${headingSize}`}>{renderHeading()}</h2>
+      </Reveal>
       {subtext && (
-        <motion.p
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className={`mt-3 md:mt-4 text-brand-silver text-sm md:text-base lg:text-lg prose-width ${
-            align === "center" ? "mx-auto" : ""
-          }`}
-        >
-          {subtext}
-        </motion.p>
+        <Reveal delay={0.16} y={40}>
+          <p
+            className={`mt-5 md:mt-6 editorial-body text-base md:text-lg max-w-2xl leading-[1.75] ${
+              align === "center" ? "mx-auto" : ""
+            }`}
+          >
+            {subtext}
+          </p>
+        </Reveal>
       )}
     </div>
   );

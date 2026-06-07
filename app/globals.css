@@ -9,26 +9,41 @@
 }
 
 :root {
-  --accent: #6b82a8;
-  --accent-dim: #4a6490;
+  --accent: #c4674a;
+  --accent-dim: #7a9e87;
+  --bg-primary: #faf8f5;
+  --bg-secondary: #f3f0ea;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --border: #e8e4dd;
 }
 
 html {
-  scroll-behavior: smooth;
   overflow-x: clip;
   width: 100%;
   max-width: 100%;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: rgba(74, 100, 144, 0.28) transparent;
+  scrollbar-color: rgba(26, 26, 26, 0.15) transparent;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
-  background-color: #ffffff;
-  color: #3a4a5a;
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
   overflow-x: clip;
   width: 100%;
   max-width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 p,
@@ -47,6 +62,10 @@ html.is-loading #site-content {
   pointer-events: none;
 }
 
+html.is-loading #page-loader {
+  display: flex;
+}
+
 html.is-loading body {
   overflow: hidden;
 }
@@ -61,8 +80,8 @@ html:not(.is-loading) #page-loader {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -70,12 +89,105 @@ html:not(.is-loading) #page-loader {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(74, 100, 144, 0.28);
+  background: rgba(26, 26, 26, 0.12);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(74, 100, 144, 0.45);
+  background: rgba(26, 26, 26, 0.22);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-brand-white font-display;
+  }
+}
+
+@layer components {
+  .editorial-eyebrow {
+    @apply text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em] text-brand-silver;
+  }
+
+  .editorial-heading {
+    @apply font-display font-bold text-brand-white text-balance tracking-[-0.04em];
+  }
+
+  .editorial-body {
+    @apply text-brand-silver leading-relaxed;
+  }
+
+  .surface-card {
+    @apply bg-brand-card border border-brand-rule rounded-organic shadow-card transition-all duration-500 ease-premium;
+  }
+
+  .surface-card-hover {
+    @apply hover:border-brand-rule hover:shadow-card-hover hover:-translate-y-1.5;
+  }
+
+  .creative-card {
+    @apply bg-brand-card border border-brand-rule rounded-organic-lg shadow-soft transition-all duration-500 ease-premium;
+  }
+
+  .hero-dot-grid {
+    background-image: radial-gradient(circle, rgba(26, 26, 26, 0.06) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .magnetic-btn {
+    @apply relative overflow-hidden;
+  }
+
+  .magnetic-btn::after {
+    content: "";
+    @apply absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,255,255,0.25), transparent 60%);
+  }
+
+  .magnetic-btn:hover::after {
+    @apply opacity-100;
+  }
+
+  .text-gradient-accent {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent-warm via-accent-sage to-accent-dusty;
+  }
+
+  .floating-shape {
+    @apply pointer-events-none absolute rounded-full blur-3xl opacity-40;
+  }
+
+  .section-shell {
+    @apply w-full py-section px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16;
+  }
+
+  .grain-overlay {
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .btn-magnetic {
+    @apply relative overflow-hidden;
+  }
+
+  .btn-magnetic::before {
+    content: "";
+    @apply absolute inset-0 bg-white/15 translate-y-full transition-transform duration-500 ease-premium rounded-[inherit];
+  }
+
+  .btn-magnetic:hover::before {
+    @apply translate-y-0;
+  }
+
+  .snap-scroll-x {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .snap-scroll-x > * {
+    scroll-snap-align: center;
+  }
 }
 
 @layer utilities {
@@ -101,90 +213,8 @@ html:not(.is-loading) #page-loader {
     animation-play-state: paused;
   }
 
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes svc-logo-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow: 0 8px 32px rgba(107, 130, 168, 0.2);
-  }
-  50% {
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(107, 130, 168, 0.35);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.8;
-  }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes barGrow {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes ping {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1.6);
-    opacity: 0;
+  .snap-scroll-x {
+    scroll-snap-type: x mandatory;
   }
 }
 

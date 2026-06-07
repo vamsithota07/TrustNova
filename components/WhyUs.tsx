@@ -55,7 +55,7 @@ export default function WhyUs() {
             <motion.div
               key={reason.title}
               variants={fadeInUp}
-              className="bg-brand-card rounded-xl p-5 md:p-8 border-l-4 border-brand-blue border border-brand-rule shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(107,130,168,0.12)] hover:border-brand-blue/60 active:scale-[0.99] min-w-0"
+              className="bg-brand-card rounded-xl p-5 md:p-8 border-l-4 border-brand-blue border border-brand-rule shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(107,143,117,0.12)] hover:border-brand-blue/60 active:scale-[0.99] min-w-0"
             >
               <span className="text-brand-blue font-bold text-lg">◆</span>
               <h3 className="text-brand-white font-bold text-lg mt-1 mb-2 md:mb-3">

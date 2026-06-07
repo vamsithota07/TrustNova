@@ -21,8 +21,8 @@ export default function Logo({
         alt="TrustNova - Brand & Creative Studio"
         width={280}
         height={120}
-        sizes="140px"
-        className={`${imageClassName} invert object-contain h-auto max-h-full`}
+        sizes="(max-width: 640px) 160px, 220px"
+        className={`${imageClassName} invert object-contain object-left`}
         priority={priority}
       />
     </span>

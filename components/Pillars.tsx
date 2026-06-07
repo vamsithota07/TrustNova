@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Target, Sparkles, Layers } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 import Container from "@/components/Container";
-import { staggerContainer, fadeInUp, inViewOptions } from "@/lib/constants";
+import RevealStagger from "@/components/motion/RevealStagger";
 
 const pillars = [
   {
@@ -29,41 +28,40 @@ const pillars = [
 
 export default function Pillars() {
   return (
-    <section id="pillars" className="w-full py-16 md:py-24 bg-brand-black">
+    <section id="pillars" className="relative w-full py-section bg-brand-black overflow-hidden">
+      <div className="floating-shape bottom-10 left-[5%] h-48 w-48 bg-accent-dusty/15" aria-hidden />
       <Container>
         <SectionHeader
           eyebrow="The TrustNova Difference"
           heading="Three Pillars of Everything We Do"
+          size="large"
+          highlight="Pillars"
         />
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 min-w-0"
-          initial={false}
-          whileInView="visible"
-          viewport={inViewOptions}
-          variants={staggerContainer(0.15)}
+        <RevealStagger
+          stagger={0.14}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 min-w-0 items-stretch"
         >
           {pillars.map((pillar, i) => (
-            <motion.div
+            <article
               key={pillar.title}
-              variants={fadeInUp}
-              className={`bg-brand-card rounded-xl p-6 md:p-8 border-l-4 border-brand-blue border border-brand-rule shadow-[0_2px_12px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue hover:shadow-card-hover active:scale-[0.99] min-w-0 ${
-                i === 2 ? "md:col-span-2 lg:col-span-1 md:max-w-md md:mx-auto lg:max-w-none lg:mx-0" : ""
-              }`}
+              data-reveal-item
+              className="group creative-card p-8 md:p-10 lg:p-12 min-w-0 h-full flex flex-col transition-all duration-500 ease-premium hover:shadow-card-hover hover:-translate-y-1"
             >
-              <div className="w-12 h-12 rounded-xl bg-brand-accentbg border border-brand-blue/20 flex items-center justify-center mb-4 md:mb-6">
-                <pillar.icon className="w-6 h-6 text-brand-blue" strokeWidth={1.5} />
+              <span className="text-[11px] font-semibold text-brand-dim mb-6 tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="w-14 h-14 rounded-2xl border border-brand-rule bg-brand-dark flex items-center justify-center mb-6 transition-all duration-500 group-hover:border-accent-warm/30 group-hover:bg-accent-warm/5">
+                <pillar.icon className="w-5 h-5 text-brand-white group-hover:text-accent-warm transition-colors" strokeWidth={1.5} />
               </div>
-              <h3 className="text-brand-white font-bold text-xl lg:text-2xl mb-2 md:mb-3">
+              <h3 className="font-display font-bold text-2xl lg:text-3xl mb-4 tracking-[-0.03em] text-brand-white">
                 {pillar.title}
               </h3>
-              <p className="text-brand-silver text-sm md:text-base leading-relaxed prose-width">
-                {pillar.description}
-              </p>
-            </motion.div>
+              <p className="editorial-body text-sm md:text-base flex-1 leading-[1.75]">{pillar.description}</p>
+            </article>
           ))}
-        </motion.div>
+        </RevealStagger>
       </Container>
     </section>
   );
-};
+}

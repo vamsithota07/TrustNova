@@ -84,7 +84,7 @@ function IndustryThumbnail({
       onClick={onClick}
       onMouseEnter={onPreload}
       onFocus={onPreload}
-      className="group text-left w-full min-w-0 max-w-full rounded-xl [overflow:clip] [contain:layout_paint] border border-brand-rule bg-brand-card shadow-[0_2px_12px_rgba(0,0,0,0.05)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-blue"
+      className="group text-left w-full min-w-0 max-w-full rounded-organic-lg [overflow:clip] [contain:layout_paint] border border-brand-rule bg-brand-card shadow-soft cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent-warm/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-card-hover hover:rotate-[0.5deg]"
     >
       <div
         ref={previewRef}
@@ -358,7 +358,7 @@ export default function IndustriesShowcase() {
                 ))}
               </div>
 
-              <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 min-w-0 max-w-full [&>*]:min-w-0 [overflow:clip]">
+              <motion.div className="flex gap-6 lg:gap-8 overflow-x-auto snap-scroll-x scrollbar-hide pb-4 lg:pb-6 min-w-0 max-w-full lg:grid lg:grid-cols-3 lg:overflow-visible lg:snap-none [&>*]:min-w-[85vw] sm:[&>*]:min-w-[45vw] lg:[&>*]:min-w-0 [overflow:clip]">
                 <AnimatePresence mode="popLayout">
                   {filtered.map((card) => (
                     <IndustryThumbnail

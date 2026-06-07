@@ -17,11 +17,11 @@ export default function About() {
   const isMobile = useIsMobile();
 
   return (
-    <section id="about" className="relative w-full py-16 md:py-24 bg-brand-dark overflow-hidden">
+    <section id="about" className="relative w-full py-section bg-brand-dark overflow-hidden">
       <div
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(107,130,168,0.08) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(107,143,117,0.08) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />
@@ -32,7 +32,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={inViewOptions}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-brand-blue uppercase tracking-widest text-xs sm:text-sm font-semibold mb-6"
+          className="editorial-eyebrow mb-8"
         >
           About Us
         </motion.p>

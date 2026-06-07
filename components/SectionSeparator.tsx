@@ -1,9 +1,9 @@
 export default function SectionSeparator() {
   return (
-    <div className="flex items-center justify-center py-2 w-full bg-brand-black">
-      <div className="h-px bg-brand-rule flex-1 max-w-[1400px]" />
-      <div className="text-brand-blue mx-4 text-lg shrink-0">◆</div>
-      <div className="h-px bg-brand-rule flex-1 max-w-[1400px]" />
+    <div className="w-full bg-brand-black py-1" aria-hidden>
+      <div className="mx-auto max-w-editorial px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-brand-rule to-transparent" />
+      </div>
     </div>
   );
 }

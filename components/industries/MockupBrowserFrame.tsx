@@ -50,7 +50,7 @@ export default function MockupBrowserFrame({
           <span className="w-3 h-3 rounded-full bg-[#28CA41]" />
         </div>
         <div className="flex-1 bg-[#0D0F14] rounded-md px-3 py-1.5 min-w-0">
-          <span className="text-[#6B82A8] text-xs font-mono truncate block">{url}</span>
+          <span className="text-brand-bluedim text-xs font-mono truncate block">{url}</span>
         </div>
       </div>
 

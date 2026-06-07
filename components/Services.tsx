@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { X } from "lucide-react";
+import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import SectionHeader from "./SectionHeader";
 import Container from "@/components/Container";
+import MagneticButton from "@/components/motion/MagneticButton";
 import ServiceVisual, { type ServiceVisualType } from "@/components/services/ServiceVisuals";
-import { staggerContainer, fadeInUp, inViewOptions, WHATSAPP_URL } from "@/lib/constants";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 type Service = {
   id: number;
@@ -16,6 +18,8 @@ type Service = {
   subtitle: string;
   visual: ServiceVisualType;
   bullets: string[];
+  rotate: number;
+  accent: "warm" | "sage" | "dusty" | "soft";
 };
 
 const services: Service[] = [
@@ -25,6 +29,8 @@ const services: Service[] = [
     title: "Logo Design & Brand Identity",
     subtitle: "A powerful logo is the foundation of every successful brand.",
     visual: "logo",
+    rotate: -2.5,
+    accent: "warm",
     bullets: [
       "3 unique initial concepts",
       "Unlimited refinements until 100% satisfied",
@@ -41,6 +47,8 @@ const services: Service[] = [
     title: "Complete Brand Identity Package",
     subtitle: "A cohesive visual language for your entire business.",
     visual: "brand",
+    rotate: 1.8,
+    accent: "sage",
     bullets: [
       "Everything in Logo Design, PLUS:",
       "Business card design (print-ready files)",
@@ -57,6 +65,8 @@ const services: Service[] = [
     title: "Website Design & Development",
     subtitle: "Your website is your most powerful sales tool - we build it right.",
     visual: "website",
+    rotate: -1.2,
+    accent: "dusty",
     bullets: [
       "Custom design tailored to your brand and goals",
       "Mobile-first responsive - perfect on all devices",
@@ -73,6 +83,8 @@ const services: Service[] = [
     title: "Website Launch & Go-Live Support",
     subtitle: "We handle every technical detail so your launch goes smoothly.",
     visual: "launch",
+    rotate: 2.2,
+    accent: "soft",
     bullets: [
       "Domain DNS configuration and pointing (domain by client)",
       "Website deployment to chosen hosting (hosting by client)",
@@ -88,6 +100,8 @@ const services: Service[] = [
     title: "Website Maintenance & Ongoing Support",
     subtitle: "Keep your website healthy, updated, and growing every month.",
     visual: "maintenance",
+    rotate: -1.8,
+    accent: "warm",
     bullets: [
       "Monthly content updates: text, images, new pages",
       "Plugin and platform updates (WordPress / Webflow)",
@@ -99,196 +113,259 @@ const services: Service[] = [
   },
 ];
 
+const accentBorder: Record<Service["accent"], string> = {
+  warm: "border-t-accent-warm",
+  sage: "border-t-accent-sage",
+  dusty: "border-t-accent-dusty",
+  soft: "border-t-accent-soft",
+};
+
+const accentBorderSide: Record<Service["accent"], string> = {
+  warm: "border-l-accent-warm",
+  sage: "border-l-accent-sage",
+  dusty: "border-l-accent-dusty",
+  soft: "border-l-accent-soft",
+};
+
+const accentText: Record<Service["accent"], string> = {
+  warm: "text-accent-warm",
+  sage: "text-accent-sage",
+  dusty: "text-accent-dusty",
+  soft: "text-accent-soft",
+};
+
 function quoteUrl(title: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(`Hi, I'd like a quote for ${title}`)}`;
 }
 
-function ServiceCard({
+function FloatingCard({
   service,
+  index,
   isActive,
-  onToggle,
-  cardRef,
+  onSelect,
 }: {
   service: Service;
+  index: number;
   isActive: boolean;
-  onToggle: () => void;
-  cardRef: (el: HTMLDivElement | null) => void;
+  onSelect: () => void;
 }) {
+  const cardRef = useRef<HTMLButtonElement>(null);
+
+  useLayoutEffect(() => {
+    registerGsap();
+    const el = cardRef.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const onEnter = () => {
+      if (isActive) return;
+      gsap.to(el, { y: -12, rotate: service.rotate + 1, scale: 1.02, duration: 0.45, ease: "power2.out" });
+    };
+    const onLeave = () => {
+      if (isActive) return;
+      gsap.to(el, { y: 0, rotate: service.rotate, scale: 1, duration: 0.5, ease: "power2.out" });
+    };
+
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    return () => {
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, [isActive, service.rotate]);
+
+  const offsetClass =
+    index % 2 === 0 ? "md:ml-0 lg:ml-4" : "md:ml-8 lg:ml-16 xl:ml-24";
+
   return (
-    <motion.div
-      layout
+    <button
       ref={cardRef}
-      className={`min-w-0 bg-brand-card rounded-[14px] border transition-all duration-300 ease-out shadow-[0_2px_8px_rgba(0,0,0,0.04)] ${
-        isActive
-          ? "border-brand-blue border-l-4 shadow-[0_8px_40px_rgba(107,130,168,0.15)]"
-          : "border-brand-rule hover:border-brand-blue hover:shadow-[0_4px_20px_rgba(107,130,168,0.12)] hover:-translate-y-0.5"
+      type="button"
+      onClick={onSelect}
+      aria-expanded={isActive}
+      style={{ rotate: `${service.rotate}deg` }}
+      className={`group creative-card ${accentBorder[service.accent]} border-t-4 text-left w-full max-w-md p-6 md:p-7 transition-shadow duration-500 hover:shadow-card-hover focus:outline-none focus:ring-2 focus:ring-brand-white/20 ${offsetClass} ${
+        isActive ? "opacity-40 pointer-events-none" : ""
       }`}
     >
-      <button
+      <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-dim">
+        {service.number}
+      </span>
+      <h3 className="font-display font-bold text-brand-white text-xl md:text-2xl mt-3 mb-2 tracking-[-0.02em] leading-tight">
+        {service.title}
+      </h3>
+      <p className={`text-sm italic ${accentText[service.accent]}`}>{service.subtitle}</p>
+      <span className="inline-flex mt-5 text-xs font-semibold uppercase tracking-widest text-brand-silver group-hover:text-brand-white transition-colors">
+        Explore →
+      </span>
+    </button>
+  );
+}
+
+function ExpandedPanel({
+  service,
+  onClose,
+}: {
+  service: Service;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  const panelTransition = { type: "spring" as const, damping: 32, stiffness: 280, mass: 0.85 };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className="fixed inset-0 z-[200]"
+    >
+      <motion.button
         type="button"
-        onClick={onToggle}
-        aria-expanded={isActive}
-        className={`w-full text-left px-7 py-7 md:px-8 md:py-7 ${
-          isActive ? "cursor-pointer" : ""
-        }`}
+        aria-label="Close service details"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        className="absolute inset-0 bg-brand-white/35 backdrop-blur-[6px]"
+        onClick={onClose}
+      />
+
+      <motion.article
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`service-title-${service.id}`}
+        initial={{ x: "105%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "105%" }}
+        transition={panelTransition}
+        className={`fixed top-0 right-0 z-10 flex h-full w-full max-w-[min(100vw,540px)] sm:max-w-xl lg:max-w-2xl flex-col overflow-hidden border-l-4 bg-brand-card shadow-[-24px_0_80px_rgba(26,26,26,0.12)] ${accentBorderSide[service.accent]}`}
       >
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4 min-w-0">
-            <span className="text-brand-blue text-[13px] font-semibold tracking-[2px] opacity-60 shrink-0">
+        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-brand-rule bg-brand-card/95 backdrop-blur-md px-6 py-5 sm:px-8">
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.12, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-dim">
               {service.number}
             </span>
             <h3
-              className={`font-bold text-brand-white min-w-0 ${
-                isActive
-                  ? "text-xl md:text-[26px] md:font-extrabold"
-                  : "text-lg md:text-[18px] md:whitespace-nowrap"
-              }`}
+              id={`service-title-${service.id}`}
+              className="font-display font-bold text-brand-white text-xl sm:text-2xl tracking-[-0.02em] mt-0.5"
             >
               {service.title}
             </h3>
-          </div>
-
-          <div className="flex items-center shrink-0 md:ml-4">
-            <ChevronDown
-              size={18}
-              className="text-brand-blue shrink-0 transition-transform duration-300 ease-out"
-              style={{ transform: isActive ? "rotate(180deg)" : "rotate(0deg)" }}
-            />
-          </div>
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isActive && (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="px-7 pb-7 md:px-8 md:pb-8 pt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-                <div className="min-w-0">
-                  <p className="text-brand-blue text-[15px] italic mt-1 mb-6">{service.subtitle}</p>
-
-                  <ul className="space-y-3">
-                    {service.bullets.map((bullet) => (
-                      <li key={bullet} className="flex items-start gap-3">
-                        <span className="text-brand-blue text-sm mt-0.5 shrink-0">▸</span>
-                        <span className="text-brand-silver text-[15px] leading-relaxed">{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="hidden lg:flex flex-col items-stretch w-full">
-                  <div className="w-full max-w-md ml-auto">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={`visual-${service.id}-${isActive}`}
-                        initial={{ opacity: 0, y: 12 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.35, ease: "easeOut" }}
-                      >
-                        <ServiceVisual type={service.visual} />
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border-t border-brand-rule mt-6 pt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <p className="text-brand-white text-sm font-semibold">Ready to get started?</p>
-                <div className="flex flex-wrap items-center gap-4">
-                  <a
-                    href={quoteUrl(service.title)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-brand-blue text-white px-7 py-2.5 rounded-lg text-[13px] font-semibold transition-all duration-300 hover:shadow-blue-glow"
-                  >
-                    Get a Quote →
-                  </a>
-                  <Link
-                    href="/services"
-                    className="text-brand-blue text-[13px] font-medium underline-offset-4 hover:underline"
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+          <motion.button
+            type="button"
+            onClick={onClose}
+            initial={{ opacity: 0, rotate: -90 }}
+            animate={{ opacity: 1, rotate: 0 }}
+            transition={{ delay: 0.15, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-rule text-brand-white hover:bg-brand-dark transition-colors"
+            aria-label="Close"
+          >
+            <X size={18} />
+          </motion.button>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.18, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          className="flex-1 overflow-y-auto p-6 sm:p-8"
+        >
+          <div className="grid grid-cols-1 gap-8 lg:gap-10">
+            <div>
+              <p className={`text-[15px] italic mb-6 ${accentText[service.accent]}`}>
+                {service.subtitle}
+              </p>
+              <ul className="space-y-3">
+                {service.bullets.map((bullet, i) => (
+                  <motion.li
+                    key={bullet}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.22 + i * 0.04, duration: 0.35 }}
+                    className="flex items-start gap-3"
+                  >
+                    <span className={`text-sm mt-0.5 shrink-0 ${accentText[service.accent]}`}>▸</span>
+                    <span className="text-brand-silver text-[15px] leading-relaxed">{bullet}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:pt-2">
+              <ServiceVisual type={service.visual} />
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="shrink-0 border-t border-brand-rule bg-brand-card px-6 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
+          <p className="text-brand-white text-sm font-semibold">Ready to get started?</p>
+          <div className="flex flex-wrap items-center gap-4">
+            <MagneticButton
+              href={quoteUrl(service.title)}
+              external
+              className="btn-magnetic min-h-[48px] px-7 py-3 bg-brand-white text-brand-black font-semibold text-sm rounded-pill shadow-soft hover:shadow-card-hover transition-all"
+            >
+              Get a Quote →
+            </MagneticButton>
+            <Link
+              href="/services"
+              className={`text-[13px] font-medium underline-offset-4 hover:underline ${accentText[service.accent]}`}
+            >
+              Learn More
+            </Link>
+          </div>
+        </motion.div>
+      </motion.article>
     </motion.div>
   );
 }
 
 export default function Services() {
   const [activeService, setActiveService] = useState<number | null>(null);
-  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
-
-  useEffect(() => {
-    if (activeService && cardRefs.current[activeService]) {
-      const timer = window.setTimeout(() => {
-        cardRefs.current[activeService]?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
-      }, 100);
-      return () => window.clearTimeout(timer);
-    }
-  }, [activeService]);
-
-  const handleToggle = (id: number) => {
-    setActiveService((prev) => (prev === id ? null : id));
-  };
+  const active = services.find((s) => s.id === activeService) ?? null;
 
   return (
-    <section id="services" className="relative w-full py-16 md:py-24 bg-brand-dark overflow-hidden">
+    <section id="services" className="relative w-full py-section bg-brand-dark overflow-hidden">
+      <div className="floating-shape top-20 -right-16 h-64 w-64 bg-accent-soft/20" aria-hidden />
       <Container>
         <SectionHeader eyebrow="Services" heading="What We Offer" className="mb-4 md:mb-5" />
-        <motion.p
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
-          className="text-center text-brand-blue text-[15px] italic mb-10"
-        >
+        <p className="text-center text-brand-silver text-[15px] italic mb-12 md:mb-16 max-w-lg mx-auto">
           Click any service to explore what&apos;s included.
-        </motion.p>
+        </p>
 
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full min-w-0"
-          initial={false}
-          whileInView="visible"
-          viewport={inViewOptions}
-          variants={staggerContainer(0.08)}
-        >
-          {services.map((service) => (
-            <motion.div
+        <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 max-w-2xl lg:max-w-none mx-auto lg:mx-0 lg:pl-8">
+          {services.map((service, index) => (
+            <FloatingCard
               key={service.id}
-              layout
-              variants={fadeInUp}
-              className={activeService === service.id ? "md:col-span-2" : undefined}
-            >
-              <ServiceCard
-                service={service}
-                isActive={activeService === service.id}
-                onToggle={() => handleToggle(service.id)}
-                cardRef={(el) => {
-                  cardRefs.current[service.id] = el;
-                }}
-              />
-            </motion.div>
+              service={service}
+              index={index}
+              isActive={activeService !== null}
+              onSelect={() => setActiveService(service.id)}
+            />
           ))}
-        </motion.div>
+        </div>
       </Container>
+
+      <AnimatePresence mode="wait">
+        {active && (
+          <ExpandedPanel service={active} onClose={() => setActiveService(null)} />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

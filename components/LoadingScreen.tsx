@@ -2,7 +2,6 @@
 
 import { useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 function lockPage() {
@@ -13,10 +12,17 @@ function unlockPage() {
   document.documentElement.classList.remove("is-loading");
 }
 
+function displayProgress(value: number) {
+  if (value >= 100) return 100;
+  return Math.max(1, Math.round(value));
+}
+
+/** Survives React Strict Mode remounts — loader runs once per page session. */
+let loaderComplete = false;
+
 export default function LoadingScreen() {
-  const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(() => !loaderComplete);
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
 
@@ -25,65 +31,76 @@ export default function LoadingScreen() {
   }, []);
 
   useLayoutEffect(() => {
-    let raf = 0;
-    let timeout1 = 0;
-    let timeout2 = 0;
+    if (loaderComplete) {
+      unlockPage();
+      setShow(false);
+      return;
+    }
 
-    setShow(true);
-    setFadeOut(false);
-    setProgress(0);
     lockPage();
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const duration = reduced ? 0 : 1200;
-    const start = Date.now();
+    const duration = reduced ? 0 : 1500;
+    let raf = 0;
+    let hideTimer = 0;
+    let safetyTimer = 0;
+    let finished = false;
 
     const finish = () => {
+      if (finished || loaderComplete) return;
+      finished = true;
+      loaderComplete = true;
+      setProgress(100);
       setFadeOut(true);
-      timeout2 = window.setTimeout(() => {
+      hideTimer = window.setTimeout(() => {
         unlockPage();
         setShow(false);
-      }, reduced ? 0 : 400);
+      }, reduced ? 0 : 450);
     };
 
     if (duration === 0) {
-      setProgress(100);
       finish();
-      return () => {
-        clearTimeout(timeout2);
-        unlockPage();
-      };
+      return () => clearTimeout(hideTimer);
     }
 
-    const tick = () => {
-      const elapsed = Date.now() - start;
-      setProgress(Math.min((elapsed / duration) * 100, 100));
+    const start = Date.now();
 
-      if (elapsed < duration) {
-        raf = requestAnimationFrame(tick);
-      } else {
-        timeout1 = window.setTimeout(finish, 200);
+    const tick = () => {
+      if (finished || loaderComplete) return;
+
+      const elapsed = Date.now() - start;
+      const next = Math.min((elapsed / duration) * 100, 100);
+      setProgress(next);
+
+      if (next >= 100) {
+        finish();
+        return;
       }
+
+      raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);
 
+    safetyTimer = window.setTimeout(finish, 5000);
+
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(timeout1);
-      clearTimeout(timeout2);
-      unlockPage();
+      clearTimeout(hideTimer);
+      clearTimeout(safetyTimer);
     };
-  }, [pathname]);
+  }, []);
 
   if (!mounted || !show) return null;
+
+  const counter = displayProgress(progress);
 
   return createPortal(
     <div
       role="status"
       aria-live="polite"
-      aria-label="Loading TrustNova"
-      className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-brand-black transition-opacity duration-300 ${
+      aria-label={`Loading TrustNova ${counter} percent`}
+      className={`fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-brand-black transition-opacity duration-500 ${
         fadeOut ? "opacity-0" : "opacity-100"
       }`}
     >
@@ -93,18 +110,18 @@ export default function LoadingScreen() {
           alt="TrustNova - Brand & Creative Studio"
           width={320}
           height={320}
-          className="h-52 sm:h-56 md:h-60 w-auto invert object-contain"
+          className="h-40 sm:h-44 md:h-48 w-auto invert object-contain"
           priority
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-brand-muted">
-        <div
-          className="h-full bg-brand-blue transition-[width] duration-75"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+      <p
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-white tabular-nums tracking-[-0.04em]"
+        aria-hidden
+      >
+        {counter}
+      </p>
     </div>,
-    document.body
+    document.body,
   );
 }

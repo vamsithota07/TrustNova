@@ -124,14 +124,14 @@ export default function Contact() {
 
   return (
     <>
-      <header className="border-b border-brand-rule bg-brand-dark">
-        <Container className="py-12 md:py-16 lg:py-20">
+      <header className="border-b border-brand-rule bg-brand-dark/50">
+        <Container className="py-section-sm md:py-16 lg:py-24">
           <motion.p
             initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={inViewOptions}
             transition={{ duration: 0.5 }}
-            className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-blue"
+            className="editorial-eyebrow mb-4"
           >
             Contact
           </motion.p>
@@ -140,7 +140,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={inViewOptions}
             transition={{ duration: 0.5, delay: 0.05 }}
-            className="max-w-3xl text-3xl font-bold text-brand-white md:text-4xl lg:text-5xl"
+            className="max-w-4xl font-display font-bold text-display-sm md:text-display-md tracking-[-0.04em] text-brand-white"
           >
             Let&apos;s build something{" "}
             <span className="text-brand-blue">the world will notice.</span>
@@ -183,7 +183,7 @@ export default function Contact() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at top right, rgba(107,130,168,0.06) 0%, transparent 55%)",
+              "radial-gradient(ellipse at top right, rgba(107,143,117,0.06) 0%, transparent 55%)",
           }}
         />
 
@@ -370,21 +370,25 @@ export default function Contact() {
               transition={{ delay: 0.1 }}
               className="min-w-0 space-y-6"
             >
-              <div className="rounded-2xl border border-brand-blue/20 bg-brand-blue/[0.06] p-6 md:p-7">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-blue">
+              <div className="creative-card p-6 md:p-8 flex flex-col gap-6 md:gap-7">
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-accent-warm">
                     <WhatsAppIcon className="h-6 w-6 text-white" />
                   </div>
-                  <div>
-                    <p className="text-sm font-bold text-brand-white">Prefer to chat first?</p>
-                    <p className="text-xs text-brand-silver">Skip the form - message us directly</p>
+                  <div className="min-w-0 pt-0.5">
+                    <p className="text-base font-bold text-brand-white leading-snug">
+                      Prefer to chat first?
+                    </p>
+                    <p className="mt-1.5 text-sm text-brand-silver leading-relaxed">
+                      Skip the form - message us directly
+                    </p>
                   </div>
                 </div>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${btnPrimary} w-full`}
+                  className={`${btnPrimary} w-full shrink-0`}
                 >
                   Chat on WhatsApp →
                 </a>
@@ -394,7 +398,7 @@ export default function Contact() {
                 {contactCards.map(({ icon: Icon, label, value, href, hint }) => (
                   <div
                     key={label}
-                    className="rounded-xl border border-brand-rule bg-brand-card p-4 transition-shadow hover:shadow-[0_4px_20px_rgba(107,130,168,0.1)]"
+                    className="rounded-xl border border-brand-rule bg-brand-card p-4 transition-shadow hover:shadow-[0_4px_20px_rgba(107,143,117,0.1)]"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-dark">

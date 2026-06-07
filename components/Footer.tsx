@@ -48,7 +48,7 @@ const socialLinksList = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden w-full border-t-2 border-brand-blue bg-brand-footer py-10 md:py-16">
+    <footer className="relative overflow-hidden w-full border-t border-brand-rule bg-brand-footer py-section-sm md:py-section">
       <Container className="relative z-[1]">
         <div className="relative z-[1] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-16 min-w-0">
           <div className="flex flex-col items-center md:items-start text-center md:text-left min-w-0">

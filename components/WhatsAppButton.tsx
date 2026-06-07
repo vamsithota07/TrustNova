@@ -37,7 +37,7 @@ export default function WhatsAppButton() {
         onMouseEnter={() => finePointer && setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         aria-label="Chat with us on WhatsApp"
-        className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 min-h-[44px] min-w-[44px] rounded-full bg-[#25D366] text-white shadow-lg transition-transform duration-300 hover:scale-110 active:scale-95 before:absolute before:inset-0 before:rounded-full before:bg-[#25D366] before:animate-ping before:opacity-30"
+        className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 min-h-[44px] min-w-[44px] rounded-full bg-brand-white text-white shadow-soft transition-all duration-300 hover:scale-110 hover:shadow-card-hover active:scale-95 before:absolute before:inset-0 before:rounded-full before:bg-accent-warm/30 before:animate-ping before:opacity-40"
       >
         <WhatsAppIcon className="relative w-6 h-6 md:w-7 md:h-7" />
       </a>

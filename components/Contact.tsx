@@ -159,6 +159,17 @@ export default function Contact() {
             initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={inViewOptions}
+            transition={{ duration: 0.5, delay: 0.12 }}
+            className="mt-4 max-w-2xl rounded-xl border border-brand-blue/20 bg-brand-blue/[0.06] px-4 py-3 text-sm text-brand-silver md:text-base"
+          >
+            <span className="font-semibold text-brand-white">For pricing, contact us.</span> Every
+            project is different, so we share a tailored quote after a quick discovery call - no
+            hidden fees.
+          </motion.p>
+          <motion.p
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={inViewOptions}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="mt-3 text-sm italic text-brand-dim"
           >

@@ -19,7 +19,6 @@ export const sitemapRoutes: {
   { path: "", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
   { path: "/industries", changeFrequency: "monthly", priority: 0.9 },
-  { path: "/pricing", changeFrequency: "monthly", priority: 0.85 },
   { path: "/recommend", changeFrequency: "monthly", priority: 0.85 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },
   { path: "/process", changeFrequency: "monthly", priority: 0.75 },

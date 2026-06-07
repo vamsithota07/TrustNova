@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact | TrustNova | Brand & Creative Studio",
   description:
-    "Get in touch with TrustNova. Send a project enquiry via our contact form to info@trustnova.in - free discovery call, Hyderabad-based brand studio.",
+    "Get in touch with TrustNova for project enquiries and pricing. Send a message to info@trustnova.in for a tailored quote and free discovery call.",
   path: "/contact",
 });
 

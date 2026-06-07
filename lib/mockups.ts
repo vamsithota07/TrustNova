@@ -49,8 +49,11 @@ export function getMockupFile(industryId: string): string {
   return MOCKUP_FILE_MAP[industryId] ?? industryId;
 }
 
+/** Bump when mockup assets change so browsers refetch iframe previews. */
+const MOCKUP_CACHE_VERSION = "2";
+
 export function getMockupHtmlPath(industryId: string): string {
-  return `/mockups/${getMockupFile(industryId)}.html`;
+  return `/mockups/${getMockupFile(industryId)}.html?v=${MOCKUP_CACHE_VERSION}`;
 }
 
 export function getMockupUrl(industryId: string): string {

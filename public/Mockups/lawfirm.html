@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'Inter', sans-serif; background: #0A0806; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 70px; height: 76px;
+  background: #0A0806;
+  border-bottom: 1px solid #1E1810;
+}
+.nav-logo { display: flex; flex-direction: column; }
+.nav-firm { font-family: 'Libre Baskerville', serif; font-size: 18px; color: #E8D5A0; letter-spacing: 2px; }
+.nav-tagline { color: #5A4A2A; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-top: 3px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: #6A5A3A; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; font-weight: 400; }
+.nav-links a.active { color: #C9A96E; }
+.nav-cta { border: 1px solid #C9A96E; color: #C9A96E; padding: 11px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; background: transparent; cursor: pointer; font-family: 'Inter', sans-serif; }
+
+.hero { height: 460px; display: grid; grid-template-columns: 1fr 1fr; }
+.hero-left { position: relative; overflow: hidden; }
+.hero-left img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(0.6) sepia(0.3); }
+.hero-left-overlay { position: absolute; inset: 0; background: linear-gradient(to right, transparent 60%, #0A0806); }
+
+.hero-right { background: #0A0806; padding: 60px 60px 50px; display: flex; flex-direction: column; justify-content: center; position: relative; }
+.hero-right::before { content: ''; position: absolute; top: 30px; right: 30px; bottom: 30px; left: 30px; border: 1px solid rgba(201,169,110,0.06); pointer-events: none; }
+.hero-practice { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+.practice-tag { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.2); color: #C9A96E; padding: 5px 14px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+.hero-h1 { font-family: 'Libre Baskerville', serif; font-size: 54px; color: #E8D5A0; line-height: 1.2; margin-bottom: 24px; font-weight: 400; }
+.hero-h1 em { font-style: italic; color: #C9A96E; display: block; }
+.hero-sub { color: #5A4A2A; font-size: 14px; line-height: 1.9; margin-bottom: 38px; font-weight: 300; }
+.hero-btns { display: flex; gap: 14px; }
+.btn-gold { background: #C9A96E; color: #0A0806; padding: 15px 36px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 600; }
+.btn-ol { background: transparent; color: #E8D5A0; padding: 15px 36px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(232,213,160,0.2); cursor: pointer; }
+.hero-est { position: absolute; bottom: 40px; right: 60px; text-align: right; }
+.est-num { font-family: 'Libre Baskerville', serif; font-size: 64px; color: rgba(201,169,110,0.12); line-height: 1; }
+.est-label { color: #3A2A1A; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-top: -10px; }
+
+.practice-areas { padding: 28px 70px; background: #060402; }
+.pa-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.pa-title { font-family: 'Libre Baskerville', serif; font-size: 32px; color: #E8D5A0; font-weight: 400; }
+.pa-title em { font-style: italic; color: #C9A96E; }
+.pa-see-all { color: #C9A96E; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+.pa-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pa { border-top: 3px solid #C9A96E; background: #0C0904; padding: 24px; position: relative; overflow: hidden; }
+.pa::after { content: attr(data-num); position: absolute; right: 20px; bottom: 14px; font-family: 'Libre Baskerville', serif; font-size: 48px; color: rgba(201,169,110,0.05); }
+.pa-icon { width: 36px; height: 36px; border: 1px solid rgba(201,169,110,0.2); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 16px; }
+.pa-name { font-family: 'Libre Baskerville', serif; color: #E8D5A0; font-size: 17px; margin-bottom: 8px; font-weight: 400; }
+.pa-desc { color: #4A3A1A; font-size: 12px; line-height: 1.7; margin-bottom: 16px; }
+.pa-link { color: #C9A96E; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.pa-link::after { content: '→'; }
+
+.cta-strip { background: linear-gradient(90deg, #1A1208, #2A1E0C, #1A1208); padding: 22px 70px; display: flex; align-items: center; justify-content: space-between; }
+.cta-text { font-family: 'Libre Baskerville', serif; color: #E8D5A0; font-size: 20px; font-style: italic; }
+.cta-sub { color: #6A5A3A; font-size: 12px; margin-top: 4px; letter-spacing: 1px; }
+.cta-btn { background: #C9A96E; color: #0A0806; padding: 14px 36px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-firm">SHARMA & ASSOCIATES</div>
+    <div class="nav-tagline">Advocates & Legal Consultants · Est. 2001</div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Practice Areas</a>
+    <a href="#">Our Team</a>
+    <a href="#">Resources</a>
+    <a href="#">Cases</a>
+    <a href="#">Contact</a>
+  </div>
+  <button class="nav-cta">Confidential Consultation</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <img src="images/photo-1589829545856-d10d557cf95f.jpg" alt="Law" />
+    <div class="hero-left-overlay"></div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-practice">
+      <span class="practice-tag">Corporate Law</span>
+      <span class="practice-tag">Property</span>
+      <span class="practice-tag">Family Law</span>
+      <span class="practice-tag">Criminal</span>
+    </div>
+    <h1 class="hero-h1">Justice.<br>Expertise.<br><em>Trust.</em></h1>
+    <p class="hero-sub">Strategic legal counsel backed by 20+ years of experience. We protect your interests and deliver results.</p>
+    <div class="hero-btns">
+      <button class="btn-gold">Book Consultation</button>
+      <button class="btn-ol">Our Practice Areas</button>
+    </div>
+    <div class="hero-est">
+      <div class="est-num">20+</div>
+      <div class="est-label">Years of Practice</div>
+    </div>
+  </div>
+</div>
+
+<div class="practice-areas">
+  <div class="pa-header">
+    <div class="pa-title">Practice <em>Areas</em></div>
+    <div class="pa-see-all">View All Areas →</div>
+  </div>
+  <div class="pa-grid">
+    <div class="pa" data-num="01">
+      <div class="pa-icon">⚖</div>
+      <div class="pa-name">Corporate & Business Law</div>
+      <div class="pa-desc">Company formation, mergers, contracts, and commercial disputes handled with precision and strategy.</div>
+      <div class="pa-link">Learn More</div>
+    </div>
+    <div class="pa" data-num="02">
+      <div class="pa-icon">🏠</div>
+      <div class="pa-name">Property & Real Estate</div>
+      <div class="pa-desc">Title verification, sale deeds, property disputes, and RERA compliance for buyers and developers.</div>
+      <div class="pa-link">Learn More</div>
+    </div>
+    <div class="pa" data-num="03">
+      <div class="pa-icon">👨‍👩‍👧</div>
+      <div class="pa-name">Family & Matrimonial</div>
+      <div class="pa-desc">Divorce, custody, maintenance, and succession matters handled with sensitivity and expertise.</div>
+      <div class="pa-link">Learn More</div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <div>
+    <div class="cta-text">Speak directly with a Senior Advocate</div>
+    <div class="cta-sub">Confidential consultation · No obligation · Available Monday to Saturday</div>
+  </div>
+  <button class="cta-btn">Book Free Consultation →</button>
+</div>
+
+</body>
+</html>

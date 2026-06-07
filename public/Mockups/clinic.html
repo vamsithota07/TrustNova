@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Segoe UI',sans-serif;background:#F0FDF9;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:70px;background:#fff;border-bottom:1px solid #E0F0EC;box-shadow:0 2px 12px rgba(26,188,156,0.08);}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-cross{width:36px;height:36px;background:#1ABC9C;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:900;line-height:1;}
+.logo-text{font-size:18px;font-weight:700;color:#1A2A2A;}.logo-text span{color:#1ABC9C;}
+.nav-links{display:flex;gap:32px;}.nav-links a{color:#5A7A7A;font-size:14px;text-decoration:none;}
+.nav-links a.active{color:#1ABC9C;font-weight:600;}
+.nav-cta{background:#1ABC9C;color:#fff;padding:10px 24px;font-size:13px;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
+.hero{height:320px;background:linear-gradient(135deg,#E8FBF7 0%,#F0FDF9 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;}
+.hero-left{padding:0 60px;}
+.hero-badges{display:flex;gap:10px;margin-bottom:20px;}
+.cert{background:#fff;border:1px solid #C0E8E0;padding:6px 14px;border-radius:20px;font-size:11px;color:#1ABC9C;font-weight:600;}
+.hero-h1{font-size:44px;font-weight:700;color:#0D1F1E;line-height:1.2;margin-bottom:14px;letter-spacing:-0.5px;}
+.hero-h1 span{color:#1ABC9C;}
+.hero-sub{color:#5A7A7A;font-size:15px;line-height:1.7;margin-bottom:28px;}
+.hero-btns{display:flex;gap:14px;}
+.btn-green{background:#1ABC9C;color:#fff;padding:12px 32px;font-size:13px;font-weight:600;border:none;border-radius:6px;cursor:pointer;}
+.btn-outline{background:#fff;color:#1ABC9C;padding:12px 32px;font-size:13px;border:2px solid #1ABC9C;border-radius:6px;cursor:pointer;}
+.hero-right{display:flex;align-items:center;justify-content:center;gap:20px;padding-right:60px;position:relative;overflow:hidden;}
+.hero-right-bg{position:absolute;inset:0;z-index:0;}
+.hero-right-overlay{position:absolute;inset:0;background:rgba(240,253,249,0.85);z-index:1;pointer-events:none;}
+.doctor-card{background:#fff;border-radius:16px;padding:20px;width:180px;box-shadow:0 8px 30px rgba(26,188,156,0.12);text-align:center;position:relative;z-index:2;}
+.doc-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 14px;overflow:hidden;}
+.doc-name{font-size:14px;font-weight:700;color:#1A2A2A;margin-bottom:4px;}
+.doc-spec{font-size:12px;color:#1ABC9C;margin-bottom:10px;}
+.doc-btn{width:100%;background:#E8FBF7;border:none;color:#1ABC9C;padding:8px;font-size:11px;border-radius:4px;cursor:pointer;font-weight:600;}
+.services{padding:32px 60px;background:#fff;}
+.services-title{font-size:24px;font-weight:700;color:#0D1F1E;margin-bottom:20px;}
+.services-title span{color:#1ABC9C;}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.service{background:#F0FDF9;border:1px solid #D0EEE8;border-radius:12px;padding:20px;text-align:center;}
+.service-icon{width:44px;height:44px;background:#1ABC9C;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;}
+.service-name{font-size:14px;font-weight:600;color:#1A2A2A;margin-bottom:6px;}
+.service-desc{font-size:12px;color:#7A9A9A;line-height:1.5;}
+.appointment{background:linear-gradient(135deg,#1ABC9C,#16A085);padding:28px 60px;display:flex;align-items:center;justify-content:space-between;}
+.appt-left{color:#fff;}
+.appt-title{font-size:22px;font-weight:700;margin-bottom:4px;}
+.appt-sub{font-size:14px;opacity:0.8;}
+.appt-form{display:flex;gap:10px;align-items:center;}
+.appt-input{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);color:#fff;padding:12px 18px;border-radius:6px;font-size:13px;width:160px;}
+.appt-btn{background:#fff;color:#1ABC9C;padding:12px 24px;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
+</style></head><body>
+<nav><div class="logo"><div class="logo-cross">+</div><div class="logo-text">Health<span>Care</span></div></div>
+<div class="nav-links"><a href="#" class="active">Home</a><a href="#">Doctors</a><a href="#">Services</a><a href="#">Appointments</a><a href="#">Contact</a></div>
+<button class="nav-cta">Book Appointment</button></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-badges"><span class="cert">NABH Accredited</span><span class="cert">ISO 9001:2015</span></div>
+<h1 class="hero-h1">Your Health.<br><span>Our Priority.</span></h1>
+<p class="hero-sub">Expert care from qualified doctors. Book your appointment online in under 60 seconds - no waiting, no hassle.</p>
+<div class="hero-btns"><button class="btn-green">Book Appointment</button><button class="btn-outline">View Doctors</button></div>
+</div>
+<div class="hero-right">
+<div class="hero-right-bg"><img src="images/photo-1519494026892-80bbd2d6fd0d.jpg" alt="Medical clinic" style="width:100%;height:100%;object-fit:cover;display:block;opacity:0.06;"></div>
+<div class="hero-right-overlay"></div>
+<div class="doctor-card"><div class="doc-avatar"><img src="images/photo-1612349317150-e413f6a5b16d.jpg" alt="Dr. Sharma" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;border-radius:50%;"></div><div class="doc-name">Dr. Sharma</div><div class="doc-spec">Cardiologist</div><button class="doc-btn">Book Now</button></div>
+<div class="doctor-card"><div class="doc-avatar"><img src="images/photo-1559839734-2b71ea197ec2.jpg" alt="Dr. Priya" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;border-radius:50%;"></div><div class="doc-name">Dr. Priya</div><div class="doc-spec">Neurologist</div><button class="doc-btn">Book Now</button></div>
+</div>
+</div>
+<div class="services">
+<div class="services-title">Our <span>Specialties</span></div>
+<div class="services-grid">
+<div class="service"><div class="service-icon">❤️</div><div class="service-name">Cardiology</div><div class="service-desc">Heart health & ECG</div></div>
+<div class="service"><div class="service-icon">🧠</div><div class="service-name">Neurology</div><div class="service-desc">Brain & spine care</div></div>
+<div class="service"><div class="service-icon">🦴</div><div class="service-name">Orthopaedics</div><div class="service-desc">Bone & joint care</div></div>
+<div class="service"><div class="service-icon">👁️</div><div class="service-name">Ophthalmology</div><div class="service-desc">Eye care & LASIK</div></div>
+</div>
+</div>
+<div class="appointment">
+<div class="appt-left"><div class="appt-title">Book Your Appointment Today</div><div class="appt-sub">Available Monday – Saturday · 9AM to 7PM</div></div>
+<div class="appt-form">
+<input class="appt-input" placeholder="Select Date" readonly>
+<input class="appt-input" placeholder="Department" readonly>
+<button class="appt-btn">Book Now →</button>
+</div>
+</div>
+</body></html>

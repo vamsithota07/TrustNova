@@ -1,0 +1,96 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Segoe UI',sans-serif;background:#F2FAFF;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:#fff;border-bottom:2px solid #00BCD4;box-shadow:0 2px 10px rgba(0,188,212,0.08);}
+.logo{font-size:20px;font-weight:800;color:#1A2A3A;letter-spacing:-0.3px;}.logo span{color:#00BCD4;}
+.nav-links{display:flex;gap:28px;}.nav-links a{color:#5A6A7A;font-size:13px;text-decoration:none;}
+.nav-links a.active{color:#00838F;font-weight:600;}
+.nav-cta{background:#00BCD4;color:#fff;padding:10px 24px;font-size:13px;border:none;border-radius:6px;cursor:pointer;font-weight:700;}
+.hero{height:320px;background:linear-gradient(135deg,#0A1F2E 0%,#1A3A50 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;position:relative;overflow:hidden;}
+.hero-bg-img{position:absolute;inset:0;z-index:0;}
+.hero-left{padding:0 60px;position:relative;z-index:2;}
+.hero-badges{display:flex;gap:10px;margin-bottom:18px;}
+.badge{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;}
+.b1{background:rgba(0,188,212,0.2);color:#00BCD4;border:1px solid rgba(0,188,212,0.3);}
+.b2{background:rgba(39,174,96,0.2);color:#27AE60;border:1px solid rgba(39,174,96,0.3);}
+.hero-h1{font-size:44px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;letter-spacing:-1px;}
+.hero-h1 span{color:#00BCD4;}
+.hero-sub{color:#6A8AAA;font-size:15px;line-height:1.7;margin-bottom:24px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-cyan{background:#00BCD4;color:#0A1F2E;padding:12px 28px;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;}
+.btn-ol{background:transparent;color:#fff;padding:12px 28px;font-size:13px;border:1px solid rgba(255,255,255,0.3);border-radius:6px;cursor:pointer;}
+.hero-right{padding-right:60px;position:relative;z-index:2;}
+.dashboard{background:rgba(255,255,255,0.05);border:1px solid rgba(0,188,212,0.2);border-radius:16px;padding:20px;position:relative;overflow:hidden;}
+.dashboard-overlay{position:absolute;inset:0;background:rgba(13,31,46,0.72);z-index:1;pointer-events:none;}
+.dashboard-content{position:relative;z-index:2;}
+.dash-title{color:#8AAAC8;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.dash-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+.metric{text-align:center;}
+.metric-num{font-size:22px;font-weight:800;color:#00BCD4;}.metric-label{font-size:10px;color:#6A8AAA;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.chart-area{display:flex;align-items:flex-end;gap:4px;height:60px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.c-bar{border-radius:3px 3px 0 0;background:rgba(0,188,212,0.4);}
+.c-bar.high{background:#00BCD4;}
+.chart-line{position:relative;}
+.services{padding:28px 60px;background:#F2FAFF;}
+.svc-title{font-size:22px;font-weight:700;color:#1A2A3A;margin-bottom:20px;}
+.svc-title span{color:#00BCD4;}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.svc{background:#fff;border-radius:12px;padding:24px;border-top:4px solid;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.svc:nth-child(1){border-color:#00BCD4;}
+.svc:nth-child(2){border-color:#9B59B6;}
+.svc:nth-child(3){border-color:#E74C3C;}
+.svc:nth-child(4){border-color:#F39C12;}
+.svc-icon{font-size:28px;margin-bottom:12px;}
+.svc-name{font-size:15px;font-weight:700;color:#1A2A3A;margin-bottom:6px;}
+.svc-desc{font-size:12px;color:#7A8A9A;line-height:1.5;margin-bottom:14px;}
+.svc-roi{display:flex;align-items:center;gap:6px;}
+.roi-label{font-size:11px;color:#AAA;}
+.roi-val{font-size:14px;font-weight:800;color:#27AE60;}
+.audit{background:linear-gradient(135deg,#00BCD4,#006B78);padding:22px 60px;display:flex;align-items:center;justify-content:space-between;}
+.audit-left{color:#fff;}
+.audit-title{font-size:20px;font-weight:700;margin-bottom:4px;}
+.audit-sub{font-size:13px;opacity:0.8;}
+.audit-btn{background:#fff;color:#006B78;padding:13px 28px;border:none;border-radius:6px;font-size:13px;font-weight:800;cursor:pointer;}
+</style></head><body>
+<nav><div class="logo">Growth<span>Lab</span></div>
+<div class="nav-links"><a href="#" class="active">Services</a><a href="#">SEO</a><a href="#">Social Media</a><a href="#">Paid Ads</a><a href="#">Case Studies</a></div>
+<button class="nav-cta">Free Audit →</button></nav>
+<div class="hero">
+<div class="hero-bg-img"><img src="images/photo-1460925895917-afdab827c52f.jpg" alt="Analytics workspace" style="width:100%;height:100%;object-fit:cover;display:block;opacity:0.10;"></div>
+<div class="hero-left">
+<div class="hero-badges"><span class="badge b1">Digital Marketing</span><span class="badge b2">Proven ROI</span></div>
+<h1 class="hero-h1">More Traffic.<br><span>More Clients.</span><br>More Growth.</h1>
+<p class="hero-sub">Data-driven digital marketing that delivers measurable results. SEO, social media, paid ads - all under one roof.</p>
+<div class="hero-btns"><button class="btn-cyan">Get Free Audit</button><button class="btn-ol">View Case Studies</button></div>
+</div>
+<div class="hero-right">
+<div class="dashboard">
+<img src="images/photo-1551288049-bebda4e38f71.jpg" alt="Marketing dashboard" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0.15;">
+<div class="dashboard-overlay"></div>
+<div class="dashboard-content">
+<div class="dash-title">Client Performance Dashboard</div>
+<div class="dash-metrics">
+<div class="metric"><div class="metric-num">+284%</div><div class="metric-label">Organic Traffic</div></div>
+<div class="metric"><div class="metric-num">3.2x</div><div class="metric-label">ROI</div></div>
+<div class="metric"><div class="metric-num">-42%</div><div class="metric-label">Cost per Lead</div></div>
+</div>
+<div class="chart-area">
+<div class="c-bar" style="height:25px;width:18px"></div><div class="c-bar" style="height:35px;width:18px"></div>
+<div class="c-bar" style="height:28px;width:18px"></div><div class="c-bar" style="height:45px;width:18px"></div>
+<div class="c-bar" style="height:40px;width:18px"></div><div class="c-bar high" style="height:60px;width:18px"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="services">
+<div class="svc-title">Our <span>Services</span></div>
+<div class="svc-grid">
+<div class="svc"><div class="svc-icon">🔍</div><div class="svc-name">SEO & Content</div><div class="svc-desc">Rank #1 on Google with proven SEO strategies and content that converts.</div><div class="svc-roi"><div class="roi-label">Avg ROI:</div><div class="roi-val">+320%</div></div></div>
+<div class="svc"><div class="svc-icon">📱</div><div class="svc-name">Social Media</div><div class="svc-desc">Build a loyal following and drive sales through Instagram, Facebook & LinkedIn.</div><div class="svc-roi"><div class="roi-label">Avg Growth:</div><div class="roi-val">+180%</div></div></div>
+<div class="svc"><div class="svc-icon">🎯</div><div class="svc-name">Paid Ads</div><div class="svc-desc">Google Ads, Meta Ads campaigns optimised for maximum return on ad spend.</div><div class="svc-roi"><div class="roi-label">Avg ROAS:</div><div class="roi-val">4.5x</div></div></div>
+<div class="svc"><div class="svc-icon">✉️</div><div class="svc-name">Email Marketing</div><div class="svc-desc">Automated email campaigns that nurture leads and drive repeat purchases.</div><div class="svc-roi"><div class="roi-label">Open Rate:</div><div class="roi-val">38%</div></div></div>
+</div>
+</div>
+<div class="audit"><div class="audit-left"><div class="audit-title">Get Your Free Website & SEO Audit</div><div class="audit-sub">Enter your website URL - we'll analyse it and send a detailed report within 24 hours. No strings attached.</div></div><button class="audit-btn">Get Free Audit →</button></div>
+</body></html>

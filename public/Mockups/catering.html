@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Segoe UI',sans-serif;background:#FAFAFA;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:#fff;border-bottom:1px solid #EEE;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.logo{font-size:20px;font-weight:700;color:#2A1A38;}.logo span{color:#9B59B6;}
+.nav-links{display:flex;gap:28px;}.nav-links a{color:#7A6A8A;font-size:13px;text-decoration:none;}
+.nav-links a.active{color:#9B59B6;font-weight:600;}
+.nav-cta{background:#9B59B6;color:#fff;padding:10px 24px;font-size:13px;border:none;border-radius:6px;cursor:pointer;font-weight:600;}
+.hero{height:350px;background:linear-gradient(135deg,#2A1A38 0%,#4A2A68 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.hero-left{padding:0 60px;}
+.hero-tag{color:#C39BD3;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;}
+.hero-h1{font-size:46px;font-weight:800;color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-1px;}
+.hero-h1 span{color:#C39BD3;}
+.hero-sub{color:#9A7AAA;font-size:15px;line-height:1.7;margin-bottom:28px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-purple{background:#9B59B6;color:#fff;padding:12px 28px;font-size:13px;font-weight:600;border:none;border-radius:6px;cursor:pointer;}
+.btn-ol{background:transparent;color:#fff;padding:12px 28px;font-size:13px;border:1px solid rgba(255,255,255,0.3);border-radius:6px;cursor:pointer;}
+.hero-right{padding-right:60px;display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.event-chip{padding:16px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);}
+.ec1{background:rgba(255,255,255,0.08);}
+.ec2{background:rgba(155,89,182,0.3);}
+.ec3{background:rgba(255,255,255,0.05);}
+.ec4{background:rgba(155,89,182,0.2);}
+.ec-icon{font-size:24px;margin-bottom:8px;}
+.ec-name{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px;}
+.ec-count{color:#9A7AAA;font-size:12px;}
+.events{padding:28px 60px;background:#FAFAFA;}
+.ev-title{font-size:22px;font-weight:700;color:#2A1A38;margin-bottom:20px;}
+.ev-title span{color:#9B59B6;}
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.ev-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+.ev-img{height:160px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.ev-emoji{font-size:48px;}
+.ev-badge{position:absolute;top:12px;left:12px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;color:#fff;z-index:2;}
+.eb1{background:#E91E8C;}.eb2{background:#2196F3;}.eb3{background:#FF9800;}
+.ev-info{padding:18px;}
+.ev-name{font-size:16px;font-weight:700;color:#2A1A38;margin-bottom:6px;}
+.ev-desc{font-size:13px;color:#7A6A8A;margin-bottom:14px;line-height:1.5;}
+.ev-bottom{display:flex;align-items:center;justify-content:space-between;}
+.ev-guests{font-size:12px;color:#9B59B6;font-weight:600;}
+.ev-btn{background:#9B59B6;color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}
+.quote{background:#9B59B6;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;}
+.quote-text{color:#fff;font-size:18px;font-weight:700;}
+.quote-sub{color:rgba(255,255,255,0.75);font-size:13px;margin-top:4px;}
+.quote-btn{background:#fff;color:#9B59B6;padding:12px 28px;border:none;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
+</style></head><body>
+<nav><div class="logo">Grand <span>Feast</span> Caterers</div>
+<div class="nav-links"><a href="#" class="active">Services</a><a href="#">Wedding</a><a href="#">Corporate</a><a href="#">Menu</a><a href="#">Gallery</a></div>
+<button class="nav-cta">Get Instant Quote</button></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-tag">✦ Premium Event Catering</div>
+<h1 class="hero-h1">Every Event.<br><span>Unforgettable.</span></h1>
+<p class="hero-sub">From intimate gatherings to grand weddings - we bring exceptional food and flawless service to every occasion.</p>
+<div class="hero-btns"><button class="btn-purple">Get Free Quote</button><button class="btn-ol">View Menu</button></div>
+</div>
+<div class="hero-right">
+<div class="event-chip ec1"><div class="ec-icon">💍</div><div class="ec-name">Weddings</div><div class="ec-count">50-2000 guests</div></div>
+<div class="event-chip ec2"><div class="ec-icon">🏢</div><div class="ec-name">Corporate</div><div class="ec-count">All team sizes</div></div>
+<div class="event-chip ec3"><div class="ec-icon">🎂</div><div class="ec-name">Birthdays</div><div class="ec-count">Any occasion</div></div>
+<div class="event-chip ec4"><div class="ec-icon">🎪</div><div class="ec-name">Social Events</div><div class="ec-count">Custom menus</div></div>
+</div>
+</div>
+<div class="events">
+<div class="ev-title">Our <span>Event Packages</span></div>
+<div class="ev-grid">
+<div class="ev-card"><div class="ev-img"><img src="images/photo-1519225421980-715cb0215aed.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,26,56,0.7),transparent 60%);"></div><div class="ev-badge eb1">WEDDING</div></div><div class="ev-info"><div class="ev-name">Wedding Catering</div><div class="ev-desc">Complete wedding food service with traditional & fusion menus. Decorations and live counters included.</div><div class="ev-bottom"><div class="ev-guests">50 – 2000 Guests</div><button class="ev-btn">Get Quote</button></div></div></div>
+<div class="ev-card"><div class="ev-img"><img src="images/photo-1511578314322-379afb476865.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,26,56,0.7),transparent 60%);"></div><div class="ev-badge eb2">CORPORATE</div></div><div class="ev-info"><div class="ev-name">Corporate Events</div><div class="ev-desc">Professional catering for conferences, product launches, team parties, and board meetings.</div><div class="ev-bottom"><div class="ev-guests">20 – 500 Guests</div><button class="ev-btn">Get Quote</button></div></div></div>
+<div class="ev-card"><div class="ev-img"><img src="images/photo-1530103862676-de8c9debad1d.jpg" alt="" style="width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(42,26,56,0.7),transparent 60%);"></div><div class="ev-badge eb3">SOCIAL</div></div><div class="ev-info"><div class="ev-name">Social Gatherings</div><div class="ev-desc">Birthday parties, anniversaries, house warmings, and special celebrations done beautifully.</div><div class="ev-bottom"><div class="ev-guests">20 – 300 Guests</div><button class="ev-btn">Get Quote</button></div></div></div>
+</div>
+</div>
+<div class="quote"><div><div class="quote-text">Get your instant catering quote in 2 minutes</div><div class="quote-sub">Tell us your event type, date, and guest count - we'll get back within the hour</div></div><button class="quote-btn">Get Instant Quote →</button></div>
+</body></html>

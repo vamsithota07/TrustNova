@@ -1,0 +1,68 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Helvetica Neue',sans-serif;background:#FDFBF7;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:#fff;border-bottom:1px solid #EDE8DE;}
+.logo{font-size:20px;font-weight:700;color:#2C1A0E;letter-spacing:-0.3px;}
+.logo span{color:#8B6F47;}
+.nav-links{display:flex;gap:28px;}.nav-links a{color:#8A7A6A;font-size:13px;text-decoration:none;}
+.nav-links a.active{color:#2C1A0E;font-weight:600;}
+.nav-cta{background:#2C1A0E;color:#FDFBF7;padding:10px 24px;font-size:13px;border:none;border-radius:6px;cursor:pointer;}
+.hero{height:380px;background:linear-gradient(160deg,#F5EFE6 0%,#EDE8DE 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.hero-left{padding:0 60px;}
+.hero-tag{background:#FFF5E8;color:#8B6F47;display:inline-block;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:20px;}
+.hero-h1{font-size:48px;font-weight:700;color:#2C1A0E;line-height:1.15;margin-bottom:16px;letter-spacing:-1px;}
+.hero-h1 em{font-weight:300;font-style:italic;color:#8B6F47;}
+.hero-sub{color:#7A6A5A;font-size:15px;line-height:1.7;margin-bottom:28px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-brown{background:#2C1A0E;color:#FDFBF7;padding:13px 30px;font-size:13px;border:none;border-radius:6px;cursor:pointer;font-weight:500;}
+.btn-ol{background:transparent;color:#2C1A0E;padding:13px 30px;font-size:13px;border:1px solid #C0A87A;border-radius:6px;cursor:pointer;}
+.hero-right{display:flex;align-items:center;justify-content:center;padding-right:60px;}
+.room-preview{width:360px;height:280px;background:linear-gradient(160deg,#EDE0CC,#D8C8B0);border-radius:12px;position:relative;overflow:hidden;box-shadow:20px 20px 60px rgba(44,26,14,0.15);}
+.rp-wall{position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(180deg,#E8DCC8,#DDD0B8);}
+.rp-floor{position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(180deg,#C8B898,#B8A888);}
+.rp-sofa{position:absolute;bottom:35%;left:50%;transform:translateX(-50%);width:180px;height:60px;background:#8B6F47;border-radius:10px 10px 4px 4px;box-shadow:0 6px 20px rgba(0,0,0,0.2);}
+.rp-sofa::before{content:'';position:absolute;top:-20px;left:0;right:0;height:22px;background:#9A7A52;border-radius:8px 8px 0 0;}
+.rp-table{position:absolute;bottom:32%;left:50%;transform:translateX(-50%);width:100px;height:10px;background:#5A3A1A;border-radius:2px;}
+.rooms-section{padding:28px 60px;background:#FDFBF7;}
+.rs-title{font-size:22px;font-weight:700;color:#2C1A0E;margin-bottom:20px;}
+.rs-title span{color:#8B6F47;}
+.room-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.room-cat{background:#fff;border:1px solid #EDE8DE;border-radius:10px;overflow:hidden;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,0.05);}
+.rc-img{height:160px;position:relative;overflow:hidden;}
+.furniture-shape{border-radius:6px;box-shadow:0 4px 16px rgba(0,0,0,0.15);}
+.fs1{width:100px;height:50px;background:linear-gradient(160deg,#8B6F47,#6A5230);}
+.fs2{width:80px;height:80px;background:linear-gradient(160deg,#5A3A5A,#3A1E3A);border-radius:50%;}
+.fs3{width:120px;height:40px;background:linear-gradient(160deg,#3A5A7A,#1E3A5A);}
+.fs4{width:90px;height:60px;background:linear-gradient(160deg,#4A6A3A,#2A4A1E);}
+.rc-info{padding:14px 16px;}
+.rc-name{font-size:15px;font-weight:700;color:#2C1A0E;margin-bottom:4px;}
+.rc-count{font-size:12px;color:#8A7A6A;margin-bottom:10px;}
+.rc-link{font-size:12px;color:#8B6F47;font-weight:600;}
+.promo{background:linear-gradient(90deg,#2C1A0E,#4A2A1A);padding:18px 60px;display:flex;align-items:center;justify-content:space-between;}
+.promo-text{color:#F5EFE6;font-size:16px;}
+.promo-sub{color:#8A7A5A;font-size:12px;margin-top:4px;}
+.promo-btn{background:#C9A96E;color:#2C1A0E;padding:12px 28px;border:none;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:1px;}
+</style></head><body>
+<nav><div class="logo">Wood<span>craft</span> Home</div>
+<div class="nav-links"><a href="#" class="active">Living Room</a><a href="#">Bedroom</a><a href="#">Kitchen</a><a href="#">Office</a><a href="#">Custom</a></div>
+<button class="nav-cta">Book Home Visit</button></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-tag">✦ Premium Handcrafted Furniture</div>
+<h1 class="hero-h1">Beautiful Spaces.<br><em>Built to Last.</em></h1>
+<p class="hero-sub">Handcrafted furniture from the finest wood, designed to perfectly fit your home and lifestyle.</p>
+<div class="hero-btns"><button class="btn-brown">Shop Collection</button><button class="btn-ol">Get Free Estimate</button></div>
+</div>
+<div class="hero-right"><div class="room-preview"><img src="images/photo-1555041469-a586c61ea9bc.jpg" alt="Living room interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div></div>
+</div>
+<div class="rooms-section">
+<div class="rs-title">Shop by <span>Room</span></div>
+<div class="room-cats">
+<div class="room-cat"><div class="rc-img"><img src="images/photo-1493663284031-b7e3aefcae8e.jpg" alt="Living room" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="rc-info"><div class="rc-name">Living Room</div><div class="rc-count">120+ Products</div><div class="rc-link">Explore →</div></div></div>
+<div class="room-cat"><div class="rc-img"><img src="images/photo-1540518614846-7eded433c457.jpg" alt="Bedroom" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="rc-info"><div class="rc-name">Bedroom</div><div class="rc-count">85+ Products</div><div class="rc-link">Explore →</div></div></div>
+<div class="room-cat"><div class="rc-img"><img src="images/photo-1556909114-f6e7ad7d3136.jpg" alt="Kitchen" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="rc-info"><div class="rc-name">Kitchen</div><div class="rc-count">60+ Products</div><div class="rc-link">Explore →</div></div></div>
+<div class="room-cat"><div class="rc-img"><img src="images/photo-1497366216548-37526070297c.jpg" alt="Home office" style="width:100%;height:100%;object-fit:cover;display:block;"></div><div class="rc-info"><div class="rc-name">Home Office</div><div class="rc-count">45+ Products</div><div class="rc-link">Explore →</div></div></div>
+</div>
+</div>
+<div class="promo"><div><div class="promo-text">Free Home Visit & Measurement Service</div><div class="promo-sub">Our designer visits your home · Custom sizing available · No hidden charges</div></div><button class="promo-btn">Book Free Visit →</button></div>
+</body></html>

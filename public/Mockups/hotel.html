@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'Jost', sans-serif; background: #0A0806; }
+
+nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 70px; height: 80px;
+  background: linear-gradient(to bottom, rgba(10,8,6,0.95), transparent);
+}
+.nav-logo { display: flex; flex-direction: column; align-items: center; }
+.nav-stars { color: #C9A96E; font-size: 11px; letter-spacing: 5px; margin-bottom: 4px; }
+.nav-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #F5ECD8; letter-spacing: 8px; font-weight: 300; text-transform: uppercase; }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { color: rgba(245,236,216,0.55); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; font-weight: 300; }
+.nav-links a.active { color: #C9A96E; }
+.nav-cta { background: transparent; color: #C9A96E; padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(201,169,110,0.5); cursor: pointer; font-family: 'Jost', sans-serif; }
+.nav-cta:hover { background: #C9A96E; color: #0A0806; }
+
+.hero { height: 580px; position: relative; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,8,6,0.85) 0%, rgba(10,8,6,0.4) 60%, rgba(10,8,6,0.1) 100%); }
+.hero-overlay2 { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,8,6,0.7) 0%, transparent 50%); }
+.hero-content { position: absolute; left: 70px; top: 50%; transform: translateY(-50%); z-index: 5; }
+.hero-eyebrow { color: #C9A96E; font-size: 10px; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 24px; font-weight: 300; display: flex; align-items: center; gap: 16px; }
+.hero-eyebrow::before { content: ''; width: 40px; height: 1px; background: #C9A96E; }
+.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: 82px; font-weight: 300; color: #F5ECD8; line-height: 1.05; margin-bottom: 28px; }
+.hero-h1 em { font-style: italic; color: #C9A96E; display: block; }
+.hero-sub { color: rgba(245,236,216,0.55); font-size: 14px; line-height: 2; margin-bottom: 42px; max-width: 380px; font-weight: 300; letter-spacing: 0.5px; }
+.hero-btns { display: flex; gap: 16px; }
+.btn-gold { background: #C9A96E; color: #0A0806; padding: 16px 44px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 500; }
+.btn-ol { background: transparent; color: #F5ECD8; padding: 16px 44px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(245,236,216,0.25); cursor: pointer; }
+.hero-award { position: absolute; right: 80px; top: 50%; transform: translateY(-50%); z-index: 5; width: 160px; height: 160px; border: 1px solid rgba(201,169,110,0.4); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(4px); background: rgba(10,8,6,0.3); }
+.award-stars { color: #C9A96E; font-size: 16px; letter-spacing: 3px; margin-bottom: 8px; }
+.award-text { color: #F5ECD8; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-align: center; line-height: 1.6; }
+.award-year { color: #C9A96E; font-size: 20px; margin-top: 6px; font-family: 'Cormorant Garamond', serif; }
+
+.rooms { background: #0A0806; padding: 28px 70px; }
+.rooms-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; }
+.rooms-title { font-family: 'Cormorant Garamond', serif; font-size: 38px; color: #F5ECD8; font-weight: 300; }
+.rooms-title em { font-style: italic; color: #C9A96E; }
+.direct-badge { background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.3); color: #C9A96E; padding: 8px 20px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+.rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.room { background: #0F0C08; border: 1px solid rgba(201,169,110,0.1); overflow: hidden; }
+.room-img { height: 180px; overflow: hidden; position: relative; }
+.room-img img { width: 100%; height: 100%; object-fit: cover; }
+.room-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,8,6,0.6), transparent 60%); }
+.room-badge { position: absolute; top: 14px; left: 14px; background: #C9A96E; color: #0A0806; font-size: 9px; font-weight: 600; padding: 5px 12px; letter-spacing: 2px; text-transform: uppercase; }
+.room-info { padding: 20px; }
+.room-type { color: #5A4A2A; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+.room-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #F5ECD8; margin-bottom: 12px; font-weight: 400; }
+.room-amenities { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.amenity { border: 1px solid #2A2018; color: #6A5A3A; padding: 4px 10px; font-size: 10px; letter-spacing: 1px; }
+.room-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 14px; border-top: 1px solid #1A1208; }
+.room-price { color: #C9A96E; font-size: 22px; font-family: 'Cormorant Garamond', serif; }
+.room-per { color: #4A3A1A; font-size: 11px; margin-top: 2px; }
+.room-btn { background: transparent; border: 1px solid rgba(201,169,110,0.4); color: #C9A96E; padding: 10px 24px; font-size: 10px; letter-spacing: 2px; cursor: pointer; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-stars">★ ★ ★ ★ ★</div>
+    <div class="nav-name">THE GRAND</div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Rooms</a>
+    <a href="#">Dining</a>
+    <a href="#">Amenities</a>
+    <a href="#">Events</a>
+    <a href="#">Gallery</a>
+  </div>
+  <button class="nav-cta">Book Direct</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-img">
+    <img src="images/photo-1542314831-068cd1dbfeeb.jpg" alt="Hotel" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-overlay2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hyderabad's Premier Luxury Hotel</div>
+    <h1 class="hero-h1">Where Luxury<br><em>Meets Home.</em></h1>
+    <p class="hero-sub">Experience unparalleled hospitality in the heart of Hyderabad. Every stay, a story worth telling.</p>
+    <div class="hero-btns">
+      <button class="btn-gold">Book Your Stay</button>
+      <button class="btn-ol">Explore Rooms</button>
+    </div>
+  </div>
+  <div class="hero-award">
+    <div class="award-stars">★★★★★</div>
+    <div class="award-text">Best Luxury Hotel</div>
+    <div class="award-year">2025</div>
+  </div>
+</div>
+
+<div class="rooms">
+  <div class="rooms-header">
+    <div class="rooms-title">Rooms <em>&amp; Suites</em></div>
+    <div class="direct-badge">Book Direct - Best Rate Guaranteed</div>
+  </div>
+  <div class="rooms-grid">
+    <div class="room">
+      <div class="room-img">
+        <img src="images/photo-1631049307264-da0ec9d70304.jpg" alt="Deluxe Room" />
+        <div class="room-overlay"></div>
+        <div class="room-badge">Deluxe</div>
+      </div>
+      <div class="room-info">
+        <div class="room-type">Room Category</div>
+        <div class="room-name">Deluxe King Room</div>
+        <div class="room-amenities">
+          <span class="amenity">Free WiFi</span>
+          <span class="amenity">Breakfast</span>
+          <span class="amenity">City View</span>
+        </div>
+        <div class="room-footer">
+          <div><div class="room-price">₹4,500</div><div class="room-per">per night</div></div>
+          <button class="room-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="room">
+      <div class="room-img">
+        <img src="images/photo-1582719478250-c89cae4dc85b.jpg" alt="Suite" />
+        <div class="room-overlay"></div>
+        <div class="room-badge">Suite</div>
+      </div>
+      <div class="room-info">
+        <div class="room-type">Premium Suite</div>
+        <div class="room-name">Executive Suite</div>
+        <div class="room-amenities">
+          <span class="amenity">Lounge</span>
+          <span class="amenity">Butler</span>
+          <span class="amenity">Terrace</span>
+        </div>
+        <div class="room-footer">
+          <div><div class="room-price">₹9,800</div><div class="room-per">per night</div></div>
+          <button class="room-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+    <div class="room">
+      <div class="room-img">
+        <img src="images/photo-1578683010236-d716f9a3f461.jpg" alt="Penthouse" />
+        <div class="room-overlay"></div>
+        <div class="room-badge">Penthouse</div>
+      </div>
+      <div class="room-info">
+        <div class="room-type">Luxury Collection</div>
+        <div class="room-name">Presidential Suite</div>
+        <div class="room-amenities">
+          <span class="amenity">Private Pool</span>
+          <span class="amenity">Chef</span>
+        </div>
+        <div class="room-footer">
+          <div><div class="room-price">₹24,000</div><div class="room-per">per night</div></div>
+          <button class="room-btn">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

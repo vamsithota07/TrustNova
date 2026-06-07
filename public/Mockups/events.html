@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'DM Sans', sans-serif; background: #0C0816; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 70px; height: 74px;
+  background: rgba(12,8,22,0.97);
+  border-bottom: 1px solid rgba(167,139,250,0.15);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-mark { width: 36px; height: 36px; background: linear-gradient(135deg, #7C3AED, #A78BFA); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 18px; }
+.nav-logo-text { font-family: 'Abril Fatface', serif; font-size: 20px; color: #F5F0FF; letter-spacing: 1px; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: #6A5A8A; font-size: 13px; letter-spacing: 0.5px; text-decoration: none; font-weight: 400; }
+.nav-links a.active { color: #F5F0FF; }
+.nav-cta { background: linear-gradient(135deg, #7C3AED, #9F5FF0); color: #fff; padding: 12px 30px; font-size: 13px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; }
+
+.hero { height: 500px; position: relative; overflow: hidden; }
+.hero-mosaic { position: absolute; inset: 0; display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; }
+.mosaic-img { overflow: hidden; position: relative; }
+.mosaic-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5) saturate(0.8); }
+.mosaic-img:first-child { grid-row: span 2; }
+.hero-overlay-grad { position: absolute; inset: 0; background: linear-gradient(to right, rgba(12,8,22,0.92) 0%, rgba(12,8,22,0.6) 40%, rgba(12,8,22,0.3) 100%); z-index: 2; }
+.hero-content { position: absolute; left: 70px; top: 50%; transform: translateY(-50%); z-index: 5; }
+.hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(124,58,237,0.2); border: 1px solid rgba(167,139,250,0.3); color: #A78BFA; padding: 8px 18px; border-radius: 30px; font-size: 12px; font-weight: 500; margin-bottom: 24px; letter-spacing: 1px; }
+.hero-h1 { font-family: 'Abril Fatface', serif; font-size: 88px; color: #F5F0FF; line-height: 0.95; margin-bottom: 10px; }
+.hero-h1 span { color: #A78BFA; display: block; }
+.hero-sub { color: rgba(245,240,255,0.5); font-size: 16px; line-height: 1.7; margin-bottom: 36px; max-width: 420px; font-weight: 300; }
+.hero-btns { display: flex; gap: 14px; margin-bottom: 40px; }
+.btn-purple { background: linear-gradient(135deg, #7C3AED, #9F5FF0); color: #fff; padding: 15px 40px; font-size: 14px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; }
+.btn-ol { background: transparent; color: #F5F0FF; padding: 15px 40px; font-size: 14px; border: 1px solid rgba(245,240,255,0.2); border-radius: 6px; cursor: pointer; }
+.hero-chips { display: flex; gap: 10px; }
+.chip { background: rgba(124,58,237,0.15); border: 1px solid rgba(167,139,250,0.2); color: #A78BFA; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+
+.events-section { background: #080612; padding: 28px 70px; }
+.ev-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+.ev-title { font-family: 'Abril Fatface', serif; font-size: 38px; color: #F5F0FF; }
+.ev-title span { color: #A78BFA; }
+.ev-see-all { color: #A78BFA; font-size: 13px; font-weight: 500; }
+.ev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.ev-card { border-radius: 16px; overflow: hidden; background: #12101E; border: 1px solid rgba(167,139,250,0.1); }
+.ev-img { height: 170px; overflow: hidden; position: relative; }
+.ev-img img { width: 100%; height: 100%; object-fit: cover; }
+.ev-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(18,16,30,0.8), transparent 60%); }
+.ev-category { position: absolute; top: 14px; left: 14px; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+.ec-wedding { background: #BE185D; }
+.ec-corporate { background: #1D4ED8; }
+.ec-social { background: #D97706; }
+.ev-info { padding: 18px 20px; }
+.ev-name { font-family: 'Abril Fatface', serif; font-size: 20px; color: #F5F0FF; margin-bottom: 6px; }
+.ev-desc { color: rgba(245,240,255,0.45); font-size: 13px; line-height: 1.6; margin-bottom: 14px; font-weight: 300; }
+.ev-footer { display: flex; align-items: center; justify-content: space-between; }
+.ev-guests { color: #A78BFA; font-size: 12px; font-weight: 500; }
+.ev-btn { background: rgba(124,58,237,0.2); border: 1px solid rgba(167,139,250,0.3); color: #A78BFA; padding: 8px 18px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+
+.quote-strip { background: linear-gradient(90deg, #7C3AED, #9333EA, #7C3AED); padding: 20px 70px; display: flex; align-items: center; justify-content: space-between; }
+.qs-text { color: rgba(255,255,255,0.9); font-size: 18px; font-weight: 500; }
+.qs-sub { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 4px; }
+.qs-btn { background: #fff; color: #7C3AED; padding: 13px 30px; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">E</div>
+    <div class="nav-logo-text">EventCraft</div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#">Weddings</a>
+    <a href="#">Corporate</a>
+    <a href="#">Gallery</a>
+    <a href="#">Contact</a>
+  </div>
+  <button class="nav-cta">Plan Your Event</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-mosaic">
+    <div class="mosaic-img"><img src="images/photo-1519741497674-611481863552.jpg" alt="Wedding" /></div>
+    <div class="mosaic-img"><img src="images/photo-1540575467063-178a50c2df87.jpg" alt="Corporate" /></div>
+    <div class="mosaic-img"><img src="images/photo-1530103862676-de8c9debad1d.jpg" alt="Party" /></div>
+    <div class="mosaic-img"><img src="images/photo-1464366400600-7168b8af9bc3.jpg" alt="Event" /></div>
+    <div class="mosaic-img"><img src="images/photo-1496337589254-7e19d01cec44.jpg" alt="Celebration" /></div>
+  </div>
+  <div class="hero-overlay-grad"></div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ Premium Event Management</div>
+    <h1 class="hero-h1">Events That<br><span>Leave Memories.</span></h1>
+    <p class="hero-sub">From intimate gatherings to grand celebrations - we craft experiences people talk about for years.</p>
+    <div class="hero-btns">
+      <button class="btn-purple">Plan Your Event</button>
+      <button class="btn-ol">View Our Work</button>
+    </div>
+    <div class="hero-chips">
+      <span class="chip">💍 Weddings</span>
+      <span class="chip">🏢 Corporate</span>
+      <span class="chip">🎉 Social</span>
+      <span class="chip">🎤 Concerts</span>
+    </div>
+  </div>
+</div>
+
+<div class="events-section">
+  <div class="ev-hdr">
+    <div class="ev-title">What We <span>Specialise In</span></div>
+    <div class="ev-see-all">View All Services →</div>
+  </div>
+  <div class="ev-grid">
+    <div class="ev-card">
+      <div class="ev-img">
+        <img src="images/photo-1519741497674-611481863552.jpg" alt="Wedding" />
+        <div class="ev-img-overlay"></div>
+        <span class="ev-category ec-wedding">Wedding</span>
+      </div>
+      <div class="ev-info">
+        <div class="ev-name">Wedding Events</div>
+        <div class="ev-desc">End-to-end wedding planning - décor, catering, entertainment, photography, all coordinated seamlessly.</div>
+        <div class="ev-footer"><div class="ev-guests">50 – 2000 Guests</div><button class="ev-btn">Get Quote</button></div>
+      </div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-img">
+        <img src="images/photo-1540575467063-178a50c2df87.jpg" alt="Corporate" />
+        <div class="ev-img-overlay"></div>
+        <span class="ev-category ec-corporate">Corporate</span>
+      </div>
+      <div class="ev-info">
+        <div class="ev-name">Corporate Events</div>
+        <div class="ev-desc">Product launches, conferences, team offsites, and annual days that reflect your brand's identity.</div>
+        <div class="ev-footer"><div class="ev-guests">20 – 500 Guests</div><button class="ev-btn">Get Quote</button></div>
+      </div>
+    </div>
+    <div class="ev-card">
+      <div class="ev-img">
+        <img src="images/photo-1530103862676-de8c9debad1d.jpg" alt="Social" />
+        <div class="ev-img-overlay"></div>
+        <span class="ev-category ec-social">Social</span>
+      </div>
+      <div class="ev-info">
+        <div class="ev-name">Social Celebrations</div>
+        <div class="ev-desc">Birthdays, anniversaries, and milestone moments celebrated with personal touches that matter.</div>
+        <div class="ev-footer"><div class="ev-guests">20 – 300 Guests</div><button class="ev-btn">Get Quote</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="quote-strip">
+  <div>
+    <div class="qs-text">Get your event quote in under 2 minutes</div>
+    <div class="qs-sub">Tell us your event type, date & guest count - we respond within the hour</div>
+  </div>
+  <button class="qs-btn">Get Instant Quote →</button>
+</div>
+
+</body>
+</html>

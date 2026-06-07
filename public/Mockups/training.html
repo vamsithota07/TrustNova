@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Segoe UI',sans-serif;background:#FFF8F3;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:#fff;border-bottom:2px solid #F97316;box-shadow:0 2px 12px rgba(249,115,22,0.1);}
+.logo{font-size:20px;font-weight:800;color:#1A2A3A;letter-spacing:-0.3px;}.logo span{color:#F97316;}
+.nav-links{display:flex;gap:28px;}.nav-links a{color:#5A6A7A;font-size:13px;text-decoration:none;font-weight:500;}
+.nav-links a.active{color:#F97316;}
+.nav-cta{background:#F97316;color:#fff;padding:10px 24px;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;}
+.hero{height:320px;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;position:relative;overflow:hidden;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,32,44,0.92) 0%,rgba(26,32,44,0.86) 100%);z-index:1;pointer-events:none;}
+.hero-left{padding:0 60px;position:relative;z-index:2;}
+.skill-pills{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.pill{padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;}
+.p1{background:#F97316;color:#fff;}.p2{background:#16A085;color:#fff;}.p3{background:#8E44AD;color:#fff;}.p4{background:#2980B9;color:#fff;}
+.hero-h1{font-size:44px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:14px;letter-spacing:-1px;}
+.hero-h1 span{color:#F5B041;}
+.hero-sub{color:#B8C4D4;font-size:15px;line-height:1.6;margin-bottom:24px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-orange{background:#F97316;color:#fff;padding:12px 28px;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;}
+.btn-wh{background:rgba(255,255,255,0.12);color:#fff;padding:12px 28px;font-size:13px;border:1px solid rgba(255,255,255,0.28);border-radius:6px;cursor:pointer;}
+.hero-right{padding-right:60px;display:flex;flex-direction:column;gap:14px;position:relative;z-index:2;}
+.stat-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;}
+.stat-icon{width:44px;height:44px;background:rgba(249,115,22,0.28);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.stat-num{font-size:24px;font-weight:800;color:#fff;}
+.stat-label{font-size:12px;color:#B8C4D4;margin-top:2px;}
+.courses{padding:30px 60px;background:#fff;}
+.courses-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.courses-title{font-size:22px;font-weight:800;color:#1A2A3A;}
+.courses-title span{color:#F97316;}
+.view-all{color:#F97316;font-size:13px;font-weight:600;}
+.courses-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.course{border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+.course-top{height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.course-badge{font-size:22px;font-weight:900;color:rgba(255,255,255,0.95);letter-spacing:-1px;position:relative;z-index:1;}
+.seats-badge{position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.25);color:#fff;font-size:10px;padding:3px 8px;border-radius:10px;z-index:1;}
+.course-info{padding:16px;background:#fff;}
+.course-name{font-size:15px;font-weight:700;color:#1A2A3A;margin-bottom:4px;}
+.course-sub{font-size:12px;color:#7A8A9A;margin-bottom:10px;}
+.course-details{display:flex;gap:12px;margin-bottom:12px;}
+.cd{font-size:11px;color:#5A6A7A;display:flex;align-items:center;gap:4px;}
+.course-fee{font-size:18px;font-weight:800;color:#F97316;margin-bottom:10px;}
+.enroll-btn{width:100%;background:#F97316;color:#fff;border:none;padding:10px;font-size:12px;font-weight:700;cursor:pointer;border-radius:6px;}
+.results{background:#1A2030;padding:20px 60px;display:flex;align-items:center;gap:40px;}
+.res-title{color:#fff;font-size:18px;font-weight:700;white-space:nowrap;}
+.res-chips{display:flex;gap:12px;flex-wrap:wrap;}
+.res-chip{background:rgba(249,115,22,0.18);border:1px solid rgba(249,115,22,0.35);color:#F5B041;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;}
+.free-demo{background:#F97316;color:#fff;padding:10px 24px;font-size:13px;font-weight:700;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;margin-left:auto;}
+</style></head><body>
+<nav><div class="logo">Skill <span>Forge</span></div>
+<div class="nav-links"><a href="#" class="active">Programs</a><a href="#">Mentors</a><a href="#">Placements</a><a href="#">Workshops</a><a href="#">Resources</a></div>
+<button class="nav-cta">Book Free Demo →</button></nav>
+<div class="hero">
+<img src="images/photo-1522202176988-66273c2fd55f.jpg" alt="Team collaboration workshop" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0.12;">
+<div class="hero-overlay"></div>
+<div class="hero-left">
+<div class="skill-pills"><span class="pill p1">Digital Marketing</span><span class="pill p2">Data Analytics</span><span class="pill p3">UI Design</span><span class="pill p4">Web Dev</span></div>
+<h1 class="hero-h1">Skills That<br><span>Get You Hired.</span></h1>
+<p class="hero-sub">Industry-led bootcamps with live projects, mentor support, and placement assistance for modern careers.</p>
+<div class="hero-btns"><button class="btn-orange">Free Career Counselling</button><button class="btn-wh">View Programs</button></div>
+</div>
+<div class="hero-right">
+<div class="stat-card"><div class="stat-icon">💼</div><div><div class="stat-num">92%</div><div class="stat-label">Placement Rate</div></div></div>
+<div class="stat-card"><div class="stat-icon">🚀</div><div><div class="stat-num">120+</div><div class="stat-label">Hiring Partners</div></div></div>
+<div class="stat-card"><div class="stat-icon">🎓</div><div><div class="stat-num">18</div><div class="stat-label">Live Programs</div></div></div>
+</div>
+</div>
+<div class="courses">
+<div class="courses-hdr"><div class="courses-title">Featured <span>Programs</span></div><div class="view-all">View All Batches →</div></div>
+<div class="courses-grid">
+<div class="course"><div class="course-top"><img src="images/photo-1460925895917-afdab827c52f.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:rgba(249,115,22,0.75);"></div><div class="course-badge">Marketing</div><div class="seats-badge">6 Seats Left</div></div><div class="course-info"><div class="course-name">Digital Marketing Pro</div><div class="course-sub">SEO · Ads · Social · Analytics</div><div class="course-details"><div class="cd">📅 12 Weeks</div><div class="cd">👥 25 Students</div></div><div class="course-fee">₹45,000</div><button class="enroll-btn">Enroll Now</button></div></div>
+<div class="course"><div class="course-top"><img src="images/photo-1551288049-bebda4e38f71.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:rgba(22,160,133,0.75);"></div><div class="course-badge">Analytics</div><div class="seats-badge">10 Seats Left</div></div><div class="course-info"><div class="course-name">Data Analytics Bootcamp</div><div class="course-sub">Excel · SQL · Power BI</div><div class="course-details"><div class="cd">📅 16 Weeks</div><div class="cd">👥 20 Students</div></div><div class="course-fee">₹55,000</div><button class="enroll-btn">Enroll Now</button></div></div>
+<div class="course"><div class="course-top"><img src="images/photo-1581291518857-4e27b48ff24e.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:rgba(142,68,173,0.75);"></div><div class="course-badge">UI/UX</div></div><div class="course-info"><div class="course-name">UI/UX Design Mastery</div><div class="course-sub">Figma · Prototyping · Systems</div><div class="course-details"><div class="cd">📅 10 Weeks</div><div class="cd">👥 18 Students</div></div><div class="course-fee">₹38,000</div><button class="enroll-btn">Enroll Now</button></div></div>
+<div class="course"><div class="course-top"><img src="images/photo-1498050108023-c5249f4df085.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"><div style="position:absolute;inset:0;background:rgba(41,128,185,0.75);"></div><div class="course-badge">Web Dev</div></div><div class="course-info"><div class="course-name">Full-Stack Web Development</div><div class="course-sub">React · Node · Deployment</div><div class="course-details"><div class="cd">📅 20 Weeks</div><div class="cd">👥 22 Students</div></div><div class="course-fee">₹65,000</div><button class="enroll-btn">Enroll Now</button></div></div>
+</div>
+</div>
+<div class="results">
+<div class="res-title">Alumni Working At →</div>
+<div class="res-chips"><span class="res-chip">Google</span><span class="res-chip">Amazon</span><span class="res-chip">Swiggy</span><span class="res-chip">Freshworks</span><span class="res-chip">Startups</span></div>
+<button class="free-demo">See Placement Stories →</button>
+</div>
+</body></html>

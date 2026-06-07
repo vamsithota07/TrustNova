@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'Inter', sans-serif; background: #080808; }
+
+nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 70px; height: 75px;
+  background: rgba(8,8,8,0.9);
+  border-bottom: 1px solid rgba(220,38,38,0.2);
+}
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; letter-spacing: 4px; }
+.nav-logo span { color: #DC2626; }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { color: #666; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; font-weight: 500; }
+.nav-links a.active { color: #fff; }
+.nav-cta { background: #DC2626; color: #fff; padding: 12px 32px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; }
+
+.hero { height: 540px; position: relative; overflow: hidden; }
+.hero-img { position: absolute; inset: 0; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; filter: brightness(0.4) contrast(1.1); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,8,8,0.95) 0%, rgba(8,8,8,0.6) 50%, rgba(8,8,8,0.1) 100%); }
+.hero-content { position: absolute; left: 70px; top: 50%; transform: translateY(-50%); z-index: 5; }
+.hero-tag { color: #DC2626; font-size: 11px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; display: flex; align-items: center; gap: 12px; }
+.hero-tag::before { content: ''; width: 30px; height: 2px; background: #DC2626; }
+.hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: 110px; color: #fff; line-height: 0.9; margin-bottom: 8px; letter-spacing: 3px; }
+.hero-h1 span { color: #DC2626; display: block; }
+.hero-sub { color: #888; font-size: 15px; line-height: 1.7; margin-bottom: 40px; max-width: 440px; font-weight: 300; }
+.hero-btns { display: flex; gap: 14px; }
+.btn-red { background: #DC2626; color: #fff; padding: 16px 44px; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; }
+.btn-ol { background: transparent; color: #fff; padding: 16px 44px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; border: 1px solid #333; cursor: pointer; font-weight: 500; }
+.hero-stats { position: absolute; right: 70px; bottom: 50px; z-index: 5; display: flex; gap: 0; }
+.stat-block { padding: 20px 32px; border-left: 1px solid #1A1A1A; text-align: center; }
+.stat-block:first-child { border-left: none; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: #DC2626; line-height: 1; }
+.stat-label { color: #555; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
+
+.plans { background: #0D0D0D; padding: 32px 70px; }
+.plans-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.plans-title { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #fff; letter-spacing: 3px; }
+.plans-title span { color: #DC2626; }
+.plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.plan { background: #111; border: 1px solid #1A1A1A; padding: 28px; position: relative; overflow: hidden; }
+.plan.hot { border-color: #DC2626; background: #150808; }
+.plan-hot-badge { position: absolute; top: 0; right: 0; background: #DC2626; color: #fff; padding: 6px 16px; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+.plan-name { color: #555; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; }
+.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: #fff; line-height: 1; margin-bottom: 4px; }
+.plan-price span { font-size: 20px; color: #555; font-family: 'Inter', sans-serif; font-weight: 300; }
+.plan-period { color: #444; font-size: 12px; margin-bottom: 22px; }
+.plan-divider { height: 1px; background: #1A1A1A; margin-bottom: 20px; }
+.plan-features { margin-bottom: 24px; }
+.plan-feature { display: flex; align-items: center; gap: 10px; padding: 7px 0; color: #666; font-size: 13px; border-bottom: 1px solid #1A1A1A; }
+.plan-feature::before { content: '✓'; color: #DC2626; font-weight: 700; font-size: 11px; flex-shrink: 0; }
+.plan-feature.no { color: #2A2A2A; }
+.plan-feature.no::before { content: '–'; color: #2A2A2A; }
+.plan-btn { width: 100%; padding: 13px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+.plan-btn-red { background: #DC2626; border: none; color: #fff; }
+.plan-btn-ol { background: transparent; border: 1px solid #2A2A2A; color: #555; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">IRON<span>FORGE</span></div>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#">Memberships</a>
+    <a href="#">Classes</a>
+    <a href="#">Trainers</a>
+    <a href="#">Schedule</a>
+  </div>
+  <button class="nav-cta">Free Trial</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-img">
+    <img src="images/photo-1534438327276-14e5300c3a48.jpg" alt="Gym" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Transform Your Body</div>
+    <h1 class="hero-h1">Train<br><span>Hard.</span></h1>
+    <p class="hero-sub">State-of-the-art equipment. World-class trainers. A community that pushes you beyond your limits every single day.</p>
+    <div class="hero-btns">
+      <button class="btn-red">Get Free Trial</button>
+      <button class="btn-ol">View Memberships</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-block"><div class="stat-num">50+</div><div class="stat-label">Equipment</div></div>
+    <div class="stat-block"><div class="stat-num">24/7</div><div class="stat-label">Access</div></div>
+    <div class="stat-block"><div class="stat-num">30+</div><div class="stat-label">Classes/Week</div></div>
+  </div>
+</div>
+
+<div class="plans">
+  <div class="plans-hdr">
+    <div class="plans-title">Choose Your <span>Plan</span></div>
+  </div>
+  <div class="plans-grid">
+    <div class="plan">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">₹999<span>/mo</span></div>
+      <div class="plan-period">Billed Monthly</div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="plan-feature">Gym Access 6AM–10PM</div>
+        <div class="plan-feature">Locker Access</div>
+        <div class="plan-feature no">Group Classes</div>
+        <div class="plan-feature no">Personal Trainer</div>
+      </div>
+      <button class="plan-btn plan-btn-ol">Get Started</button>
+    </div>
+    <div class="plan hot">
+      <div class="plan-hot-badge">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-price">₹1,799<span>/mo</span></div>
+      <div class="plan-period">Billed Monthly</div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="plan-feature">24/7 Gym Access</div>
+        <div class="plan-feature">Locker + Shower</div>
+        <div class="plan-feature">10 Group Classes</div>
+        <div class="plan-feature no">Personal Trainer</div>
+      </div>
+      <button class="plan-btn plan-btn-red">Get Started</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Elite</div>
+      <div class="plan-price">₹3,499<span>/mo</span></div>
+      <div class="plan-period">Billed Monthly</div>
+      <div class="plan-divider"></div>
+      <div class="plan-features">
+        <div class="plan-feature">24/7 Access + All Amenities</div>
+        <div class="plan-feature">Unlimited Classes</div>
+        <div class="plan-feature">4 PT Sessions/mo</div>
+        <div class="plan-feature">Nutrition Consultation</div>
+      </div>
+      <button class="plan-btn plan-btn-ol">Get Started</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

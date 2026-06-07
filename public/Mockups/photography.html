@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Helvetica Neue',sans-serif;background:#0A0A0A;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:70px;background:rgba(10,10,10,0.95);border-bottom:1px solid #1A1A1A;}
+.logo{font-size:18px;font-weight:300;color:#fff;letter-spacing:6px;text-transform:uppercase;}
+.logo span{color:#F39C12;font-weight:700;}
+.nav-links{display:flex;gap:32px;}.nav-links a{color:#666;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;}
+.nav-links a.active{color:#fff;}
+.nav-cta{background:transparent;color:#F39C12;padding:10px 28px;font-size:12px;letter-spacing:2px;border:1px solid #F39C12;cursor:pointer;text-transform:uppercase;}
+.hero{height:480px;position:relative;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:repeat(5,1fr);height:100%;gap:2px;}
+.hero-img{position:relative;overflow:hidden;}
+.hi1.tall{grid-row:span 2;}.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,transparent 50%);z-index:1;}
+.hero-content{position:absolute;bottom:0;left:0;right:0;z-index:10;padding:50px 60px;}
+.hero-tag{color:#F39C12;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-bottom:14px;}
+.hero-h1{font-size:60px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:20px;letter-spacing:-1.5px;}
+.hero-h1 em{color:#F39C12;font-style:italic;}
+.hero-btns{display:flex;gap:14px;}
+.btn-gold{background:#F39C12;color:#0A0A0A;padding:13px 32px;font-size:12px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+.btn-ol{background:transparent;color:#fff;padding:13px 32px;font-size:12px;letter-spacing:2px;border:1px solid rgba(255,255,255,0.4);cursor:pointer;text-transform:uppercase;}
+.portfolio{padding:30px 60px;background:#0A0A0A;}
+.port-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.port-title{color:#fff;font-size:20px;font-weight:300;letter-spacing:2px;text-transform:uppercase;}
+.port-cats{display:flex;gap:10px;}
+.port-cat{padding:7px 18px;border:1px solid #2A2A2A;color:#666;font-size:11px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+.port-cat.active{border-color:#F39C12;color:#F39C12;}
+.port-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.port-item{aspect-ratio:3/4;position:relative;overflow:hidden;cursor:pointer;}
+.book{background:#111;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #1A1A1A;}
+.book-text{color:#fff;font-size:18px;font-weight:300;letter-spacing:1px;}
+.book-sub{color:#555;font-size:13px;margin-top:4px;}
+.book-btn{background:#F39C12;color:#0A0A0A;padding:13px 32px;font-size:12px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+</style></head><body>
+<nav><div class="logo">LENS <span>&</span> LIGHT</div>
+<div class="nav-links"><a href="#">Portfolio</a><a href="#" class="active">Wedding</a><a href="#">Commercial</a><a href="#">Pricing</a><a href="#">About</a></div>
+<button class="nav-cta">Book a Shoot</button></nav>
+<div class="hero">
+<div class="hero-grid">
+<div class="hero-img hi1"><img src="images/photo-1537633552985-df8429e8048b.jpg" alt="Wedding photography" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="hero-img hi2"><img src="images/photo-1471286174890-9c112ffca5b4.jpg" alt="Portrait photography" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="hero-img hi3"><img src="images/photo-1492691527719-9d1e07e534b4.jpg" alt="Event photography" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="hero-img hi4"><img src="images/photo-1506905925346-21bda4d32df4.jpg" alt="Landscape photography" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="hero-img hi5"><img src="images/photo-1558618666-fcd25c85cd64.jpg" alt="Fashion photography" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+</div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-tag">✦ Award-Winning Photography</div>
+<h1 class="hero-h1">Moments That<br><em>Last Forever.</em></h1>
+<div class="hero-btns"><button class="btn-gold">View Portfolio</button><button class="btn-ol">Book a Shoot</button></div>
+</div>
+</div>
+<div class="portfolio">
+<div class="port-header">
+<div class="port-title">Recent Work</div>
+<div class="port-cats">
+<div class="port-cat active">All</div><div class="port-cat">Wedding</div><div class="port-cat">Corporate</div><div class="port-cat">Portrait</div>
+</div>
+</div>
+<div class="port-grid">
+<div class="port-item pi1"><img src="images/photo-1537633552985-df8429e8048b.jpg" alt="Wedding portfolio" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item pi2"><img src="images/photo-1519741497674-611481863552.jpg" alt="Couple portrait" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item pi3"><img src="images/photo-1492691527719-9d1e07e534b4.jpg" alt="Event portfolio" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item pi4"><img src="images/photo-1471286174890-9c112ffca5b4.jpg" alt="Portrait portfolio" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item pi5"><img src="images/photo-1506905925346-21bda4d32df4.jpg" alt="Landscape portfolio" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+</div>
+</div>
+<div class="book">
+<div><div class="book-text">Ready to create something extraordinary?</div><div class="book-sub">Limited slots available for 2025 · Book early to secure your date</div></div>
+<button class="book-btn">Book Your Session →</button>
+</div>
+</body></html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'Segoe UI', sans-serif; background: #F8FAFB; }
+
+nav { display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 70px; background: #fff; border-bottom: 1px solid #E8EDF2; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #1B4F8A, #2E75B6); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.logo-icon svg { width: 20px; height: 20px; fill: white; }
+.logo-text { font-size: 18px; font-weight: 700; color: #1A2A3A; letter-spacing: -0.3px; }
+.logo-text span { color: #2E75B6; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: #5A6A7A; font-size: 14px; text-decoration: none; }
+.nav-links a.active { color: #1B4F8A; font-weight: 600; }
+.nav-cta { background: #1B4F8A; color: #fff; padding: 10px 28px; font-size: 13px; border: none; border-radius: 6px; cursor: pointer; font-weight: 500; }
+
+.hero { height: 340px; position: relative; overflow: hidden; display: flex; align-items: center; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-bg-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(13,36,64,0.88) 0%, rgba(27,79,138,0.75) 60%, rgba(46,117,182,0.65) 100%); z-index: 1; }
+.hero-skyline { display: none; }
+.building { background: rgba(255,255,255,0.8); border-radius: 2px 2px 0 0; }
+.b1 { width: 60px; height: 180px; } .b2 { width: 40px; height: 240px; } .b3 { width: 80px; height: 160px; }
+.b4 { width: 50px; height: 280px; } .b5 { width: 70px; height: 200px; } .b6 { width: 45px; height: 320px; }
+.b7 { width: 90px; height: 180px; } .b8 { width: 55px; height: 260px; } .b9 { width: 65px; height: 210px; }
+.b10 { width: 40px; height: 290px; } .b11 { width: 75px; height: 170px; } .b12 { width: 50px; height: 240px; }
+.hero-content { position: relative; z-index: 2; padding: 0 60px; width: 100%; }
+.hero-label { color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+.hero-h1 { color: #fff; font-size: 48px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; letter-spacing: -1px; }
+.hero-sub { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 32px; }
+.search-bar { background: #fff; border-radius: 12px; padding: 8px; display: flex; gap: 8px; align-items: center; max-width: 780px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+.search-group { flex: 1; padding: 10px 16px; border-right: 1px solid #E8EDF2; }
+.search-group:last-of-type { border-right: none; }
+.search-label { font-size: 10px; color: #8A9AAA; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.search-val { font-size: 14px; color: #1A2A3A; font-weight: 500; }
+.search-btn { background: #2E75B6; color: #fff; padding: 14px 28px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+
+.props { padding: 40px 60px; background: #F8FAFB; }
+.props-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.props-title { font-size: 26px; font-weight: 700; color: #1A2A3A; }
+.props-title span { color: #2E75B6; }
+.props-filters { display: flex; gap: 10px; }
+.filter { padding: 8px 18px; border: 1px solid #DDE5EE; border-radius: 20px; font-size: 13px; color: #5A6A7A; background: #fff; cursor: pointer; }
+.filter.active { background: #1B4F8A; border-color: #1B4F8A; color: #fff; }
+.prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.prop-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.prop-img { height: 180px; position: relative; overflow: hidden; }
+.prop-badge { position: absolute; top: 14px; left: 14px; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; z-index: 1; }
+.badge-new { background: #27AE60; color: #fff; }
+.badge-hot { background: #E74C3C; color: #fff; }
+.badge-ready { background: #F39C12; color: #fff; }
+.prop-info { padding: 20px; }
+.prop-price { font-size: 22px; font-weight: 700; color: #1B4F8A; margin-bottom: 6px; }
+.prop-name { font-size: 15px; font-weight: 600; color: #1A2A3A; margin-bottom: 4px; }
+.prop-loc { font-size: 13px; color: #7A8A9A; margin-bottom: 14px; display: flex; align-items: center; gap: 4px; }
+.prop-loc::before { content: '📍'; font-size: 12px; }
+.prop-specs { display: flex; gap: 16px; padding-top: 14px; border-top: 1px solid #EEF2F6; }
+.spec { font-size: 12px; color: #5A6A7A; display: flex; align-items: center; gap: 4px; }
+.spec-icon { font-size: 14px; }
+.prop-btn { width: 100%; background: #F0F4F8; border: none; color: #1B4F8A; padding: 12px; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 14px; border-radius: 8px; }
+
+.emi-strip { background: linear-gradient(90deg, #1B4F8A, #2E75B6); padding: 18px 60px; display: flex; align-items: center; justify-content: space-between; }
+.emi-text { color: rgba(255,255,255,0.8); font-size: 14px; }
+.emi-highlight { color: #fff; font-size: 18px; font-weight: 700; margin-top: 2px; }
+.emi-btn { background: #fff; color: #1B4F8A; padding: 12px 28px; border: none; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+    <div class="logo-text">Prime<span>Homes</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="active">Buy</a>
+    <a href="#">Rent</a>
+    <a href="#">New Projects</a>
+    <a href="#">Commercial</a>
+    <a href="#">About</a>
+  </div>
+  <button class="nav-cta">Post Property Free</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg">
+    <img src="images/photo-1560518883-ce09059eeffa.jpg" alt="Hyderabad city skyline" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <div class="hero-bg-overlay"></div>
+  </div>
+  <div class="hero-skyline">
+    <div class="building b1"></div><div class="building b2"></div><div class="building b3"></div>
+    <div class="building b4"></div><div class="building b5"></div><div class="building b6"></div>
+    <div class="building b7"></div><div class="building b8"></div><div class="building b9"></div>
+    <div class="building b10"></div><div class="building b11"></div><div class="building b12"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-label">Hyderabad's Most Trusted Property Portal</div>
+    <h1 class="hero-h1">Find Your Dream Property<br>in Hyderabad</h1>
+    <p class="hero-sub">10,000+ verified listings · Direct owner contact · No brokerage</p>
+    <div class="search-bar">
+      <div class="search-group">
+        <div class="search-label">Looking for</div>
+        <div class="search-val">Buy Property ▾</div>
+      </div>
+      <div class="search-group">
+        <div class="search-label">Location</div>
+        <div class="search-val">Hyderabad ▾</div>
+      </div>
+      <div class="search-group">
+        <div class="search-label">Budget</div>
+        <div class="search-val">₹20L – ₹1Cr ▾</div>
+      </div>
+      <div class="search-group">
+        <div class="search-label">Type</div>
+        <div class="search-val">Apartment ▾</div>
+      </div>
+      <button class="search-btn">Search →</button>
+    </div>
+  </div>
+</div>
+
+<div class="props">
+  <div class="props-header">
+    <div class="props-title">Featured <span>Properties</span></div>
+    <div class="props-filters">
+      <div class="filter active">All</div>
+      <div class="filter">Apartment</div>
+      <div class="filter">Villa</div>
+      <div class="filter">Plot</div>
+    </div>
+  </div>
+  <div class="prop-grid">
+    <div class="prop-card">
+      <div class="prop-img p1">
+        <img src="images/photo-1545324418-cc1a3fa10c00.jpg" alt="Premium apartment" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="prop-badge badge-new">NEW</span>
+      </div>
+      <div class="prop-info">
+        <div class="prop-price">₹85 Lakhs</div>
+        <div class="prop-name">3BHK Premium Apartment</div>
+        <div class="prop-loc">Banjara Hills, Hyderabad</div>
+        <div class="prop-specs">
+          <div class="spec"><span class="spec-icon">🛏</span> 3 BHK</div>
+          <div class="spec"><span class="spec-icon">🚿</span> 2 Bath</div>
+          <div class="spec"><span class="spec-icon">📐</span> 1,450 sqft</div>
+        </div>
+        <button class="prop-btn">Schedule Site Visit →</button>
+      </div>
+    </div>
+    <div class="prop-card">
+      <div class="prop-img p2">
+        <img src="images/photo-1564013799919-ab600027ffc6.jpg" alt="Independent villa" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="prop-badge badge-hot">HOT DEAL</span>
+      </div>
+      <div class="prop-info">
+        <div class="prop-price">₹1.2 Crore</div>
+        <div class="prop-name">4BHK Independent Villa</div>
+        <div class="prop-loc">Jubilee Hills, Hyderabad</div>
+        <div class="prop-specs">
+          <div class="spec"><span class="spec-icon">🛏</span> 4 BHK</div>
+          <div class="spec"><span class="spec-icon">🚿</span> 4 Bath</div>
+          <div class="spec"><span class="spec-icon">📐</span> 3,200 sqft</div>
+        </div>
+        <button class="prop-btn">Schedule Site Visit →</button>
+      </div>
+    </div>
+    <div class="prop-card">
+      <div class="prop-img p3">
+        <img src="images/photo-1484154218962-a197022b5858.jpg" alt="Modern flat" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <span class="prop-badge badge-ready">READY TO MOVE</span>
+      </div>
+      <div class="prop-info">
+        <div class="prop-price">₹42 Lakhs</div>
+        <div class="prop-name">2BHK Flat</div>
+        <div class="prop-loc">Kondapur, Hyderabad</div>
+        <div class="prop-specs">
+          <div class="spec"><span class="spec-icon">🛏</span> 2 BHK</div>
+          <div class="spec"><span class="spec-icon">🚿</span> 2 Bath</div>
+          <div class="spec"><span class="spec-icon">📐</span> 980 sqft</div>
+        </div>
+        <button class="prop-btn">Schedule Site Visit →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="emi-strip">
+  <div>
+    <div class="emi-text">Calculate your monthly EMI instantly</div>
+    <div class="emi-highlight">Home Loan starting at 8.5% per annum · Zero Processing Fee</div>
+  </div>
+  <button class="emi-btn">Try EMI Calculator →</button>
+</div>
+
+</body>
+</html>

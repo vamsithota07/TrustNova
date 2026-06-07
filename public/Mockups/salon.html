@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Georgia',serif;background:#FDF8FC;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:70px;background:#fff;border-bottom:1px solid #F0E0EE;}
+.logo{font-size:22px;color:#2A1A28;letter-spacing:3px;font-style:italic;}
+.logo span{color:#C84890;}
+.nav-links{display:flex;gap:32px;}.nav-links a{color:#9A6A8A;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;font-family:sans-serif;}
+.nav-cta{background:#C84890;color:#fff;padding:10px 28px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;font-family:sans-serif;text-transform:uppercase;}
+.hero{height:380px;background:linear-gradient(135deg,#FDF0F8 0%,#F8E8F5 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.hero-left{padding:0 60px;}
+.hero-tag{color:#C84890;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;font-family:sans-serif;}
+.hero-h1{font-size:52px;color:#2A1A28;line-height:1.15;margin-bottom:16px;font-weight:400;}
+.hero-h1 em{color:#C84890;}
+.hero-sub{color:#9A6A8A;font-size:15px;line-height:1.7;margin-bottom:28px;font-family:sans-serif;}
+.hero-btns{display:flex;gap:14px;}
+.btn-pink{background:#C84890;color:#fff;padding:13px 32px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;font-family:sans-serif;text-transform:uppercase;}
+.btn-ol{background:transparent;color:#C84890;padding:13px 32px;font-size:12px;letter-spacing:2px;border:1px solid #C84890;cursor:pointer;font-family:sans-serif;text-transform:uppercase;}
+.hero-right{position:relative;overflow:hidden;height:380px;}
+.hero-right-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(253,240,248,0.6),rgba(248,232,245,0.4));z-index:1;pointer-events:none;}
+.services{padding:32px 60px;background:#fff;}
+.services-title{font-size:26px;color:#2A1A28;margin-bottom:24px;font-weight:400;}
+.services-title span{color:#C84890;font-style:italic;}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.service{border-top:3px solid #C84890;background:#FDF8FC;padding:24px;text-align:center;}
+.service-icon{font-size:28px;margin-bottom:12px;}
+.service-name{font-size:15px;color:#2A1A28;margin-bottom:8px;font-weight:600;font-family:sans-serif;}
+.service-price{color:#C84890;font-size:14px;font-family:sans-serif;margin-bottom:8px;}
+.service-btn{background:transparent;border:1px solid #E0B0D0;color:#C84890;padding:7px 18px;font-size:11px;letter-spacing:1px;cursor:pointer;font-family:sans-serif;text-transform:uppercase;}
+.gallery{background:#FDF0F8;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;}
+.gallery-title{font-size:20px;color:#2A1A28;font-style:italic;margin-bottom:4px;}
+.gallery-sub{color:#9A6A8A;font-size:13px;font-family:sans-serif;}
+.gallery-strips{display:flex;gap:12px;}
+.strip{width:80px;height:80px;border-radius:8px;overflow:hidden;}
+.gallery-btn{background:#C84890;color:#fff;padding:12px 28px;font-size:12px;border:none;cursor:pointer;font-family:sans-serif;text-transform:uppercase;letter-spacing:1px;}
+</style></head><body>
+<nav><div class="logo">Bloom <span>&</span> Glow</div>
+<div class="nav-links"><a href="#">Services</a><a href="#">Book</a><a href="#">Gallery</a><a href="#">Gift Cards</a><a href="#">About</a></div>
+<button class="nav-cta">Book Appointment</button></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-tag">✦ Premium Beauty Studio</div>
+<h1 class="hero-h1">Look Beautiful.<br><em>Feel Confident.</em></h1>
+<p class="hero-sub" style="font-family:sans-serif">Expert stylists, premium products, and a relaxing experience tailored just for you.</p>
+<div class="hero-btns"><button class="btn-pink">Book Now</button><button class="btn-ol">View Services</button></div>
+</div>
+<div class="hero-right">
+<img src="images/photo-1522337360788-8b13dee7a37e.jpg" alt="Salon styling" style="width:100%;height:100%;object-fit:cover;display:block;">
+<div class="hero-right-overlay"></div>
+</div>
+</div>
+<div class="services">
+<div class="services-title">Our <span>Signature</span> Services</div>
+<div class="services-grid">
+<div class="service"><div class="service-icon">✂️</div><div class="service-name">Hair Styling</div><div class="service-price">From ₹499</div><button class="service-btn">Book Now</button></div>
+<div class="service"><div class="service-icon">💅</div><div class="service-name">Nail Art</div><div class="service-price">From ₹299</div><button class="service-btn">Book Now</button></div>
+<div class="service"><div class="service-icon">🧖</div><div class="service-name">Facial & Skin</div><div class="service-price">From ₹799</div><button class="service-btn">Book Now</button></div>
+<div class="service"><div class="service-icon">💄</div><div class="service-name">Bridal Makeup</div><div class="service-price">From ₹4,999</div><button class="service-btn">Book Now</button></div>
+</div>
+</div>
+<div class="gallery">
+<div><div class="gallery-title">Before & After Gallery</div><div class="gallery-sub">Real transformations from our clients</div></div>
+<div class="gallery-strips">
+<div class="strip s1"><img src="images/photo-1522337360788-8b13dee7a37e.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div>
+<div class="strip s2"><img src="images/photo-1604654894610-df63bc536371.jpg" alt="Hair styling" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div>
+<div class="strip s3"><img src="images/photo-1487412947147-5cebf100ffc2.jpg" alt="Facial treatment" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div>
+</div>
+<button class="gallery-btn">View Full Gallery →</button>
+</div>
+</body></html>

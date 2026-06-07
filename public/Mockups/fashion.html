@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Helvetica Neue',sans-serif;background:#FAFAFA;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:65px;background:#fff;border-bottom:1px solid #E8E8E8;}
+.logo{font-size:20px;font-weight:700;color:#1A1A1A;letter-spacing:4px;text-transform:uppercase;}
+.nav-links{display:flex;gap:32px;}.nav-links a{color:#888;font-size:13px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;}
+.nav-links a.active{color:#1A1A1A;border-bottom:2px solid #1A1A1A;padding-bottom:2px;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-bag{background:#1A1A1A;color:#fff;padding:8px 24px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+.hero{height:400px;display:grid;grid-template-columns:1fr 1fr;}
+.hero-left{background:#F5F0EC;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-right{background:#fff;padding:70px 60px;display:flex;flex-direction:column;justify-content:center;}
+.new-season{display:inline-flex;align-items:center;gap:8px;background:#FFF0EC;color:#E05840;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:24px;letter-spacing:1px;}
+.hero-h1{font-size:54px;font-weight:700;color:#1A1A1A;line-height:1.1;margin-bottom:16px;letter-spacing:-1.5px;}
+.hero-h1 em{font-style:italic;color:#888;font-weight:400;}
+.hero-sub{color:#888;font-size:15px;line-height:1.7;margin-bottom:30px;}
+.hero-btns{display:flex;gap:14px;}
+.btn-dark{background:#1A1A1A;color:#fff;padding:14px 36px;font-size:12px;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+.btn-light{background:#fff;color:#1A1A1A;padding:14px 36px;font-size:12px;letter-spacing:2px;border:1px solid #1A1A1A;cursor:pointer;text-transform:uppercase;}
+.style-tags{display:flex;gap:10px;margin-top:20px;}
+.tag{background:#F5F5F5;color:#888;padding:6px 16px;border-radius:20px;font-size:11px;letter-spacing:1px;}
+.products{padding:36px 60px;background:#FAFAFA;}
+.prod-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+.prod-title{font-size:22px;font-weight:700;color:#1A1A1A;letter-spacing:-0.5px;}
+.prod-cats{display:flex;gap:10px;}
+.prod-cat{padding:8px 20px;border:1px solid #E0E0E0;font-size:12px;color:#888;letter-spacing:1px;cursor:pointer;text-transform:uppercase;}
+.prod-cat.active{background:#1A1A1A;border-color:#1A1A1A;color:#fff;}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.prod-card{background:#fff;position:relative;}
+.prod-img{height:220px;position:relative;overflow:hidden;}
+.wish{position:absolute;top:12px;right:12px;width:28px;height:28px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:1;}
+.sale{position:absolute;top:12px;left:12px;background:#E74C3C;color:#fff;padding:4px 8px;font-size:10px;letter-spacing:1px;font-weight:700;z-index:1;}
+.prod-info{padding:14px;}
+.prod-name{font-size:14px;color:#1A1A1A;margin-bottom:4px;font-weight:500;}
+.prod-price{font-size:15px;font-weight:700;color:#1A1A1A;}
+.prod-price del{color:#AAA;font-weight:400;font-size:13px;margin-left:6px;}
+</style></head><body>
+<nav><div class="logo">Aura & Co</div>
+<div class="nav-links"><a href="#">Women</a><a href="#" class="active">Men</a><a href="#">Kids</a><a href="#">New Arrivals</a><a href="#">Sale</a></div>
+<div class="nav-right"><button class="nav-bag">Bag (2)</button></div></nav>
+<div class="hero">
+<div class="hero-left"><div style="position:relative;width:100%;height:100%;overflow:hidden;"><img src="images/photo-1529139574466-a303027c1d8b.jpg" alt="Fashion model in seasonal collection" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div></div>
+<div class="hero-right">
+<span class="new-season">★ New Season 2025</span>
+<h1 class="hero-h1">Style That<br><em>Speaks</em><br>For You.</h1>
+<p class="hero-sub">Curated collections for the modern Indian wardrobe. Premium fabrics, timeless designs.</p>
+<div class="hero-btns"><button class="btn-dark">Shop Now</button><button class="btn-light">View Lookbook</button></div>
+<div class="style-tags"><span class="tag">Casual</span><span class="tag">Formal</span><span class="tag">Ethnic</span><span class="tag">Festive</span></div>
+</div>
+</div>
+<div class="products">
+<div class="prod-header">
+<div class="prod-title">Trending Now</div>
+<div class="prod-cats"><div class="prod-cat active">All</div><div class="prod-cat">Women</div><div class="prod-cat">Men</div><div class="prod-cat">Kids</div></div>
+</div>
+<div class="prod-grid">
+<div class="prod-card"><div class="prod-img w"><img src="images/photo-1509631179647-0177331693ae.jpg" alt="Silk kurta set" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"><div class="wish">♡</div><div class="sale">SALE</div></div><div class="prod-info"><div class="prod-name">Silk Kurta Set</div><div class="prod-price">₹2,499 <del>₹3,999</del></div></div></div>
+<div class="prod-card"><div class="prod-img m"><img src="images/photo-1617137968427-85924c800a22.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"><div class="wish">♡</div></div><div class="prod-info"><div class="prod-name">Classic Blazer</div><div class="prod-price">₹4,299</div></div></div>
+<div class="prod-card"><div class="prod-img k"><img src="images/photo-1610030469983-98e550d6193c.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"><div class="wish">♡</div></div><div class="prod-info"><div class="prod-name">Anarkali Suit</div><div class="prod-price">₹3,199</div></div></div>
+<div class="prod-card"><div class="prod-img u"><img src="images/photo-1515886657613-9f3515b0c78f.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"><div class="wish">♡</div></div><div class="prod-info"><div class="prod-name">Linen Co-ord Set</div><div class="prod-price">₹2,799</div></div></div>
+</div>
+</div>
+</body></html>

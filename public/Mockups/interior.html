@@ -1,0 +1,76 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Helvetica Neue',sans-serif;background:#F8F6F2;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:68px;background:#F8F6F2;border-bottom:1px solid #E8E4DE;}
+.logo{font-size:16px;font-weight:300;color:#2A2018;letter-spacing:6px;text-transform:uppercase;}
+.logo span{font-weight:700;color:#8B6F47;}
+.nav-links{display:flex;gap:32px;}.nav-links a{color:#8A7A6A;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;}
+.nav-links a.active{color:#2A2018;}
+.nav-cta{background:#2A2018;color:#F8F6F2;padding:10px 24px;font-size:11px;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+.hero{height:420px;display:grid;grid-template-columns:0.8fr 1.2fr;height:420px;}
+.hero-left{background:#2A2018;display:flex;flex-direction:column;justify-content:center;padding:60px 50px;position:relative;overflow:hidden;}
+.hero-left::after{content:'';position:absolute;bottom:0;right:0;width:120px;height:120px;background:rgba(139,111,71,0.3);border-radius:50%;transform:translate(40px,40px);}
+.hero-eyebrow{color:#8B6F47;font-size:10px;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;}
+.hero-h1{font-size:44px;font-weight:300;color:#F8F6F2;line-height:1.2;margin-bottom:20px;letter-spacing:-0.5px;}
+.hero-h1 strong{font-weight:700;color:#C9A96E;display:block;}
+.hero-sub{color:#8A7A6A;font-size:14px;line-height:1.7;margin-bottom:28px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-gold{background:#C9A96E;color:#2A2018;padding:12px 28px;font-size:11px;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;font-weight:700;}
+.btn-light{background:transparent;color:#F8F6F2;padding:12px 28px;font-size:11px;letter-spacing:2px;border:1px solid rgba(248,246,242,0.3);cursor:pointer;text-transform:uppercase;}
+.hero-right{background:#EDE8E0;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;}
+.room-scene{position:relative;width:100%;height:100%;}
+.floor{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(180deg,#D4C5B0,#C0AE98);}
+.wall{position:absolute;top:0;left:0;right:0;bottom:80px;background:linear-gradient(160deg,#EDE8E0,#E0D8CC);}
+.sofa{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);width:280px;height:90px;background:linear-gradient(180deg,#8B6F47,#6A5230);border-radius:12px 12px 4px 4px;box-shadow:0 8px 30px rgba(0,0,0,0.2);}
+.sofa::before{content:'';position:absolute;top:-30px;left:0;right:0;height:30px;background:linear-gradient(180deg,#9A7A52,#8B6F47);border-radius:10px 10px 0 0;}
+.table{position:absolute;bottom:58px;left:50%;transform:translateX(-50%);width:120px;height:14px;background:#5A3A1A;border-radius:3px;box-shadow:0 4px 16px rgba(0,0,0,0.2);}
+.lamp{position:absolute;bottom:150px;right:80px;width:8px;height:100px;background:#5A3A1A;}
+.lamp-shade{position:absolute;top:-20px;left:-24px;width:56px;height:30px;background:#C9A96E;clip-path:polygon(15% 100%,85% 100%,100% 0%,0% 0%);opacity:0.9;}
+.lamp-glow{position:absolute;top:-10px;left:-30px;width:68px;height:60px;background:radial-gradient(ellipse,rgba(201,169,110,0.4) 0%,transparent 70%);}
+.portfolio{padding:28px 60px;background:#F8F6F2;}
+.port-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.port-title{font-size:20px;font-weight:300;color:#2A2018;letter-spacing:1px;}
+.port-title em{font-style:italic;color:#8B6F47;}
+.port-filters{display:flex;gap:10px;}
+.pf{padding:7px 18px;border:1px solid #DDD8D0;font-size:11px;color:#8A7A6A;letter-spacing:1px;cursor:pointer;text-transform:uppercase;}
+.pf.active{background:#2A2018;border-color:#2A2018;color:#F8F6F2;}
+.port-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.port-item{height:160px;border-radius:4px;overflow:hidden;position:relative;cursor:pointer;}
+.port-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(42,32,24,0.8),transparent);padding:14px;transform:translateY(100%);transition:transform 0.3s;}
+.port-label{color:#F8F6F2;font-size:12px;letter-spacing:1px;text-transform:uppercase;}
+.consult{background:#8B6F47;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;}
+.cons-text{color:#F8F6F2;font-size:18px;font-weight:300;letter-spacing:0.5px;}
+.cons-sub{color:rgba(248,246,242,0.7);font-size:13px;margin-top:4px;}
+.cons-btn{background:#F8F6F2;color:#8B6F47;padding:12px 28px;font-size:11px;font-weight:700;letter-spacing:2px;border:none;cursor:pointer;text-transform:uppercase;}
+</style></head><body>
+<nav><div class="logo"><span>Forma</span> Studio</div>
+<div class="nav-links"><a href="#" class="active">Portfolio</a><a href="#">Services</a><a href="#">Process</a><a href="#">About</a><a href="#">Contact</a></div>
+<button class="nav-cta">Free Consultation</button></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-eyebrow">Award-Winning Interiors</div>
+<h1 class="hero-h1">Design That<br><strong>Transforms Spaces.</strong></h1>
+<p class="hero-sub">From concept to completion - we create interiors that balance beauty, function, and your unique lifestyle.</p>
+<div class="hero-btns"><button class="btn-gold">View Portfolio</button><button class="btn-light">Free Consultation</button></div>
+</div>
+<div class="hero-right">
+<img src="images/photo-1618221195710-dd6b41faaea6.jpg" alt="Interior design living room" style="width:100%;height:100%;object-fit:cover;display:block;">
+</div>
+</div>
+<div class="portfolio">
+<div class="port-hdr">
+<div class="port-title">Our <em>Projects</em></div>
+<div class="port-filters"><div class="pf active">All</div><div class="pf">Residential</div><div class="pf">Commercial</div><div class="pf">Hospitality</div></div>
+</div>
+<div class="port-grid">
+<div class="port-item"><img src="images/photo-1586023492125-27b2c045efd7.jpg" alt="Residential interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item"><img src="images/photo-1560185007-cde436f6a4d0.jpg" alt="Bedroom interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item"><img src="images/photo-1556909114-f6e7ad7d3136.jpg" alt="Kitchen interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+<div class="port-item"><img src="images/photo-1497366216548-37526070297c.jpg" alt="Office interior" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+</div>
+</div>
+<div class="consult">
+<div><div class="cons-text">Ready to transform your space?</div><div class="cons-sub">Free consultation · 3D visualization · Turnkey execution</div></div>
+<button class="cons-btn">Get Free Consultation →</button>
+</div>
+</body></html>

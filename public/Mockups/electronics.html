@@ -1,0 +1,80 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1440px;height:900px;overflow:hidden;font-family:'Segoe UI',sans-serif;background:#F2F4F8;}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:64px;background:#0D1B2E;color:#fff;}
+.logo{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:#fff;}.logo span{color:#00BCD4;}
+.nav-links{display:flex;gap:28px;}.nav-links a{color:#8AA0B8;font-size:13px;text-decoration:none;}
+.nav-links a.active{color:#fff;}
+.nav-right{display:flex;gap:12px;align-items:center;}
+.nav-price-btn{background:#00BCD4;color:#0D1B2E;padding:9px 24px;font-size:12px;font-weight:700;border:none;cursor:pointer;border-radius:4px;letter-spacing:1px;}
+.hero{height:340px;background:linear-gradient(135deg,#0D1B2E 0%,#1A3050 60%,#1E3A60 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.hero-left{padding:0 60px;}
+.hero-right{position:relative;overflow:hidden;height:340px;}
+.hero-right-overlay{position:absolute;inset:0;background:rgba(13,27,46,0.85);z-index:1;pointer-events:none;}
+.hero-tag{color:#00BCD4;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.hero-h1{font-size:52px;font-weight:800;color:#fff;line-height:1.1;margin-bottom:14px;letter-spacing:-1.5px;}
+.hero-h1 span{color:#00BCD4;}
+.hero-sub{color:#6A8AAA;font-size:15px;line-height:1.7;margin-bottom:28px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-cyan{background:#00BCD4;color:#0D1B2E;padding:12px 32px;font-size:13px;font-weight:700;border:none;cursor:pointer;border-radius:4px;}
+.btn-ol{background:transparent;color:#fff;padding:12px 32px;font-size:13px;border:1px solid rgba(255,255,255,0.3);cursor:pointer;border-radius:4px;}
+.cats{padding:28px 60px;background:#fff;border-bottom:1px solid #E8ECF0;}
+.cats-title{font-size:18px;font-weight:700;color:#1A2A3A;margin-bottom:18px;}
+.cats-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+.cat{background:#F5F8FC;border:1px solid #E0E8F0;border-radius:10px;padding:18px 12px;text-align:center;cursor:pointer;}
+.cat.active{border-color:#00BCD4;background:#E8FAFC;}
+.cat-circle{width:48px;height:48px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+.cc1{background:#E8F8FC;}.cc2{background:#EEE8FC;}.cc3{background:#E8FCF0;}.cc4{background:#FCF0E8;}.cc5{background:#FCE8EE;}.cc6{background:#F0FCE8;}
+.cat-name{font-size:12px;font-weight:600;color:#2A3A4A;}
+.products{padding:28px 60px;background:#F2F4F8;}
+.prod-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
+.prod-title{font-size:20px;font-weight:700;color:#1A2A3A;}
+.compare-btn{background:#0D1B2E;color:#fff;padding:8px 20px;font-size:12px;border:none;border-radius:4px;cursor:pointer;}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.prod{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.prod-img{height:150px;overflow:hidden;}
+.emi-badge{background:#E8F8FC;color:#00838F;font-size:10px;padding:4px 10px;border-radius:10px;font-weight:600;}
+.prod-info{padding:16px;}
+.prod-brand{font-size:11px;color:#00BCD4;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.prod-name{font-size:14px;font-weight:600;color:#1A2A3A;margin-bottom:8px;}
+.prod-price{font-size:20px;font-weight:800;color:#1A2A3A;margin-bottom:4px;}
+.prod-emi{font-size:12px;color:#5A7A9A;margin-bottom:12px;}
+.prod-btn{width:100%;background:#00BCD4;color:#0D1B2E;border:none;padding:10px;font-size:12px;font-weight:700;cursor:pointer;border-radius:4px;letter-spacing:1px;}
+</style></head><body>
+<nav><div class="logo">Tech<span>Zone</span></div>
+<div class="nav-links"><a href="#">Mobiles</a><a href="#" class="active">Laptops</a><a href="#">TVs</a><a href="#">Audio</a><a href="#">Repair</a></div>
+<div class="nav-right"><button class="nav-price-btn">Get Best Price</button></div></nav>
+<div class="hero">
+<div class="hero-left">
+<div class="hero-tag">⚡ Mega Electronics Sale</div>
+<h1 class="hero-h1">Latest Tech.<br><span>Best Prices.</span></h1>
+<p class="hero-sub">Authorised dealer for Apple, Samsung, OnePlus & 50+ brands. EMI from ₹0 processing fee.</p>
+<div class="hero-btns"><button class="btn-cyan">Shop Now</button><button class="btn-ol">Get Best Price</button></div>
+</div>
+<div class="hero-right">
+<div style="position:absolute;inset:0;z-index:0;">
+<img src="images/photo-1593642632559-0c6d3fc62b89.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:0.15;">
+</div>
+<div class="hero-right-overlay"></div>
+</div>
+</div>
+<div class="cats">
+<div class="cats-title">Shop by Category</div>
+<div class="cats-grid">
+<div class="cat active"><div class="cat-circle cc1">📱</div><div class="cat-name">Mobiles</div></div>
+<div class="cat"><div class="cat-circle cc2">💻</div><div class="cat-name">Laptops</div></div>
+<div class="cat"><div class="cat-circle cc3">📺</div><div class="cat-name">Smart TVs</div></div>
+<div class="cat"><div class="cat-circle cc4">🎧</div><div class="cat-name">Audio</div></div>
+<div class="cat"><div class="cat-circle cc5">⌚</div><div class="cat-name">Wearables</div></div>
+<div class="cat"><div class="cat-circle cc6">🔧</div><div class="cat-name">Repair</div></div>
+</div>
+</div>
+<div class="products">
+<div class="prod-header"><div class="prod-title">Top Selling Laptops</div><button class="compare-btn">Compare Models</button></div>
+<div class="prod-grid">
+<div class="prod"><div class="prod-img pi1"><img src="images/photo-1517336714731-489689fd1ca8.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:inherit;"></div><div class="prod-info"><div class="prod-brand">Apple</div><div class="prod-name">MacBook Air M3</div><div class="prod-price">₹1,14,900</div><div class="prod-emi">EMI from ₹3,196/mo · 0% interest</div><button class="prod-btn">GET BEST PRICE</button></div></div>
+<div class="prod"><div class="prod-img pi2"><img src="images/photo-1496181133206-80ce9b88a853.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div><div class="prod-info"><div class="prod-brand">Dell</div><div class="prod-name">XPS 15 OLED</div><div class="prod-price">₹1,89,990</div><div class="prod-emi">EMI from ₹5,277/mo · No Cost</div><button class="prod-btn">GET BEST PRICE</button></div></div>
+<div class="prod"><div class="prod-img pi3"><img src="images/photo-1603302576837-37561b2e2302.jpg" alt="" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div><div class="prod-info"><div class="prod-brand">ASUS</div><div class="prod-name">ROG Strix G16</div><div class="prod-price">₹1,24,990</div><div class="prod-emi">EMI from ₹3,472/mo · 0% interest</div><button class="prod-btn">GET BEST PRICE</button></div></div>
+</div>
+</div>
+</body></html>

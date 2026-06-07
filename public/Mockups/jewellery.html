@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1440px; height: 900px; overflow: hidden; font-family: 'Montserrat', sans-serif; background: #F9F5EE; }
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 70px; height: 75px;
+  background: #F9F5EE;
+  border-bottom: 1px solid rgba(166,128,74,0.2);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: #1A1208; letter-spacing: 6px; text-transform: uppercase; }
+.nav-logo em { font-style: italic; color: #A6804A; }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { font-family: 'Montserrat', sans-serif; color: #8A7A5A; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; }
+.nav-links a.active { color: #1A1208; border-bottom: 1px solid #A6804A; padding-bottom: 3px; }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+.nav-icon { width: 20px; height: 20px; color: #8A7A5A; }
+.nav-cta { background: #1A1208; color: #F9F5EE; padding: 12px 32px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
+
+.hero { display: grid; grid-template-columns: 1fr 1fr; height: 530px; }
+
+.hero-left { position: relative; overflow: hidden; }
+.hero-left img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-left-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,18,8,0.3), transparent); }
+.hero-left-tag { position: absolute; bottom: 40px; left: 40px; }
+.hero-tag-line { width: 40px; height: 1px; background: #A6804A; margin-bottom: 12px; }
+.hero-tag-text { font-family: 'Montserrat', sans-serif; color: #F9F5EE; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; }
+
+.hero-right { background: #1A1208; padding: 60px 60px 50px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+.hero-right::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: rgba(166,128,74,0.08); }
+.hero-right::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: rgba(166,128,74,0.05); }
+.hero-eyebrow { font-family: 'Montserrat', sans-serif; color: #A6804A; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+.hero-eyebrow::before { content: ''; width: 30px; height: 1px; background: #A6804A; }
+.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: 68px; font-weight: 300; color: #F9F5EE; line-height: 1.05; margin-bottom: 24px; letter-spacing: -1px; }
+.hero-h1 em { font-style: italic; color: #A6804A; display: block; }
+.hero-sub { font-family: 'Montserrat', sans-serif; color: rgba(249,245,238,0.5); font-size: 13px; line-height: 2; margin-bottom: 42px; max-width: 340px; letter-spacing: 0.5px; }
+.hero-btns { display: flex; gap: 16px; }
+.btn-gold { background: #A6804A; color: #F9F5EE; padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
+.btn-outline { background: transparent; color: #F9F5EE; padding: 16px 40px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(249,245,238,0.25); cursor: pointer; font-family: 'Montserrat', sans-serif; }
+
+.collections { padding: 48px 70px; background: #F9F5EE; }
+.coll-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; }
+.coll-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #1A1208; }
+.coll-title em { font-style: italic; color: #A6804A; }
+.coll-sub { font-family: 'Montserrat', sans-serif; color: #8A7A5A; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; }
+.coll-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.coll-card { position: relative; cursor: pointer; overflow: hidden; }
+.coll-img { height: 200px; overflow: hidden; position: relative; }
+.coll-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.coll-card:hover .coll-img img { transform: scale(1.06); }
+.coll-badge { position: absolute; top: 14px; right: 14px; background: #A6804A; color: #fff; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; font-family: 'Montserrat', sans-serif; }
+.coll-info { padding: 18px 0 0; }
+.coll-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #1A1208; margin-bottom: 6px; font-weight: 400; }
+.coll-count { font-family: 'Montserrat', sans-serif; font-size: 10px; color: #8A7A5A; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+.coll-price { font-family: 'Montserrat', sans-serif; font-size: 14px; color: #A6804A; font-weight: 500; }
+
+.promo { background: #1A1208; padding: 22px 70px; display: flex; align-items: center; justify-content: center; gap: 50px; }
+.promo-item { display: flex; align-items: center; gap: 12px; }
+.promo-icon { width: 20px; height: 20px; border: 1px solid #A6804A; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.promo-text { font-family: 'Montserrat', sans-serif; color: rgba(249,245,238,0.7); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+.promo-sep { color: #A6804A; font-size: 8px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Aurum <em>&</em> Co</div>
+  <div class="nav-links">
+    <a href="#">Collections</a>
+    <a href="#" class="active">Gold</a>
+    <a href="#">Silver</a>
+    <a href="#">Diamond</a>
+    <a href="#">Occasions</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-cta">Visit Showroom</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <img src="images/photo-1515562141207-7a88fb7ce338.jpg" alt="Jewellery" />
+    <div class="hero-left-overlay"></div>
+    <div class="hero-left-tag">
+      <div class="hero-tag-line"></div>
+      <div class="hero-tag-text">Bridal Collection 2025</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-eyebrow">New Arrivals</div>
+    <h1 class="hero-h1">Crafted in<br>Gold. Worn<br><em>with Pride.</em></h1>
+    <p class="hero-sub">Handcrafted jewellery for life's most precious moments. BIS hallmarked. Lifetime exchange.</p>
+    <div class="hero-btns">
+      <button class="btn-gold">Explore Collection</button>
+      <button class="btn-outline">Book Appointment</button>
+    </div>
+  </div>
+</div>
+
+<div class="collections">
+  <div class="coll-header">
+    <div class="coll-title">Shop by <em>Category</em></div>
+    <div class="coll-sub">View All Collections →</div>
+  </div>
+  <div class="coll-grid">
+    <div class="coll-card">
+      <div class="coll-img">
+        <img src="images/photo-1603561591411-07134e71a2a9.jpg" alt="Gold" />
+        <div class="coll-badge">New</div>
+      </div>
+      <div class="coll-info">
+        <div class="coll-name">Gold Jewellery</div>
+        <div class="coll-count">240+ Designs</div>
+        <div class="coll-price">From ₹8,999</div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-img">
+        <img src="images/photo-1611085583191-a3b181a88401.jpg" alt="Silver" />
+      </div>
+      <div class="coll-info">
+        <div class="coll-name">Silver Collection</div>
+        <div class="coll-count">180+ Designs</div>
+        <div class="coll-price">From ₹1,299</div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-img">
+        <img src="images/photo-1605100804763-247f67b3557e.jpg" alt="Diamond" />
+        <div class="coll-badge">Hot</div>
+      </div>
+      <div class="coll-info">
+        <div class="coll-name">Diamond Sets</div>
+        <div class="coll-count">90+ Designs</div>
+        <div class="coll-price">From ₹24,999</div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <div class="coll-img">
+        <img src="images/photo-1599643478518-a784e5dc4c8f.jpg" alt="Bridal" />
+      </div>
+      <div class="coll-info">
+        <div class="coll-name">Bridal Sets</div>
+        <div class="coll-count">60+ Designs</div>
+        <div class="coll-price">From ₹45,999</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="promo">
+  <div class="promo-item"><div class="promo-icon">✓</div><div class="promo-text">BIS Hallmarked</div></div>
+  <div class="promo-sep">◆</div>
+  <div class="promo-item"><div class="promo-icon">✓</div><div class="promo-text">Free Home Delivery</div></div>
+  <div class="promo-sep">◆</div>
+  <div class="promo-item"><div class="promo-icon">✓</div><div class="promo-text">Lifetime Exchange</div></div>
+  <div class="promo-sep">◆</div>
+  <div class="promo-item"><div class="promo-icon">✓</div><div class="promo-text">EMI Available</div></div>
+</div>
+
+</body>
+</html>

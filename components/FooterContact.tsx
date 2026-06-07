@@ -49,7 +49,7 @@ export default function FooterContact() {
           {PHONE}
         </a>
         <p className="text-brand-dim text-xs mt-2">
-          Available Monday–Saturday, 9:00 AM – 7:00 PM IST
+          Available Monday-Saturday, 9:00 AM - 7:00 PM IST
         </p>
       </div>
 

@@ -124,7 +124,6 @@ export default function Process() {
               <article
                 key={step.number}
                 className={`creative-card p-6 ${i % 2 === 1 ? "ml-6" : "mr-6"}`}
-                style={{ rotate: i % 2 === 0 ? "-1deg" : "1.5deg" }}
               >
                 <div className="flex items-start gap-4">
                   <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${accentBg[step.accent]}`}>
@@ -151,7 +150,6 @@ export default function Process() {
               <article
                 key={step.number}
                 className="creative-card shrink-0 w-[min(420px,38vw)] p-8 xl:p-10"
-                style={{ rotate: `${(i % 2 === 0 ? -1.5 : 1.2) + i * 0.3}deg` }}
               >
                 <span className="text-[11px] font-bold tracking-[0.25em] text-brand-dim">{step.number}</span>
                 <div className={`mt-6 mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl ${accentBg[step.accent]}`}>

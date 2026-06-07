@@ -58,6 +58,57 @@ export interface IndustryCard {
   };
 }
 
+export const industryCategories: IndustryCategory[] = [
+  "Retail & Products",
+  "Food & Hospitality",
+  "Services",
+  "Professional",
+  "Health & Wellness",
+  "Education",
+  "Creative",
+];
+
+export const categoryAccents: Record<
+  IndustryCategory,
+  "warm" | "sage" | "dusty" | "soft"
+> = {
+  "Retail & Products": "warm",
+  "Food & Hospitality": "warm",
+  Services: "sage",
+  Professional: "dusty",
+  "Health & Wellness": "sage",
+  Education: "soft",
+  Creative: "warm",
+};
+
+export function industriesInCategory(category: IndustryCategory): IndustryCard[] {
+  return industryCards.filter((card) => card.category === category);
+}
+
+export function categoryStartIndex(category: IndustryCategory): number {
+  return industryCards.findIndex((card) => card.category === category);
+}
+
+export const accentTextClass: Record<
+  (typeof categoryAccents)[IndustryCategory],
+  string
+> = {
+  warm: "text-accent-warm",
+  sage: "text-accent-sage",
+  dusty: "text-accent-dusty",
+  soft: "text-accent-soft",
+};
+
+export const accentBgClass: Record<
+  (typeof categoryAccents)[IndustryCategory],
+  string
+> = {
+  warm: "bg-accent-warm",
+  sage: "bg-accent-sage",
+  dusty: "bg-accent-dusty",
+  soft: "bg-accent-soft",
+};
+
 export const industryCards: IndustryCard[] = [
   {
     id: "jewellery",

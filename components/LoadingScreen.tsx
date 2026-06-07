@@ -17,7 +17,7 @@ function displayProgress(value: number) {
   return Math.max(1, Math.round(value));
 }
 
-/** Survives React Strict Mode remounts — loader runs once per page session. */
+/** Survives React Strict Mode remounts - loader runs once per page session. */
 let loaderComplete = false;
 
 export default function LoadingScreen() {

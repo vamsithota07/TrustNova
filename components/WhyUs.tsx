@@ -18,7 +18,7 @@ const reasons = [
   },
   {
     title: "Fast Turnaround",
-    description: "Logo concepts in 3–5 days. Full websites in 2–4 weeks.",
+    description: "Logo concepts in 3-5 days. Full websites in 2-4 weeks.",
   },
   {
     title: "No Revision Limits",

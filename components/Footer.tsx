@@ -150,27 +150,13 @@ export default function Footer() {
       </Container>
 
       <div
-        style={{
-          position: "absolute",
-          right: "-40px",
-          bottom: "-40px",
-          width: "380px",
-          height: "380px",
-          pointerEvents: "none",
-          userSelect: "none",
-          zIndex: 0,
-        }}
+        className="hidden md:block absolute pointer-events-none select-none z-0 right-[-40px] bottom-[-40px] w-[380px] h-[380px]"
       >
         <Image
           src="/logo_icon.png"
           alt=""
           fill
-          style={{
-            objectFit: "contain",
-            objectPosition: "bottom right",
-            opacity: 0.055,
-            filter: "invert(1)",
-          }}
+          className="object-contain object-bottom-right opacity-[0.055] invert"
         />
       </div>
     </footer>

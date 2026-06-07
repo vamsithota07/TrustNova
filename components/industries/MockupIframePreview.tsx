@@ -65,25 +65,25 @@ export default function MockupIframePreview({
   }, [industryId]);
 
   const src = getMockupHtmlPath(industryId);
-  const zoom = box.w > 0 ? box.w / MOCKUP_WIDTH : scale;
+  const scaleFactor = box.w > 0 ? box.w / MOCKUP_WIDTH : scale;
+  const scaledHeight = MOCKUP_HEIGHT * scaleFactor;
 
   return (
     <div
       ref={containerRef}
-      className={`relative w-full max-w-full min-w-0 h-full bg-[#1A1E28] ${className}`}
-      style={{ overflow: "clip", contain: "layout paint" }}
+      className={`relative w-full max-w-full min-w-0 h-full overflow-hidden bg-brand-muted ${className}`}
     >
       {(!isVisible || !loaded) && (
-        <div className="absolute inset-0 animate-pulse bg-[#1A1E28] z-0" aria-hidden />
+        <div className="absolute inset-0 animate-pulse bg-brand-muted z-0" aria-hidden />
       )}
 
       {isVisible && box.w > 0 && (
         <div
-          className="pointer-events-none select-none origin-top-left"
+          className="pointer-events-none select-none absolute top-0 left-0 origin-top-left"
           style={{
             width: MOCKUP_WIDTH,
             height: MOCKUP_HEIGHT,
-            zoom,
+            transform: `scale(${scaleFactor})`,
           }}
         >
           <iframe
@@ -97,6 +97,14 @@ export default function MockupIframePreview({
             height={MOCKUP_HEIGHT}
           />
         </div>
+      )}
+
+      {/* Crop to hero area on small previews */}
+      {box.h > 0 && scaledHeight > box.h && (
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-brand-muted to-transparent"
+          aria-hidden
+        />
       )}
     </div>
   );

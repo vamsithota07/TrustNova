@@ -56,7 +56,7 @@ export default function RootLayout({
         </div>
         <MotionProvider>
           <LoadingScreen />
-          <div id="site-content" className="relative w-full max-w-[100vw] overflow-x-clip min-w-0">
+          <div id="site-content" className="relative w-full min-w-0">
             <div className="pointer-events-none fixed inset-0 z-[1] grain-overlay opacity-40" aria-hidden />
             <ScrollProgress />
             <Navbar />

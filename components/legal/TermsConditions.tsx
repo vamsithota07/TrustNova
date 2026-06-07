@@ -405,11 +405,11 @@ export default function TermsConditions() {
                 </BodyText>
                 <BulletList
                   items={[
-                    "Logo Design - first concepts within 3–5 business days of advance payment",
-                    "Complete Brand Identity - 7–14 business days",
-                    "Website Design (up to 5 pages) - 2–3 weeks",
-                    "Website Design (6–8+ pages) - 3–5 weeks",
-                    "Website Launch Support - 2–5 business days after site approval",
+                    "Logo Design - first concepts within 3-5 business days of advance payment",
+                    "Complete Brand Identity - 7-14 business days",
+                    "Website Design (up to 5 pages) - 2-3 weeks",
+                    "Website Design (6-8+ pages) - 3-5 weeks",
+                    "Website Launch Support - 2-5 business days after site approval",
                   ]}
                 />
                 <SubHeading>9.2 Delays Caused by Client</SubHeading>
@@ -514,7 +514,7 @@ export default function TermsConditions() {
                     {
                       icon: Clock,
                       label: "Hours",
-                      value: "Monday – Saturday, 9:00 AM – 7:00 PM IST",
+                      value: "Monday - Saturday, 9:00 AM - 7:00 PM IST",
                     },
                   ].map(({ icon: Icon, label, value, href }, index, arr) => (
                     <div

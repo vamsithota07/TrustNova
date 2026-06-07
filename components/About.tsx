@@ -50,7 +50,7 @@ export default function About() {
           >
             &ldquo;
           </span>
-          <p className="text-brand-white italic text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light leading-relaxed -mt-4 md:-mt-6">
+          <p className="text-brand-white text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light leading-relaxed -mt-4 md:-mt-6">
             Great design is not decoration.
             <br />
             It is communication.

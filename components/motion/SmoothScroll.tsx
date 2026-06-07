@@ -17,13 +17,35 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     try {
       lenis = new Lenis({
-        lerp: 0.085,
+        lerp: 0.1,
         smoothWheel: true,
-        wheelMultiplier: 0.9,
-        touchMultiplier: 1.1,
+        wheelMultiplier: 0.85,
+        touchMultiplier: 1,
+        syncTouch: true,
       });
 
       lenis.on("scroll", ScrollTrigger.update);
+
+      ScrollTrigger.scrollerProxy(document.documentElement, {
+        scrollTop(value) {
+          if (arguments.length && lenis && value !== undefined) {
+            lenis.scrollTo(value, { immediate: true });
+          }
+          return lenis?.scroll ?? window.scrollY;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+        pinType: "fixed",
+      });
+
+      ScrollTrigger.addEventListener("refresh", () => lenis?.resize());
+      ScrollTrigger.refresh();
 
       const raf = (time: number) => {
         lenis?.raf(time);

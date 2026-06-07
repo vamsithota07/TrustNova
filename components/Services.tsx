@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
-import SectionHeader from "./SectionHeader";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
 import ServiceVisual, { type ServiceVisualType } from "@/components/services/ServiceVisuals";
@@ -18,7 +15,6 @@ type Service = {
   subtitle: string;
   visual: ServiceVisualType;
   bullets: string[];
-  rotate: number;
   accent: "warm" | "sage" | "dusty" | "soft";
 };
 
@@ -29,7 +25,6 @@ const services: Service[] = [
     title: "Logo Design & Brand Identity",
     subtitle: "A powerful logo is the foundation of every successful brand.",
     visual: "logo",
-    rotate: -2.5,
     accent: "warm",
     bullets: [
       "3 unique initial concepts",
@@ -47,14 +42,13 @@ const services: Service[] = [
     title: "Complete Brand Identity Package",
     subtitle: "A cohesive visual language for your entire business.",
     visual: "brand",
-    rotate: 1.8,
     accent: "sage",
     bullets: [
       "Everything in Logo Design, PLUS:",
       "Business card design (print-ready files)",
       "Letterhead & professional email signature",
       "5 customisable social media post templates",
-      "Brand Style Guide (10–15 page PDF)",
+      "Brand Style Guide (10-15 page PDF)",
       "WhatsApp Business profile banner",
       "Brand icon / favicon for digital use",
     ],
@@ -65,7 +59,6 @@ const services: Service[] = [
     title: "Website Design & Development",
     subtitle: "Your website is your most powerful sales tool - we build it right.",
     visual: "website",
-    rotate: -1.2,
     accent: "dusty",
     bullets: [
       "Custom design tailored to your brand and goals",
@@ -83,7 +76,6 @@ const services: Service[] = [
     title: "Website Launch & Go-Live Support",
     subtitle: "We handle every technical detail so your launch goes smoothly.",
     visual: "launch",
-    rotate: 2.2,
     accent: "soft",
     bullets: [
       "Domain DNS configuration and pointing (domain by client)",
@@ -100,7 +92,6 @@ const services: Service[] = [
     title: "Website Maintenance & Ongoing Support",
     subtitle: "Keep your website healthy, updated, and growing every month.",
     visual: "maintenance",
-    rotate: -1.8,
     accent: "warm",
     bullets: [
       "Monthly content updates: text, images, new pages",
@@ -113,20 +104,6 @@ const services: Service[] = [
   },
 ];
 
-const accentBorder: Record<Service["accent"], string> = {
-  warm: "border-t-accent-warm",
-  sage: "border-t-accent-sage",
-  dusty: "border-t-accent-dusty",
-  soft: "border-t-accent-soft",
-};
-
-const accentBorderSide: Record<Service["accent"], string> = {
-  warm: "border-l-accent-warm",
-  sage: "border-l-accent-sage",
-  dusty: "border-l-accent-dusty",
-  soft: "border-l-accent-soft",
-};
-
 const accentText: Record<Service["accent"], string> = {
   warm: "text-accent-warm",
   sage: "text-accent-sage",
@@ -134,238 +111,485 @@ const accentText: Record<Service["accent"], string> = {
   soft: "text-accent-soft",
 };
 
+const accentLine: Record<Service["accent"], string> = {
+  warm: "bg-accent-warm",
+  sage: "bg-accent-sage",
+  dusty: "bg-accent-dusty",
+  soft: "bg-accent-soft",
+};
+
 function quoteUrl(title: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(`Hi, I'd like a quote for ${title}`)}`;
 }
 
-function FloatingCard({
-  service,
-  index,
-  isActive,
-  onSelect,
-}: {
-  service: Service;
-  index: number;
-  isActive: boolean;
-  onSelect: () => void;
-}) {
-  const cardRef = useRef<HTMLButtonElement>(null);
+function ServiceCtaRow({ service, className = "" }: { service: Service; className?: string }) {
+  return (
+    <div
+      data-service-cta
+      className={`flex flex-col sm:flex-row sm:items-center gap-4 ${className}`}
+    >
+      <MagneticButton
+        href={quoteUrl(service.title)}
+        external
+        className="btn-magnetic min-h-[48px] px-7 py-3.5 bg-brand-white text-brand-black font-semibold text-sm rounded-pill shadow-soft hover:shadow-card-hover transition-all w-full sm:w-auto justify-center"
+      >
+        Get a Quote →
+      </MagneticButton>
+      <Link
+        href="/contact"
+        className={`text-sm font-medium underline-offset-4 hover:underline text-center sm:text-left ${accentText[service.accent]}`}
+      >
+        Learn More
+      </Link>
+    </div>
+  );
+}
+
+function ServiceEditorial({ service, includeCta = true }: { service: Service; includeCta?: boolean }) {
+  return (
+    <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
+        <div className="min-w-0">
+          <p
+            data-service-subtitle
+            className={`text-base md:text-lg leading-relaxed mb-8 ${accentText[service.accent]}`}
+          >
+            {service.subtitle}
+          </p>
+
+          <div data-service-deliverables>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim mb-4">
+              What&apos;s included
+            </p>
+            <ul className="space-y-2.5">
+              {service.bullets.map((bullet) => (
+                <li
+                  key={bullet}
+                  data-service-bullet
+                  className="flex items-start gap-2.5 text-brand-silver text-sm md:text-[15px] leading-relaxed"
+                >
+                  <span className={`shrink-0 mt-0.5 text-xs ${accentText[service.accent]}`}>▸</span>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {includeCta && <ServiceCtaRow service={service} className="pt-8 pb-2" />}
+        </div>
+
+        <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-8">
+          <div className="w-full max-w-md" data-service-visual-inner>
+            <ServiceVisual type={service.visual} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ServicePanel({ service }: { service: Service }) {
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      <div
+        data-panel-title
+        className="pointer-events-none mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
+      >
+        <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
+          Service {service.number}
+        </span>
+        <div className={`mx-auto mt-4 h-px w-12 ${accentLine[service.accent]}`} aria-hidden />
+        <h3 className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] mt-5 tracking-[-0.03em] leading-[1.08] text-balance">
+          {service.title}
+        </h3>
+      </div>
+
+      <div
+        data-panel-content
+        className="min-h-0 flex-1 overflow-y-auto scrollbar-hide opacity-0 will-change-transform"
+      >
+        <div className="mx-auto mt-6 sm:mt-8 w-full max-w-6xl pb-4">
+          <ServiceEditorial service={service} includeCta={false} />
+        </div>
+      </div>
+
+      <div
+        data-panel-footer
+        className="shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-5 pb-6 sm:pb-7 opacity-0"
+      >
+        <div className="mx-auto w-full max-w-6xl">
+          <ServiceCtaRow service={service} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ServicesFallback() {
+  return (
+    <div className="px-4 sm:px-6 md:px-8 pb-section space-y-20 max-w-4xl mx-auto">
+      {services.map((service) => (
+        <article key={service.id} className="space-y-6">
+          <div className="text-center">
+            <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
+              Service {service.number}
+            </span>
+            <h3 className="font-display font-bold text-brand-white text-2xl sm:text-3xl mt-3 tracking-[-0.03em]">
+              {service.title}
+            </h3>
+          </div>
+          <ServiceEditorial service={service} />
+        </article>
+      ))}
+    </div>
+  );
+}
+
+const INTRO_WEIGHT = 0.85;
+const SERVICE_WEIGHT = 1;
+
+export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const progressFillRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [useFallback, setUseFallback] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useLayoutEffect(() => {
     registerGsap();
-    const el = cardRef.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const onEnter = () => {
-      if (isActive) return;
-      gsap.to(el, { y: -12, rotate: service.rotate + 1, scale: 1.02, duration: 0.45, ease: "power2.out" });
-    };
-    const onLeave = () => {
-      if (isActive) return;
-      gsap.to(el, { y: 0, rotate: service.rotate, scale: 1, duration: 0.5, ease: "power2.out" });
-    };
+    const section = sectionRef.current;
+    const pin = pinRef.current;
+    const intro = introRef.current;
+    const progress = progressRef.current;
+    const progressFill = progressFillRef.current;
 
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, [isActive, service.rotate]);
+    if (!section || !pin || !intro || !progress) return;
 
-  const offsetClass =
-    index % 2 === 0 ? "md:ml-0 lg:ml-4" : "md:ml-8 lg:ml-16 xl:ml-24";
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const coarse = window.matchMedia("(max-width: 1023px)").matches;
 
-  return (
-    <button
-      ref={cardRef}
-      type="button"
-      onClick={onSelect}
-      aria-expanded={isActive}
-      style={{ rotate: `${service.rotate}deg` }}
-      className={`group creative-card ${accentBorder[service.accent]} border-t-4 text-left w-full max-w-md p-6 md:p-7 transition-shadow duration-500 hover:shadow-card-hover focus:outline-none focus:ring-2 focus:ring-brand-white/20 ${offsetClass} ${
-        isActive ? "opacity-40 pointer-events-none" : ""
-      }`}
-    >
-      <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-dim">
-        {service.number}
-      </span>
-      <h3 className="font-display font-bold text-brand-white text-xl md:text-2xl mt-3 mb-2 tracking-[-0.02em] leading-tight">
-        {service.title}
-      </h3>
-      <p className={`text-sm italic ${accentText[service.accent]}`}>{service.subtitle}</p>
-      <span className="inline-flex mt-5 text-xs font-semibold uppercase tracking-widest text-brand-silver group-hover:text-brand-white transition-colors">
-        Explore →
-      </span>
-    </button>
-  );
-}
+    if (reduced || coarse) {
+      setUseFallback(true);
+      return;
+    }
 
-function ExpandedPanel({
-  service,
-  onClose,
-}: {
-  service: Service;
-  onClose: () => void;
-}) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
+    if (panels.length !== services.length) return;
+
+    const ctx = gsap.context(() => {
+      const totalUnits = INTRO_WEIGHT + services.length * SERVICE_WEIGHT;
+      const totalScroll = window.innerHeight * totalUnits;
+      const introEnd = INTRO_WEIGHT / totalUnits;
+      let lastIndex = 0;
+
+      gsap.set(intro, { opacity: 1, y: 0, scale: 1 });
+      gsap.set(progress, { opacity: 1, y: 0 });
+      if (progressFill) gsap.set(progressFill, { scaleX: 0 });
+
+      panels.forEach((panel, i) => {
+        const title = panel.querySelector("[data-panel-title]");
+        const content = panel.querySelector("[data-panel-content]");
+        const footer = panel.querySelector("[data-panel-footer]");
+        const subtitle = panel.querySelector("[data-service-subtitle]");
+        const bullets = panel.querySelectorAll("[data-service-bullet]");
+        const deliverables = panel.querySelector("[data-service-deliverables]");
+        const visual = panel.querySelector("[data-service-visual]");
+        const visualInner = panel.querySelector("[data-service-visual-inner]");
+        const cta = panel.querySelector("[data-service-cta]");
+
+        gsap.set(panel, {
+          opacity: 0,
+          y: 0,
+          pointerEvents: "none",
+          zIndex: i + 1,
+        });
+        gsap.set(title, { opacity: 0, y: 56, scale: 1 });
+        gsap.set(content, { opacity: 0, y: 48 });
+        gsap.set(footer, { opacity: 0, y: 24 });
+        gsap.set([subtitle, deliverables, visual, ...Array.from(bullets)], {
+          opacity: 0,
+          y: 32,
+        });
+        gsap.set(cta, { opacity: 0, y: 16 });
+        if (visualInner) gsap.set(visualInner, { y: 24 });
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${totalScroll}`,
+          pin: pin,
+          scrub: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const p = self.progress;
+            if (progressFill) {
+              gsap.set(progressFill, { scaleX: p });
+            }
+
+            let idx = 0;
+            if (p >= introEnd * 0.7) {
+              const serviceProgress = (p - introEnd) / (1 - introEnd);
+              idx = Math.min(
+                services.length - 1,
+                Math.max(0, Math.floor(serviceProgress * services.length)),
+              );
+            }
+
+            if (idx !== lastIndex) {
+              lastIndex = idx;
+              setActiveIndex(idx);
+            }
+          },
+        },
+      });
+
+      tl.to(intro, { opacity: 1, y: 0, duration: 0.12, ease: "none" }, 0);
+      tl.to(
+        intro,
+        { opacity: 0, y: 56, scale: 0.98, duration: 0.22, ease: "power1.inOut" },
+        introEnd * 0.3,
+      );
+
+      services.forEach((_, i) => {
+        const panel = panels[i];
+        if (!panel) return;
+
+        const segStart = introEnd + (i / services.length) * (1 - introEnd);
+        const segEnd = introEnd + ((i + 1) / services.length) * (1 - introEnd);
+        const segLen = segEnd - segStart;
+
+        const title = panel.querySelector("[data-panel-title]");
+        const content = panel.querySelector("[data-panel-content]");
+        const footer = panel.querySelector("[data-panel-footer]");
+        const subtitle = panel.querySelector("[data-service-subtitle]");
+        const bullets = panel.querySelectorAll("[data-service-bullet]");
+        const deliverables = panel.querySelector("[data-service-deliverables]");
+        const visual = panel.querySelector("[data-service-visual]");
+        const visualInner = panel.querySelector("[data-service-visual-inner]");
+        const cta = panel.querySelector("[data-service-cta]");
+
+        const t = (fraction: number) => segStart + segLen * fraction;
+
+        tl.set(panel, { opacity: 1, y: 0, pointerEvents: "auto" }, t(0));
+        tl.fromTo(
+          title,
+          { opacity: 0, y: 56 },
+          { opacity: 1, y: 0, duration: segLen * 0.2, ease: "power2.out" },
+          t(0.04),
+        );
+        tl.to(title, { opacity: 1, y: 0, duration: segLen * 0.14, ease: "none" }, t(0.24));
+
+        tl.fromTo(
+          content,
+          { opacity: 0, y: 48 },
+          { opacity: 1, y: 0, duration: segLen * 0.2, ease: "power2.out" },
+          t(0.36),
+        );
+        tl.fromTo(
+          subtitle,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power2.out" },
+          t(0.42),
+        );
+        tl.fromTo(
+          deliverables,
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+          t(0.48),
+        );
+        tl.fromTo(
+          bullets,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: segLen * 0.14,
+            stagger: segLen * 0.01,
+            ease: "power2.out",
+          },
+          t(0.52),
+        );
+        tl.fromTo(
+          visual,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power2.out" },
+          t(0.56),
+        );
+        if (visualInner) {
+          tl.fromTo(
+            visualInner,
+            { y: 24 },
+            { y: 0, duration: segLen * 0.14, ease: "power2.out" },
+            t(0.6),
+          );
+        }
+        tl.fromTo(
+          footer,
+          { opacity: 0, y: 24 },
+          { opacity: 1, y: 0, duration: segLen * 0.14, ease: "power2.out" },
+          t(0.58),
+        );
+        tl.fromTo(
+          cta,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+          t(0.64),
+        );
+
+        if (i < services.length - 1) {
+          tl.to(
+            panel,
+            { opacity: 0, y: 40, duration: segLen * 0.12, ease: "power1.in" },
+            t(0.86),
+          );
+          tl.set(panel, { pointerEvents: "none" }, t(0.98));
+          tl.set(title, { opacity: 0, y: 56, scale: 1 }, t(0.98));
+          tl.set(content, { opacity: 0, y: 48 }, t(0.98));
+          tl.set(footer, { opacity: 0, y: 24 }, t(0.98));
+          tl.set([subtitle, deliverables, visual, cta, ...Array.from(bullets)], { opacity: 0, y: 32 }, t(0.98));
+          if (visualInner) tl.set(visualInner, { y: 24 }, t(0.98));
+        } else {
+          tl.to({}, { duration: segLen * 0.1 }, t(0.78));
+        }
+      });
+
+      gsap.to("[data-service-parallax]", {
+        y: 24,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${totalScroll}`,
+          scrub: true,
+        },
+      });
+    }, section);
+
+    return () => ctx.revert();
   }, []);
 
-  const panelTransition = { type: "spring" as const, damping: 32, stiffness: 280, mass: 0.85 };
+  useLayoutEffect(() => {
+    if (useFallback) return;
+    dotRefs.current.forEach((dot, i) => {
+      if (!dot) return;
+      const active = i === activeIndex;
+      gsap.to(dot, {
+        scale: active ? 1.25 : 1,
+        opacity: active ? 1 : 0.3,
+        duration: 0.35,
+        ease: "power2.out",
+      });
+    });
+  }, [activeIndex, useFallback]);
+
+  const progressLabel = services[activeIndex]?.title ?? services[0].title;
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[200]"
-    >
-      <motion.button
-        type="button"
-        aria-label="Close service details"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        className="absolute inset-0 bg-brand-white/35 backdrop-blur-[6px]"
-        onClick={onClose}
-      />
-
-      <motion.article
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={`service-title-${service.id}`}
-        initial={{ x: "105%" }}
-        animate={{ x: 0 }}
-        exit={{ x: "105%" }}
-        transition={panelTransition}
-        className={`fixed top-0 right-0 z-10 flex h-full w-full max-w-[min(100vw,540px)] sm:max-w-xl lg:max-w-2xl flex-col overflow-hidden border-l-4 bg-brand-card shadow-[-24px_0_80px_rgba(26,26,26,0.12)] ${accentBorderSide[service.accent]}`}
-      >
-        <div className="flex shrink-0 items-center justify-between gap-4 border-b border-brand-rule bg-brand-card/95 backdrop-blur-md px-6 py-5 sm:px-8">
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.12, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand-dim">
-              {service.number}
-            </span>
-            <h3
-              id={`service-title-${service.id}`}
-              className="font-display font-bold text-brand-white text-xl sm:text-2xl tracking-[-0.02em] mt-0.5"
-            >
-              {service.title}
-            </h3>
-          </motion.div>
-          <motion.button
-            type="button"
-            onClick={onClose}
-            initial={{ opacity: 0, rotate: -90 }}
-            animate={{ opacity: 1, rotate: 0 }}
-            transition={{ delay: 0.15, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-rule text-brand-white hover:bg-brand-dark transition-colors"
-            aria-label="Close"
-          >
-            <X size={18} />
-          </motion.button>
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 overflow-y-auto p-6 sm:p-8"
-        >
-          <div className="grid grid-cols-1 gap-8 lg:gap-10">
-            <div>
-              <p className={`text-[15px] italic mb-6 ${accentText[service.accent]}`}>
-                {service.subtitle}
+    <section ref={sectionRef} id="services" className="relative w-full bg-brand-black">
+      {useFallback ? (
+        <>
+          <Container className="pt-section pb-10 md:pb-12">
+            <div className="text-center mb-0">
+              <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
+              <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
+                What We Offer
+              </h2>
+              <p className="mt-5 md:mt-6 editorial-body text-base md:text-lg max-w-2xl leading-[1.75] mx-auto">
+                Scroll to explore each service - one focused story at a time.
               </p>
-              <ul className="space-y-3">
-                {service.bullets.map((bullet, i) => (
-                  <motion.li
-                    key={bullet}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.22 + i * 0.04, duration: 0.35 }}
-                    className="flex items-start gap-3"
-                  >
-                    <span className={`text-sm mt-0.5 shrink-0 ${accentText[service.accent]}`}>▸</span>
-                    <span className="text-brand-silver text-[15px] leading-relaxed">{bullet}</span>
-                  </motion.li>
-                ))}
-              </ul>
             </div>
-            <div className="lg:pt-2">
-              <ServiceVisual type={service.visual} />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="shrink-0 border-t border-brand-rule bg-brand-card px-6 sm:px-8 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+          </Container>
+          <ServicesFallback />
+        </>
+      ) : (
+        <div
+          ref={pinRef}
+          className="relative flex h-[calc(100dvh-7rem)] flex-col sm:h-[calc(100dvh-8rem)] md:h-[calc(100dvh-9rem)] overflow-x-clip bg-brand-black"
         >
-          <p className="text-brand-white text-sm font-semibold">Ready to get started?</p>
-          <div className="flex flex-wrap items-center gap-4">
-            <MagneticButton
-              href={quoteUrl(service.title)}
-              external
-              className="btn-magnetic min-h-[48px] px-7 py-3 bg-brand-white text-brand-black font-semibold text-sm rounded-pill shadow-soft hover:shadow-card-hover transition-all"
-            >
-              Get a Quote →
-            </MagneticButton>
-            <Link
-              href="/services"
-              className={`text-[13px] font-medium underline-offset-4 hover:underline ${accentText[service.accent]}`}
-            >
-              Learn More
-            </Link>
+          <div
+            className="pointer-events-none absolute inset-0 opacity-35"
+            aria-hidden
+            data-service-parallax
+          >
+            <div className="floating-shape top-[10%] -left-24 h-64 w-64 bg-accent-sage/10 animate-float" />
+            <div className="floating-shape bottom-[12%] -right-20 h-72 w-72 bg-accent-warm/8 animate-float-delayed" />
           </div>
-        </motion.div>
-      </motion.article>
-    </motion.div>
-  );
-}
 
-export default function Services() {
-  const [activeService, setActiveService] = useState<number | null>(null);
-  const active = services.find((s) => s.id === activeService) ?? null;
+          <div
+            ref={introRef}
+            className="absolute inset-0 z-30 flex items-center justify-center px-6"
+          >
+            <div className="text-center max-w-3xl w-full">
+              <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
+              <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
+                What We Offer
+              </h2>
+              <p className="mt-5 md:mt-6 editorial-body text-base md:text-lg max-w-2xl leading-[1.75] mx-auto text-brand-silver">
+                Scroll to explore each service - one focused story at a time.
+              </p>
+            </div>
+          </div>
 
-  return (
-    <section id="services" className="relative w-full py-section bg-brand-dark overflow-hidden">
-      <div className="floating-shape top-20 -right-16 h-64 w-64 bg-accent-soft/20" aria-hidden />
-      <Container>
-        <SectionHeader eyebrow="Services" heading="What We Offer" className="mb-4 md:mb-5" />
-        <p className="text-center text-brand-silver text-[15px] italic mb-12 md:mb-16 max-w-lg mx-auto">
-          Click any service to explore what&apos;s included.
-        </p>
+          <div
+            ref={progressRef}
+            className="relative z-40 shrink-0 px-4 sm:px-6 pt-4 pb-3"
+          >
+            <div className="max-w-md mx-auto">
+              <div className="flex items-center justify-between gap-3 mb-3">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim">
+                  {`${String(activeIndex + 1).padStart(2, "0")} / ${String(services.length).padStart(2, "0")}`}
+                </span>
+                <span className="text-[11px] font-medium text-brand-silver truncate max-w-[55%] text-right">
+                  {progressLabel}
+                </span>
+              </div>
+              <div className="h-0.5 bg-brand-rule rounded-full overflow-hidden">
+                <div
+                  ref={progressFillRef}
+                  className="h-full w-full origin-left bg-brand-white rounded-full"
+                  style={{ transform: "scaleX(0)" }}
+                />
+              </div>
+              <div className="flex justify-center gap-2 mt-3">
+                {services.map((s, i) => (
+                  <span
+                    key={s.id}
+                    ref={(el) => {
+                      dotRefs.current[i] = el;
+                    }}
+                    className="h-1.5 w-1.5 rounded-full bg-brand-white opacity-30"
+                    aria-hidden
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
 
-        <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 max-w-2xl lg:max-w-none mx-auto lg:mx-0 lg:pl-8">
-          {services.map((service, index) => (
-            <FloatingCard
-              key={service.id}
-              service={service}
-              index={index}
-              isActive={activeService !== null}
-              onSelect={() => setActiveService(service.id)}
-            />
-          ))}
+          <div className="relative z-10 min-h-0 flex-1">
+            {services.map((service, i) => (
+              <div
+                key={service.id}
+                ref={(el) => {
+                  panelRefs.current[i] = el;
+                }}
+                className="absolute inset-0 flex flex-col opacity-0"
+                aria-label={service.title}
+                aria-hidden={activeIndex !== i}
+              >
+                <ServicePanel service={service} />
+              </div>
+            ))}
+          </div>
         </div>
-      </Container>
-
-      <AnimatePresence mode="wait">
-        {active && (
-          <ExpandedPanel service={active} onClose={() => setActiveService(null)} />
-        )}
-      </AnimatePresence>
+      )}
     </section>
   );
 }

@@ -50,7 +50,7 @@ export function getMockupFile(industryId: string): string {
 }
 
 /** Bump when mockup assets change so browsers refetch iframe previews. */
-const MOCKUP_CACHE_VERSION = "2";
+const MOCKUP_CACHE_VERSION = "3";
 
 export function getMockupHtmlPath(industryId: string): string {
   return `/mockups/${getMockupFile(industryId)}.html?v=${MOCKUP_CACHE_VERSION}`;

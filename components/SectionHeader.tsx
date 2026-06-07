@@ -33,7 +33,7 @@ export default function SectionHeader({
       return (
         <>
           {before}
-          <span className="italic text-accent-warm">{highlight}</span>
+          <span className="text-accent-warm">{highlight}</span>
           {after}
         </>
       );

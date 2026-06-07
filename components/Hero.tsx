@@ -53,16 +53,15 @@ export default function Hero() {
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
         tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.7 })
-          .from(lines, { opacity: 0, y: "110%", rotateX: 12, duration: 1, stagger: 0.11, ease: "power4.out" }, "-=0.35")
+          .from(lines, { opacity: 0, y: "110%", duration: 1, stagger: 0.11, ease: "power4.out" }, "-=0.35")
           .from(copyRef.current, { opacity: 0, y: 32, duration: 0.85 }, "-=0.5")
           .from(ctaRef.current?.children ?? [], { opacity: 0, y: 24, duration: 0.75, stagger: 0.08 }, "-=0.55")
-          .from(cardRef.current, { opacity: 0, y: 60, rotate: -4, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
+          .from(cardRef.current, { opacity: 0, y: 60, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
           .from(marqueeRef.current, { opacity: 0, y: 16, duration: 0.7 }, "-=0.4");
 
         if (cardRef.current) {
           gsap.to(cardRef.current, {
             y: -10,
-            rotate: -2,
             duration: 5,
             repeat: -1,
             yoyo: true,
@@ -138,7 +137,7 @@ export default function Hero() {
                   <h1
                     data-hero-line
                     className={`font-display font-bold text-display-lg lg:text-display-xl leading-[0.95] tracking-[-0.05em] ${
-                      line.accent ? "text-accent-warm italic" : "text-brand-white"
+                      line.accent ? "text-accent-warm" : "text-brand-white"
                     }`}
                   >
                     {line.text}
@@ -166,7 +165,7 @@ export default function Hero() {
           </div>
 
           <div ref={cardRef} className="w-full min-w-0 order-2 lg:justify-self-end lg:mt-8">
-            <div className="creative-card p-6 sm:p-8 md:p-10 w-full max-w-md lg:ml-auto rotate-[-1.5deg] hover:rotate-0 hover:shadow-card-hover transition-all duration-700 ease-premium">
+            <div className="creative-card p-6 sm:p-8 md:p-10 w-full max-w-md lg:ml-auto hover:shadow-card-hover transition-all duration-700 ease-premium">
               <p className="editorial-eyebrow mb-5">What we do</p>
               <h2 className="font-display font-bold text-2xl md:text-3xl text-brand-white mb-6 tracking-[-0.03em]">
                 Our Services

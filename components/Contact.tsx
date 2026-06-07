@@ -26,8 +26,8 @@ const serviceOptions = [
 
 const budgetOptions = [
   "Under ₹15,000",
-  "₹15,000 – ₹30,000",
-  "₹30,000 – ₹60,000",
+  "₹15,000 - ₹30,000",
+  "₹30,000 - ₹60,000",
   "₹60,000+",
   "Not sure yet",
 ];
@@ -62,7 +62,7 @@ const contactCards = [
   {
     icon: Clock,
     label: "Hours",
-    value: "Mon – Sat, 9:00 AM – 7:00 PM IST",
+    value: "Mon - Sat, 9:00 AM - 7:00 PM IST",
     hint: "Closed on public holidays",
   },
 ];
@@ -171,7 +171,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={inViewOptions}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="mt-3 text-sm italic text-brand-dim"
+            className="mt-3 text-sm text-brand-dim"
           >
             Currently accepting new projects for 2025
           </motion.p>

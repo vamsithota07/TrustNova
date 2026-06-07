@@ -104,6 +104,12 @@ html:not(.is-loading) #page-loader {
   h4 {
     @apply text-brand-white font-display;
   }
+
+  em,
+  i,
+  .italic {
+    font-style: normal;
+  }
 }
 
 @layer components {

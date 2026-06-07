@@ -12,7 +12,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function RecommendPage() {
   return (
-    <main className="hero-dot-grid relative min-h-screen bg-brand-black pt-28 sm:pt-32 md:pt-36 pb-section-sm md:pb-section min-w-0 overflow-hidden">
+    <main className="hero-dot-grid relative bg-brand-black pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24 min-w-0 w-full">
       <div
         className="floating-shape top-32 -left-24 h-64 w-64 bg-accent-sage/15 animate-float"
         aria-hidden

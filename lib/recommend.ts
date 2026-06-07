@@ -2,12 +2,10 @@ import { WHATSAPP_URL } from "@/lib/constants";
 
 export type Stage = "starting" | "running" | "growing" | "rebranding";
 export type Need = "logo" | "website" | "both" | "maintenance";
-export type Budget = "under15" | "15to40" | "40to80" | "above80";
 
 export interface Answers {
   stage: Stage;
   need: Need;
-  budget?: Budget;
 }
 
 export type ResultId =
@@ -15,8 +13,7 @@ export type ResultId =
   | "brand-identity"
   | "website"
   | "full-bundle"
-  | "maintenance"
-  | "budget-mismatch";
+  | "maintenance";
 
 export interface Recommendation {
   id: ResultId;
@@ -27,10 +24,6 @@ export interface Recommendation {
   includes: string[];
   ctaLabel: string;
   whatsappMessage: string;
-  /** Result 6 shows an extra logo card below */
-  showLogoFallback?: boolean;
-  mismatchHeading?: string;
-  mismatchDescription?: string;
 }
 
 const results: Record<ResultId, Omit<Recommendation, "id">> = {
@@ -118,75 +111,25 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
     ctaLabel: "Start Maintenance →",
     whatsappMessage: "Hi, I'm interested in Website Maintenance",
   },
-  "budget-mismatch": {
-    badge: "OUR HONEST RECOMMENDATION",
-    packageName: "Let's Start Smart",
-    price: "",
-    description:
-      "A quality website starts at ₹25,000. But here's what we suggest: start with a professional logo and brand identity today, then build your website once you're ready. A strong brand first means your website will be 10x more effective.",
-    includes: [],
-    ctaLabel: "Let's Talk About Your Budget →",
-    whatsappMessage: "Hi, I'd like to discuss my budget",
-    showLogoFallback: true,
-    mismatchHeading: "Let's Start Smart",
-    mismatchDescription:
-      "A quality website starts at ₹25,000. But here's what we suggest: start with a professional logo and brand identity today, then build your website once you're ready. A strong brand first means your website will be 10x more effective.",
-  },
 };
 
 export function getRecommendation(answers: Answers): Recommendation {
-  const { stage, need, budget } = answers;
+  const { stage, need } = answers;
 
   if (need === "maintenance") {
     return { id: "maintenance", ...results.maintenance };
   }
 
-  if (!budget) {
-    if (need === "both") {
-      return { id: "full-bundle", ...results["full-bundle"] };
-    }
-
-    if (need === "website") {
-      return { id: "website", ...results.website };
-    }
-
-    if (need === "logo" && (stage === "growing" || stage === "rebranding")) {
-      return { id: "brand-identity", ...results["brand-identity"] };
-    }
-
-    return { id: "logo-basic", ...results["logo-basic"] };
-  }
-
-  if ((need === "website" || need === "both") && budget === "under15") {
-    return { id: "budget-mismatch", ...results["budget-mismatch"] };
-  }
-
-  if (need === "both" && (budget === "40to80" || budget === "above80")) {
+  if (need === "both") {
     return { id: "full-bundle", ...results["full-bundle"] };
   }
 
-  if (need === "website" && budget !== "under15") {
+  if (need === "website") {
     return { id: "website", ...results.website };
   }
 
-  if (
-    need === "logo" &&
-    (budget === "15to40" || budget === "40to80" || budget === "above80") &&
-    (stage === "growing" || stage === "rebranding")
-  ) {
+  if (stage === "growing" || stage === "rebranding") {
     return { id: "brand-identity", ...results["brand-identity"] };
-  }
-
-  if (need === "logo" && (budget === "under15" || budget === "15to40")) {
-    return { id: "logo-basic", ...results["logo-basic"] };
-  }
-
-  if (need === "logo") {
-    return { id: "brand-identity", ...results["brand-identity"] };
-  }
-
-  if (need === "both") {
-    return { id: "full-bundle", ...results["full-bundle"] };
   }
 
   return { id: "logo-basic", ...results["logo-basic"] };
@@ -195,5 +138,3 @@ export function getRecommendation(answers: Answers): Recommendation {
 export function getWhatsAppUrl(message: string): string {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
 }
-
-export const logoFallback = results["logo-basic"];

@@ -23,16 +23,6 @@ export function useReducedMotion(): boolean {
   return reduced;
 }
 
-export function useIsTouchDevice(): boolean {
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    setIsTouch(window.matchMedia("(pointer: coarse)").matches);
-  }, []);
-
-  return isTouch;
-}
-
 export function useFinePointer(): boolean {
   const [fine, setFine] = useState(false);
 

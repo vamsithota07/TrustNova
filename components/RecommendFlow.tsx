@@ -2,17 +2,15 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Mail } from "lucide-react";
 import {
   getRecommendation,
   getWhatsAppUrl,
-  logoFallback,
   type Stage,
   type Need,
-  type Budget,
   type Recommendation,
 } from "@/lib/recommend";
-import { btnPrimary, WHATSAPP_URL } from "@/lib/constants";
+import { btnPrimary, btnSecondary, EMAIL, WHATSAPP_URL } from "@/lib/constants";
 import { useIsMobile } from "@/lib/hooks";
 
 interface Option {
@@ -77,33 +75,6 @@ const step2Options: { id: Need; emoji: string; title: string; description: strin
     emoji: "🔧",
     title: "Ongoing Support",
     description: "I already have a site. I just need someone to maintain and grow it.",
-  },
-];
-
-const step3Options: { id: Budget; emoji: string; title: string; description: string }[] = [
-  {
-    id: "under15",
-    emoji: "💰",
-    title: "Under ₹15,000",
-    description: "I'm starting lean and need the essentials done well.",
-  },
-  {
-    id: "15to40",
-    emoji: "💰💰",
-    title: "₹15,000 – ₹40,000",
-    description: "I'm ready to invest in a professional brand presence.",
-  },
-  {
-    id: "40to80",
-    emoji: "💰💰💰",
-    title: "₹40,000 – ₹80,000",
-    description: "I want the full package - brand and website together.",
-  },
-  {
-    id: "above80",
-    emoji: "💰💰💰💰",
-    title: "₹80,000+",
-    description: "Budget is not the constraint. Quality and results are what matter.",
   },
 ];
 
@@ -199,46 +170,29 @@ function OptionCard({
 
 function ResultCard({
   result,
-  isFallback = false,
+  showPackagePrice = true,
 }: {
   result: Recommendation;
-  isFallback?: boolean;
+  showPackagePrice?: boolean;
 }) {
   return (
-    <div
-      className={`relative bg-brand-card border border-brand-rule border-l-4 border-brand-blue rounded-r-xl p-6 md:p-8 shadow-[0_4px_40px_rgba(107,130,168,0.1)] ${
-        isFallback ? "mt-6" : ""
-      }`}
-    >
+    <div className="relative bg-brand-card border border-brand-rule border-l-4 border-brand-blue rounded-r-xl p-6 md:p-8 shadow-[0_4px_40px_rgba(107,130,168,0.1)]">
       <span className="inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider bg-brand-blue text-white rounded-full mb-4">
-        {isFallback ? "RECOMMENDED FOR YOU" : result.badge}
+        {result.badge}
       </span>
 
-      {result.id === "budget-mismatch" && !isFallback ? (
-        <>
-          <h3 className="text-brand-white font-bold text-2xl md:text-3xl mb-4">
-            {result.mismatchHeading}
-          </h3>
-          <p className="text-brand-silver leading-relaxed mb-6 max-w-3xl">
-            {result.mismatchDescription}
-          </p>
-        </>
-      ) : (
-        <>
-          <h3 className="text-brand-white font-bold text-2xl md:text-3xl mb-2">
-            {result.packageName}
-          </h3>
-          {result.price && (
-            <p className="text-brand-blue font-bold text-xl md:text-2xl mb-4">
-              {result.price}
-            </p>
-          )}
-          <p className="text-brand-silver leading-relaxed mb-6 max-w-3xl">{result.description}</p>
-        </>
+      <h3 className="text-brand-white font-bold text-2xl md:text-3xl mb-2">
+        {result.packageName}
+      </h3>
+      {showPackagePrice && result.price && (
+        <p className="text-brand-blue font-bold text-xl md:text-2xl mb-4">
+          {result.price}
+        </p>
       )}
+      <p className="text-brand-silver leading-relaxed mb-6 max-w-3xl">{result.description}</p>
 
       {result.includes.length > 0 && (
-        <ul className="space-y-2 mb-8">
+        <ul className="space-y-2">
           {result.includes.map((item) => (
             <li key={item} className="flex items-start gap-2 text-brand-silver text-sm">
               <Check className="w-4 h-4 text-brand-blue shrink-0 mt-0.5" />
@@ -247,15 +201,6 @@ function ResultCard({
           ))}
         </ul>
       )}
-
-      <a
-        href={getWhatsAppUrl(result.whatsappMessage)}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${btnPrimary} w-full sm:w-auto sm:min-w-[280px] text-base px-6 sm:px-10 py-4`}
-      >
-        {result.ctaLabel}
-      </a>
     </div>
   );
 }
@@ -267,7 +212,6 @@ export default function RecommendFlow() {
   const [direction, setDirection] = useState(1);
   const [stage, setStage] = useState<Stage | null>(null);
   const [need, setNeed] = useState<Need | null>(null);
-  const [budget, setBudget] = useState<Budget | null>(null);
   const [result, setResult] = useState<Recommendation | null>(null);
 
   const goNext = useCallback(() => {
@@ -282,17 +226,10 @@ export default function RecommendFlow() {
 
   const handleNeedSelect = (value: Need) => {
     setNeed(value);
-    setTimeout(goNext, 300);
-  };
-
-  const handleBudgetSelect = (value: Budget) => {
-    setBudget(value);
-    if (stage && need) {
-      const rec = getRecommendation({ stage, need, budget: value });
-      setDirection(1);
-      setResult(rec);
-      setStep(4);
+    if (stage) {
+      setResult(getRecommendation({ stage, need: value }));
     }
+    setTimeout(goNext, 300);
   };
 
   const handleStartOver = () => {
@@ -300,7 +237,6 @@ export default function RecommendFlow() {
     setDirection(-1);
     setStage(null);
     setNeed(null);
-    setBudget(null);
     setResult(null);
     setStep(1);
   };
@@ -308,8 +244,15 @@ export default function RecommendFlow() {
   const stepHeadings = [
     "Where are you right now?",
     "What's your biggest priority right now?",
-    "What's your approximate budget?",
+    "Your tailored pricing",
   ];
+
+  const contactWhatsAppUrl = result
+    ? getWhatsAppUrl(result.whatsappMessage)
+    : WHATSAPP_URL;
+  const contactEmailUrl = result
+    ? `mailto:${EMAIL}?subject=${encodeURIComponent(`Enquiry: ${result.packageName}`)}&body=${encodeURIComponent("Hi TrustNova,\n\nI'd like to discuss pricing for my project.\n\n")}`
+    : `mailto:${EMAIL}?subject=${encodeURIComponent("Project enquiry - TrustNova")}`;
 
   return (
     <div className="w-full mx-auto min-w-0">
@@ -321,8 +264,8 @@ export default function RecommendFlow() {
           Find Your Perfect Package
         </h1>
         <p className="text-brand-silver text-base md:text-lg prose-width mx-auto">
-          Answer 3 quick questions. We&apos;ll tell you exactly what you need - and
-          what it will cost.
+          Answer 2 quick questions. We&apos;ll recommend the right package and share
+          tailored pricing for your project.
         </p>
       </div>
 
@@ -382,7 +325,7 @@ export default function RecommendFlow() {
           </motion.div>
         )}
 
-        {step === 3 && (
+        {step === 3 && result && (
           <motion.div
             key="step3"
             custom={direction}
@@ -395,41 +338,40 @@ export default function RecommendFlow() {
             <h2 className="text-brand-white font-bold text-xl md:text-2xl mb-6 text-center">
               {stepHeadings[2]}
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {step3Options.map((opt) => (
-                <OptionCard
-                  key={opt.id}
-                  option={opt}
-                  selected={budget === opt.id}
-                  onSelect={() => handleBudgetSelect(opt.id)}
-                />
-              ))}
-            </div>
-          </motion.div>
-        )}
 
-        {step === 4 && result && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            {result.id === "budget-mismatch" ? (
-              <>
-                <ResultCard result={result} />
-                <ResultCard
-                  result={{ id: "logo-basic", ...logoFallback }}
-                  isFallback
-                />
-              </>
-            ) : (
-              <ResultCard result={result} />
-            )}
+            <ResultCard result={result} showPackagePrice={false} />
+
+            <div className="mt-6 rounded-2xl border border-brand-blue/20 bg-brand-blue/[0.06] p-6 md:p-8 text-center">
+              <p className="text-brand-white font-bold text-lg md:text-xl mb-2">
+                Pricing starts from ₹15,000
+              </p>
+              <p className="text-brand-silver text-sm md:text-base leading-relaxed max-w-xl mx-auto">
+                Based on your requirements, we tailor every quote to fit your project -
+                scope, timeline, and goals. No hidden fees.
+              </p>
+
+              <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+                <a
+                  href={contactWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${btnPrimary} w-full sm:w-auto sm:min-w-[220px] px-8 py-4`}
+                >
+                  Chat on WhatsApp →
+                </a>
+                <a
+                  href={contactEmailUrl}
+                  className={`${btnSecondary} w-full sm:w-auto sm:min-w-[220px] px-8 py-4 gap-2`}
+                >
+                  <Mail className="h-4 w-4" strokeWidth={2} />
+                  Email us
+                </a>
+              </div>
+            </div>
 
             <div className="mt-10 text-center space-y-8">
               <div>
-                <p className="text-brand-silver mb-2">Not what you expected?</p>
+                <p className="text-brand-silver mb-2">Want to try different answers?</p>
                 <button
                   type="button"
                   onClick={handleStartOver}
@@ -453,21 +395,6 @@ export default function RecommendFlow() {
                     {line}
                   </p>
                 ))}
-              </div>
-
-              <div className="pt-4 border-t border-brand-rule">
-                <p className="text-brand-silver text-sm mb-4 max-w-md mx-auto">
-                  Still unsure? Just WhatsApp us and describe your business.
-                  We&apos;ll figure it out together.
-                </p>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`${btnPrimary} px-10 py-4`}
-                >
-                  Chat With Us →
-                </a>
               </div>
             </div>
           </motion.div>

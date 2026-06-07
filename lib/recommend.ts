@@ -7,7 +7,7 @@ export type Budget = "under15" | "15to40" | "40to80" | "above80";
 export interface Answers {
   stage: Stage;
   need: Need;
-  budget: Budget;
+  budget?: Budget;
 }
 
 export type ResultId =
@@ -139,6 +139,22 @@ export function getRecommendation(answers: Answers): Recommendation {
 
   if (need === "maintenance") {
     return { id: "maintenance", ...results.maintenance };
+  }
+
+  if (!budget) {
+    if (need === "both") {
+      return { id: "full-bundle", ...results["full-bundle"] };
+    }
+
+    if (need === "website") {
+      return { id: "website", ...results.website };
+    }
+
+    if (need === "logo" && (stage === "growing" || stage === "rebranding")) {
+      return { id: "brand-identity", ...results["brand-identity"] };
+    }
+
+    return { id: "logo-basic", ...results["logo-basic"] };
   }
 
   if ((need === "website" || need === "both") && budget === "under15") {

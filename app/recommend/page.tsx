@@ -6,7 +6,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Find the Right Package | TrustNova",
   description:
-    "Answer 3 quick questions and TrustNova will recommend the perfect logo, brand, or website package for your business and budget.",
+    "Answer 2 quick questions and TrustNova will recommend the right logo, brand, or website package for your business.",
   path: "/recommend",
 });
 

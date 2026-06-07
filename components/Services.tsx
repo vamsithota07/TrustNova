@@ -1,7 +1,6 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -124,23 +123,14 @@ function quoteUrl(title: string) {
 
 function ServiceCtaRow({ service, className = "" }: { service: Service; className?: string }) {
   return (
-    <div
-      data-service-cta
-      className={`flex flex-col sm:flex-row sm:items-center gap-4 ${className}`}
-    >
+    <div data-service-cta className={className}>
       <MagneticButton
         href={quoteUrl(service.title)}
         external
-        className="btn-magnetic min-h-[48px] px-7 py-3.5 bg-brand-white text-brand-black font-semibold text-sm rounded-pill shadow-soft hover:shadow-card-hover transition-all w-full sm:w-auto justify-center"
+        className="btn-magnetic relative z-20 min-h-[48px] px-7 py-3.5 bg-brand-white text-brand-black font-semibold text-sm rounded-pill shadow-soft hover:shadow-card-hover transition-all w-full sm:w-auto justify-center"
       >
         Get a Quote →
       </MagneticButton>
-      <Link
-        href="/contact"
-        className={`text-sm font-medium underline-offset-4 hover:underline text-center sm:text-left ${accentText[service.accent]}`}
-      >
-        Learn More
-      </Link>
     </div>
   );
 }
@@ -202,6 +192,12 @@ function ServicePanel({ service }: { service: Service }) {
         <h3 className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] mt-5 tracking-[-0.03em] leading-[1.08] text-balance">
           {service.title}
         </h3>
+        <p
+          data-scroll-hint
+          className="mt-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
+        >
+          Scroll to know more
+        </p>
       </div>
 
       <div
@@ -215,7 +211,7 @@ function ServicePanel({ service }: { service: Service }) {
 
       <div
         data-panel-footer
-        className="shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-5 pb-6 sm:pb-7 opacity-0"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-5 pb-6 sm:pb-7 opacity-0"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />
@@ -293,6 +289,7 @@ export default function Services() {
 
       panels.forEach((panel, i) => {
         const title = panel.querySelector("[data-panel-title]");
+        const scrollHint = panel.querySelector("[data-scroll-hint]");
         const content = panel.querySelector("[data-panel-content]");
         const footer = panel.querySelector("[data-panel-footer]");
         const subtitle = panel.querySelector("[data-service-subtitle]");
@@ -309,6 +306,7 @@ export default function Services() {
           zIndex: i + 1,
         });
         gsap.set(title, { opacity: 0, y: 56, scale: 1 });
+        gsap.set(scrollHint, { opacity: 0, y: 20 });
         gsap.set(content, { opacity: 0, y: 48 });
         gsap.set(footer, { opacity: 0, y: 24 });
         gsap.set([subtitle, deliverables, visual, ...Array.from(bullets)], {
@@ -357,6 +355,7 @@ export default function Services() {
         { opacity: 0, y: 56, scale: 0.98, duration: 0.22, ease: "power1.inOut" },
         introEnd * 0.3,
       );
+      tl.set(intro, { pointerEvents: "none" }, introEnd * 0.3);
 
       services.forEach((_, i) => {
         const panel = panels[i];
@@ -367,6 +366,7 @@ export default function Services() {
         const segLen = segEnd - segStart;
 
         const title = panel.querySelector("[data-panel-title]");
+        const scrollHint = panel.querySelector("[data-scroll-hint]");
         const content = panel.querySelector("[data-panel-content]");
         const footer = panel.querySelector("[data-panel-footer]");
         const subtitle = panel.querySelector("[data-service-subtitle]");
@@ -385,7 +385,18 @@ export default function Services() {
           { opacity: 1, y: 0, duration: segLen * 0.2, ease: "power2.out" },
           t(0.04),
         );
+        tl.fromTo(
+          scrollHint,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power2.out" },
+          t(0.12),
+        );
         tl.to(title, { opacity: 1, y: 0, duration: segLen * 0.14, ease: "none" }, t(0.24));
+        tl.to(
+          scrollHint,
+          { opacity: 0, y: -12, duration: segLen * 0.1, ease: "power1.in" },
+          t(0.34),
+        );
 
         tl.fromTo(
           content,
@@ -452,6 +463,7 @@ export default function Services() {
           );
           tl.set(panel, { pointerEvents: "none" }, t(0.98));
           tl.set(title, { opacity: 0, y: 56, scale: 1 }, t(0.98));
+          tl.set(scrollHint, { opacity: 0, y: 20 }, t(0.98));
           tl.set(content, { opacity: 0, y: 48 }, t(0.98));
           tl.set(footer, { opacity: 0, y: 24 }, t(0.98));
           tl.set([subtitle, deliverables, visual, cta, ...Array.from(bullets)], { opacity: 0, y: 32 }, t(0.98));
@@ -497,11 +509,14 @@ export default function Services() {
       {useFallback ? (
         <>
           <Container className="pt-section pb-10 md:pb-12">
-            <div className="text-center mb-0">
+            <div className="relative text-center mb-0">
               <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
               <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
               </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
+                Scroll through each service to see what&apos;s included.
+              </p>
             </div>
           </Container>
           <ServicesFallback />
@@ -522,14 +537,20 @@ export default function Services() {
 
           <div
             ref={introRef}
-            className="absolute inset-0 z-30 flex items-center justify-center px-6"
+            className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center px-6"
           >
             <div className="text-center max-w-3xl w-full">
               <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
               <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
               </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
+                Scroll through each service to see what&apos;s included.
+              </p>
             </div>
+            <p className="absolute bottom-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim">
+              Scroll to begin
+            </p>
           </div>
 
           <div

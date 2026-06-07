@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, Mail } from "lucide-react";
+import { Check, ChevronLeft, Mail } from "lucide-react";
 import {
   getRecommendation,
   getWhatsAppUrl,
@@ -138,6 +138,19 @@ function StepIndicator({ currentStep }: { currentStep: number }) {
   );
 }
 
+function StepBackButton({ onClick, label }: { onClick: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-brand-silver transition-colors hover:text-brand-blue"
+    >
+      <ChevronLeft className="h-4 w-4" strokeWidth={2} />
+      {label}
+    </button>
+  );
+}
+
 function OptionCard({
   option,
   selected,
@@ -218,6 +231,20 @@ export default function RecommendFlow() {
     setDirection(1);
     setStep((s) => s + 1);
   }, []);
+
+  const goBack = useCallback(() => {
+    setDirection(-1);
+    setStep((s) => Math.max(1, s - 1));
+  }, []);
+
+  const handleBackFromStep2 = () => {
+    goBack();
+  };
+
+  const handleBackFromStep3 = () => {
+    setResult(null);
+    goBack();
+  };
 
   const handleStageSelect = (value: Stage) => {
     setStage(value);
@@ -309,6 +336,7 @@ export default function RecommendFlow() {
             exit="exit"
             transition={{ duration: isMobile ? 0.32 : 0.4, ease: "easeOut" }}
           >
+            <StepBackButton onClick={handleBackFromStep2} label="Back to Step 1" />
             <h2 className="text-brand-white font-bold text-xl md:text-2xl mb-6 text-center">
               {stepHeadings[1]}
             </h2>
@@ -335,6 +363,7 @@ export default function RecommendFlow() {
             exit="exit"
             transition={{ duration: isMobile ? 0.32 : 0.4, ease: "easeOut" }}
           >
+            <StepBackButton onClick={handleBackFromStep3} label="Back to Step 2" />
             <h2 className="text-brand-white font-bold text-xl md:text-2xl mb-6 text-center">
               {stepHeadings[2]}
             </h2>

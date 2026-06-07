@@ -66,7 +66,6 @@ export const navLinks: NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "Find My Package", href: "/recommend", highlight: true },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export const PHONE = "+91 95022 24444";

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { registerGsap, ScrollTrigger } from "@/lib/motion/gsap-register";
+import { setLenisInstance } from "@/lib/motion/lenis";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -23,6 +24,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         touchMultiplier: 1,
         syncTouch: true,
       });
+
+      setLenisInstance(lenis);
 
       lenis.on("scroll", ScrollTrigger.update);
 
@@ -59,6 +62,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     return () => {
       cancelAnimationFrame(rafId);
+      setLenisInstance(null);
       lenis?.destroy();
     };
   }, []);

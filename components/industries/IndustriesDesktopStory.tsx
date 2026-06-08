@@ -1,9 +1,17 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { flushSync } from "react-dom";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { gsap, ScrollTrigger, registerGsap } from "@/lib/motion/gsap-register";
+import { motion } from "framer-motion";
+import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { getLenisInstance } from "@/lib/motion/lenis";
 import {
   industryCards,
   getIndustryTintColor,
@@ -16,6 +24,8 @@ import { WHATSAPP_URL } from "@/lib/constants";
 const TOTAL = industryCards.length;
 const MOCKUP_W = 1440;
 const MOCKUP_H = 900;
+const WHEEL_THRESHOLD = 30;
+const TOUCH_THRESHOLD = 50;
 
 function whatsappFor(industry: IndustryCard) {
   return (
@@ -26,10 +36,10 @@ function whatsappFor(industry: IndustryCard) {
 
 function CoverBackground({
   industryId,
-  visible,
+  index,
 }: {
   industryId: string;
-  visible: boolean;
+  index: number;
 }) {
   const [scale, setScale] = useState(1);
 
@@ -44,9 +54,10 @@ function CoverBackground({
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 transition-opacity duration-[600ms] ease-out"
-      style={{ opacity: visible ? 1 : 0, zIndex: visible ? 1 : 0 }}
-      aria-hidden={!visible}
+      id={`industry-bg-${index}`}
+      className="pointer-events-none absolute inset-0"
+      style={{ opacity: index === 0 ? 1 : 0, zIndex: index === 0 ? 1 : 0 }}
+      aria-hidden={index !== 0}
     >
       <div
         className="absolute left-1/2 top-1/2"
@@ -103,75 +114,256 @@ function IndustryContent({ industry }: { industry: IndustryCard }) {
   );
 }
 
+function expandLoadedIndices(indices: number[], center: number) {
+  const next = new Set(indices);
+  next.add(center);
+  if (center > 0) next.add(center - 1);
+  if (center < TOTAL - 1) next.add(center + 1);
+  return Array.from(next)
+    .filter((i) => i >= 0 && i < TOTAL)
+    .sort((a, b) => a - b);
+}
+
 export default function IndustriesDesktopStory() {
   const rootRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const heroContentRef = useRef<HTMLDivElement>(null);
-  const outerRef = useRef<HTMLDivElement>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
+  const storyWrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const progressNameRef = useRef<HTMLParagraphElement>(null);
+
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [isStoryActive, setIsStoryActive] = useState(false);
+
+  const activeIndexRef = useRef(0);
+  const isAnimatingRef = useRef(false);
+  const isStoryActiveRef = useRef(false);
+  const touchStartYRef = useRef(0);
+  const touchHandledRef = useRef(false);
 
   const activeIndustry = industryCards[activeIndex];
   const tintRgb = hexToRgbString(getIndustryTintColor(activeIndustry.id));
 
-  const preloadIndices = [
-    Math.max(0, activeIndex - 1),
-    activeIndex,
-    Math.min(TOTAL - 1, activeIndex + 1),
-  ];
+  const updateOverlayTint = useCallback((index: number) => {
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+    const rgb = hexToRgbString(getIndustryTintColor(industryCards[index].id));
+    overlay.style.setProperty("--tint-rgb", rgb);
+  }, []);
+
+  const releaseStory = useCallback((direction: "up" | "down") => {
+    isStoryActiveRef.current = false;
+    setIsStoryActive(false);
+    getLenisInstance()?.start();
+
+    const lenis = getLenisInstance();
+    if (direction === "up" && heroRef.current) {
+      lenis?.scrollTo(heroRef.current, { duration: 0.9 });
+      return;
+    }
+
+    if (direction === "down" && storyWrapperRef.current) {
+      const exitTarget =
+        storyWrapperRef.current.offsetTop + storyWrapperRef.current.offsetHeight + 8;
+      lenis?.scrollTo(exitTarget, { duration: 0.9 });
+    }
+  }, []);
+
+  const goToIndustry = useCallback(
+    (newIndex: number) => {
+      if (isAnimatingRef.current) return;
+      if (newIndex < 0 || newIndex >= TOTAL) return;
+
+      const currentIndex = activeIndexRef.current;
+      if (newIndex === currentIndex) return;
+
+      isAnimatingRef.current = true;
+      setHasScrolled(true);
+
+      const direction = newIndex > currentIndex ? 1 : -1;
+
+      flushSync(() => {
+        setLoadedIndices((prev) => expandLoadedIndices(prev, newIndex));
+      });
+
+      const contentEl = contentRef.current;
+      const ctaEl = ctaRef.current;
+      const progressNameEl = progressNameRef.current;
+      const currentBg = document.getElementById(`industry-bg-${currentIndex}`);
+      const newBg = document.getElementById(`industry-bg-${newIndex}`);
+
+      const exitTargets = [contentEl, ctaEl, progressNameEl].filter(Boolean) as Element[];
+
+      gsap.to(exitTargets, {
+        opacity: 0,
+        y: direction * -40,
+        duration: 0.35,
+        ease: "power2.in",
+      });
+
+      if (currentBg) {
+        gsap.to(currentBg, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
+      }
+
+      if (newBg) {
+        gsap.set(newBg, { zIndex: 2 });
+        gsap.to(newBg, { opacity: 1, duration: 0.5, ease: "power2.inOut" });
+      }
+
+      window.setTimeout(() => {
+        activeIndexRef.current = newIndex;
+        setActiveIndex(newIndex);
+        updateOverlayTint(newIndex);
+
+        if (currentBg) {
+          gsap.set(currentBg, { zIndex: 0 });
+        }
+
+        gsap.fromTo(
+          exitTargets,
+          { opacity: 0, y: direction * 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: "power3.out",
+            onComplete: () => {
+              isAnimatingRef.current = false;
+            },
+          }
+        );
+      }, 350);
+    },
+    [updateOverlayTint]
+  );
+
+  const handleWheelIntent = useCallback(
+    (delta: number) => {
+      if (!isStoryActiveRef.current || isAnimatingRef.current) return false;
+
+      if (Math.abs(delta) < WHEEL_THRESHOLD) return false;
+
+      const currentIndex = activeIndexRef.current;
+
+      if (delta > 0) {
+        if (currentIndex < TOTAL - 1) {
+          goToIndustry(currentIndex + 1);
+          return true;
+        }
+        releaseStory("down");
+        return true;
+      }
+
+      if (delta < 0) {
+        if (currentIndex > 0) {
+          goToIndustry(currentIndex - 1);
+          return true;
+        }
+        releaseStory("up");
+        return true;
+      }
+
+      return true;
+    },
+    [goToIndustry, releaseStory]
+  );
 
   useLayoutEffect(() => {
     registerGsap();
+    updateOverlayTint(0);
+  }, [updateOverlayTint]);
 
-    const hero = heroRef.current;
-    const heroContent = heroContentRef.current;
-    const outer = outerRef.current;
-    const pin = pinRef.current;
-    const overlay = overlayRef.current;
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+    setLoadedIndices((prev) => expandLoadedIndices(prev, activeIndex));
+  }, [activeIndex]);
 
-    if (!hero || !heroContent || !outer || !pin) return;
+  useEffect(() => {
+    const container = containerRef.current;
+    const storyWrapper = storyWrapperRef.current;
+    if (!container || !storyWrapper) return;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: hero,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        onUpdate: (self) => {
-          gsap.set(heroContent, {
-            opacity: Math.max(0, 1 - self.progress * 2),
-            y: self.progress * -60,
-          });
-          if (self.progress > 0.05) setHasScrolled(true);
-        },
-      });
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
 
-      const scrollDistance = window.innerHeight * TOTAL;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const active = entry.isIntersecting && entry.intersectionRatio >= 0.55;
+        isStoryActiveRef.current = active;
+        setIsStoryActive(active);
 
-      ScrollTrigger.create({
-        trigger: outer,
-        start: "top top",
-        end: () => `+=${scrollDistance}`,
-        pin: pin,
-        scrub: 0.8,
-        anticipatePin: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const idx = Math.min(TOTAL - 1, Math.max(0, Math.floor(self.progress * TOTAL)));
-          setActiveIndex(idx);
-          if (self.progress > 0.01) setHasScrolled(true);
+        if (active) {
+          getLenisInstance()?.stop();
+        } else {
+          getLenisInstance()?.start();
+        }
+      },
+      { threshold: [0, 0.55, 0.85, 1] }
+    );
 
-          const rgb = hexToRgbString(getIndustryTintColor(industryCards[idx].id));
-          if (overlay) {
-            overlay.style.setProperty("--tint-rgb", rgb);
-          }
-        },
-      });
-    }, rootRef);
+    observer.observe(storyWrapper);
 
-    return () => ctx.revert();
+    const handleWheel = (event: WheelEvent) => {
+      if (!isStoryActiveRef.current) return;
+
+      const consumed = handleWheelIntent(event.deltaY);
+      if (consumed) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+
+    const handleTouchStart = (event: TouchEvent) => {
+      if (!isStoryActiveRef.current) return;
+      touchStartYRef.current = event.touches[0]?.clientY ?? 0;
+      touchHandledRef.current = false;
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (!isStoryActiveRef.current || touchHandledRef.current) return;
+
+      const touchY = event.touches[0]?.clientY ?? touchStartYRef.current;
+      const delta = touchStartYRef.current - touchY;
+
+      if (Math.abs(delta) < TOUCH_THRESHOLD) return;
+
+      event.preventDefault();
+      touchHandledRef.current = true;
+      handleWheelIntent(delta);
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
+    container.addEventListener("touchmove", handleTouchMove, { passive: false });
+
+    return () => {
+      observer.disconnect();
+      container.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("touchstart", handleTouchStart);
+      container.removeEventListener("touchmove", handleTouchMove);
+      getLenisInstance()?.start();
+    };
+  }, [handleWheelIntent]);
+
+  useEffect(() => {
+    if (!heroRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          setHasScrolled(true);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(heroRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -180,7 +372,7 @@ export default function IndustriesDesktopStory() {
         ref={heroRef}
         className="relative flex min-h-[100dvh] flex-col items-center justify-center bg-[#F8F5EF] px-6 pt-28 sm:pt-32 md:pt-36"
       >
-        <div ref={heroContentRef} className="max-w-3xl text-center">
+        <div className="max-w-3xl text-center">
           <p className="editorial-eyebrow mb-4 md:mb-5">Industries We Build For</p>
           <h1 className="editorial-heading text-balance text-[clamp(2rem,5vw,3.75rem)] text-brand-white md:text-display-sm">
             Whatever Your Business,
@@ -196,60 +388,60 @@ export default function IndustriesDesktopStory() {
         </div>
       </header>
 
-      <div ref={outerRef} style={{ height: `calc(${TOTAL} * 100dvh)` }}>
-        <div ref={pinRef} className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0806]">
-          {/* Layer 1 — full-bleed mockup backgrounds */}
+      <div ref={storyWrapperRef} className="relative h-[100dvh]">
+        <div
+          ref={containerRef}
+          className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#0a0806]"
+          style={{ zIndex: isStoryActive ? 10 : 1 }}
+        >
           <div className="absolute inset-0 z-0">
-            {preloadIndices.map((i) => (
+            {loadedIndices.map((i) => (
               <CoverBackground
                 key={industryCards[i].id}
                 industryId={industryCards[i].id}
-                visible={i === activeIndex}
+                index={i}
               />
             ))}
           </div>
 
-          {/* Layer 2 — gradient overlay */}
           <div
             ref={overlayRef}
             className="pointer-events-none absolute inset-0 z-[2] transition-[background] duration-600 ease-out"
             style={{
               background: `linear-gradient(to right, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.4) 55%, rgba(10,8,6,0) 100%), radial-gradient(ellipse at 20% 50%, rgba(${tintRgb}, 0.18), transparent 55%)`,
+              ["--tint-rgb" as string]: tintRgb,
             }}
           />
 
-          {/* Layer 3 — content panel */}
-          <div className="absolute left-0 z-[3] flex h-full w-full max-w-[50%] flex-col justify-center pl-[clamp(40px,6vw,100px)] pr-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndustry.id}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              >
+          <div className="absolute left-0 z-[3] flex h-full w-full max-w-[50%] flex-col justify-between py-[clamp(40px,8vh,80px)] pl-[clamp(40px,6vw,100px)] pr-8">
+            <div className="flex flex-1 flex-col justify-center">
+              <div ref={contentRef} className="industry-content">
                 <IndustryContent industry={activeIndustry} />
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </div>
+
+            <div ref={ctaRef} className="industry-content shrink-0 pt-6">
+              <Link
+                href={whatsappFor(activeIndustry)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-all hover:bg-[#B35B3F]"
+              >
+                Build My {activeIndustry.name} Website →
+              </Link>
+            </div>
           </div>
 
-          {/* Layer 4 — progress indicator */}
           <div className="absolute right-10 top-8 z-[4] text-right">
             <div className="mb-1.5 text-[11px] uppercase tracking-[0.2em] text-white/40">
               {String(activeIndex + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
             </div>
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={activeIndustry.name}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35 }}
-                className="mb-2.5 text-[13px] font-medium text-white/75"
-              >
-                {activeIndustry.name}
-              </motion.p>
-            </AnimatePresence>
+            <p
+              ref={progressNameRef}
+              className="mb-2.5 text-[13px] font-medium text-white/75"
+            >
+              {activeIndustry.name}
+            </p>
             <div className="flex justify-end gap-1">
               {industryCards.map((_, i) => (
                 <div
@@ -264,28 +456,6 @@ export default function IndustriesDesktopStory() {
             </div>
           </div>
 
-          {/* Layer 5 — bottom CTA (mobile-hidden duplicate; main CTA in content) */}
-          <AnimatePresence>
-            <motion.div
-              key={`cta-${activeIndustry.id}`}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 16 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-8 left-[clamp(40px,6vw,100px)] z-[4]"
-            >
-              <Link
-                href={whatsappFor(activeIndustry)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-all hover:bg-[#B35B3F]"
-              >
-                Build My {activeIndustry.name} Website →
-              </Link>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Scroll hint */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: hasScrolled ? 0 : 1 }}
@@ -303,6 +473,8 @@ export default function IndustriesDesktopStory() {
           </motion.div>
         </div>
       </div>
+
+      <div className="h-[40dvh] bg-brand-black" aria-hidden />
     </div>
   );
 }

@@ -55,7 +55,7 @@ export const WHATSAPP_URL = `https://wa.me/${PHONE_WHATSAPP}`;
 export const EMAIL = "info@trustnova.in";
 
 export const socialLinks = {
-  instagram: "https://instagram.com/trustnova.in",
+  instagram: "https://www.instagram.com/trustnova.in/",
   linkedin: "https://linkedin.com/company/trustnova",
   gmail: `mailto:${EMAIL}`,
   x: "https://x.com/trustnova_in",

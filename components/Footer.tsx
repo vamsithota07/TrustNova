@@ -1,50 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Linkedin, Mail } from "lucide-react";
-import { navLinks, socialLinks } from "@/lib/constants";
+import { navLinks } from "@/lib/constants";
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
 import FooterContact from "@/components/FooterContact";
-
-function XIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
-const socialLinksList = [
-  {
-    href: socialLinks.instagram,
-    label: "TrustNova on Instagram",
-    external: true,
-    icon: Instagram,
-  },
-  {
-    href: socialLinks.linkedin,
-    label: "TrustNova on LinkedIn",
-    external: true,
-    icon: Linkedin,
-  },
-  {
-    href: socialLinks.gmail,
-    label: "Email TrustNova",
-    external: false,
-    icon: Mail,
-  },
-  {
-    href: socialLinks.x,
-    label: "TrustNova on X",
-    external: true,
-    icon: XIcon,
-  },
-] as const;
+import FooterSocialLinks from "@/components/FooterSocialLinks";
 
 export default function Footer() {
   return (
@@ -64,25 +24,7 @@ export default function Footer() {
               <p>Every brand tells a story that earns trust.</p>
             </div>
 
-            <div className="flex items-center justify-center gap-4 md:gap-5 mt-6 md:mt-8">
-              {socialLinksList.map(({ href, label, external, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  {...(external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                  aria-label={label}
-                  className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-brand-blue transition-colors duration-200 hover:text-brand-white active:scale-95"
-                >
-                  {Icon === XIcon ? (
-                    <XIcon className="w-6 h-6 shrink-0" />
-                  ) : (
-                    <Icon className="w-6 h-6 shrink-0" strokeWidth={1.75} />
-                  )}
-                </a>
-              ))}
-            </div>
+            <FooterSocialLinks />
           </div>
 
           <div className="text-center md:text-left lg:border-r lg:border-brand-rule lg:pr-12 xl:pr-16 min-w-0">

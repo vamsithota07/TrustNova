@@ -134,7 +134,7 @@ export function structuredDataGraph() {
         logo: `${SITE_URL}/logo.png`,
         email: EMAIL,
         telephone: `+${PHONE_WHATSAPP}`,
-        sameAs: [socialLinks.instagram, socialLinks.linkedin, socialLinks.x],
+        sameAs: [socialLinks.instagram, socialLinks.x],
       },
       {
         "@type": "ProfessionalService",

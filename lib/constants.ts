@@ -54,9 +54,11 @@ export const PHONE_WHATSAPP = "919502224444";
 export const WHATSAPP_URL = `https://wa.me/${PHONE_WHATSAPP}`;
 export const EMAIL = "info@trustnova.in";
 
+export const LINKEDIN_COMING_SOON_MESSAGE =
+  "We're on our way to launching our LinkedIn profile — check back soon!";
+
 export const socialLinks = {
   instagram: "https://www.instagram.com/trustnova.in/",
-  linkedin: "https://linkedin.com/company/trustnova",
   gmail: `mailto:${EMAIL}`,
   x: "https://x.com/trustnovain",
 };

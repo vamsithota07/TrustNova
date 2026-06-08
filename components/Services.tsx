@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -282,10 +282,25 @@ export default function Services() {
   const bgTintRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const spineDotRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const [useFallback, setUseFallback] = useState(false);
+  const [useFallback, setUseFallback] = useState<boolean | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
+  useEffect(() => {
+    const check = () => {
+      setUseFallback(
+        window.matchMedia("(max-width: 1023px)").matches ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      );
+    };
+    check();
+    const mq = window.matchMedia("(max-width: 1023px)");
+    mq.addEventListener("change", check);
+    return () => mq.removeEventListener("change", check);
+  }, []);
+
   useLayoutEffect(() => {
+    if (useFallback !== false) return;
+
     registerGsap();
 
     const section = sectionRef.current;
@@ -295,14 +310,6 @@ export default function Services() {
     const progressFill = progressFillRef.current;
 
     if (!section || !pin || !intro || !progress) return;
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const coarse = window.matchMedia("(max-width: 1023px)").matches;
-
-    if (reduced || coarse) {
-      setUseFallback(true);
-      return;
-    }
 
     const panels = panelRefs.current.filter(Boolean) as HTMLDivElement[];
     if (panels.length !== services.length) return;
@@ -564,10 +571,10 @@ export default function Services() {
     }, section);
 
     return () => ctx.revert();
-  }, []);
+  }, [useFallback]);
 
   useLayoutEffect(() => {
-    if (useFallback) return;
+    if (useFallback !== false) return;
     spineDotRefs.current.forEach((dot, i) => {
       if (!dot) return;
       const active = i === activeIndex;
@@ -585,7 +592,7 @@ export default function Services() {
 
   return (
     <section ref={sectionRef} id="services" className="relative w-full bg-brand-black">
-      {useFallback ? (
+      {useFallback !== false ? (
         <>
           <Container className="pt-section pb-10 md:pb-12">
             <div className="relative text-center mb-0">

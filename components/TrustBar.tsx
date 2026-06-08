@@ -15,7 +15,7 @@ export default function TrustBar() {
   return (
     <section className="w-full bg-brand-card border-y border-brand-rule py-10 md:py-12 overflow-hidden">
       <Container>
-        <RevealStagger className="flex gap-4 md:gap-6 overflow-x-auto snap-scroll-x scrollbar-hide pb-2 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible min-w-0">
+        <RevealStagger className="horizontal-scroll flex gap-4 md:gap-6 overflow-x-auto snap-scroll-x scrollbar-hide pb-2 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:overflow-visible min-w-0">
           {signals.map(({ icon: Icon, label }) => (
             <div
               key={label}

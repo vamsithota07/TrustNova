@@ -158,7 +158,6 @@ export default function Process() {
         <div
           data-process-mobile-line
           className="pointer-events-none absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 origin-top bg-accent-warm/30"
-          style={{ height: "0%" }}
           aria-hidden
         />
         <div className="relative flex flex-col gap-5 max-w-xl mx-auto">

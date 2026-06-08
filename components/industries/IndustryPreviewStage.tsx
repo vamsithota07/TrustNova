@@ -161,7 +161,7 @@ export default function IndustryPreviewStage({
                   height: `${MOCKUP_HEIGHT}px`,
                   border: "none",
                   display: "block",
-                  pointerEvents: active ? "auto" : "none",
+                  pointerEvents: compact ? "none" : active ? "auto" : "none",
                 }}
               />
             </div>

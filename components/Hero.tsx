@@ -71,16 +71,18 @@ export default function Hero() {
           });
         });
 
-        gsap.to(blob1Ref.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-          y: -80,
-          opacity: 0.3,
-        });
+        if (window.matchMedia("(min-width: 1024px)").matches) {
+          gsap.to(blob1Ref.current, {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+            y: -80,
+            opacity: 0.3,
+          });
+        }
       } catch (error) {
         console.warn("Hero animation skipped:", error);
       }
@@ -173,7 +175,7 @@ export default function Hero() {
                 ))}
               </ul>
               <div className="mt-6 border-t border-brand-rule pt-5">
-                <p className="flex min-w-0 items-center justify-center gap-2 whitespace-nowrap text-xs tracking-wide text-brand-silver md:justify-start">
+                <p className="flex min-w-0 flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-xs tracking-wide text-brand-silver md:justify-start md:text-left">
                   <span
                     className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#27AE60]"
                     style={{ animation: "status-pulse 2s ease-in-out infinite" }}

@@ -9,6 +9,7 @@ import { useHasMounted } from "@/lib/hooks";
 import { navLinks } from "@/lib/constants";
 import MagneticButton from "@/components/motion/MagneticButton";
 import Logo from "@/components/Logo";
+import { getLenisInstance } from "@/lib/motion/lenis";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -37,10 +38,12 @@ export default function Navbar() {
 
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    getLenisInstance()?.stop();
 
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      getLenisInstance()?.start();
     };
   }, [isOpen]);
 

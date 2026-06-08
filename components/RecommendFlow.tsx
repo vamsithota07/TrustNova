@@ -197,9 +197,9 @@ function StepBackButton({ onClick, label }: { onClick: () => void; label: string
     <button
       type="button"
       onClick={onClick}
-      className="mb-6 md:mb-7 inline-flex items-center gap-2 text-sm font-medium text-brand-silver transition-colors hover:text-brand-white group"
+      className="mb-6 md:mb-7 inline-flex min-h-[44px] items-center gap-2 py-1 text-sm font-medium text-brand-silver transition-colors hover:text-brand-white group"
     >
-      <span className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-rule bg-brand-card transition-all group-hover:border-brand-white/30 group-hover:-translate-x-0.5">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-rule bg-brand-card transition-all group-hover:border-brand-white/30 group-hover:-translate-x-0.5">
         <ChevronLeft className="h-4 w-4" strokeWidth={2} />
       </span>
       {label}

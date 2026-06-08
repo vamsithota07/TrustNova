@@ -23,7 +23,7 @@ export default function WhatsAppButton() {
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 group"
+      className="fixed z-50 group bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] md:bottom-6 md:right-6"
     >
       {finePointer && showTooltip && (
         <div className="absolute right-14 md:right-16 top-1/2 -translate-y-1/2 bg-brand-card text-brand-white text-xs px-3 py-2 rounded-lg whitespace-nowrap border border-brand-rule shadow-[0_4px_12px_rgba(0,0,0,0.1)]">

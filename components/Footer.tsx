@@ -64,7 +64,7 @@ export default function Footer() {
           >
             <Link
               href="/terms"
-              className="transition-colors duration-200 hover:text-brand-white"
+              className="inline-flex min-h-[44px] items-center px-2 py-1 transition-colors duration-200 hover:text-brand-white"
             >
               Terms &amp; Conditions
             </Link>
@@ -73,7 +73,7 @@ export default function Footer() {
             </span>
             <Link
               href="/privacy"
-              className="transition-colors duration-200 hover:text-brand-white"
+              className="inline-flex min-h-[44px] items-center px-2 py-1 transition-colors duration-200 hover:text-brand-white"
             >
               Privacy Policy
             </Link>

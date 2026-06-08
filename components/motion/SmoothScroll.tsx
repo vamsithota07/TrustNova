@@ -9,7 +9,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   useEffect(() => {
     registerGsap();
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 1023px)").matches
+    ) {
       return;
     }
 

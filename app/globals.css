@@ -226,6 +226,12 @@ html:not(.is-loading) #page-loader {
   .snap-scroll-x {
     scroll-snap-type: x mandatory;
   }
+
+  .horizontal-scroll {
+    overscroll-behavior-x: contain;
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @keyframes bounce {

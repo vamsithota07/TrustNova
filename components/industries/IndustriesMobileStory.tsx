@@ -92,7 +92,7 @@ export default function IndustriesMobileStory() {
         </div>
       </div>
 
-      <div className="mb-4 flex gap-1.5 overflow-x-auto scrollbar-hide px-4">
+      <div className="horizontal-scroll mb-4 flex gap-1.5 overflow-x-auto scrollbar-hide px-4">
         {industryCategories.map((category) => {
           const isActive = activeCategory === category;
           return (
@@ -100,7 +100,7 @@ export default function IndustriesMobileStory() {
               key={category}
               type="button"
               onClick={() => jumpToCategory(category)}
-              className={`shrink-0 rounded-full border px-3 py-1.5 text-[11px] font-medium transition-colors ${
+              className={`shrink-0 rounded-full border px-4 py-2 min-h-[44px] text-[11px] font-medium transition-colors ${
                 isActive
                   ? "border-brand-white bg-brand-white text-brand-black"
                   : "border-brand-rule text-brand-dim"
@@ -114,7 +114,7 @@ export default function IndustriesMobileStory() {
 
       <div
         ref={scrollerRef}
-        className="flex snap-x snap-mandatory overflow-x-auto scrollbar-hide"
+        className="horizontal-scroll flex snap-x snap-mandatory overflow-x-auto scrollbar-hide"
         style={{ scrollSnapType: "x mandatory" }}
       >
         {industryCards.map((item, i) => {
@@ -213,10 +213,14 @@ export default function IndustriesMobileStory() {
             type="button"
             aria-label={`Go to industry ${i + 1}`}
             onClick={() => scrollToIndex(i)}
-            className={`h-1.5 rounded-full transition-all ${
-              i === activeIndex ? `w-4 ${accentBgClass[accent]}` : "w-1.5 bg-brand-rule"
-            }`}
-          />
+            className="flex h-11 w-11 items-center justify-center"
+          >
+            <span
+              className={`block h-1.5 rounded-full transition-all ${
+                i === activeIndex ? `w-4 ${accentBgClass[accent]}` : "w-1.5 bg-brand-rule"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </div>

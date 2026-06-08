@@ -581,7 +581,7 @@ export default function TermsConditions() {
       <button
         type="button"
         onClick={() => setDrawerOpen(true)}
-        className="lg:hidden fixed bottom-6 right-5 z-40 flex items-center gap-2 rounded-full bg-brand-blue text-white px-4 py-3 text-sm font-semibold shadow-[0_8px_24px_rgba(107,143,117,0.35)]"
+        className="lg:hidden fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] left-5 z-40 flex min-h-[44px] items-center gap-2 rounded-full bg-brand-blue text-white px-4 py-3 text-sm font-semibold shadow-[0_8px_24px_rgba(107,143,117,0.35)]"
         aria-label="Open table of contents"
       >
         <List className="w-4 h-4" />

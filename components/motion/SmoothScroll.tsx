@@ -17,6 +17,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     let rafId = 0;
 
     try {
+      if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual";
+      }
+
       lenis = new Lenis({
         lerp: 0.075,
         smoothWheel: true,

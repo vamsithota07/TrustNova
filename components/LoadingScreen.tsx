@@ -1,6 +1,7 @@
 "use client";
 
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, useRef, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 
@@ -17,59 +18,67 @@ function displayProgress(value: number) {
   return Math.max(1, Math.round(value));
 }
 
-/** Survives React Strict Mode remounts - loader runs once per page session. */
-let loaderComplete = false;
+/** First-visit splash runs once per tab session. */
+let initialLoaderComplete = false;
+
+const INITIAL_DURATION = 1500;
+const NAV_DURATION = 850;
 
 export default function LoadingScreen() {
+  const pathname = usePathname();
+  const pathnameRef = useRef(pathname);
+  const prevPathname = useRef<string | null>(null);
+  const animCleanup = useRef<(() => void) | null>(null);
+
   const [mounted, setMounted] = useState(false);
-  const [show, setShow] = useState(() => !loaderComplete);
+  const [readyForNav, setReadyForNav] = useState(initialLoaderComplete);
+  const [show, setShow] = useState(() => !initialLoaderComplete);
   const [progress, setProgress] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
 
-  useLayoutEffect(() => {
-    setMounted(true);
-  }, []);
+  pathnameRef.current = pathname;
 
-  useLayoutEffect(() => {
-    if (loaderComplete) {
-      unlockPage();
-      setShow(false);
-      return;
-    }
-
-    lockPage();
+  const runLoader = useCallback((duration: number, onComplete?: () => void) => {
+    animCleanup.current?.();
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const duration = reduced ? 0 : 1500;
+    const resolvedDuration = reduced ? 0 : duration;
+
+    lockPage();
+    setFadeOut(false);
+    setShow(true);
+    setProgress(0);
+
     let raf = 0;
     let hideTimer = 0;
     let safetyTimer = 0;
     let finished = false;
 
     const finish = () => {
-      if (finished || loaderComplete) return;
+      if (finished) return;
       finished = true;
-      loaderComplete = true;
       setProgress(100);
       setFadeOut(true);
       hideTimer = window.setTimeout(() => {
         unlockPage();
         setShow(false);
+        onComplete?.();
       }, reduced ? 0 : 450);
     };
 
-    if (duration === 0) {
+    if (resolvedDuration === 0) {
       finish();
-      return () => clearTimeout(hideTimer);
+      animCleanup.current = () => clearTimeout(hideTimer);
+      return;
     }
 
     const start = Date.now();
 
     const tick = () => {
-      if (finished || loaderComplete) return;
+      if (finished) return;
 
       const elapsed = Date.now() - start;
-      const next = Math.min((elapsed / duration) * 100, 100);
+      const next = Math.min((elapsed / resolvedDuration) * 100, 100);
       setProgress(next);
 
       if (next >= 100) {
@@ -81,15 +90,46 @@ export default function LoadingScreen() {
     };
 
     raf = requestAnimationFrame(tick);
+    safetyTimer = window.setTimeout(finish, resolvedDuration + 3500);
 
-    safetyTimer = window.setTimeout(finish, 5000);
-
-    return () => {
+    animCleanup.current = () => {
       cancelAnimationFrame(raf);
       clearTimeout(hideTimer);
       clearTimeout(safetyTimer);
     };
   }, []);
+
+  useLayoutEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useLayoutEffect(() => {
+    if (initialLoaderComplete) {
+      unlockPage();
+      setShow(false);
+      prevPathname.current = pathnameRef.current;
+      setReadyForNav(true);
+      return;
+    }
+
+    runLoader(INITIAL_DURATION, () => {
+      initialLoaderComplete = true;
+      prevPathname.current = pathnameRef.current;
+      setReadyForNav(true);
+    });
+
+    return () => animCleanup.current?.();
+  }, [runLoader]);
+
+  useEffect(() => {
+    if (!readyForNav || !initialLoaderComplete) return;
+    if (prevPathname.current === pathname) return;
+
+    prevPathname.current = pathname;
+    runLoader(NAV_DURATION);
+  }, [pathname, readyForNav, runLoader]);
+
+  useEffect(() => () => animCleanup.current?.(), []);
 
   if (!mounted || !show) return null;
 
@@ -122,6 +162,6 @@ export default function LoadingScreen() {
         {counter}
       </p>
     </div>,
-    document.body,
+    document.body
   );
 }

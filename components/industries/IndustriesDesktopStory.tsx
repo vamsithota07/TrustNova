@@ -10,7 +10,7 @@ import {
 import { flushSync } from "react-dom";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { gsap, ScrollTrigger, registerGsap } from "@/lib/motion/gsap-register";
 import { getLenisInstance } from "@/lib/motion/lenis";
 import {
   industryCards,
@@ -127,7 +127,8 @@ function expandLoadedIndices(indices: number[], center: number) {
 export default function IndustriesDesktopStory() {
   const rootRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const storyWrapperRef = useRef<HTMLDivElement>(null);
+  const introContentRef = useRef<HTMLDivElement>(null);
+  const storyWrapperRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -137,7 +138,7 @@ export default function IndustriesDesktopStory() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [isStoryActive, setIsStoryActive] = useState(false);
+  const [isStoryVisible, setIsStoryVisible] = useState(false);
 
   const activeIndexRef = useRef(0);
   const isAnimatingRef = useRef(false);
@@ -157,7 +158,9 @@ export default function IndustriesDesktopStory() {
 
   const releaseStory = useCallback((direction: "up" | "down") => {
     isStoryActiveRef.current = false;
-    setIsStoryActive(false);
+    if (direction === "up") {
+      setIsStoryVisible(false);
+    }
     getLenisInstance()?.start();
 
     const lenis = getLenisInstance();
@@ -275,6 +278,55 @@ export default function IndustriesDesktopStory() {
   useLayoutEffect(() => {
     registerGsap();
     updateOverlayTint(0);
+
+    const hero = heroRef.current;
+    const introContent = introContentRef.current;
+    const storyWrapper = storyWrapperRef.current;
+
+    if (!hero || !introContent || !storyWrapper) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const activateStory = () => {
+      isStoryActiveRef.current = true;
+      setIsStoryVisible(true);
+      setHasScrolled(true);
+      getLenisInstance()?.stop();
+    };
+
+    const deactivateStory = () => {
+      isStoryActiveRef.current = false;
+      setIsStoryVisible(false);
+      getLenisInstance()?.start();
+    };
+
+    const ctx = gsap.context(() => {
+      gsap.to(introContent, {
+        opacity: 0,
+        y: -40,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero,
+          start: "center center",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      ScrollTrigger.create({
+        trigger: storyWrapper,
+        start: "top top",
+        end: "bottom top",
+        onEnter: activateStory,
+        onEnterBack: activateStory,
+        onLeaveBack: deactivateStory,
+        onLeave: deactivateStory,
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
   }, [updateOverlayTint]);
 
   useEffect(() => {
@@ -284,29 +336,11 @@ export default function IndustriesDesktopStory() {
 
   useEffect(() => {
     const container = containerRef.current;
-    const storyWrapper = storyWrapperRef.current;
-    if (!container || !storyWrapper) return;
+    if (!container) return;
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const active = entry.isIntersecting && entry.intersectionRatio >= 0.55;
-        isStoryActiveRef.current = active;
-        setIsStoryActive(active);
-
-        if (active) {
-          getLenisInstance()?.stop();
-        } else {
-          getLenisInstance()?.start();
-        }
-      },
-      { threshold: [0, 0.55, 0.85, 1] }
-    );
-
-    observer.observe(storyWrapper);
 
     const handleWheel = (event: WheelEvent) => {
       if (!isStoryActiveRef.current) return;
@@ -342,7 +376,6 @@ export default function IndustriesDesktopStory() {
     container.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
-      observer.disconnect();
       container.removeEventListener("wheel", handleWheel);
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchmove", handleTouchMove);
@@ -350,29 +383,13 @@ export default function IndustriesDesktopStory() {
     };
   }, [handleWheelIntent]);
 
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          setHasScrolled(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(heroRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <div ref={rootRef} className="bg-brand-black">
-      <header
+    <div ref={rootRef} className="relative bg-brand-black">
+      <section
         ref={heroRef}
-        className="relative flex min-h-[100dvh] flex-col items-center justify-center bg-[#F8F5EF] px-6 pt-28 sm:pt-32 md:pt-36"
+        className="relative z-10 flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[#F8F5EF] px-6"
       >
-        <div className="max-w-3xl text-center">
+        <div ref={introContentRef} className="max-w-3xl pt-24 text-center sm:pt-28 md:pt-32">
           <p className="editorial-eyebrow mb-4 md:mb-5">Industries We Build For</p>
           <h1 className="editorial-heading text-balance text-[clamp(2rem,5vw,3.75rem)] text-brand-white md:text-display-sm">
             Whatever Your Business,
@@ -382,17 +399,23 @@ export default function IndustriesDesktopStory() {
           <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
             Scroll through 20 industries and see exactly what we&apos;d build for yours.
           </p>
-          <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: hasScrolled ? 0 : 1 }}
+            transition={{ duration: 0.4 }}
+            className="mt-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
+          >
             Scroll to begin
-          </p>
+          </motion.p>
         </div>
-      </header>
+      </section>
 
-      <div ref={storyWrapperRef} className="relative h-[100dvh]">
+      <section ref={storyWrapperRef} className="relative z-[1] h-[100dvh] bg-brand-black">
         <div
           ref={containerRef}
-          className="sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#0a0806]"
-          style={{ zIndex: isStoryActive ? 10 : 1 }}
+          className={`sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#0a0806] transition-opacity duration-300 ${
+            isStoryVisible ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
         >
           <div className="absolute inset-0 z-0">
             {loadedIndices.map((i) => (
@@ -406,14 +429,14 @@ export default function IndustriesDesktopStory() {
 
           <div
             ref={overlayRef}
-            className="pointer-events-none absolute inset-0 z-[2] transition-[background] duration-600 ease-out"
+            className="pointer-events-none absolute inset-0 z-[1] transition-[background] duration-600 ease-out"
             style={{
               background: `linear-gradient(to right, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.4) 55%, rgba(10,8,6,0) 100%), radial-gradient(ellipse at 20% 50%, rgba(${tintRgb}, 0.18), transparent 55%)`,
               ["--tint-rgb" as string]: tintRgb,
             }}
           />
 
-          <div className="absolute left-0 z-[3] flex h-full w-full max-w-[50%] flex-col justify-between py-[clamp(40px,8vh,80px)] pl-[clamp(40px,6vw,100px)] pr-8">
+          <div className="absolute left-0 z-[2] flex h-full w-full max-w-[50%] flex-col justify-between py-[clamp(40px,8vh,80px)] pl-[clamp(40px,6vw,100px)] pr-8">
             <div className="flex flex-1 flex-col justify-center">
               <div ref={contentRef} className="industry-content">
                 <IndustryContent industry={activeIndustry} />
@@ -432,7 +455,7 @@ export default function IndustriesDesktopStory() {
             </div>
           </div>
 
-          <div className="absolute right-10 top-8 z-[4] text-right">
+          <div className="absolute right-10 top-8 z-[3] text-right">
             <div className="mb-1.5 text-[11px] uppercase tracking-[0.2em] text-white/40">
               {String(activeIndex + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
             </div>
@@ -455,24 +478,8 @@ export default function IndustriesDesktopStory() {
               ))}
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: hasScrolled ? 0 : 1 }}
-            transition={{ duration: 0.4 }}
-            className="pointer-events-none absolute bottom-8 left-1/2 z-[4] flex -translate-x-1/2 flex-col items-center gap-2"
-          >
-            <span className="text-[11px] uppercase tracking-[0.2em] text-white/40">Scroll</span>
-            <motion.span
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              className="text-lg text-white/40"
-            >
-              ↓
-            </motion.span>
-          </motion.div>
         </div>
-      </div>
+      </section>
 
       <div className="h-[40dvh] bg-brand-black" aria-hidden />
     </div>

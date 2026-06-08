@@ -37,7 +37,7 @@ function fadeUpStyle(reduced: boolean, delay: string) {
   return { animation: `fadeUp 0.5s ease ${delay} both` };
 }
 
-function LogoVisual({ reduced }: { reduced: boolean }) {
+function LogoVisual({ reduced, active }: { reduced: boolean; active: boolean }) {
   return (
     <div className="relative flex h-[260px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-8">
       <div
@@ -85,7 +85,13 @@ function LogoVisual({ reduced }: { reduced: boolean }) {
                 ? "border border-brand-blue bg-brand-blue text-white"
                 : "border border-brand-rule bg-brand-black text-brand-blue"
             }`}
-            style={fadeUpStyle(reduced, `${i * 0.2}s`)}
+            style={
+              reduced || !active
+                ? fadeUpStyle(reduced, `${i * 0.2}s`)
+                : {
+                    animation: `concept-flip 0.5s ease ${i * 0.15}s both`,
+                  }
+            }
           >
             {label}
           </div>
@@ -335,10 +341,18 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
   );
 }
 
-function VisualBody({ type, reduced }: { type: ServiceVisualType; reduced: boolean }) {
+function VisualBody({
+  type,
+  reduced,
+  active,
+}: {
+  type: ServiceVisualType;
+  reduced: boolean;
+  active: boolean;
+}) {
   switch (type) {
     case "logo":
-      return <LogoVisual reduced={reduced} />;
+      return <LogoVisual reduced={reduced} active={active} />;
     case "brand":
       return <BrandVisual reduced={reduced} />;
     case "website":
@@ -350,12 +364,18 @@ function VisualBody({ type, reduced }: { type: ServiceVisualType; reduced: boole
   }
 }
 
-export default function ServiceVisual({ type }: { type: ServiceVisualType }) {
+export default function ServiceVisual({
+  type,
+  active = true,
+}: {
+  type: ServiceVisualType;
+  active?: boolean;
+}) {
   const reduced = usePrefersReducedMotion();
 
   return (
     <div>
-      <VisualBody type={type} reduced={reduced} />
+      <VisualBody type={type} reduced={reduced} active={active} />
       <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue">
         {visualLabels[type]}
       </p>

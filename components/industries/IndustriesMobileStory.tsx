@@ -10,8 +10,10 @@ import {
   accentTextClass,
   accentBgClass,
   categoryStartIndex,
+  getIndustryTintColor,
   type IndustryCategory,
 } from "@/lib/industries";
+import { shouldRenderNearby } from "@/lib/motion/performance";
 import { WHATSAPP_URL } from "@/lib/constants";
 import IndustryPreviewStage from "@/components/industries/IndustryPreviewStage";
 
@@ -124,8 +126,16 @@ export default function IndustriesMobileStory() {
               className="w-full shrink-0 snap-center snap-always px-4"
               style={{ scrollSnapAlign: "center" }}
             >
-              <div className="flex h-[min(52vh,420px)] flex-col overflow-hidden rounded-2xl border border-brand-rule bg-brand-card shadow-soft">
-                <IndustryPreviewStage industryId={item.id} title={item.name} active={i === activeIndex} />
+              <div className="relative aspect-[1440/900] w-full overflow-hidden rounded-2xl border border-brand-rule bg-brand-card shadow-soft">
+                <IndustryPreviewStage
+                  industryId={item.id}
+                  title={item.name}
+                  active={i === activeIndex}
+                  compact
+                  tintColor={getIndustryTintColor(item.id)}
+                  shouldLoad={shouldRenderNearby(activeIndex, i)}
+                  className="h-full"
+                />
               </div>
 
               <motion.div

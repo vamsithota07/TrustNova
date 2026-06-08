@@ -22,8 +22,12 @@ export default function TrustBar() {
               data-reveal-item
               className="flex flex-col items-center lg:items-start gap-4 text-center lg:text-left min-w-[75vw] sm:min-w-[45vw] md:min-w-0 snap-center shrink-0 md:shrink group creative-card p-6 md:p-0 md:bg-transparent md:border-0 md:shadow-none md:rounded-none hover:shadow-soft md:hover:shadow-none transition-shadow"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-rule bg-brand-dark transition-all duration-500 group-hover:border-accent-sage/40 group-hover:bg-accent-sage/5">
-                <Icon className="w-4 h-4 text-brand-white group-hover:text-accent-sage transition-colors shrink-0" strokeWidth={1.75} />
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-rule bg-brand-dark transition-all duration-500 group-hover:border-accent-warm/40 group-hover:bg-accent-warm/5">
+                <Icon
+                  className="h-4 w-4 shrink-0 text-brand-white transition-colors group-hover:text-accent-warm"
+                  strokeWidth={1.75}
+                  data-reveal-icon
+                />
               </div>
               <span className="text-brand-white text-sm md:text-base font-semibold tracking-[-0.01em]">
                 {label}

@@ -8,6 +8,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import LoadingScreen from "@/components/LoadingScreen";
 import ScrollProgress from "@/components/ScrollProgress";
 import MotionProvider from "@/components/MotionProvider";
+import PageTransition from "@/components/motion/PageTransition";
 import JsonLd from "@/components/JsonLd";
 import { rootMetadata, structuredDataGraph } from "@/lib/seo";
 
@@ -60,7 +61,7 @@ export default function RootLayout({
             <div className="pointer-events-none fixed inset-0 z-[1] grain-overlay opacity-40" aria-hidden />
             <ScrollProgress />
             <Navbar />
-            {children}
+            <PageTransition>{children}</PageTransition>
             <Footer />
             <WhatsAppButton />
           </div>

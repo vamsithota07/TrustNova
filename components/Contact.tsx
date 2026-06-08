@@ -14,6 +14,17 @@ import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE } from "@/lib/constants";
 
+type SubmitState = "idle" | "loading" | "success";
+
+function SendIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+      <line x1="22" y1="2" x2="11" y2="13" />
+      <polygon points="22 2 15 22 11 13 2 9 22 2" />
+    </svg>
+  );
+}
+
 const serviceOptions = [
   "Logo Design & Brand Identity",
   "Complete Brand Identity Package",
@@ -111,6 +122,7 @@ function buildMailtoUrl(data: FormState) {
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   const update = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -118,8 +130,12 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = buildMailtoUrl(form);
-    setSubmitted(true);
+    setSubmitState("loading");
+    window.setTimeout(() => {
+      window.location.href = buildMailtoUrl(form);
+      setSubmitState("success");
+      setSubmitted(true);
+    }, 500);
   };
 
   return (
@@ -234,6 +250,7 @@ export default function Contact() {
                       type="button"
                       onClick={() => {
                         setSubmitted(false);
+                        setSubmitState("idle");
                         setForm(initialForm);
                       }}
                       className="mt-6 text-sm text-brand-dim transition-colors hover:text-brand-blue"
@@ -345,15 +362,42 @@ export default function Contact() {
                       />
                     </div>
 
-                    <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                      <button
-                        type="submit"
-                        className={`${btnPrimary} shrink-0 gap-2 whitespace-nowrap`}
-                      >
-                        <Mail className="h-4 w-4" strokeWidth={2} />
-                        Send via Email
-                      </button>
-                      <p className="text-xs text-brand-dim">
+                    <div className="pt-2">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <motion.button
+                          type="submit"
+                          disabled={submitState === "loading"}
+                          initial={false}
+                          animate={
+                            submitState === "success"
+                              ? { scale: [0.8, 1], backgroundColor: "#27AE60" }
+                              : { scale: 1, backgroundColor: "#C4674A" }
+                          }
+                          transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                          className="inline-flex items-center gap-2.5 rounded-lg border-none px-9 py-4 text-[15px] font-semibold tracking-[0.3px] text-white shadow-[0_4px_20px_rgba(196,103,74,0.3)] transition-all duration-250 ease-out hover:-translate-y-0.5 hover:bg-[#B35B3F] hover:shadow-[0_8px_28px_rgba(196,103,74,0.4)] active:translate-y-0 active:scale-[0.98] disabled:opacity-80"
+                          style={{
+                            background: submitState === "success" ? "#27AE60" : undefined,
+                          }}
+                        >
+                          {submitState === "loading" ? (
+                            <>
+                              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                              Sending...
+                            </>
+                          ) : submitState === "success" ? (
+                            <>
+                              <CheckCircle className="h-[18px] w-[18px]" strokeWidth={2.5} />
+                              Enquiry Sent!
+                            </>
+                          ) : (
+                            <>
+                              <SendIcon />
+                              Send Enquiry
+                            </>
+                          )}
+                        </motion.button>
+                      </div>
+                      <p className="mt-2.5 text-xs text-brand-dim">
                         By submitting, you agree to be contacted about your enquiry.
                       </p>
                     </div>

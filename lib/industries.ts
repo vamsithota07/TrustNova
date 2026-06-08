@@ -725,3 +725,30 @@ export const industryCards: IndustryCard[] = [
     },
   },
 ];
+
+export const industryTintColors: Record<string, string> = {
+  jewellery: "#C9A96E",
+  clothing: "#E91E8C",
+  electronics: "#00BCD4",
+  furniture: "#8B6F47",
+  restaurant: "#D4883A",
+  catering: "#9B59B6",
+  hotel: "#C9A96E",
+  interior: "#8B6845",
+  "real-estate": "#2E75B6",
+  ca: "#2980B9",
+  law: "#C9A96E",
+  architect: "#E74C3C",
+  clinic: "#1ABC9C",
+  gym: "#E74C3C",
+  salon: "#C84890",
+  coaching: "#F97316",
+  training: "#F97316",
+  photographer: "#E8A020",
+  events: "#9B59B6",
+  "digital-marketing": "#00BCD4",
+};
+
+export function getIndustryTintColor(id: string): string {
+  return industryTintColors[id] ?? "#C4674A";
+}

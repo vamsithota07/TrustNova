@@ -2,15 +2,20 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/motion/gsap-register";
 import {
   industryCards,
-  categoryAccents,
-  accentTextClass,
+  getIndustryTintColor,
   type IndustryCard,
 } from "@/lib/industries";
+import { getMockupHtmlPath } from "@/lib/mockups";
+import { hexToRgbString } from "@/lib/colors";
 import { WHATSAPP_URL } from "@/lib/constants";
-import IndustryPreviewStage from "@/components/industries/IndustryPreviewStage";
+
+const TOTAL = industryCards.length;
+const MOCKUP_W = 1440;
+const MOCKUP_H = 900;
 
 function whatsappFor(industry: IndustryCard) {
   return (
@@ -19,98 +24,81 @@ function whatsappFor(industry: IndustryCard) {
   );
 }
 
-function InsightBlock({
-  label,
-  children,
-  accent,
+function CoverBackground({
+  industryId,
+  visible,
 }: {
-  label: string;
-  children: React.ReactNode;
-  accent: keyof typeof accentTextClass;
+  industryId: string;
+  visible: boolean;
 }) {
+  const [scale, setScale] = useState(1);
+
+  useLayoutEffect(() => {
+    const update = () => {
+      setScale(Math.max(window.innerWidth / MOCKUP_W, window.innerHeight / MOCKUP_H));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
-    <div data-insight-block>
-      <p
-        className={`mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] ${accentTextClass[accent]}`}
+    <div
+      className="pointer-events-none absolute inset-0 transition-opacity duration-[600ms] ease-out"
+      style={{ opacity: visible ? 1 : 0, zIndex: visible ? 1 : 0 }}
+      aria-hidden={!visible}
+    >
+      <div
+        className="absolute left-1/2 top-1/2"
+        style={{
+          width: MOCKUP_W,
+          height: MOCKUP_H,
+          transform: `translate(-50%, -50%) scale(${scale})`,
+          transformOrigin: "center center",
+        }}
       >
-        {label}
-      </p>
-      {children}
+        <iframe
+          src={getMockupHtmlPath(industryId)}
+          width={MOCKUP_W}
+          height={MOCKUP_H}
+          title={industryId}
+          scrolling="no"
+          className="block border-0"
+          style={{ width: MOCKUP_W, height: MOCKUP_H, pointerEvents: "none" }}
+        />
+      </div>
     </div>
   );
 }
 
-function IndustryChapterContent({ industry, index }: { industry: IndustryCard; index: number }) {
-  const accent = categoryAccents[industry.category];
-  const Icon = industry.icon;
+function IndustryContent({ industry }: { industry: IndustryCard }) {
+  const tint = getIndustryTintColor(industry.id);
+  const rgb = hexToRgbString(tint);
 
   return (
-    <div className="flex h-full min-h-0 flex-col justify-center py-4">
-      <div data-insight-meta className="mb-5 flex items-center gap-3">
-        <div
-          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-brand-rule bg-brand-card ${accentTextClass[accent]}`}
-        >
-          <Icon className="h-4 w-4" strokeWidth={1.5} />
-        </div>
-        <div>
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-dim">
-            Chapter {String(index + 1).padStart(2, "0")}
-          </p>
-          <p className={`text-xs font-medium ${accentTextClass[accent]}`}>{industry.category}</p>
-        </div>
-      </div>
-
-      <h2
-        data-insight-title
-        className="mb-6 font-display text-[clamp(1.5rem,2.4vw,2.35rem)] font-bold leading-[1.06] tracking-[-0.03em] text-brand-white"
+    <div className="flex max-w-xl flex-col">
+      <span
+        className="mb-5 inline-flex w-fit rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em]"
+        style={{
+          background: `rgba(${rgb}, 0.15)`,
+          border: `1px solid rgba(${rgb}, 0.3)`,
+          color: tint,
+        }}
       >
+        {industry.category}
+      </span>
+      <h2 className="mb-3 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white">
         {industry.name}
       </h2>
-
-      <div data-insight-body className="max-h-[min(42vh,420px)] space-y-5 overflow-y-auto scrollbar-hide pr-2">
-        <InsightBlock label="Why this industry is different" accent={accent}>
-          <p className="text-sm leading-[1.7] text-brand-silver">{industry.tagline}</p>
-        </InsightBlock>
-
-        <InsightBlock label="Recommended conversion strategy" accent={accent}>
-          <p className="mb-1.5 text-sm font-semibold text-brand-white">
-            {industry.specialFeature.title}
-          </p>
-          <p className="text-sm leading-[1.7] text-brand-silver">
-            {industry.specialFeature.description}
-          </p>
-        </InsightBlock>
-
-        <InsightBlock label="Key website features" accent={accent}>
-          <ul className="space-y-2">
-            {industry.needs.map((item) => (
-              <li
-                key={item}
-                data-insight-item
-                className="flex items-start gap-2 text-sm leading-[1.65] text-brand-silver"
-              >
-                <span className={`mt-0.5 shrink-0 text-[10px] ${accentTextClass[accent]}`}>▸</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </InsightBlock>
-
-        <InsightBlock label="Expected user journey" accent={accent}>
-          <p className="text-sm leading-[1.7] text-brand-silver">{industry.pages.join(" → ")}</p>
-        </InsightBlock>
-      </div>
-
-      <div data-insight-cta className="mt-6 shrink-0">
-        <Link
-          href={whatsappFor(industry)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-[46px] w-full items-center justify-center rounded-pill bg-brand-white px-5 text-sm font-semibold text-brand-black shadow-soft transition-shadow hover:shadow-card-hover sm:w-auto"
-        >
-          Build My {industry.name} Website →
-        </Link>
-      </div>
+      <p className="mb-8 text-base text-white/65">{industry.tagline}</p>
+      <ul className="space-y-2.5">
+        {industry.needs.slice(0, 4).map((item) => (
+          <li key={item} className="flex items-start gap-2.5 text-sm text-white/80">
+            <span className="mt-1.5 h-[5px] w-[5px] shrink-0 rounded-full bg-accent-warm" />
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -118,258 +106,203 @@ function IndustryChapterContent({ industry, index }: { industry: IndustryCard; i
 export default function IndustriesDesktopStory() {
   const rootRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const showcaseRef = useRef<HTMLElement>(null);
+  const heroContentRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
-  const progressFillRef = useRef<HTMLDivElement>(null);
-  const chapterRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   const activeIndustry = industryCards[activeIndex];
-  const total = industryCards.length;
+  const tintRgb = hexToRgbString(getIndustryTintColor(activeIndustry.id));
+
+  const preloadIndices = [
+    Math.max(0, activeIndex - 1),
+    activeIndex,
+    Math.min(TOTAL - 1, activeIndex + 1),
+  ];
 
   useLayoutEffect(() => {
     registerGsap();
 
     const hero = heroRef.current;
-    const showcase = showcaseRef.current;
+    const heroContent = heroContentRef.current;
+    const outer = outerRef.current;
     const pin = pinRef.current;
-    const progressFill = progressFillRef.current;
+    const overlay = overlayRef.current;
 
-    if (!hero || !showcase || !pin) return;
-
-    const chapters = chapterRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (chapters.length !== total) return;
-
-    let lastIndex = 0;
+    if (!hero || !heroContent || !outer || !pin) return;
 
     const ctx = gsap.context(() => {
-      const chapterScroll = window.innerHeight * total;
-
-      gsap.set(hero, { opacity: 1, y: 0 });
-      if (progressFill) gsap.set(progressFill, { scaleX: 0 });
-
-      chapters.forEach((chapter, i) => {
-        const preview = chapter.querySelector("[data-chapter-preview]") as HTMLElement | null;
-        const content = chapter.querySelector("[data-chapter-content]") as HTMLElement | null;
-        const meta = chapter.querySelector("[data-insight-meta]");
-        const title = chapter.querySelector("[data-insight-title]");
-        const body = chapter.querySelector("[data-insight-body]");
-        const blocks = chapter.querySelectorAll("[data-insight-block]");
-        const items = chapter.querySelectorAll("[data-insight-item]");
-        const cta = chapter.querySelector("[data-insight-cta]");
-
-        gsap.set(chapter, {
-          opacity: i === 0 ? 1 : 0,
-          pointerEvents: i === 0 ? "auto" : "none",
-          zIndex: i + 1,
-        });
-
-        if (preview) {
-          gsap.set(preview, {
-            position: "absolute",
-            top: 72,
-            bottom: 24,
-            left: "6%",
-            right: "6%",
-          });
-        }
-
-        if (content) {
-          gsap.set(content, { opacity: 0, x: -56, pointerEvents: "none" });
-        }
-        gsap.set([meta, title, body, cta, ...Array.from(blocks), ...Array.from(items)], {
-          opacity: 0,
-          y: 28,
-        });
-      });
-
       ScrollTrigger.create({
         trigger: hero,
         start: "top top",
         end: "bottom top",
         scrub: true,
         onUpdate: (self) => {
-          const fade = 1 - self.progress;
-          gsap.set(hero, {
-            opacity: fade,
-            y: self.progress * -40,
-            pointerEvents: fade < 0.05 ? "none" : "auto",
+          gsap.set(heroContent, {
+            opacity: Math.max(0, 1 - self.progress * 2),
+            y: self.progress * -60,
           });
+          if (self.progress > 0.05) setHasScrolled(true);
         },
       });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: showcase,
-          start: "top top",
-          end: () => `+=${chapterScroll}`,
-          pin: pin,
-          scrub: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (progressFill) gsap.set(progressFill, { scaleX: self.progress });
+      const scrollDistance = window.innerHeight * TOTAL;
 
-            const idx = Math.min(
-              total - 1,
-              Math.max(0, Math.floor(self.progress * total)),
-            );
+      ScrollTrigger.create({
+        trigger: outer,
+        start: "top top",
+        end: () => `+=${scrollDistance}`,
+        pin: pin,
+        scrub: 0.8,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const idx = Math.min(TOTAL - 1, Math.max(0, Math.floor(self.progress * TOTAL)));
+          setActiveIndex(idx);
+          if (self.progress > 0.01) setHasScrolled(true);
 
-            if (idx !== lastIndex) {
-              lastIndex = idx;
-              setActiveIndex(idx);
-            }
-          },
-        },
-      });
-
-      chapters.forEach((chapter, i) => {
-        const preview = chapter.querySelector("[data-chapter-preview]") as HTMLElement | null;
-        const content = chapter.querySelector("[data-chapter-content]") as HTMLElement | null;
-        const meta = chapter.querySelector("[data-insight-meta]");
-        const title = chapter.querySelector("[data-insight-title]");
-        const body = chapter.querySelector("[data-insight-body]");
-        const blocks = chapter.querySelectorAll("[data-insight-block]");
-        const items = chapter.querySelectorAll("[data-insight-item]");
-        const cta = chapter.querySelector("[data-insight-cta]");
-
-        const segStart = i / total;
-        const segLen = 1 / total;
-        const t = (f: number) => segStart + segLen * f;
-
-        if (i > 0) {
-          tl.set(chapter, { opacity: 1, pointerEvents: "auto" }, t(0));
-          if (preview) {
-            tl.set(preview, { top: 72, bottom: 24, left: "6%", right: "6%" }, t(0));
+          const rgb = hexToRgbString(getIndustryTintColor(industryCards[idx].id));
+          if (overlay) {
+            overlay.style.setProperty("--tint-rgb", rgb);
           }
-          tl.set(content, { opacity: 0, x: -56, pointerEvents: "none" }, t(0));
-          tl.set([meta, title, body, cta, ...Array.from(blocks), ...Array.from(items)], {
-            opacity: 0,
-            y: 28,
-          }, t(0));
-        }
-
-        if (preview) {
-          tl.to(
-            preview,
-            {
-              top: 88,
-              bottom: 32,
-              left: "44%",
-              right: "3%",
-              duration: segLen * 0.22,
-              ease: "power2.inOut",
-            },
-            t(0.32),
-          );
-        }
-
-        if (content) {
-          tl.to(content, { opacity: 1, x: 0, duration: segLen * 0.16, ease: "power2.out" }, t(0.36));
-          tl.set(content, { pointerEvents: "auto" }, t(0.36));
-        }
-
-        tl.to(meta, { opacity: 1, y: 0, duration: segLen * 0.08, ease: "power2.out" }, t(0.4));
-        tl.to(title, { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power3.out" }, t(0.44));
-        tl.to(
-          blocks,
-          { opacity: 1, y: 0, duration: segLen * 0.1, stagger: segLen * 0.02, ease: "power2.out" },
-          t(0.5),
-        );
-        tl.to(
-          items,
-          { opacity: 1, y: 0, duration: segLen * 0.08, stagger: segLen * 0.006, ease: "power2.out" },
-          t(0.58),
-        );
-        tl.to(body, { opacity: 1, y: 0, duration: segLen * 0.08, ease: "power2.out" }, t(0.52));
-        tl.to(cta, { opacity: 1, y: 0, duration: segLen * 0.08, ease: "power2.out" }, t(0.66));
-
-        if (i < total - 1) {
-          tl.to(chapter, { opacity: 0, duration: segLen * 0.1, ease: "power1.in" }, t(0.9));
-          tl.set(chapter, { pointerEvents: "none" }, t(0.98));
-        }
+        },
       });
     }, rootRef);
 
     return () => ctx.revert();
-  }, [total]);
+  }, []);
 
   return (
     <div ref={rootRef} className="bg-brand-black">
       <header
         ref={heroRef}
-        className="relative z-10 flex h-[100dvh] flex-col items-center justify-center px-6 pt-28 sm:pt-32 md:pt-36"
+        className="relative flex min-h-[100dvh] flex-col items-center justify-center bg-[#F8F5EF] px-6 pt-28 sm:pt-32 md:pt-36"
       >
-        <div className="max-w-3xl text-center">
-          <p className="editorial-eyebrow mb-4 md:mb-5">Our Expertise</p>
-          <h1 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm text-balance">
+        <div ref={heroContentRef} className="max-w-3xl text-center">
+          <p className="editorial-eyebrow mb-4 md:mb-5">Industries We Build For</p>
+          <h1 className="editorial-heading text-balance text-[clamp(2rem,5vw,3.75rem)] text-brand-white md:text-display-sm">
             Whatever Your Business,
             <br />
             We Know How to Build For It.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
-            Scroll to experience each industry website - preview first, then the strategy behind
-            it.
+            Scroll through 20 industries and see exactly what we&apos;d build for yours.
+          </p>
+          <p className="mt-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim">
+            Scroll to begin
           </p>
         </div>
-        <p className="absolute bottom-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim">
-          Scroll to begin
-        </p>
       </header>
 
-      <section ref={showcaseRef} className="relative bg-brand-black">
-        <div ref={pinRef} className="relative h-[100dvh] overflow-hidden bg-brand-black">
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-50 bg-gradient-to-b from-brand-black via-brand-black/95 to-transparent px-6 pb-6 pt-24 sm:px-10 sm:pt-28">
-            <div className="mx-auto max-w-6xl">
-              <div className="mb-2 flex items-center justify-between gap-4">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-brand-dim">
-                  {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-                </span>
-                <span className="truncate text-[10px] font-medium text-brand-silver">
-                  {activeIndustry?.name}
-                </span>
-              </div>
-              <div className="h-0.5 overflow-hidden rounded-full bg-brand-rule">
+      <div ref={outerRef} style={{ height: `calc(${TOTAL} * 100dvh)` }}>
+        <div ref={pinRef} className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0806]">
+          {/* Layer 1 — full-bleed mockup backgrounds */}
+          <div className="absolute inset-0 z-0">
+            {preloadIndices.map((i) => (
+              <CoverBackground
+                key={industryCards[i].id}
+                industryId={industryCards[i].id}
+                visible={i === activeIndex}
+              />
+            ))}
+          </div>
+
+          {/* Layer 2 — gradient overlay */}
+          <div
+            ref={overlayRef}
+            className="pointer-events-none absolute inset-0 z-[2] transition-[background] duration-600 ease-out"
+            style={{
+              background: `linear-gradient(to right, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.4) 55%, rgba(10,8,6,0) 100%), radial-gradient(ellipse at 20% 50%, rgba(${tintRgb}, 0.18), transparent 55%)`,
+            }}
+          />
+
+          {/* Layer 3 — content panel */}
+          <div className="absolute left-0 z-[3] flex h-full w-full max-w-[50%] flex-col justify-center pl-[clamp(40px,6vw,100px)] pr-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndustry.id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <IndustryContent industry={activeIndustry} />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Layer 4 — progress indicator */}
+          <div className="absolute right-10 top-8 z-[4] text-right">
+            <div className="mb-1.5 text-[11px] uppercase tracking-[0.2em] text-white/40">
+              {String(activeIndex + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={activeIndustry.name}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.35 }}
+                className="mb-2.5 text-[13px] font-medium text-white/75"
+              >
+                {activeIndustry.name}
+              </motion.p>
+            </AnimatePresence>
+            <div className="flex justify-end gap-1">
+              {industryCards.map((_, i) => (
                 <div
-                  ref={progressFillRef}
-                  className="h-full w-full origin-left rounded-full bg-brand-white"
-                  style={{ transform: "scaleX(0)" }}
+                  key={i}
+                  className="h-1 rounded-sm transition-all duration-300 ease-out"
+                  style={{
+                    width: i === activeIndex ? 20 : 4,
+                    background: i === activeIndex ? "#C4674A" : "rgba(255,255,255,0.2)",
+                  }}
                 />
-              </div>
+              ))}
             </div>
           </div>
 
-          {industryCards.map((industry, i) => (
-            <div
-              key={industry.id}
-              ref={(el) => {
-                chapterRefs.current[i] = el;
-              }}
-              className="absolute inset-0 opacity-0 pointer-events-none"
-              aria-hidden={activeIndex !== i}
+          {/* Layer 5 — bottom CTA (mobile-hidden duplicate; main CTA in content) */}
+          <AnimatePresence>
+            <motion.div
+              key={`cta-${activeIndustry.id}`}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 16 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-8 left-[clamp(40px,6vw,100px)] z-[4]"
             >
-              <div
-                data-chapter-content
-                className="absolute bottom-8 left-6 top-[5.5rem] z-30 w-[min(100%,40%)] sm:left-10"
+              <Link
+                href={whatsappFor(activeIndustry)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-all hover:bg-[#B35B3F]"
               >
-                <IndustryChapterContent industry={industry} index={i} />
-              </div>
+                Build My {activeIndustry.name} Website →
+              </Link>
+            </motion.div>
+          </AnimatePresence>
 
-              <div
-                data-chapter-preview
-                className="absolute z-20 overflow-hidden rounded-2xl"
-              >
-                <IndustryPreviewStage
-                  industryId={industry.id}
-                  title={industry.name}
-                  active={activeIndex === i}
-                  className="h-full"
-                />
-              </div>
-            </div>
-          ))}
+          {/* Scroll hint */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: hasScrolled ? 0 : 1 }}
+            transition={{ duration: 0.4 }}
+            className="pointer-events-none absolute bottom-8 left-1/2 z-[4] flex -translate-x-1/2 flex-col items-center gap-2"
+          >
+            <span className="text-[11px] uppercase tracking-[0.2em] text-white/40">Scroll</span>
+            <motion.span
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              className="text-lg text-white/40"
+            >
+              ↓
+            </motion.span>
+          </motion.div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

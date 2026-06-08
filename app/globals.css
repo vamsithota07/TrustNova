@@ -224,6 +224,92 @@ html:not(.is-loading) #page-loader {
   }
 }
 
+@keyframes mockup-load-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes concept-flip {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateY(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateY(0deg);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --content-max: 1500px;
+  }
+
+  .ultra-wide-container {
+    max-width: var(--content-max);
+  }
+}
+
+* {
+  cursor: default !important;
+}
+
+a,
+button,
+[role="button"],
+select,
+label[for],
+input[type="submit"],
+input[type="button"],
+.clickable {
+  cursor: pointer !important;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.hero-services-card {
+  position: relative;
+  background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+    conic-gradient(from var(--border-angle, 0deg), #c4674a, transparent 40%, #c4674a) border-box;
+  border: 1.5px solid transparent;
+  animation: hero-border-spin 6s linear infinite;
+}
+
+@keyframes hero-border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -237,4 +323,5 @@ html:not(.is-loading) #page-loader {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
 }

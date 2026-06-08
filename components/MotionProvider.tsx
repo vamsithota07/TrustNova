@@ -2,7 +2,6 @@
 
 import { MotionConfig } from "framer-motion";
 import SmoothScroll from "@/components/motion/SmoothScroll";
-
 export default function MotionProvider({
   children,
 }: {

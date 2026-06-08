@@ -6,6 +6,15 @@ import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
 import ServiceVisual, { type ServiceVisualType } from "@/components/services/ServiceVisuals";
 import { WHATSAPP_URL } from "@/lib/constants";
+import { shouldRenderNearby } from "@/lib/motion/performance";
+
+const SERVICE_TINT_RGB = [
+  "196, 103, 74",
+  "122, 158, 135",
+  "107, 143, 168",
+  "154, 139, 180",
+  "196, 103, 74",
+];
 
 type Service = {
   id: number;
@@ -135,7 +144,15 @@ function ServiceCtaRow({ service, className = "" }: { service: Service; classNam
   );
 }
 
-function ServiceEditorial({ service, includeCta = true }: { service: Service; includeCta?: boolean }) {
+function ServiceEditorial({
+  service,
+  includeCta = true,
+  isActive = true,
+}: {
+  service: Service;
+  includeCta?: boolean;
+  isActive?: boolean;
+}) {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
@@ -170,7 +187,9 @@ function ServiceEditorial({ service, includeCta = true }: { service: Service; in
 
         <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-8">
           <div className="w-full max-w-md" data-service-visual-inner>
-            <ServiceVisual type={service.visual} />
+            {isActive ? <ServiceVisual type={service.visual} active /> : (
+              <div className="h-[260px] rounded-2xl border border-brand-rule bg-brand-dark/50" />
+            )}
           </div>
         </div>
       </div>
@@ -178,20 +197,29 @@ function ServiceEditorial({ service, includeCta = true }: { service: Service; in
   );
 }
 
-function ServicePanel({ service }: { service: Service }) {
+function ServicePanel({ service, isActive = false }: { service: Service; isActive?: boolean }) {
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div
         data-panel-title
         className="pointer-events-none mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
       >
-        <span className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
+        <span data-service-number className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
           Service {service.number}
         </span>
-        <div className={`mx-auto mt-4 h-px w-12 ${accentLine[service.accent]}`} aria-hidden />
-        <h3 className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] mt-5 tracking-[-0.03em] leading-[1.08] text-balance">
-          {service.title}
-        </h3>
+        <div
+          data-accent-line
+          className={`mx-auto mt-4 h-px w-0 max-w-[80px] ${accentLine[service.accent]}`}
+          aria-hidden
+        />
+        <div className="mt-5 overflow-hidden">
+          <h3
+            data-service-name
+            className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] tracking-[-0.03em] leading-[1.08] text-balance"
+          >
+            {service.title}
+          </h3>
+        </div>
         <p
           data-scroll-hint
           className="mt-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
@@ -205,7 +233,7 @@ function ServicePanel({ service }: { service: Service }) {
         className="min-h-0 flex-1 overflow-y-auto scrollbar-hide opacity-0 will-change-transform"
       >
         <div className="mx-auto mt-6 sm:mt-8 w-full max-w-6xl pb-4">
-          <ServiceEditorial service={service} includeCta={false} />
+          <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
         </div>
       </div>
 
@@ -250,8 +278,10 @@ export default function Services() {
   const introRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const progressFillRef = useRef<HTMLDivElement>(null);
+  const spineLineRef = useRef<HTMLDivElement>(null);
+  const bgTintRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const spineDotRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [useFallback, setUseFallback] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -341,6 +371,16 @@ export default function Services() {
               );
             }
 
+            if (bgTintRef.current) {
+              const rgb = SERVICE_TINT_RGB[idx] ?? SERVICE_TINT_RGB[0];
+              bgTintRef.current.style.background = `radial-gradient(ellipse at 30% 50%, rgba(${rgb}, 0.06), transparent 60%)`;
+            }
+
+            if (spineLineRef.current) {
+              const spineH = 216 * ((idx + 1) / services.length);
+              gsap.set(spineLineRef.current, { height: spineH });
+            }
+
             if (idx !== lastIndex) {
               lastIndex = idx;
               setActiveIndex(idx);
@@ -366,6 +406,9 @@ export default function Services() {
         const segLen = segEnd - segStart;
 
         const title = panel.querySelector("[data-panel-title]");
+        const serviceNumber = panel.querySelector("[data-service-number]");
+        const accentLineEl = panel.querySelector("[data-accent-line]");
+        const serviceName = panel.querySelector("[data-service-name]");
         const scrollHint = panel.querySelector("[data-scroll-hint]");
         const content = panel.querySelector("[data-panel-content]");
         const footer = panel.querySelector("[data-panel-footer]");
@@ -375,10 +418,39 @@ export default function Services() {
         const visual = panel.querySelector("[data-service-visual]");
         const visualInner = panel.querySelector("[data-service-visual-inner]");
         const cta = panel.querySelector("[data-service-cta]");
+        const useBlur = window.innerWidth >= 768;
 
         const t = (fraction: number) => segStart + segLen * fraction;
 
-        tl.set(panel, { opacity: 1, y: 0, pointerEvents: "auto" }, t(0));
+        if (i > 0) {
+          tl.fromTo(
+            panel,
+            { opacity: 0, y: 60, filter: useBlur ? "blur(4px)" : "blur(0px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: segLen * 0.14, ease: "power3.out" },
+            t(0),
+          );
+        } else {
+          tl.set(panel, { opacity: 1, y: 0, pointerEvents: "auto", filter: "blur(0px)" }, t(0));
+        }
+        tl.set(panel, { pointerEvents: "auto" }, t(0));
+        tl.fromTo(
+          serviceNumber,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power2.out" },
+          t(0.04),
+        );
+        tl.fromTo(
+          accentLineEl,
+          { width: 0 },
+          { width: 80, duration: segLen * 0.14, ease: "power2.out" },
+          t(0.08),
+        );
+        tl.fromTo(
+          serviceName,
+          { opacity: 0, y: "100%" },
+          { opacity: 1, y: 0, duration: segLen * 0.18, ease: "power3.out" },
+          t(0.12),
+        );
         tl.fromTo(
           title,
           { opacity: 0, y: 56 },
@@ -418,27 +490,27 @@ export default function Services() {
         );
         tl.fromTo(
           bullets,
-          { opacity: 0, y: 24 },
+          { opacity: 0, x: -16 },
           {
             opacity: 1,
-            y: 0,
-            duration: segLen * 0.14,
-            stagger: segLen * 0.01,
+            x: 0,
+            duration: segLen * 0.12,
+            stagger: segLen * 0.008,
             ease: "power2.out",
           },
           t(0.52),
         );
         tl.fromTo(
           visual,
-          { opacity: 0, y: 32 },
-          { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power2.out" },
+          { opacity: 0, scale: 0.9 },
+          { opacity: 1, scale: 1, duration: segLen * 0.14, ease: "power2.out" },
           t(0.56),
         );
         if (visualInner) {
           tl.fromTo(
             visualInner,
-            { y: 24 },
-            { y: 0, duration: segLen * 0.14, ease: "power2.out" },
+            { y: 24, scale: 0.92 },
+            { y: 0, scale: 1, duration: segLen * 0.14, ease: "power2.out" },
             t(0.6),
           );
         }
@@ -458,7 +530,13 @@ export default function Services() {
         if (i < services.length - 1) {
           tl.to(
             panel,
-            { opacity: 0, y: 40, duration: segLen * 0.12, ease: "power1.in" },
+            {
+              opacity: 0,
+              y: -40,
+              filter: useBlur ? "blur(4px)" : "blur(0px)",
+              duration: segLen * 0.12,
+              ease: "power1.in",
+            },
             t(0.86),
           );
           tl.set(panel, { pointerEvents: "none" }, t(0.98));
@@ -490,14 +568,15 @@ export default function Services() {
 
   useLayoutEffect(() => {
     if (useFallback) return;
-    dotRefs.current.forEach((dot, i) => {
+    spineDotRefs.current.forEach((dot, i) => {
       if (!dot) return;
       const active = i === activeIndex;
       gsap.to(dot, {
-        scale: active ? 1.25 : 1,
-        opacity: active ? 1 : 0.3,
-        duration: 0.35,
-        ease: "power2.out",
+        scale: active ? 1.35 : 1,
+        backgroundColor: active ? "#C4674A" : "#DDDDDD",
+        borderColor: active ? "#C4674A" : "rgba(196, 103, 74, 0.4)",
+        duration: 0.4,
+        ease: "back.out(2)",
       });
     });
   }, [activeIndex, useFallback]);
@@ -527,12 +606,48 @@ export default function Services() {
           className="relative flex h-[calc(100dvh-7rem)] flex-col sm:h-[calc(100dvh-8rem)] md:h-[calc(100dvh-9rem)] overflow-x-clip bg-brand-black"
         >
           <div
-            className="pointer-events-none absolute inset-0 opacity-35"
+            ref={bgTintRef}
+            className="pointer-events-none absolute inset-0 z-0 transition-[background] duration-700"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-0 z-[1] opacity-35"
             aria-hidden
             data-service-parallax
           >
             <div className="floating-shape top-[10%] -left-24 h-64 w-64 bg-accent-sage/10 animate-float" />
             <div className="floating-shape bottom-[12%] -right-20 h-72 w-72 bg-accent-warm/8 animate-float-delayed" />
+          </div>
+
+          <div
+            className="pointer-events-none absolute left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-10"
+            style={{ height: 240 }}
+          >
+            <div className="relative flex h-full w-6 flex-col items-center">
+              <div className="absolute top-3 bottom-3 w-0.5 rounded-full bg-brand-rule" />
+              <div
+                ref={spineLineRef}
+                className="absolute top-3 w-0.5 origin-top rounded-full bg-accent-warm"
+                style={{ height: 0 }}
+              />
+              {services.map((s, i) => (
+                <div key={s.id} className="relative z-10 flex flex-1 items-center justify-center">
+                  <span
+                    ref={(el) => {
+                      spineDotRefs.current[i] = el;
+                    }}
+                    data-spine-dot
+                    className="h-2.5 w-2.5 rounded-full border-2 border-accent-warm/40 bg-brand-rule"
+                    aria-hidden
+                  />
+                  {activeIndex === i && (
+                    <span className="absolute left-5 top-1/2 max-w-[140px] -translate-y-1/2 truncate text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
+                      {s.title.split("&")[0].trim()}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div
@@ -573,18 +688,6 @@ export default function Services() {
                   style={{ transform: "scaleX(0)" }}
                 />
               </div>
-              <div className="flex justify-center gap-2 mt-3">
-                {services.map((s, i) => (
-                  <span
-                    key={s.id}
-                    ref={(el) => {
-                      dotRefs.current[i] = el;
-                    }}
-                    className="h-1.5 w-1.5 rounded-full bg-brand-white opacity-30"
-                    aria-hidden
-                  />
-                ))}
-              </div>
             </div>
           </div>
 
@@ -599,7 +702,10 @@ export default function Services() {
                 aria-label={service.title}
                 aria-hidden={activeIndex !== i}
               >
-                <ServicePanel service={service} />
+                <ServicePanel
+                  service={service}
+                  isActive={shouldRenderNearby(activeIndex, i)}
+                />
               </div>
             ))}
           </div>

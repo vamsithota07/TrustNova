@@ -45,7 +45,9 @@ module.exports = {
         "section-sm": "clamp(3.5rem, 8vw, 6rem)",
       },
       maxWidth: {
-        editorial: "90rem",
+        editorial: "87.5rem",
+        content: "1400px",
+        "content-wide": "1500px",
       },
       borderRadius: {
         organic: "2rem",

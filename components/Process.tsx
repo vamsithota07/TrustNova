@@ -101,6 +101,44 @@ export default function Process() {
       return () => tween.scrollTrigger?.kill();
     });
 
+    mm.add("(max-width: 1023px)", () => {
+      const line = section.querySelector("[data-process-mobile-line]") as HTMLElement | null;
+      const cards = section.querySelectorAll("[data-process-card]");
+      if (!line) return;
+
+      gsap.fromTo(
+        line,
+        { scaleY: 0 },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 70%",
+            end: "bottom 30%",
+            scrub: true,
+          },
+        },
+      );
+
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+            },
+          },
+        );
+      });
+    });
+
     return () => mm.revert();
   }, []);
 
@@ -116,13 +154,20 @@ export default function Process() {
       </Container>
 
       {/* Mobile & tablet: vertical journey cards */}
-      <div className="lg:hidden px-4 sm:px-6 md:px-8 pb-section">
-        <div className="flex flex-col gap-5 max-w-xl mx-auto">
+      <div className="relative lg:hidden px-4 sm:px-6 md:px-8 pb-section">
+        <div
+          data-process-mobile-line
+          className="pointer-events-none absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 origin-top bg-accent-warm/30"
+          style={{ height: "0%" }}
+          aria-hidden
+        />
+        <div className="relative flex flex-col gap-5 max-w-xl mx-auto">
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
               <article
                 key={step.number}
+                data-process-card
                 className={`creative-card p-6 ${i % 2 === 1 ? "ml-6" : "mr-6"}`}
               >
                 <div className="flex items-start gap-4">

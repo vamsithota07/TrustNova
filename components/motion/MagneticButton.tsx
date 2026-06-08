@@ -29,13 +29,26 @@ export default function MagneticButton({
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    el.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    const strength = 0.28;
+    const max = 20;
+    const tx = Math.max(-max, Math.min(max, x * strength));
+    const ty = Math.max(-max, Math.min(max, y * strength));
+    el.style.transform = `translate(${tx}px, ${ty}px)`;
   };
 
   const handleLeave = () => {
     const el = ref.current;
     if (!el) return;
     el.style.transform = "translate(0, 0)";
+  };
+
+  const handleClick = () => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    el.animate(
+      [{ transform: el.style.transform || "translate(0,0)" }, { transform: "translate(0,0) scale(0.95)" }, { transform: "translate(0,0) scale(1)" }],
+      { duration: 220, easing: "ease-out" },
+    );
   };
 
   const shared =
@@ -52,6 +65,7 @@ export default function MagneticButton({
           className={`${shared} ${className}`}
           onMouseMove={handleMove}
           onMouseLeave={handleLeave}
+          onClick={handleClick}
         >
           {children}
         </a>
@@ -64,6 +78,7 @@ export default function MagneticButton({
         className={`${shared} ${className}`}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
+        onClick={handleClick}
       >
         {children}
       </Link>

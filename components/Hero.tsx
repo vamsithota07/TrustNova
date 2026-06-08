@@ -4,7 +4,6 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import { btnPrimary, btnSecondary, WHATSAPP_URL } from "@/lib/constants";
 import MagneticButton from "@/components/motion/MagneticButton";
-import Container from "@/components/Container";
 
 const services = [
   "Logo Design & Brand Identity",
@@ -59,25 +58,16 @@ export default function Hero() {
           .from(cardRef.current, { opacity: 0, y: 60, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
           .from(marqueeRef.current, { opacity: 0, y: 16, duration: 0.7 }, "-=0.4");
 
-        if (cardRef.current) {
-          gsap.to(cardRef.current, {
-            y: -10,
-            duration: 5,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-        }
-
         [blob1Ref, blob2Ref].forEach((ref, i) => {
           if (!ref.current) return;
           gsap.to(ref.current, {
-            y: i === 0 ? -30 : 24,
-            x: i === 0 ? 20 : -16,
-            duration: 7 + i * 2,
+            x: `random(${i === 0 ? -60 : -40}, ${i === 0 ? 60 : 40})`,
+            y: `random(${i === 0 ? -40 : -24}, ${i === 0 ? 40 : 24})`,
+            duration: `random(8, 14)`,
             repeat: -1,
             yoyo: true,
             ease: "sine.inOut",
+            stagger: 3,
           });
         });
 
@@ -107,22 +97,19 @@ export default function Hero() {
     >
       <div
         ref={blob1Ref}
-        className="floating-shape -top-16 right-[8%] h-72 w-72 bg-accent-sage/30 animate-float"
+        className="floating-shape -top-16 right-[8%] h-72 w-72 bg-accent-warm/[0.08] mix-blend-multiply"
         aria-hidden
       />
       <div
         ref={blob2Ref}
-        className="floating-shape bottom-[20%] -left-20 h-56 w-56 bg-accent-warm/20 animate-float-delayed"
+        className="floating-shape bottom-[20%] -left-20 h-56 w-56 bg-accent-warm/[0.08] mix-blend-multiply"
         aria-hidden
       />
-      <div
-        className="pointer-events-none absolute top-1/3 right-[15%] hidden lg:block h-24 w-24 rounded-organic border border-brand-rule/80 bg-brand-card/60 shadow-soft rotate-12 animate-float-slow"
-        aria-hidden
-      />
-
-      <Container className="relative z-10 flex-1 flex flex-col justify-center py-12 md:py-16 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 xl:gap-20 items-center w-full min-w-0">
-          <div className="w-full min-w-0 order-1 lg:-mt-6">
+      <div className="relative z-10 flex flex-1 w-full items-center justify-center py-12 md:py-16 lg:py-20">
+        <div
+          className="hero-grid mx-auto grid w-full grid-cols-1 items-start gap-[clamp(24px,3vw,48px)] px-[clamp(20px,4vw,48px)] lg:max-w-[1040px] lg:grid-cols-[1fr_300px] lg:gap-8 min-[1441px]:max-w-[1180px] min-[1441px]:grid-cols-[1fr_320px]"
+        >
+          <div className="order-1 w-full min-w-0">
             <span
               ref={eyebrowRef}
               className="inline-flex items-center gap-2.5 px-4 py-2 mb-8 md:mb-10 editorial-eyebrow border border-brand-rule rounded-pill bg-brand-card/80 shadow-soft backdrop-blur-sm"
@@ -136,7 +123,7 @@ export default function Hero() {
                 <div key={line.text} className="overflow-hidden py-0.5">
                   <h1
                     data-hero-line
-                    className={`font-display font-bold text-display-lg lg:text-display-xl leading-[0.95] tracking-[-0.05em] ${
+                    className={`font-display font-bold leading-[0.95] tracking-[-0.05em] text-[clamp(2.5rem,5.5vw,7rem)] ${
                       line.accent ? "text-accent-warm" : "text-brand-white"
                     }`}
                   >
@@ -164,33 +151,41 @@ export default function Hero() {
             </div>
           </div>
 
-          <div ref={cardRef} className="w-full min-w-0 order-2 lg:justify-self-end lg:mt-8">
-            <div className="creative-card p-6 sm:p-8 md:p-10 w-full max-w-md lg:ml-auto hover:shadow-card-hover transition-all duration-700 ease-premium">
-              <p className="editorial-eyebrow mb-5">What we do</p>
-              <h2 className="font-display font-bold text-2xl md:text-3xl text-brand-white mb-6 tracking-[-0.03em]">
+          <div
+            ref={cardRef}
+            className="hero-card order-2 w-full shrink-0 lg:mt-[4.75rem] lg:w-[300px] lg:min-w-[300px] lg:max-w-[300px] min-[1441px]:mt-20 min-[1441px]:w-[320px] min-[1441px]:min-w-[320px] min-[1441px]:max-w-[320px]"
+          >
+            <div className="hero-services-card creative-card box-border w-full overflow-hidden p-6 transition-all duration-700 ease-premium hover:shadow-card-hover">
+              <p className="editorial-eyebrow mb-4">What we do</p>
+              <h2 className="mb-5 font-display text-lg font-bold tracking-[-0.03em] text-brand-white">
                 Our Services
               </h2>
-              <ul className="space-y-4 md:space-y-5">
+              <ul className="space-y-3">
                 {services.map((title, i) => (
-                  <li key={title} className="flex items-start gap-4 min-w-0 group">
-                    <span className="text-[11px] font-semibold text-brand-dim mt-1 shrink-0 tabular-nums">
+                  <li key={title} className="group flex min-w-0 items-start gap-3 transition-all duration-200 hover:translate-x-1">
+                    <span className="mt-0.5 shrink-0 text-[11px] font-semibold text-brand-dim tabular-nums transition-transform duration-200 group-hover:scale-110">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-brand-white font-medium text-sm md:text-base leading-snug group-hover:text-accent-warm transition-colors duration-300">
+                    <p className="text-[14px] font-medium leading-[1.4] text-brand-white transition-colors duration-300 group-hover:text-accent-warm">
                       {title}
                     </p>
                   </li>
                 ))}
               </ul>
-              <div className="border-t border-brand-rule mt-8 pt-6">
-                <p className="text-brand-silver text-xs md:text-sm tracking-wide">
+              <div className="mt-6 border-t border-brand-rule pt-5">
+                <p className="flex min-w-0 items-center justify-center gap-2 whitespace-nowrap text-xs tracking-wide text-brand-silver md:justify-start">
+                  <span
+                    className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#27AE60]"
+                    style={{ animation: "status-pulse 2s ease-in-out infinite" }}
+                    aria-hidden
+                  />
                   Based in Hyderabad · Serving all of India
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </Container>
+      </div>
 
       <div
         ref={marqueeRef}

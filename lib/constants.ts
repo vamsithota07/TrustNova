@@ -58,7 +58,7 @@ export const socialLinks = {
   instagram: "https://www.instagram.com/trustnova.in/",
   linkedin: "https://linkedin.com/company/trustnova",
   gmail: `mailto:${EMAIL}`,
-  x: "https://x.com/trustnova_in",
+  x: "https://x.com/trustnovain",
 };
 
 export const siteMetadata = {

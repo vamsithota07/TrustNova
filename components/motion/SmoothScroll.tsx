@@ -18,9 +18,9 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     try {
       lenis = new Lenis({
-        lerp: 0.1,
+        lerp: 0.075,
         smoothWheel: true,
-        wheelMultiplier: 0.85,
+        wheelMultiplier: 0.8,
         touchMultiplier: 1,
         syncTouch: true,
       });
@@ -29,8 +29,8 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
       lenis.on("scroll", ScrollTrigger.update);
 
-      ScrollTrigger.scrollerProxy(document.documentElement, {
-        scrollTop(value) {
+      const scrollerProxy = {
+        scrollTop(value?: number) {
           if (arguments.length && lenis && value !== undefined) {
             lenis.scrollTo(value, { immediate: true });
           }
@@ -44,8 +44,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
             height: window.innerHeight,
           };
         },
-        pinType: "fixed",
-      });
+        pinType: "transform" as const,
+      };
+
+      ScrollTrigger.scrollerProxy(document.documentElement, scrollerProxy);
+      ScrollTrigger.scrollerProxy(document.body, scrollerProxy);
 
       ScrollTrigger.addEventListener("refresh", () => lenis?.resize());
       ScrollTrigger.refresh();

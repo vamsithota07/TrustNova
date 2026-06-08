@@ -1,15 +1,7 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import { flushSync } from "react-dom";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { gsap, ScrollTrigger, registerGsap } from "@/lib/motion/gsap-register";
 import { getLenisInstance } from "@/lib/motion/lenis";
 import {
@@ -17,15 +9,17 @@ import {
   getIndustryTintColor,
   type IndustryCard,
 } from "@/lib/industries";
-import { getMockupHtmlPath } from "@/lib/mockups";
+import {
+  getMockupHtmlPath,
+  MOCKUP_HEIGHT,
+  MOCKUP_WIDTH,
+} from "@/lib/mockups";
 import { hexToRgbString } from "@/lib/colors";
 import { WHATSAPP_URL } from "@/lib/constants";
+import IndustriesScrollRail from "@/components/industries/IndustriesScrollRail";
 
 const TOTAL = industryCards.length;
-const MOCKUP_W = 1440;
-const MOCKUP_H = 900;
-const WHEEL_THRESHOLD = 30;
-const TOUCH_THRESHOLD = 50;
+const SCRUB = 0.8;
 
 function whatsappFor(industry: IndustryCard) {
   return (
@@ -34,454 +28,579 @@ function whatsappFor(industry: IndustryCard) {
   );
 }
 
-function CoverBackground({
-  industryId,
-  index,
-}: {
-  industryId: string;
-  index: number;
-}) {
-  const [scale, setScale] = useState(1);
+function MockupIframe({ industryId }: { industryId: string }) {
+  const scalerRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const el = scalerRef.current;
+    if (!el) return;
+
     const update = () => {
-      setScale(Math.max(window.innerWidth / MOCKUP_W, window.innerHeight / MOCKUP_H));
+      const scale = Math.max(
+        window.innerWidth / MOCKUP_WIDTH,
+        window.innerHeight / MOCKUP_HEIGHT
+      );
+      el.style.transform = `translate(-50%, -50%) scale(${scale})`;
     };
+
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
   return (
-    <div
-      id={`industry-bg-${index}`}
-      className="pointer-events-none absolute inset-0"
-      style={{ opacity: index === 0 ? 1 : 0, zIndex: index === 0 ? 1 : 0 }}
-      aria-hidden={index !== 0}
-    >
+    <div className="absolute inset-0 overflow-hidden bg-[#080604]">
       <div
-        className="absolute left-1/2 top-1/2"
+        ref={scalerRef}
+        className="iframe-scaler absolute left-1/2 top-1/2 will-change-transform"
         style={{
-          width: MOCKUP_W,
-          height: MOCKUP_H,
-          transform: `translate(-50%, -50%) scale(${scale})`,
+          width: MOCKUP_WIDTH,
+          height: MOCKUP_HEIGHT,
           transformOrigin: "center center",
+          pointerEvents: "none",
         }}
       >
         <iframe
           src={getMockupHtmlPath(industryId)}
-          width={MOCKUP_W}
-          height={MOCKUP_H}
+          width={MOCKUP_WIDTH}
+          height={MOCKUP_HEIGHT}
           title={industryId}
           scrolling="no"
+          loading="lazy"
           className="block border-0"
-          style={{ width: MOCKUP_W, height: MOCKUP_H, pointerEvents: "none" }}
+          style={{
+            width: MOCKUP_WIDTH,
+            height: MOCKUP_HEIGHT,
+            border: "none",
+            display: "block",
+            pointerEvents: "none",
+          }}
         />
       </div>
     </div>
   );
 }
 
-function IndustryContent({ industry }: { industry: IndustryCard }) {
+function IndustryPanel({ industry }: { industry: IndustryCard }) {
   const tint = getIndustryTintColor(industry.id);
   const rgb = hexToRgbString(tint);
+  const features = industry.needs.slice(0, 4);
 
   return (
-    <div className="flex max-w-xl flex-col">
+    <div className="max-w-[480px]">
       <span
-        className="mb-5 inline-flex w-fit rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em]"
+        data-panel-category
+        className="mb-5 inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em]"
         style={{
-          background: `rgba(${rgb}, 0.15)`,
-          border: `1px solid rgba(${rgb}, 0.3)`,
+          background: `rgba(${rgb}, 0.18)`,
+          border: `1px solid rgba(${rgb}, 0.35)`,
           color: tint,
         }}
       >
         {industry.category}
       </span>
-      <h2 className="mb-3 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white">
+
+      <h2
+        data-panel-title
+        className="mb-3.5 font-display text-[clamp(1.9rem,3.8vw,3.75rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white"
+      >
         {industry.name}
       </h2>
-      <p className="mb-8 text-base text-white/65">{industry.tagline}</p>
-      <ul className="space-y-2.5">
-        {industry.needs.slice(0, 4).map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-sm text-white/80">
+
+      <p
+        data-panel-tagline
+        className="mb-8 max-w-md text-[15px] leading-[1.7] text-white/60"
+      >
+        {industry.tagline}
+      </p>
+
+      <ul data-panel-features className="mb-9 space-y-2.5">
+        {features.map((feature) => (
+          <li
+            key={feature}
+            data-panel-feature
+            className="flex items-start gap-2.5 text-sm text-white/78"
+          >
             <span className="mt-1.5 h-[5px] w-[5px] shrink-0 rounded-full bg-accent-warm" />
-            {item}
+            {feature}
           </li>
         ))}
       </ul>
+
+      <Link
+        data-panel-cta
+        href={whatsappFor(industry)}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-colors hover:bg-[#B35B3F]"
+      >
+        Build My {industry.name} Website →
+      </Link>
     </div>
   );
 }
 
-function expandLoadedIndices(indices: number[], center: number) {
-  const next = new Set(indices);
-  next.add(center);
-  if (center > 0) next.add(center - 1);
-  if (center < TOTAL - 1) next.add(center + 1);
-  return Array.from(next)
-    .filter((i) => i >= 0 && i < TOTAL)
-    .sort((a, b) => a - b);
+function expandPreload(center: number) {
+  const next = new Set<number>();
+  for (let i = center - 1; i <= center + 1; i += 1) {
+    if (i >= 0 && i < TOTAL) next.add(i);
+  }
+  return next;
+}
+
+function scrollDistance() {
+  return TOTAL * window.innerHeight;
 }
 
 export default function IndustriesDesktopStory() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLElement>(null);
+  const introRef = useRef<HTMLElement>(null);
   const introContentRef = useRef<HTMLDivElement>(null);
-  const storyWrapperRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const progressNameRef = useRef<HTMLParagraphElement>(null);
+  const storyRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
+  const mockupRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const parallaxRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const gradientRef = useRef<HTMLDivElement>(null);
+  const tintRef = useRef<HTMLDivElement>(null);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loadedIndices, setLoadedIndices] = useState<number[]>([0, 1]);
-  const [hasScrolled, setHasScrolled] = useState(false);
-  const [isStoryVisible, setIsStoryVisible] = useState(false);
-
-  const activeIndexRef = useRef(0);
-  const isAnimatingRef = useRef(false);
-  const isStoryActiveRef = useRef(false);
-  const touchStartYRef = useRef(0);
-  const touchHandledRef = useRef(false);
+  const [storyProgress, setStoryProgress] = useState(0);
+  const [loadedIndexes, setLoadedIndexes] = useState<Set<number>>(
+    () => expandPreload(0)
+  );
 
   const activeIndustry = industryCards[activeIndex];
-  const tintRgb = hexToRgbString(getIndustryTintColor(activeIndustry.id));
 
-  const updateOverlayTint = useCallback((index: number) => {
-    const overlay = overlayRef.current;
-    if (!overlay) return;
-    const rgb = hexToRgbString(getIndustryTintColor(industryCards[index].id));
-    overlay.style.setProperty("--tint-rgb", rgb);
-  }, []);
+  useEffect(() => {
+    if (window.innerWidth < 1024) return;
 
-  const releaseStory = useCallback((direction: "up" | "down") => {
-    isStoryActiveRef.current = false;
-    if (direction === "up") {
-      setIsStoryVisible(false);
-    }
-    getLenisInstance()?.start();
-
-    const lenis = getLenisInstance();
-    if (direction === "up" && heroRef.current) {
-      lenis?.scrollTo(heroRef.current, { duration: 0.9 });
-      return;
-    }
-
-    if (direction === "down" && storyWrapperRef.current) {
-      const exitTarget =
-        storyWrapperRef.current.offsetTop + storyWrapperRef.current.offsetHeight + 8;
-      lenis?.scrollTo(exitTarget, { duration: 0.9 });
-    }
-  }, []);
-
-  const goToIndustry = useCallback(
-    (newIndex: number) => {
-      if (isAnimatingRef.current) return;
-      if (newIndex < 0 || newIndex >= TOTAL) return;
-
-      const currentIndex = activeIndexRef.current;
-      if (newIndex === currentIndex) return;
-
-      isAnimatingRef.current = true;
-      setHasScrolled(true);
-
-      const direction = newIndex > currentIndex ? 1 : -1;
-
-      flushSync(() => {
-        setLoadedIndices((prev) => expandLoadedIndices(prev, newIndex));
-      });
-
-      const contentEl = contentRef.current;
-      const ctaEl = ctaRef.current;
-      const progressNameEl = progressNameRef.current;
-      const currentBg = document.getElementById(`industry-bg-${currentIndex}`);
-      const newBg = document.getElementById(`industry-bg-${newIndex}`);
-
-      const exitTargets = [contentEl, ctaEl, progressNameEl].filter(Boolean) as Element[];
-
-      gsap.to(exitTargets, {
-        opacity: 0,
-        y: direction * -40,
-        duration: 0.35,
-        ease: "power2.in",
-      });
-
-      if (currentBg) {
-        gsap.to(currentBg, { opacity: 0, duration: 0.5, ease: "power2.inOut" });
-      }
-
-      if (newBg) {
-        gsap.set(newBg, { zIndex: 2 });
-        gsap.to(newBg, { opacity: 1, duration: 0.5, ease: "power2.inOut" });
-      }
-
-      window.setTimeout(() => {
-        activeIndexRef.current = newIndex;
-        setActiveIndex(newIndex);
-        updateOverlayTint(newIndex);
-
-        if (currentBg) {
-          gsap.set(currentBg, { zIndex: 0 });
-        }
-
-        gsap.fromTo(
-          exitTargets,
-          { opacity: 0, y: direction * 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.45,
-            ease: "power3.out",
-            onComplete: () => {
-              isAnimatingRef.current = false;
-            },
-          }
-        );
-      }, 350);
-    },
-    [updateOverlayTint]
-  );
-
-  const handleWheelIntent = useCallback(
-    (delta: number) => {
-      if (!isStoryActiveRef.current || isAnimatingRef.current) return false;
-
-      if (Math.abs(delta) < WHEEL_THRESHOLD) return false;
-
-      const currentIndex = activeIndexRef.current;
-
-      if (delta > 0) {
-        if (currentIndex < TOTAL - 1) {
-          goToIndustry(currentIndex + 1);
-          return true;
-        }
-        releaseStory("down");
-        return true;
-      }
-
-      if (delta < 0) {
-        if (currentIndex > 0) {
-          goToIndustry(currentIndex - 1);
-          return true;
-        }
-        releaseStory("up");
-        return true;
-      }
-
-      return true;
-    },
-    [goToIndustry, releaseStory]
-  );
-
-  useLayoutEffect(() => {
     registerGsap();
-    updateOverlayTint(0);
 
-    const hero = heroRef.current;
-    const introContent = introContentRef.current;
-    const storyWrapper = storyWrapperRef.current;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    if (!hero || !introContent || !storyWrapper) return;
+    let ctx: gsap.Context | null = null;
+    let cancelled = false;
+    let lastIndex = 0;
+    let lenisAttempts = 0;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
+    const setup = () => {
+      if (cancelled) return;
 
-    const activateStory = () => {
-      isStoryActiveRef.current = true;
-      setIsStoryVisible(true);
-      setHasScrolled(true);
-      getLenisInstance()?.stop();
-    };
-
-    const deactivateStory = () => {
-      isStoryActiveRef.current = false;
-      setIsStoryVisible(false);
-      getLenisInstance()?.start();
-    };
-
-    const ctx = gsap.context(() => {
-      gsap.to(introContent, {
-        opacity: 0,
-        y: -40,
-        ease: "none",
-        scrollTrigger: {
-          trigger: hero,
-          start: "center center",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-
-      ScrollTrigger.create({
-        trigger: storyWrapper,
-        start: "top top",
-        end: "bottom top",
-        onEnter: activateStory,
-        onEnterBack: activateStory,
-        onLeaveBack: deactivateStory,
-        onLeave: deactivateStory,
-      });
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, [updateOverlayTint]);
-
-  useEffect(() => {
-    activeIndexRef.current = activeIndex;
-    setLoadedIndices((prev) => expandLoadedIndices(prev, activeIndex));
-  }, [activeIndex]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      return;
-    }
-
-    const handleWheel = (event: WheelEvent) => {
-      if (!isStoryActiveRef.current) return;
-
-      const consumed = handleWheelIntent(event.deltaY);
-      if (consumed) {
-        event.preventDefault();
-        event.stopPropagation();
+      if (!reducedMotion && !getLenisInstance()) {
+        lenisAttempts += 1;
+        if (lenisAttempts < 90) {
+          requestAnimationFrame(setup);
+          return;
+        }
       }
+
+      const intro = introRef.current;
+      const introContent = introContentRef.current;
+      const story = storyRef.current;
+      const stage = stageRef.current;
+      const scrollTrack = scrollTrackRef.current;
+      const gradient = gradientRef.current;
+      const tint = tintRef.current;
+      if (
+        !intro ||
+        !introContent ||
+        !story ||
+        !stage ||
+        !scrollTrack ||
+        !gradient ||
+        !tint
+      ) {
+        return;
+      }
+
+      ctx = gsap.context(() => {
+        mockupRefs.current.forEach((mockup, i) => {
+          if (mockup) gsap.set(mockup, { opacity: i === 0 ? 1 : 0 });
+          if (parallaxRefs.current[i]) {
+            gsap.set(parallaxRefs.current[i], { y: "0%", scale: 1 });
+          }
+        });
+
+        contentRefs.current.forEach((panel) => {
+          if (!panel) return;
+          gsap.set(panel, { opacity: 0, y: 48, pointerEvents: "none" });
+          const title = panel.querySelector("[data-panel-title]");
+          const tagline = panel.querySelector("[data-panel-tagline]");
+          const category = panel.querySelector("[data-panel-category]");
+          const features = panel.querySelector("[data-panel-features]");
+          const cta = panel.querySelector("[data-panel-cta]");
+          gsap.set([title, tagline, category, features, cta], {
+            opacity: 0,
+            y: 28,
+          });
+        });
+
+        gsap.set(gradient, { opacity: 0 });
+
+        if (!reducedMotion) {
+          gsap.to(introContent, {
+            opacity: 0,
+            y: -40,
+            ease: "none",
+            scrollTrigger: {
+              trigger: intro,
+              start: "top top",
+              end: "bottom top",
+              scrub: SCRUB,
+            },
+          });
+        }
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: story,
+            start: "top top",
+            end: () => `+=${scrollDistance()}`,
+            pin: stage,
+            scrub: reducedMotion ? false : SCRUB,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              setStoryProgress(self.progress);
+
+              const idx = Math.min(
+                TOTAL - 1,
+                Math.max(0, Math.floor(self.progress * TOTAL))
+              );
+
+              const rgb = hexToRgbString(
+                getIndustryTintColor(industryCards[idx].id)
+              );
+              tint.style.background = `radial-gradient(ellipse at 22% 48%, rgba(${rgb}, 0.24), transparent 58%)`;
+
+              if (idx !== lastIndex) {
+                lastIndex = idx;
+                setActiveIndex(idx);
+                setLoadedIndexes(expandPreload(idx));
+              }
+            },
+          },
+        });
+
+        industryCards.forEach((_, i) => {
+          const mockup = mockupRefs.current[i];
+          const parallax = parallaxRefs.current[i];
+          const content = contentRefs.current[i];
+          const nextMockup =
+            i < TOTAL - 1 ? mockupRefs.current[i + 1] : null;
+          const nextParallax =
+            i < TOTAL - 1 ? parallaxRefs.current[i + 1] : null;
+
+          if (!mockup || !parallax || !content) return;
+
+          const segStart = i / TOTAL;
+          const segEnd = (i + 1) / TOTAL;
+          const segLen = segEnd - segStart;
+          const t = (fraction: number) => segStart + segLen * fraction;
+
+          const title = content.querySelector("[data-panel-title]");
+          const tagline = content.querySelector("[data-panel-tagline]");
+          const category = content.querySelector("[data-panel-category]");
+          const features = content.querySelector("[data-panel-features]");
+          const featureItems = content.querySelectorAll("[data-panel-feature]");
+          const cta = content.querySelector("[data-panel-cta]");
+
+          if (i === 0) {
+            tl.set(mockup, { opacity: 1 }, 0);
+            tl.set(parallax, { y: "0%", scale: 1 }, 0);
+          } else {
+            tl.set(mockup, { opacity: 1, y: 0 }, t(0));
+            tl.set(parallax, { y: "0%", scale: 1 }, t(0));
+          }
+
+          tl.set(content, { opacity: 0, y: 48, pointerEvents: "none" }, t(0));
+          tl.set(gradient, { opacity: 0 }, t(0));
+
+          // Phase 1 — mockup hero (hold)
+          tl.to(
+            mockup,
+            { opacity: 1, duration: segLen * 0.22, ease: "none" },
+            t(0.02)
+          );
+          tl.to(
+            parallax,
+            { y: "0%", scale: 1, duration: segLen * 0.22, ease: "none" },
+            t(0.02)
+          );
+
+          // Phase 2 — mockup recedes, content enters
+          tl.to(
+            mockup,
+            { opacity: 0.32, duration: segLen * 0.16, ease: "power1.inOut" },
+            t(0.28)
+          );
+          tl.to(
+            parallax,
+            { y: "-2%", scale: 0.97, duration: segLen * 0.16, ease: "power1.inOut" },
+            t(0.28)
+          );
+          tl.fromTo(
+            gradient,
+            { opacity: 0 },
+            { opacity: 1, duration: segLen * 0.14, ease: "power1.inOut" },
+            t(0.30)
+          );
+          tl.fromTo(
+            content,
+            { opacity: 0, y: 48 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: segLen * 0.18,
+              ease: "power2.out",
+            },
+            t(0.32)
+          );
+          tl.set(content, { pointerEvents: "auto" }, t(0.32));
+          tl.fromTo(
+            category,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+            t(0.36)
+          );
+          tl.fromTo(
+            title,
+            { opacity: 0, y: 32 },
+            { opacity: 1, y: 0, duration: segLen * 0.12, ease: "power3.out" },
+            t(0.40)
+          );
+          tl.fromTo(
+            tagline,
+            { opacity: 0, y: 24 },
+            { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+            t(0.44)
+          );
+          tl.fromTo(
+            features,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+            t(0.48)
+          );
+          tl.fromTo(
+            featureItems,
+            { opacity: 0, x: -12 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: segLen * 0.1,
+              stagger: segLen * 0.006,
+              ease: "power2.out",
+            },
+            t(0.50)
+          );
+          tl.fromTo(
+            cta,
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: segLen * 0.1, ease: "power2.out" },
+            t(0.56)
+          );
+
+          // Phase 3 — hold content
+          tl.to(
+            content,
+            { opacity: 1, duration: segLen * 0.14, ease: "none" },
+            t(0.60)
+          );
+
+          // Phase 4 — content exits, next mockup enters
+          tl.to(
+            content,
+            { opacity: 0, y: -28, duration: segLen * 0.14, ease: "power1.in" },
+            t(0.76)
+          );
+          tl.set(content, { pointerEvents: "none" }, t(0.90));
+          tl.to(
+            gradient,
+            { opacity: 0, duration: segLen * 0.12, ease: "power1.in" },
+            t(0.78)
+          );
+          tl.to(
+            mockup,
+            { opacity: 0, duration: segLen * 0.14, ease: "power1.in" },
+            t(0.80)
+          );
+          tl.to(
+            parallax,
+            { y: "-5%", scale: 0.95, duration: segLen * 0.14, ease: "power1.in" },
+            t(0.80)
+          );
+
+          if (nextMockup && nextParallax) {
+            tl.set(nextMockup, { opacity: 0 }, t(0.82));
+            tl.set(nextParallax, { y: "4%", scale: 1.02 }, t(0.82));
+            tl.fromTo(
+              nextMockup,
+              { opacity: 0 },
+              { opacity: 1, duration: segLen * 0.14, ease: "power2.out" },
+              t(0.86)
+            );
+            tl.fromTo(
+              nextParallax,
+              { y: "4%", scale: 1.02 },
+              { y: "0%", scale: 1, duration: segLen * 0.14, ease: "power2.out" },
+              t(0.86)
+            );
+          }
+
+          if (i < TOTAL - 1) {
+            tl.set(mockup, { opacity: 0, y: 0 }, t(0.98));
+            tl.set(parallax, { y: "0%", scale: 1 }, t(0.98));
+            tl.set(
+              [title, tagline, category, features, cta, ...Array.from(featureItems)],
+              { opacity: 0, y: 28 },
+              t(0.98)
+            );
+          }
+        });
+      }, rootRef);
+
+      ScrollTrigger.refresh();
     };
 
-    const handleTouchStart = (event: TouchEvent) => {
-      if (!isStoryActiveRef.current) return;
-      touchStartYRef.current = event.touches[0]?.clientY ?? 0;
-      touchHandledRef.current = false;
+    const handleResize = () => {
+      document.querySelectorAll<HTMLElement>(".iframe-scaler").forEach((el) => {
+        const scale = Math.max(
+          window.innerWidth / MOCKUP_WIDTH,
+          window.innerHeight / MOCKUP_HEIGHT
+        );
+        el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      });
+      ScrollTrigger.refresh();
     };
 
-    const handleTouchMove = (event: TouchEvent) => {
-      if (!isStoryActiveRef.current || touchHandledRef.current) return;
-
-      const touchY = event.touches[0]?.clientY ?? touchStartYRef.current;
-      const delta = touchStartYRef.current - touchY;
-
-      if (Math.abs(delta) < TOUCH_THRESHOLD) return;
-
-      event.preventDefault();
-      touchHandledRef.current = true;
-      handleWheelIntent(delta);
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("touchstart", handleTouchStart, { passive: true });
-    container.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("resize", handleResize);
+    setup();
 
     return () => {
-      container.removeEventListener("wheel", handleWheel);
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchmove", handleTouchMove);
-      getLenisInstance()?.start();
+      cancelled = true;
+      window.removeEventListener("resize", handleResize);
+      ctx?.revert();
     };
-  }, [handleWheelIntent]);
+  }, []);
 
   return (
-    <div ref={rootRef} className="relative bg-brand-black">
+    <div ref={rootRef} className="relative w-full bg-brand-black">
       <section
-        ref={heroRef}
-        className="relative z-10 flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[#F8F5EF] px-6"
+        ref={introRef}
+        className="relative z-[5] flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[#F8F5EF] px-10 text-center"
       >
-        <div ref={introContentRef} className="max-w-3xl pt-24 text-center sm:pt-28 md:pt-32">
-          <p className="editorial-eyebrow mb-4 md:mb-5">Industries We Build For</p>
-          <h1 className="editorial-heading text-balance text-[clamp(2rem,5vw,3.75rem)] text-brand-white md:text-display-sm">
+        <div ref={introContentRef} className="max-w-[700px]">
+          <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.35em] text-accent-warm">
+            Industries We Build For
+          </p>
+          <h1 className="mb-5 font-display text-[clamp(2rem,4.5vw,4rem)] font-bold leading-[1.1] tracking-[-0.03em] text-brand-white">
             Whatever Your Business,
             <br />
             We Know How to Build For It.
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
-            Scroll through 20 industries and see exactly what we&apos;d build for yours.
+          <p className="mb-14 text-base text-brand-silver">
+            Scroll to explore {TOTAL} industries
           </p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: hasScrolled ? 0 : 1 }}
-            transition={{ duration: 0.4 }}
-            className="mt-8 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
-          >
-            Scroll to begin
-          </motion.p>
+          <div className="animate-tn-bounce flex flex-col items-center gap-2">
+            <div className="h-[60px] w-px bg-gradient-to-b from-accent-warm to-transparent" />
+            <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-accent-warm">
+              Scroll
+            </span>
+          </div>
         </div>
       </section>
 
-      <section ref={storyWrapperRef} className="relative z-[1] h-[100dvh] bg-brand-black">
+      <div ref={storyRef} className="relative bg-[#080604]">
         <div
-          ref={containerRef}
-          className={`sticky top-0 h-[100dvh] w-full overflow-hidden bg-[#0a0806] transition-opacity duration-300 ${
-            isStoryVisible ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
+          ref={stageRef}
+          className="relative z-10 h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#080604]"
         >
-          <div className="absolute inset-0 z-0">
-            {loadedIndices.map((i) => (
-              <CoverBackground
-                key={industryCards[i].id}
-                industryId={industryCards[i].id}
-                index={i}
-              />
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            {industryCards.map((industry, i) => (
+              <div
+                key={industry.id}
+                ref={(el) => {
+                  mockupRefs.current[i] = el;
+                }}
+                className="absolute inset-0 overflow-hidden will-change-[opacity]"
+                style={{ opacity: i === 0 ? 1 : 0 }}
+                aria-hidden={i !== activeIndex}
+              >
+                <div
+                  ref={(el) => {
+                    parallaxRefs.current[i] = el;
+                  }}
+                  className="absolute inset-0 will-change-transform"
+                >
+                  {loadedIndexes.has(i) && (
+                    <MockupIframe industryId={industry.id} />
+                  )}
+                </div>
+              </div>
             ))}
           </div>
 
           <div
-            ref={overlayRef}
-            className="pointer-events-none absolute inset-0 z-[1] transition-[background] duration-600 ease-out"
+            ref={tintRef}
+            className="pointer-events-none absolute inset-0 z-[1] transition-[background] duration-500"
             style={{
-              background: `linear-gradient(to right, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.4) 55%, rgba(10,8,6,0) 100%), radial-gradient(ellipse at 20% 50%, rgba(${tintRgb}, 0.18), transparent 55%)`,
-              ["--tint-rgb" as string]: tintRgb,
+              background: `radial-gradient(ellipse at 22% 48%, rgba(${hexToRgbString(getIndustryTintColor(activeIndustry.id))}, 0.24), transparent 58%)`,
             }}
           />
 
-          <div className="absolute left-0 z-[2] flex h-full w-full max-w-[50%] flex-col justify-between py-[clamp(40px,8vh,80px)] pl-[clamp(40px,6vw,100px)] pr-8">
-            <div className="flex flex-1 flex-col justify-center">
-              <div ref={contentRef} className="industry-content">
-                <IndustryContent industry={activeIndustry} />
-              </div>
-            </div>
+          <div
+            ref={gradientRef}
+            className="pointer-events-none absolute inset-0 z-[2] opacity-0"
+            style={{
+              background:
+                "linear-gradient(to right, rgba(8,6,4,0.94) 0%, rgba(8,6,4,0.78) 40%, rgba(8,6,4,0.28) 68%, transparent 100%)",
+            }}
+          />
 
-            <div ref={ctaRef} className="industry-content shrink-0 pt-6">
-              <Link
-                href={whatsappFor(activeIndustry)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-all hover:bg-[#B35B3F]"
-              >
-                Build My {activeIndustry.name} Website →
-              </Link>
-            </div>
-          </div>
-
-          <div className="absolute right-10 top-8 z-[3] text-right">
-            <div className="mb-1.5 text-[11px] uppercase tracking-[0.2em] text-white/40">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
-            </div>
-            <p
-              ref={progressNameRef}
-              className="mb-2.5 text-[13px] font-medium text-white/75"
+          {industryCards.map((industry, i) => (
+            <div
+              key={industry.id}
+              ref={(el) => {
+                contentRefs.current[i] = el;
+              }}
+              className="pointer-events-none absolute left-0 top-0 z-[3] flex h-full w-1/2 max-w-[50%] flex-col justify-center pl-[clamp(40px,7vw,120px)] pr-8 opacity-0"
+              aria-hidden={i !== activeIndex}
             >
+              <IndustryPanel industry={industry} />
+            </div>
+          ))}
+
+          <div className="pointer-events-none absolute right-10 top-8 z-[10] text-right">
+            <div className="mb-1 text-[11px] uppercase tracking-[0.2em] text-white/40">
+              {String(activeIndex + 1).padStart(2, "0")} /{" "}
+              {String(TOTAL).padStart(2, "0")}
+            </div>
+            <p className="max-w-[180px] truncate text-[13px] font-medium text-white/75">
               {activeIndustry.name}
             </p>
-            <div className="flex justify-end gap-1">
-              {industryCards.map((_, i) => (
-                <div
-                  key={i}
-                  className="h-1 rounded-sm transition-all duration-300 ease-out"
-                  style={{
-                    width: i === activeIndex ? 20 : 4,
-                    background: i === activeIndex ? "#C4674A" : "rgba(255,255,255,0.2)",
-                  }}
-                />
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
 
-      <div className="h-[40dvh] bg-brand-black" aria-hidden />
+          <IndustriesScrollRail
+            progress={storyProgress}
+            activeIndex={activeIndex}
+          />
+
+          <p className="pointer-events-none absolute bottom-8 left-1/2 z-[10] -translate-x-1/2 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/35">
+            Scroll to explore
+          </p>
+        </div>
+
+        <div
+          ref={scrollTrackRef}
+          className="pointer-events-none"
+          style={{ height: `${TOTAL * 100}dvh` }}
+          aria-hidden
+        />
+      </div>
     </div>
   );
 }

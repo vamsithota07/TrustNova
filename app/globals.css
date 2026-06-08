@@ -46,6 +46,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.site-navbar {
+  z-index: 1000 !important;
+}
+
 p,
 h1,
 h2,
@@ -221,6 +225,64 @@ html:not(.is-loading) #page-loader {
 
   .snap-scroll-x {
     scroll-snap-type: x mandatory;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-industries-bounce {
+  animation: bounce 2s ease infinite;
+}
+
+.animate-tn-bounce {
+  animation: tn-bounce 2s ease infinite;
+}
+
+@keyframes industries-rail-scan-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes industries-rail-chevron-fall {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: rotate(45deg) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(45deg) translateY(3px);
+  }
+}
+
+.industries-rail-scan {
+  animation: industries-rail-scan-pulse 2.4s ease-in-out infinite;
+}
+
+.industries-rail-chevron {
+  animation: industries-rail-chevron-fall 1.8s ease-in-out infinite;
+}
+
+@keyframes tn-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
   }
 }
 

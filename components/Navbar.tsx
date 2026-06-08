@@ -64,7 +64,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -16 }}
         animate={mounted ? { opacity: 1, y: 0 } : false}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-        className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 pt-3 sm:pt-4 pointer-events-none"
+        className="site-navbar fixed top-0 left-0 right-0 z-[1000] px-3 sm:px-5 pt-3 sm:pt-4 pointer-events-none"
       >
         <div
           className={`pointer-events-auto mx-auto max-w-editorial flex items-center justify-between gap-4 rounded-pill border transition-all duration-500 ease-premium ${

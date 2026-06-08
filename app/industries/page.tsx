@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function IndustriesPage() {
   return (
-    <main className="min-w-0 w-full overflow-x-hidden bg-brand-black">
+    <main className="relative w-full overflow-x-clip bg-brand-black">
       <IndustriesShowcase />
     </main>
   );

@@ -19,5 +19,11 @@ export default function IndustriesShowcase() {
     return <div className="min-h-[50vh] bg-brand-black" aria-hidden />;
   }
 
-  return isMobile ? <IndustriesMobileStory /> : <IndustriesDesktopStory />;
+  return isMobile ? (
+    <IndustriesMobileStory />
+  ) : (
+    <div className="relative w-full overflow-x-clip">
+      <IndustriesDesktopStory />
+    </div>
+  );
 }

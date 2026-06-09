@@ -14,7 +14,7 @@ import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE } from "@/lib/constants";
 
-type SubmitState = "idle" | "loading" | "success";
+type SubmitState = "idle" | "loading" | "success" | "error";
 
 function SendIcon() {
   return (
@@ -101,41 +101,57 @@ const initialForm: FormState = {
   message: "",
 };
 
-function buildMailtoBody(data: FormState) {
-  return [
-    `Name: ${data.name}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
-    `Service: ${data.service}`,
-    `Budget: ${data.budget}`,
-    "",
-    "Message:",
-    data.message,
-  ].join("\n");
-}
-
-function buildMailtoUrl(data: FormState) {
-  const subject = `Project enquiry from ${data.name} - TrustNova`;
-  return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildMailtoBody(data))}`;
-}
-
 export default function Contact() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const update = (field: keyof FormState, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage("");
     setSubmitState("loading");
-    window.setTimeout(() => {
-      window.location.href = buildMailtoUrl(form);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim().toLowerCase(),
+          phone: form.phone.trim(),
+          service: form.service,
+          budget: form.budget,
+          message: form.message.trim(),
+          source: "Contact Page",
+        }),
+      });
+
+      const result = (await response.json()) as { success?: boolean; error?: string };
+
+      if (!response.ok || !result.success) {
+        if (response.status === 503) {
+          setErrorMessage(
+            "Contact form is not set up yet. Please email us at info@trustnova.in or message us on WhatsApp.",
+          );
+        } else {
+          setErrorMessage(result.error || "Could not send your enquiry. Please try again.");
+        }
+        setSubmitState("error");
+        return;
+      }
+
       setSubmitState("success");
       setSubmitted(true);
-    }, 500);
+    } catch (error) {
+      console.error("Contact form error:", error);
+      setErrorMessage("Could not send your enquiry. Please try again.");
+      setSubmitState("error");
+    }
   };
 
   return (
@@ -218,8 +234,8 @@ export default function Contact() {
                     Send us a message
                   </h2>
                   <p className="mt-2 text-sm text-brand-silver">
-                    Fill in the form and we&apos;ll open your email app addressed to{" "}
-                    <span className="font-medium text-brand-white">{EMAIL}</span>.
+                    Fill in the form and we&apos;ll get back to you at your email within one business
+                    day.
                   </p>
                 </div>
 
@@ -228,22 +244,27 @@ export default function Contact() {
                     <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue/10">
                       <CheckCircle className="h-7 w-7 text-brand-blue" strokeWidth={1.75} />
                     </div>
-                    <h3 className="text-lg font-bold text-brand-white">You&apos;re almost done</h3>
+                    <h3 className="text-lg font-bold text-brand-white">Enquiry received!</h3>
                     <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-brand-silver">
-                      Your email app should have opened with your message ready to send to{" "}
-                      {EMAIL}. Hit send there and we&apos;ll get back to you shortly.
+                      Thank you, {form.name.split(" ")[0] || "there"}. We&apos;ve received your
+                      message and will reply to{" "}
+                      <span className="font-medium text-brand-white">{form.email}</span> within one
+                      business day.
                     </p>
                     <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-                      <a href={buildMailtoUrl(form)} className={btnPrimary}>
-                        Open email again →
-                      </a>
                       <a
                         href={WHATSAPP_URL}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className={btnPrimary}
+                      >
+                        Chat on WhatsApp →
+                      </a>
+                      <a
+                        href={`mailto:${EMAIL}`}
                         className="text-sm font-semibold text-brand-blue underline-offset-4 hover:underline"
                       >
-                        Prefer WhatsApp instead
+                        Email us directly
                       </a>
                     </div>
                     <button
@@ -397,6 +418,9 @@ export default function Contact() {
                           )}
                         </motion.button>
                       </div>
+                      {submitState === "error" && errorMessage && (
+                        <p className="mt-2.5 text-xs text-[#E74C3C]">{errorMessage}</p>
+                      )}
                       <p className="mt-2.5 text-xs text-brand-dim">
                         By submitting, you agree to be contacted about your enquiry.
                       </p>

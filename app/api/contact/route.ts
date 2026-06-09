@@ -3,21 +3,29 @@ import { getGoogleSheetsUrl } from "@/lib/google-sheets";
 
 const SHEET_URL = getGoogleSheetsUrl();
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function POST(request: Request) {
   if (!SHEET_URL || SHEET_URL === "your_script_url_here") {
     return NextResponse.json(
-      { success: false, error: "Newsletter URL is not configured" },
+      { success: false, error: "Contact form URL is not configured" },
       { status: 503 },
     );
   }
 
   try {
     const body = await request.json();
-    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    const name = typeof body.name === "string" ? body.name.trim() : "";
+    const email =
+      typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    const phone = typeof body.phone === "string" ? body.phone.trim() : "";
+    const service = typeof body.service === "string" ? body.service.trim() : "";
+    const budget = typeof body.budget === "string" ? body.budget.trim() : "";
+    const message = typeof body.message === "string" ? body.message.trim() : "";
 
-    if (!email || !email.includes("@")) {
+    if (!name || !email || !EMAIL_PATTERN.test(email) || !phone || !service || !message) {
       return NextResponse.json(
-        { success: false, error: "Invalid email address" },
+        { success: false, error: "Please fill in all required fields." },
         { status: 400 },
       );
     }
@@ -26,10 +34,14 @@ export async function POST(request: Request) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: "newsletter",
+        type: "contact",
+        name,
         email,
-        source: body.source || "Website Footer",
-        name: body.name || "",
+        phone,
+        service,
+        budget,
+        message,
+        source: body.source || "Contact Page",
       }),
       redirect: "follow",
     });
@@ -52,7 +64,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Newsletter API error:", error);
+    console.error("Contact API error:", error);
     return NextResponse.json(
       { success: false, error: "Request failed" },
       { status: 500 },

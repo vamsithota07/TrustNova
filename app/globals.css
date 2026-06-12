@@ -129,6 +129,12 @@ html:not(.is-loading) #page-loader {
     @apply text-brand-silver leading-relaxed;
   }
 
+  .portfolio-outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(26, 26, 26, 0.08);
+    user-select: none;
+  }
+
   .surface-card {
     @apply bg-brand-card border border-brand-rule rounded-organic shadow-card transition-all duration-500 ease-premium;
   }

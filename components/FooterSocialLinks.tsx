@@ -64,7 +64,7 @@ export default function FooterSocialLinks() {
         <button
           type="button"
           onClick={showLinkedinNotice}
-          aria-label="LinkedIn — profile coming soon"
+          aria-label="LinkedIn, profile coming soon"
           title={LINKEDIN_COMING_SOON_MESSAGE}
           className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-brand-dim transition-colors duration-200 hover:text-brand-silver active:scale-95 cursor-pointer"
         >

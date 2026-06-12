@@ -320,7 +320,7 @@ export default function IndustriesDesktopStory() {
           tl.set(content, { opacity: 0, y: 48, pointerEvents: "none" }, t(0));
           tl.set(gradient, { opacity: 0 }, t(0));
 
-          // Phase 1 — mockup hero (hold)
+          // Phase 1: mockup hero (hold)
           tl.to(
             mockup,
             { opacity: 1, duration: segLen * 0.22, ease: "none" },
@@ -332,7 +332,7 @@ export default function IndustriesDesktopStory() {
             t(0.02)
           );
 
-          // Phase 2 — mockup recedes, content enters
+          // Phase 2: mockup recedes, content enters
           tl.to(
             mockup,
             { opacity: 0.32, duration: segLen * 0.16, ease: "power1.inOut" },
@@ -404,14 +404,14 @@ export default function IndustriesDesktopStory() {
             t(0.56)
           );
 
-          // Phase 3 — hold content
+          // Phase 3: hold content
           tl.to(
             content,
             { opacity: 1, duration: segLen * 0.14, ease: "none" },
             t(0.60)
           );
 
-          // Phase 4 — content exits, next mockup enters
+          // Phase 4: content exits, next mockup enters
           tl.to(
             content,
             { opacity: 0, y: -28, duration: segLen * 0.14, ease: "power1.in" },

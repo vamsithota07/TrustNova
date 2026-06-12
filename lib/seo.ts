@@ -18,6 +18,7 @@ export const sitemapRoutes: {
 }[] = [
   { path: "", changeFrequency: "weekly", priority: 1 },
   { path: "/services", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/portfolio", changeFrequency: "monthly", priority: 0.88 },
   { path: "/industries", changeFrequency: "monthly", priority: 0.9 },
   { path: "/recommend", changeFrequency: "monthly", priority: 0.85 },
   { path: "/about", changeFrequency: "monthly", priority: 0.8 },

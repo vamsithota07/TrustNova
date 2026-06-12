@@ -124,7 +124,7 @@ export default function FooterContact() {
         {status === "success" ? (
           <div className="flex max-w-sm items-center gap-2.5 rounded-lg border border-[#27AE60]/25 bg-[#27AE60]/[0.08] px-4 py-3 text-sm font-medium text-[#27AE60] mx-auto md:mx-0">
             <Check className="h-4 w-4 shrink-0" strokeWidth={2.5} />
-            You&apos;re subscribed — thank you!
+            You&apos;re subscribed. Thank you!
           </div>
         ) : (
           <form onSubmit={handleNewsletter} className="w-full max-w-sm mx-auto md:mx-0">

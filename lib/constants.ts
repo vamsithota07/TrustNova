@@ -43,6 +43,7 @@ export const inViewOptions = { once: true, margin: "-80px" as const };
 
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Industries", href: "/industries" },
   { label: "Services", href: "/services" },
   { label: "Find My Package", href: "/recommend", highlight: true },
@@ -55,7 +56,7 @@ export const WHATSAPP_URL = `https://wa.me/${PHONE_WHATSAPP}`;
 export const EMAIL = "info@trustnova.in";
 
 export const LINKEDIN_COMING_SOON_MESSAGE =
-  "We're on our way to launching our LinkedIn profile — check back soon!";
+  "We're on our way to launching our LinkedIn profile. Check back soon!";
 
 export const socialLinks = {
   instagram: "https://www.instagram.com/trustnova.in/",

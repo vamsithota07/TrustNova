@@ -354,13 +354,17 @@ html:not(.is-loading) #page-loader {
 }
 
 a,
+a *,
 button,
+button *,
 [role="button"],
+[role="button"] *,
 select,
 label[for],
 input[type="submit"],
 input[type="button"],
-.clickable {
+.clickable,
+.clickable * {
   cursor: pointer !important;
 }
 

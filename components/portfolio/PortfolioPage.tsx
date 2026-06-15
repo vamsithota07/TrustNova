@@ -84,7 +84,12 @@ function PortfolioProjectCard({
       className="flex w-full shrink-0 snap-center snap-always flex-col px-4 sm:px-8 md:w-auto md:px-0"
     >
       {project.href ? (
-        <a href={project.href} target="_blank" rel="noopener noreferrer" className="group block">
+        <a
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group block cursor-pointer"
+        >
           {card}
         </a>
       ) : (

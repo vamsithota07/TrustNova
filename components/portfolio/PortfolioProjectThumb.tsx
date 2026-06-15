@@ -16,7 +16,7 @@ export default function PortfolioProjectThumb({
 }: PortfolioProjectThumbProps) {
   if (image) {
     return (
-      <div className="relative mx-auto w-[88%] overflow-hidden rounded-lg bg-white shadow-[0_12px_40px_rgba(0,0,0,0.12)]">
+      <div className="relative mx-auto w-full overflow-hidden rounded-lg bg-white shadow-[0_12px_40px_rgba(0,0,0,0.12)] md:w-[88%]">
         <div className="relative aspect-[1440/900] w-full">
           <Image
             src={image}
@@ -35,7 +35,7 @@ export default function PortfolioProjectThumb({
   const src = getMockupHtmlPath(industryId);
 
   return (
-    <div className="relative mx-auto w-[88%] overflow-hidden rounded-lg bg-white shadow-[0_12px_40px_rgba(0,0,0,0.12)]">
+    <div className="relative mx-auto w-full overflow-hidden rounded-lg bg-white shadow-[0_12px_40px_rgba(0,0,0,0.12)] md:w-[88%]">
       <div className="relative aspect-[1440/900] w-full overflow-hidden">
         <iframe
           src={src}

@@ -42,24 +42,26 @@ export default function PortfolioHeroHeader() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
-            className="relative z-20 mb-[-0.08em] w-full"
+            className="relative z-20 mb-[-0.08em] w-full max-w-full"
           >
-            <span className="absolute right-[8%] top-0 text-[11px] font-semibold tracking-[0.12em] text-accent-warm sm:right-[12%] sm:text-xs md:right-[18%]">
-              &apos;26
-            </span>
+            <div className="relative mx-auto inline-block max-w-full">
+              <span className="absolute -right-5 top-0 text-[11px] font-semibold tracking-[0.12em] text-accent-warm sm:-right-7 sm:text-xs">
+                &apos;26
+              </span>
 
-            <h1
-              className="select-none whitespace-nowrap font-display leading-[0.88] text-brand-white"
-              aria-label="Portfolio"
-            >
-              <span className="inline-block -rotate-[2deg] text-[clamp(2.75rem,14vw,9.5rem)] font-extrabold tracking-[-0.05em]">
-                POR
-              </span>
-              <StylizedT className="mx-[-0.03em] inline-block translate-y-[0.06em] rotate-[3deg] text-[clamp(2.25rem,11vw,7.5rem)] font-bold" />
-              <span className="inline-block translate-y-[0.12em] rotate-[1deg] text-[clamp(2.5rem,12.5vw,8.5rem)] font-black tracking-[-0.06em]">
-                FOLIO
-              </span>
-            </h1>
+              <h1
+                className="select-none whitespace-nowrap font-display text-[clamp(1.65rem,9.2vw,9.5rem)] leading-[0.88] text-brand-white"
+                aria-label="Portfolio"
+              >
+                <span className="inline-block -rotate-[2deg] font-extrabold tracking-[-0.05em]">
+                  POR
+                </span>
+                <StylizedT className="mx-[-0.03em] inline-block translate-y-[0.06em] rotate-[3deg] text-[0.85em] font-bold" />
+                <span className="inline-block translate-y-[0.12em] rotate-[1deg] text-[0.92em] font-black tracking-[-0.06em]">
+                  FOLIO
+                </span>
+              </h1>
+            </div>
           </motion.div>
 
           {/* Centered transparent avatar with blob accent behind */}

@@ -22,6 +22,7 @@ export const featuredProjects: PortfolioProject[] = [
     description:
       "React + Vite marketing site for HVAC systems, cleanroom solutions, cold rooms, AHU fabrication and pharmaceutical-grade engineering in Hyderabad.",
     image: "/portfolio/vistix-preview.png",
+    href: "https://vistixengineers.com/",
     panelBg: "#1B2A6B",
     panelText: "#FFFFFF",
   },

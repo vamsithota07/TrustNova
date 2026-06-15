@@ -35,11 +35,9 @@ function XIcon({ className }: { className?: string }) {
 function PortfolioProjectCard({
   project,
   index,
-  wide = false,
 }: {
   project: PortfolioProject;
   index: number;
-  wide?: boolean;
 }) {
   const card = (
     <>
@@ -62,7 +60,7 @@ function PortfolioProjectCard({
           {project.number.replace("0", "")}
         </span>
       </div>
-      <div className="mt-4 min-w-0 px-1">
+      <div className="mt-4 min-w-0">
         <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-accent-warm">
           {project.category}
         </p>
@@ -83,11 +81,7 @@ function PortfolioProjectCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={inViewOptions}
       transition={{ duration: 0.55, ease, delay: index * 0.08 }}
-      className={
-        wide
-          ? "flex w-[85vw] shrink-0 snap-center flex-col sm:w-[70vw] md:w-auto"
-          : "flex w-[78vw] shrink-0 snap-center flex-col sm:w-[52vw] md:w-auto"
-      }
+      className="flex w-full shrink-0 snap-center snap-always flex-col px-4 sm:px-8 md:w-auto md:px-0"
     >
       {project.href ? (
         <a href={project.href} target="_blank" rel="noopener noreferrer" className="group block">
@@ -251,15 +245,15 @@ export default function PortfolioPage() {
           </motion.div>
 
           {/* Featured client work: Vistix & ASMC */}
-          <div className="horizontal-scroll mb-12 flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6">
+          <div className="horizontal-scroll -mx-4 mb-12 flex gap-0 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6">
             {featuredProjects.map((project, i) => (
-              <PortfolioProjectCard key={project.id} project={project} index={i} wide />
+              <PortfolioProjectCard key={project.id} project={project} index={i} />
             ))}
           </div>
 
           <p className="editorial-eyebrow mb-6 text-accent-warm">Industry showcases</p>
 
-          <div className="horizontal-scroll flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-5 md:gap-3 md:overflow-visible md:pb-0 lg:gap-4">
+          <div className="horizontal-scroll -mx-4 flex gap-0 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-5 md:gap-3 md:overflow-visible md:pb-0 lg:gap-4">
             {portfolioProjects.map((project, i) => (
               <PortfolioProjectCard key={project.id} project={project} index={i} />
             ))}

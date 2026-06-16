@@ -8,6 +8,7 @@ export type PortfolioProject = {
   panelText: string;
   industryId?: string;
   image?: string;
+  imageAlt: string;
   href?: string;
 };
 
@@ -22,6 +23,7 @@ export const featuredProjects: PortfolioProject[] = [
     description:
       "React + Vite marketing site for HVAC systems, cleanroom solutions, cold rooms, AHU fabrication and pharmaceutical-grade engineering in Hyderabad.",
     image: "/portfolio/vistix-preview.png",
+    imageAlt: "HVAC engineering website design by TrustNova Hyderabad",
     href: "https://vistixengineers.com/",
     panelBg: "#1B2A6B",
     panelText: "#FFFFFF",
@@ -34,6 +36,7 @@ export const featuredProjects: PortfolioProject[] = [
     description:
       "Premium Next.js website for Asian Speciality Medical Centre LLC, luxury dental clinics across Oman with immersive motion and 3D hero.",
     image: "/portfolio/asmc-preview.png",
+    imageAlt: "Dental clinic website design by TrustNova",
     panelBg: "#0F2A3D",
     panelText: "#FFFFFF",
   },
@@ -47,6 +50,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Food & Hospitality",
     description: "Restaurant website with menu showcase, reservations, and warm brand storytelling.",
     industryId: "restaurant",
+    imageAlt: "Restaurant website design by TrustNova",
     panelBg: "#8BA4C4",
     panelText: "#FFFFFF",
   },
@@ -57,6 +61,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Professional",
     description: "Law firm identity with authority-led layout, practice areas, and consultation flows.",
     industryId: "law",
+    imageAlt: "Law firm website design by TrustNova Hyderabad",
     panelBg: "#E8E0D4",
     panelText: "#0D1117",
   },
@@ -67,6 +72,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Retail & Products",
     description: "Luxury jewellery storefront with collection grids and trust-first product presentation.",
     industryId: "jewellery",
+    imageAlt: "Jewellery shop website design by TrustNova Hyderabad",
     panelBg: "#9BB5A0",
     panelText: "#FFFFFF",
   },
@@ -77,6 +83,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Health & Wellness",
     description: "Healthcare website focused on appointments, services clarity, and patient confidence.",
     industryId: "clinic",
+    imageAlt: "Clinic website design by TrustNova Hyderabad",
     panelBg: "#C4674A",
     panelText: "#FFFFFF",
   },
@@ -87,6 +94,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Creative",
     description: "Photography portfolio with immersive galleries and premium visual hierarchy.",
     industryId: "photographer",
+    imageAlt: "Photography studio website design by TrustNova",
     panelBg: "#F5F3EF",
     panelText: "#0D1117",
   },

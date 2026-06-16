@@ -50,7 +50,8 @@ export const navLinks: NavLink[] = [
   { label: "About", href: "/about" },
 ];
 
-export const PHONE = "+91 95022 24444";
+export const PHONE = "+91 9502224444";
+export const PHONE_TEL = "tel:+919502224444";
 export const PHONE_WHATSAPP = "919502224444";
 export const WHATSAPP_URL = `https://wa.me/${PHONE_WHATSAPP}`;
 export const EMAIL = "info@trustnova.in";

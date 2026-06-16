@@ -1,6 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
@@ -15,6 +26,14 @@ const nextConfig = {
       {
         source: "/Mockups/:path*",
         destination: "/mockups/:path*",
+      },
+      {
+        source: "/og-image.jpg",
+        destination: "/opengraph-image",
+      },
+      {
+        source: "/og-image.png",
+        destination: "/opengraph-image",
       },
     ];
   },

@@ -49,9 +49,9 @@ export default function PortfolioHeroHeader() {
                 &apos;26
               </span>
 
-              <h1
+              <p
                 className="select-none whitespace-nowrap font-display text-[clamp(1.65rem,9.2vw,9.5rem)] leading-[0.88] text-brand-white"
-                aria-label="Portfolio"
+                aria-hidden
               >
                 <span className="inline-block -rotate-[2deg] font-extrabold tracking-[-0.05em]">
                   POR
@@ -60,7 +60,7 @@ export default function PortfolioHeroHeader() {
                 <span className="inline-block translate-y-[0.12em] rotate-[1deg] text-[0.92em] font-black tracking-[-0.06em]">
                   FOLIO
                 </span>
-              </h1>
+              </p>
             </div>
           </motion.div>
 

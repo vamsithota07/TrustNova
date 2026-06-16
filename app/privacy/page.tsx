@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
 import InnerPageLayout from "@/components/InnerPageLayout";
 import LegalPageContent from "@/components/LegalPageContent";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
 import { EMAIL } from "@/lib/constants";
-import { createPageMetadata } from "@/lib/seo";
+import { createPageMetadata, pageSEO } from "@/lib/seo";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Privacy Policy | TrustNova",
-  description: "How TrustNova collects, uses, and protects your personal information.",
-  path: "/privacy",
-});
+export const metadata: Metadata = createPageMetadata(pageSEO.privacy);
 
 export default function PrivacyPage() {
   return (
     <InnerPageLayout>
+      <BreadcrumbJsonLd pageName="Privacy Policy" pagePath="/privacy" />
       <LegalPageContent
         title="Privacy Policy"
         updated="June 2025"

@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import InnerPageLayout from "@/components/InnerPageLayout";
 import PortfolioPage from "@/components/portfolio/PortfolioPage";
-import { createPageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
+import { portfolioCollectionSchema, portfolioMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Portfolio | TrustNova - Brand & Creative Studio",
-  description:
-    "Explore TrustNova's portfolio of logo design, brand identity, and website projects for Indian businesses across hospitality, retail, professional services, and more.",
-  path: "/portfolio",
-});
+export const metadata: Metadata = portfolioMetadata;
 
 export default function PortfolioRoute() {
   return (
     <InnerPageLayout>
+      <JsonLd data={portfolioCollectionSchema()} />
       <PortfolioPage />
     </InnerPageLayout>
   );

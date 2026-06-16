@@ -24,9 +24,8 @@ const marqueeItems = [
 ];
 
 const headlineLines = [
-  { text: "Your Brand.", accent: false },
-  { text: "Your Trust.", accent: false },
-  { text: "Your Growth.", accent: true },
+  { text: "Brand & Website Design", accent: false },
+  { text: "Studio in Hyderabad", accent: true },
 ];
 
 export default function Hero() {
@@ -121,18 +120,18 @@ export default function Hero() {
             </span>
 
             <div ref={linesRef} className="mb-8 md:mb-10 space-y-1 md:space-y-2 overflow-hidden">
-              {headlineLines.map((line) => (
-                <div key={line.text} className="overflow-hidden py-0.5">
-                  <h1
-                    data-hero-line
-                    className={`font-display font-bold leading-[0.95] tracking-[-0.05em] text-[clamp(2.5rem,5.5vw,7rem)] ${
-                      line.accent ? "text-accent-warm" : "text-brand-white"
-                    }`}
-                  >
-                    {line.text}
-                  </h1>
-                </div>
-              ))}
+              <h1 className="font-display font-bold leading-[0.95] tracking-[-0.05em] text-[clamp(2.5rem,5.5vw,7rem)]">
+                {headlineLines.map((line) => (
+                  <div key={line.text} className="overflow-hidden py-0.5">
+                    <span
+                      data-hero-line
+                      className={`block ${line.accent ? "text-accent-warm" : "text-brand-white"}`}
+                    >
+                      {line.text}
+                    </span>
+                  </div>
+                ))}
+              </h1>
             </div>
 
             <p

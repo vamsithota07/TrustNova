@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
 import RecommendFlow from "@/components/RecommendFlow";
 import Container from "@/components/Container";
-import { createPageMetadata } from "@/lib/seo";
+import BreadcrumbJsonLd from "@/components/seo/BreadcrumbJsonLd";
+import { createPageMetadata, pageSEO } from "@/lib/seo";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Find the Right Package | TrustNova",
-  description:
-    "Answer 2 quick questions and TrustNova will recommend the right logo, brand, or website package for your business.",
-  path: "/recommend",
-});
+export const metadata: Metadata = createPageMetadata(pageSEO.recommend);
 
 export default function RecommendPage() {
   return (
     <main className="hero-dot-grid relative overflow-x-clip bg-brand-black pt-28 sm:pt-32 md:pt-36 pb-16 md:pb-24 min-w-0 w-full">
+      <BreadcrumbJsonLd pageName="Find My Package" pagePath="/recommend" />
       <div
         className="floating-shape top-32 -left-24 h-64 w-64 bg-accent-sage/15 animate-float"
         aria-hidden

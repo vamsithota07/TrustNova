@@ -4,6 +4,7 @@ import { navLinks } from "@/lib/constants";
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
 import FooterContact from "@/components/FooterContact";
+import FooterNap from "@/components/FooterNap";
 import FooterSocialLinks from "@/components/FooterSocialLinks";
 
 export default function Footer() {
@@ -53,7 +54,10 @@ export default function Footer() {
           </div>
 
           <div className="lg:pl-12 xl:pl-16 min-w-0">
-            <FooterContact />
+            <FooterNap />
+            <div className="mt-8">
+              <FooterContact />
+            </div>
           </div>
         </div>
 
@@ -81,8 +85,11 @@ export default function Footer() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left w-full">
             <p className="text-brand-dim text-xs">
-              © 2025 TrustNova. All rights reserved. · trustnova.in · Hyderabad,
-              India
+              © 2025 TrustNova. All rights reserved. ·{" "}
+              <a href="https://trustnova.in" className="hover:text-brand-white transition-colors">
+                trustnova.in
+              </a>{" "}
+              · Hyderabad, Telangana, India
             </p>
             <p className="text-brand-blue text-xs">
               Built with ♥ for Indian businesses

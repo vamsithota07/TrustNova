@@ -49,7 +49,7 @@ function PortfolioProjectCard({
           {project.number}
         </span>
         <PortfolioProjectThumb
-          title={project.title}
+          imageAlt={project.imageAlt}
           industryId={project.industryId}
           image={project.image}
         />
@@ -236,9 +236,9 @@ export default function PortfolioPage() {
           >
             <div>
               <p className="editorial-eyebrow mb-2 text-accent-warm">Selected Projects</p>
-              <h2 className="font-display text-2xl font-bold text-brand-white md:text-3xl">
-                Brands we&apos;ve shaped
-              </h2>
+              <h1 className="font-display text-2xl font-bold text-brand-white md:text-3xl">
+                Our Work — Brands &amp; Websites We&apos;ve Built
+              </h1>
             </div>
             <Link
               href="/industries"

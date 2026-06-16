@@ -10,7 +10,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import MotionProvider from "@/components/MotionProvider";
 import PageTransition from "@/components/motion/PageTransition";
 import JsonLd from "@/components/JsonLd";
-import { rootMetadata, structuredDataGraph } from "@/lib/seo";
+import { professionalServiceSchema, rootMetadata } from "@/lib/seo";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -35,7 +35,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${syne.variable}`}>
       <head>
-        <JsonLd data={structuredDataGraph()} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <JsonLd data={professionalServiceSchema()} />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){document.documentElement.classList.add("is-loading");})();`,

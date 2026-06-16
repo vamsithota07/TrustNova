@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL, sitemapRoutes } from "@/lib/seo";
+import { SITE_URL, sitemapPaths } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return sitemapRoutes.map(({ path, changeFrequency, priority }) => ({
+  const lastModified = new Date();
+
+  return sitemapPaths.map((path) => ({
     url: path === "" ? SITE_URL : `${SITE_URL}${path}`,
-    lastModified: new Date(),
-    changeFrequency,
-    priority,
+    lastModified,
   }));
 }

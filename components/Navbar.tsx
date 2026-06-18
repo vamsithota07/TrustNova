@@ -16,14 +16,33 @@ export default function Navbar() {
   const mounted = useHasMounted();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+  const lastScrollY = useRef(0);
+  const [introDone, setIntroDone] = useState(false);
 
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const timer = setTimeout(() => setIntroDone(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 20);
+
+      const delta = y - lastScrollY.current;
+      if (delta > 10) {
+        setHidden(true);
+      } else if (delta < -10) {
+        setHidden(false);
+      }
+      lastScrollY.current = y;
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -65,8 +84,8 @@ export default function Navbar() {
     <>
       <motion.header
         initial={{ opacity: 0, y: -16 }}
-        animate={mounted ? { opacity: 1, y: 0 } : false}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+        animate={mounted ? { opacity: 1, y: hidden ? "-100%" : 0 } : false}
+        transition={introDone ? { duration: 0.3, ease: "easeOut" } : { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
         className="site-navbar fixed top-0 left-0 right-0 z-[1000] px-3 sm:px-5 pt-3 sm:pt-4 pointer-events-none"
       >
         <div

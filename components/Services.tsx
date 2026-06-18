@@ -182,7 +182,7 @@ function ServiceEditorial({
             </ul>
           </div>
 
-          {includeCta && <ServiceCtaRow service={service} className="pt-8 pb-2" />}
+          {includeCta && <ServiceCtaRow service={service} className="hidden lg:block pt-8 pb-2" />}
         </div>
 
         <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-8">
@@ -192,6 +192,8 @@ function ServiceEditorial({
             )}
           </div>
         </div>
+
+        {includeCta && <ServiceCtaRow service={service} className="lg:hidden pt-2 pb-2" />}
       </div>
     </div>
   );

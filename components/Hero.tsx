@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import { btnPrimary, btnSecondary, WHATSAPP_URL } from "@/lib/constants";
@@ -36,8 +37,6 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const blob1Ref = useRef<HTMLDivElement>(null);
-  const blob2Ref = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     registerGsap();
@@ -56,32 +55,6 @@ export default function Hero() {
           .from(ctaRef.current?.children ?? [], { opacity: 0, y: 24, duration: 0.75, stagger: 0.08 }, "-=0.55")
           .from(cardRef.current, { opacity: 0, y: 60, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
           .from(marqueeRef.current, { opacity: 0, y: 16, duration: 0.7 }, "-=0.4");
-
-        [blob1Ref, blob2Ref].forEach((ref, i) => {
-          if (!ref.current) return;
-          gsap.to(ref.current, {
-            x: `random(${i === 0 ? -60 : -40}, ${i === 0 ? 60 : 40})`,
-            y: `random(${i === 0 ? -40 : -24}, ${i === 0 ? 40 : 24})`,
-            duration: `random(8, 14)`,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-            stagger: 3,
-          });
-        });
-
-        if (window.matchMedia("(min-width: 1024px)").matches) {
-          gsap.to(blob1Ref.current, {
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-            y: -80,
-            opacity: 0.3,
-          });
-        }
       } catch (error) {
         console.warn("Hero animation skipped:", error);
       }
@@ -94,18 +67,20 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="hero-dot-grid relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-brand-black pt-28 sm:pt-32 md:pt-36"
+      className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-brand-black pt-28 sm:pt-32 md:pt-36"
     >
-      <div
-        ref={blob1Ref}
-        className="floating-shape -top-16 right-[8%] h-72 w-72 bg-accent-warm/[0.08] mix-blend-multiply"
-        aria-hidden
-      />
-      <div
-        ref={blob2Ref}
-        className="floating-shape bottom-[20%] -left-20 h-56 w-56 bg-accent-warm/[0.08] mix-blend-multiply"
-        aria-hidden
-      />
+      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+        <Image
+          src="/hero-background.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[72%_center] opacity-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/88 to-brand-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-black/50 via-transparent to-brand-black/85" />
+      </div>
       <div className="relative z-10 flex flex-1 w-full items-center justify-center py-12 md:py-16 lg:py-20">
         <div
           className="hero-grid mx-auto grid w-full grid-cols-1 items-start gap-[clamp(24px,3vw,48px)] px-[clamp(20px,4vw,48px)] lg:max-w-[1040px] lg:grid-cols-[1fr_300px] lg:gap-8 min-[1441px]:max-w-[1180px] min-[1441px]:grid-cols-[1fr_320px]"

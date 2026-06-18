@@ -567,14 +567,14 @@ export default function IndustriesDesktopStory() {
               ref={(el) => {
                 contentRefs.current[i] = el;
               }}
-              className="pointer-events-none absolute left-0 top-0 z-[3] flex h-full w-1/2 max-w-[50%] flex-col justify-center pl-[clamp(40px,7vw,120px)] pr-8 opacity-0"
+              className="pointer-events-none absolute left-0 top-0 z-[3] flex h-full w-1/2 max-w-[50%] flex-col justify-center pl-[clamp(40px,7vw,120px)] pr-8 pt-20 opacity-0"
               aria-hidden={i !== activeIndex}
             >
               <IndustryPanel industry={industry} />
             </div>
           ))}
 
-          <div className="pointer-events-none absolute right-10 top-8 z-[10] text-right">
+          <div className="pointer-events-none absolute right-10 top-24 z-[10] text-right">
             <div className="mb-1 text-[11px] uppercase tracking-[0.2em] text-white/40">
               {String(activeIndex + 1).padStart(2, "0")} /{" "}
               {String(TOTAL).padStart(2, "0")}

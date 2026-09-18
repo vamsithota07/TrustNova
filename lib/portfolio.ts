@@ -24,8 +24,9 @@ export const featuredProjects: PortfolioProject[] = [
     description: "Digital marketing support for a global grain brand, shaping campaign creative, social storytelling, and growth-focused channel strategy.",
     panelBg: "#546B47",
     panelText: "#FFFFFF",
+    image: "/portfolio/milletio-global-grain.png",
     imageAlt: "Milletio Global Grain digital marketing portfolio by TrustNova",
-    variant: "campaign",
+    href: "https://www.milletioglobalgrain.com/",
   },
   {
     id: "vistix",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -301,21 +301,10 @@ export default function Services() {
   const bgTintRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const spineDotRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const [useFallback, setUseFallback] = useState<boolean | null>(null);
+  // Service pages need to expand naturally: a fixed-height scrollytelling panel
+  // can hide longer deliverable lists on shorter screens.
+  const [useFallback] = useState<boolean>(() => true);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const check = () => {
-      setUseFallback(
-        window.matchMedia("(max-width: 1023px)").matches ||
-          window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-      );
-    };
-    check();
-    const mq = window.matchMedia("(max-width: 1023px)");
-    mq.addEventListener("change", check);
-    return () => mq.removeEventListener("change", check);
-  }, []);
 
   useLayoutEffect(() => {
     if (useFallback !== false) return;

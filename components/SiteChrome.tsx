@@ -11,7 +11,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  if (pathname.startsWith("/hub")) return <>{children}</>;
+  if (pathname.startsWith("/hub") || pathname.startsWith("/desk")) return <>{children}</>;
 
   return (
     <MotionProvider>

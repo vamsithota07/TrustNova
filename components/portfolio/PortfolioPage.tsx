@@ -52,6 +52,7 @@ function PortfolioProjectCard({
           imageAlt={project.imageAlt}
           industryId={project.industryId}
           image={project.image}
+          imageAspect={project.imageAspect}
           variant={project.variant}
         />
         <span

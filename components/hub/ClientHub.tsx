@@ -126,7 +126,7 @@ export default function ClientHub() {
             <div className="rounded-organic border border-brand-rule bg-brand-card p-6 shadow-soft sm:p-8">
               <p className="editorial-eyebrow text-accent-warm">Contact TrustNova</p>
               <h2 className="mt-2 text-2xl font-bold">Your words, your approval.</h2>
-              <p className="mt-3 text-sm leading-relaxed text-brand-silver">Write your update here. We’ll show the finished draft before opening Gmail or WhatsApp — nothing is sent by this hub.</p>
+              <p className="mt-3 text-sm leading-relaxed text-brand-silver">Write your update here. We’ll show the finished draft before opening Gmail or WhatsApp. Nothing is sent by this hub.</p>
               <div className="mt-7 space-y-3">
                 <div className="flex gap-3"><Mail size={18} className="text-accent-warm" /><span className="text-sm text-brand-silver">Email drafts go to {EMAIL}</span></div>
                 <div className="flex gap-3"><MessageCircle size={18} className="text-accent-warm" /><span className="text-sm text-brand-silver">WhatsApp drafts open your own WhatsApp</span></div>

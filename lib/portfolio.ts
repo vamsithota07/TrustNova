@@ -8,6 +8,7 @@ export type PortfolioProject = {
   panelText: string;
   industryId?: string;
   image?: string;
+  imageAspect?: "wide";
   imageAlt: string;
   href?: string;
   variant?: "campaign";
@@ -25,6 +26,7 @@ export const featuredProjects: PortfolioProject[] = [
     panelBg: "#546B47",
     panelText: "#FFFFFF",
     image: "/portfolio/milletio-global-grain.png",
+    imageAspect: "wide",
     imageAlt: "Milletio Global Grain digital marketing portfolio by TrustNova",
     href: "https://www.milletioglobalgrain.com/",
   },

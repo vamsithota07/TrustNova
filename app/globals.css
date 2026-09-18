@@ -9,6 +9,8 @@
 }
 
 :root {
+  --font-space-grotesk: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-syne: "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --accent: #c4674a;
   --accent-dim: #7a9e87;
   --bg-primary: #faf8f5;

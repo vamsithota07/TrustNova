@@ -30,7 +30,7 @@ export default function PortfolioProjectThumb({
   if (image) {
     return (
       <div className="relative mx-auto w-full overflow-hidden rounded-lg bg-white shadow-[0_12px_40px_rgba(0,0,0,0.12)] md:w-[88%]">
-        <div className={`relative w-full ${imageAspect === "wide" ? "aspect-[1900/843]" : "aspect-[1440/900]"}`}>
+        <div className={`relative w-full ${imageAspect === "wide" ? "aspect-[1900/936]" : "aspect-[1440/900]"}`}>
           <Image
             src={image}
             alt={imageAlt}

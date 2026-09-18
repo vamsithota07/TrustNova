@@ -10,7 +10,7 @@ export default function FooterNap() {
     <div className="space-y-8 text-center md:text-left">
       <div>
         <h3 className={sectionTitle}>TrustNova</h3>
-        <p className="text-brand-white text-sm font-medium">Brand &amp; Creative Studio</p>
+        <p className="text-brand-white text-sm font-medium">Brand, Web &amp; Growth Studio</p>
         <p className="mt-2 text-brand-silver text-sm">
           <Link href="/" className="hover:text-brand-blue transition-colors">
             trustnova.in

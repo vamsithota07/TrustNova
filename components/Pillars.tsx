@@ -22,7 +22,7 @@ const pillars = [
     icon: Layers,
     title: "End-to-End",
     description:
-      "From brief to launch - and beyond. We are with you at every stage of your brand's journey.",
+      "From brief to launch - and beyond. Brand, website, and digital marketing working together to grow your business.",
   },
 ];
 

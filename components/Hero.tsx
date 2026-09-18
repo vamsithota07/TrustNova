@@ -10,6 +10,7 @@ const services = [
   "Logo Design & Brand Identity",
   "Brand Identity Package",
   "Website Design & Development",
+  "Digital Marketing & Growth",
   "Launch & Maintenance Support",
 ];
 
@@ -21,11 +22,12 @@ const marqueeItems = [
   "Go-Live Support",
   "Brand Style Guides",
   "SEO Setup",
+  "Digital Marketing",
   "Mobile-First Design",
 ];
 
 const headlineLines = [
-  { text: "Brand & Website Design", accent: false },
+  { text: "Brand, Web & Growth", accent: false },
   { text: "Studio in Hyderabad", accent: true },
 ];
 
@@ -114,7 +116,7 @@ export default function Hero() {
               className="editorial-body text-base lg:text-xl mb-10 md:mb-12 max-w-xl leading-[1.75]"
             >
               We design logos that stop the scroll, build identities that command
-              respect, and create websites that convert visitors into clients.
+              respect, create websites that convert visitors into clients, and build digital marketing that helps them grow.
             </p>
 
             <div ref={ctaRef} className="flex flex-col sm:flex-row flex-wrap gap-4 w-full min-w-0">

@@ -52,6 +52,7 @@ function PortfolioProjectCard({
           imageAlt={project.imageAlt}
           industryId={project.industryId}
           image={project.image}
+          variant={project.variant}
         />
         <span
           className="mt-3 font-display text-5xl font-bold leading-none opacity-90 md:text-6xl"
@@ -118,8 +119,8 @@ export default function PortfolioPage() {
               <span className="text-accent-warm">TrustNova</span>
             </h2>
             <p className="mt-5 text-base leading-[1.8] text-brand-silver md:text-lg">
-              A Hyderabad-based brand &amp; creative studio crafting logos, identities,
-              and conversion-focused websites for Indian businesses. We believe great
+              A Hyderabad-based brand, web &amp; growth studio crafting logos, identities,
+              conversion-focused websites, and digital marketing for Indian businesses. We believe great
               design earns trust before a single word is read, and we build every
               project with that principle at the centre.
             </p>

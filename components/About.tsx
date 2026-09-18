@@ -77,7 +77,7 @@ export default function About() {
             </h2>
             <p className="text-brand-silver text-sm md:text-base lg:text-lg leading-relaxed prose-width">
               Our mission is to give every Indian business, small or large, a brand
-              identity and online presence that earns trust from day one. Great design is
+              identity, online presence, and digital growth strategy that earns trust from day one. Great design is
               not a luxury; it is the engine of business growth.
             </p>
             <p className="text-brand-silver text-sm md:text-base lg:text-lg leading-relaxed mt-4 prose-width">

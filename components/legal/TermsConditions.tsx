@@ -203,7 +203,7 @@ export default function TermsConditions() {
                 <BodyText>
                   These Terms apply to all services offered by TrustNova, including Logo Design, Brand
                   Identity, Website Design &amp; Development, Website Launch Support, and Website
-                  Maintenance.
+                  Maintenance, and Digital Marketing &amp; Growth.
                 </BodyText>
                 <BodyText>
                   If you do not agree with any part of these Terms, please do not engage our services.
@@ -219,6 +219,7 @@ export default function TermsConditions() {
                     "Website Design & Development - custom website design and development built to your brand, delivered on your chosen platform (WordPress, Webflow, or static HTML).",
                     "Website Launch & Go-Live Support - DNS configuration, SSL setup, deployment, and post-launch technical support.",
                     "Website Maintenance & Ongoing Support - monthly updates, backups, uptime monitoring, and priority support.",
+                    "Digital Marketing & Growth - strategy, SEO, Google Business Profile optimisation, social media, paid campaigns, and reporting.",
                   ]}
                 />
                 <BodyText>

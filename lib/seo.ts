@@ -8,9 +8,9 @@ export const TWITTER_HANDLE = "@trustnovain";
 export const defaultSEO = {
   siteName: SITE_NAME,
   siteUrl: SITE_URL,
-  defaultTitle: "TrustNova - Logo & Website Design Studio in Hyderabad",
+  defaultTitle: "TrustNova - Brand, Website & Digital Marketing Studio in Hyderabad",
   defaultDescription:
-    "TrustNova is a Brand and Creative Studio in Hyderabad. We design logos, brand identities, and websites for Indian businesses. Starting from ₹8,000.",
+    "TrustNova is a brand, website, and digital marketing studio in Hyderabad. We help Indian businesses build trust, get found, and grow.",
   defaultOGImage: `${SITE_URL}/og-image.jpg`,
   twitterHandle: TWITTER_HANDLE,
 } as const;
@@ -24,27 +24,31 @@ export const OG_IMAGE = {
 
 export const pageSEO = {
   home: {
-    title: "TrustNova - Logo & Website Design Studio in Hyderabad",
+    title: "TrustNova - Brand, Website & Digital Marketing Studio in Hyderabad",
     description:
-      "We design logos that stop the scroll, build brand identities that earn trust, and create websites that convert visitors into clients. Based in Hyderabad, serving all of India. Starting ₹8,000.",
+      "We design brands, build conversion-focused websites, and run digital marketing that helps Indian businesses get found and grow. Based in Hyderabad.",
     keywords: [
       "logo design hyderabad",
       "website design hyderabad",
       "brand identity hyderabad",
       "web designer hyderabad",
       "logo designer hyderabad",
+      "digital marketing agency hyderabad",
+      "seo services hyderabad",
     ],
     path: "/",
   },
   services: {
-    title: "Our Services - Logo Design, Brand Identity & Website Development | TrustNova",
+    title: "Our Services - Branding, Websites & Digital Marketing | TrustNova",
     description:
-      "Logo Design from ₹8,000. Complete Brand Identity from ₹18,000. Website Design from ₹25,000. Professional design services for Indian businesses. Based in Hyderabad.",
+      "Branding, website design, SEO, social media, Google Business Profile optimisation, and paid digital marketing for Indian businesses. Based in Hyderabad.",
     keywords: [
       "logo design india",
       "website design india",
       "brand identity package india",
       "web development hyderabad",
+      "digital marketing hyderabad",
+      "social media marketing hyderabad",
     ],
     path: "/services",
   },
@@ -89,9 +93,9 @@ export const pageSEO = {
     path: "/privacy",
   },
   portfolio: {
-    title: "Portfolio - Website & Brand Design Work | TrustNova Hyderabad",
+    title: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova Hyderabad",
     description:
-      "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries. Based in Hyderabad.",
+      "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses. Based in Hyderabad.",
     keywords: [
       "web design portfolio hyderabad",
       "logo design portfolio india",
@@ -130,19 +134,19 @@ export const PORTFOLIO_OG_IMAGE = {
 
 export const portfolioMetadata: Metadata = {
   title: {
-    absolute: "Portfolio - Website & Brand Design Work | TrustNova Hyderabad",
+    absolute: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova Hyderabad",
   },
   description:
-    "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries. Based in Hyderabad.",
+    "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses. Based in Hyderabad.",
   keywords:
     "web design portfolio hyderabad, logo design portfolio india, brand identity portfolio, website design samples india",
   alternates: {
     canonical: `${SITE_URL}/portfolio`,
   },
   openGraph: {
-    title: "Portfolio - Website & Brand Design Work | TrustNova",
+    title: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova",
     description:
-      "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries.",
+      "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses.",
     url: `${SITE_URL}/portfolio`,
     siteName: SITE_NAME,
     locale: "en_IN",
@@ -153,7 +157,7 @@ export const portfolioMetadata: Metadata = {
     card: "summary_large_image",
     site: TWITTER_HANDLE,
     title: "Portfolio | TrustNova",
-    description: "Logo designs, brand identities, and websites built for Indian businesses.",
+    description: "Brand identity, websites, and digital marketing work for Indian businesses.",
     images: [PORTFOLIO_OG_IMAGE.url],
   },
 };
@@ -262,7 +266,7 @@ export function professionalServiceSchema() {
     logo: `${SITE_URL}/logo.png`,
     image: defaultSEO.defaultOGImage,
     description:
-      "TrustNova is a Brand and Creative Studio based in Hyderabad, India. We design logos, brand identities, and websites for Indian businesses.",
+      "TrustNova is a brand, website, and digital marketing studio based in Hyderabad, India.",
     telephone: PHONE_TEL.replace("tel:", ""),
     email: EMAIL,
     priceRange: "₹₹",
@@ -331,6 +335,15 @@ export function professionalServiceSchema() {
           },
           price: "25000",
           priceCurrency: "INR",
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Digital Marketing & Growth",
+            description:
+              "SEO, Google Business Profile optimisation, social media, paid campaigns, and monthly growth reporting.",
+          },
         },
       ],
     },

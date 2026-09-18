@@ -10,14 +10,26 @@ export type PortfolioProject = {
   image?: string;
   imageAlt: string;
   href?: string;
+  variant?: "campaign";
 };
 
 export const STUDIO_FOUNDER_IMAGE = "/avatar.png";
 
 export const featuredProjects: PortfolioProject[] = [
   {
-    id: "vistix",
+    id: "milletio-global-grain",
     number: "01",
+    title: "Milletio Global Grain",
+    category: "Digital Marketing",
+    description: "Digital marketing support for a global grain brand, shaping campaign creative, social storytelling, and growth-focused channel strategy.",
+    panelBg: "#546B47",
+    panelText: "#FFFFFF",
+    imageAlt: "Milletio Global Grain digital marketing portfolio by TrustNova",
+    variant: "campaign",
+  },
+  {
+    id: "vistix",
+    number: "02",
     title: "Vistix Engineers",
     category: "HVAC & Industrial Engineering",
     description:
@@ -30,7 +42,7 @@ export const featuredProjects: PortfolioProject[] = [
   },
   {
     id: "asmc",
-    number: "02",
+    number: "03",
     title: "ASMC",
     category: "Healthcare & Dental",
     description:

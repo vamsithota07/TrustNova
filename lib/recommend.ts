@@ -1,7 +1,7 @@
 import { WHATSAPP_URL } from "@/lib/constants";
 
 export type Stage = "starting" | "running" | "growing" | "rebranding";
-export type Need = "logo" | "website" | "both" | "maintenance";
+export type Need = "logo" | "website" | "both" | "maintenance" | "digital-marketing";
 
 export interface Answers {
   stage: Stage;
@@ -13,7 +13,8 @@ export type ResultId =
   | "brand-identity"
   | "website"
   | "full-bundle"
-  | "maintenance";
+  | "maintenance"
+  | "digital-marketing";
 
 export interface Recommendation {
   id: ResultId;
@@ -111,6 +112,15 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
     ctaLabel: "Start Maintenance →",
     whatsappMessage: "Hi, I'm interested in Website Maintenance",
   },
+  "digital-marketing": {
+    badge: "RECOMMENDED FOR YOU",
+    packageName: "Digital Marketing & Growth",
+    price: "Tailored monthly plans",
+    description: "You have the foundation. Now you need a focused growth system that makes your business easier to find, follow, and choose.",
+    includes: ["Digital growth strategy", "SEO and Google Business Profile optimisation", "Social media content planning", "Meta and Google Ads campaign management", "Monthly reporting and clear next actions"],
+    ctaLabel: "Plan My Growth →",
+    whatsappMessage: "Hi, I'm interested in Digital Marketing & Growth",
+  },
 };
 
 export function getRecommendation(answers: Answers): Recommendation {
@@ -118,6 +128,10 @@ export function getRecommendation(answers: Answers): Recommendation {
 
   if (need === "maintenance") {
     return { id: "maintenance", ...results.maintenance };
+  }
+
+  if (need === "digital-marketing") {
+    return { id: "digital-marketing", ...results["digital-marketing"] };
   }
 
   if (need === "both") {

@@ -11,6 +11,7 @@ import { shouldRenderNearby } from "@/lib/motion/performance";
 const SERVICE_TINT_RGB = [
   "196, 103, 74",
   "122, 158, 135",
+  "122, 158, 135",
   "107, 143, 168",
   "154, 139, 180",
   "196, 103, 74",
@@ -108,6 +109,22 @@ const services: Service[] = [
       "Uptime monitoring and rapid issue resolution",
       "Priority support via WhatsApp and email",
       "Monthly performance and traffic report",
+    ],
+  },
+  {
+    id: 6,
+    number: "06",
+    title: "Digital Marketing & Growth",
+    subtitle: "Turn attention into qualified enquiries with a growth plan built around your business.",
+    visual: "digital",
+    accent: "sage",
+    bullets: [
+      "Digital marketing strategy and monthly growth roadmap",
+      "Google Business Profile optimisation for local discovery",
+      "SEO foundations, content priorities, and on-page improvements",
+      "Social media content planning and campaign creative",
+      "Meta and Google Ads campaign setup and optimisation",
+      "Clear monthly reporting on reach, leads, and next actions",
     ],
   },
 ];

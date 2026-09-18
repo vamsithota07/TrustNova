@@ -31,6 +31,7 @@ const serviceOptions = [
   "Website Design & Development",
   "Website Launch & Go-Live Support",
   "Website Maintenance & Support",
+  "Digital Marketing & Growth",
   "Full Brand + Website Bundle",
   "Not sure yet - need guidance",
 ];

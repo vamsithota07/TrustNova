@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export type ServiceVisualType = "logo" | "brand" | "website" | "launch" | "maintenance";
+export type ServiceVisualType = "logo" | "brand" | "website" | "launch" | "maintenance" | "digital";
 
 const visualLabels: Record<ServiceVisualType, string> = {
   logo: "3 Concepts Delivered",
@@ -10,6 +10,7 @@ const visualLabels: Record<ServiceVisualType, string> = {
   website: "Mobile-First & Responsive",
   launch: "30-Day Support Included",
   maintenance: "Monthly Reports Included",
+  digital: "Growth Strategy Included",
 };
 
 function usePrefersReducedMotion() {
@@ -341,6 +342,25 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
   );
 }
 
+function DigitalVisual({ reduced }: { reduced: boolean }) {
+  const metrics = [42, 67, 54, 82, 76, 94];
+  return (
+    <div className="h-[260px] overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-6">
+      <div className="flex items-start justify-between">
+        <div><p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-brand-dim">Growth dashboard</p><p className="mt-1 text-lg font-bold text-brand-white">Campaign momentum</p></div>
+        <span className="rounded-full bg-accent-sage/10 px-2.5 py-1 text-[10px] font-bold text-accent-sage">LIVE</span>
+      </div>
+      <div className="mt-7 flex h-24 items-end gap-2">
+        {metrics.map((height, index) => <div key={height} className="flex-1 rounded-t bg-accent-warm/25" style={{ height: `${height}%`, ...(reduced ? {} : { animation: `barGrow 0.55s ease ${index * 0.08}s both` }) }} />)}
+      </div>
+      <div className="mt-6 grid grid-cols-2 gap-3">
+        <div className="rounded-xl border border-brand-rule bg-brand-card p-3"><p className="text-[10px] uppercase tracking-wide text-brand-dim">Qualified leads</p><p className="mt-1 text-xl font-bold text-brand-white">Growing</p></div>
+        <div className="rounded-xl border border-brand-rule bg-brand-card p-3"><p className="text-[10px] uppercase tracking-wide text-brand-dim">Channels</p><p className="mt-1 text-xl font-bold text-brand-white">Search + Social</p></div>
+      </div>
+    </div>
+  );
+}
+
 function VisualBody({
   type,
   reduced,
@@ -361,6 +381,8 @@ function VisualBody({
       return <LaunchVisual reduced={reduced} />;
     case "maintenance":
       return <MaintenanceVisual reduced={reduced} />;
+    case "digital":
+      return <DigitalVisual reduced={reduced} />;
   }
 }
 

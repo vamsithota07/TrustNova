@@ -85,6 +85,13 @@ const step2Options: Option[] = [
     description: "I already have a site. I just need someone to maintain and grow it.",
     accent: "soft",
   },
+  {
+    id: "digital-marketing",
+    emoji: "📣",
+    title: "Digital Marketing & Growth",
+    description: "I need more visibility, qualified leads, and a smarter plan for search, social, or ads.",
+    accent: "sage",
+  },
 ];
 
 const accentRing: Record<Option["accent"], string> = {

@@ -8,7 +8,7 @@ export const TWITTER_HANDLE = "@trustnovain";
 export const defaultSEO = {
   siteName: SITE_NAME,
   siteUrl: SITE_URL,
-  defaultTitle: "TrustNova — Logo & Website Design Studio in Hyderabad",
+  defaultTitle: "TrustNova - Logo & Website Design Studio in Hyderabad",
   defaultDescription:
     "TrustNova is a Brand and Creative Studio in Hyderabad. We design logos, brand identities, and websites for Indian businesses. Starting from ₹8,000.",
   defaultOGImage: `${SITE_URL}/og-image.jpg`,
@@ -19,12 +19,12 @@ export const OG_IMAGE = {
   url: "/og-image.jpg",
   width: 1200,
   height: 630,
-  alt: "TrustNova — Brand & Creative Studio, Hyderabad",
+  alt: "TrustNova - Brand & Creative Studio, Hyderabad",
 } as const;
 
 export const pageSEO = {
   home: {
-    title: "TrustNova — Logo & Website Design Studio in Hyderabad",
+    title: "TrustNova - Logo & Website Design Studio in Hyderabad",
     description:
       "We design logos that stop the scroll, build brand identities that earn trust, and create websites that convert visitors into clients. Based in Hyderabad, serving all of India. Starting ₹8,000.",
     keywords: [
@@ -37,7 +37,7 @@ export const pageSEO = {
     path: "/",
   },
   services: {
-    title: "Our Services — Logo Design, Brand Identity & Website Development | TrustNova",
+    title: "Our Services - Logo Design, Brand Identity & Website Development | TrustNova",
     description:
       "Logo Design from ₹8,000. Complete Brand Identity from ₹18,000. Website Design from ₹25,000. Professional design services for Indian businesses. Based in Hyderabad.",
     keywords: [
@@ -60,19 +60,19 @@ export const pageSEO = {
     path: "/industries",
   },
   recommend: {
-    title: "Find Your Perfect Package — Website & Brand Design | TrustNova",
+    title: "Find Your Perfect Package - Website & Brand Design | TrustNova",
     description:
       "Answer 3 quick questions and find the right TrustNova package for your business stage and budget. Logo from ₹8,000, Website from ₹25,000.",
     path: "/recommend",
   },
   about: {
-    title: "About TrustNova — Brand & Creative Studio, Hyderabad",
+    title: "About TrustNova - Brand & Creative Studio, Hyderabad",
     description:
       "TrustNova is a Brand and Creative Studio founded in Hyderabad to help Indian businesses build powerful brands and professional websites that earn trust and drive growth.",
     path: "/about",
   },
   contact: {
-    title: "Contact TrustNova — Start Your Brand or Website Project",
+    title: "Contact TrustNova - Start Your Brand or Website Project",
     description:
       "Get in touch with TrustNova to start your logo, brand identity, or website project. Based in Hyderabad. WhatsApp: +91 9502224444. Email: info@trustnova.in",
     path: "/contact",
@@ -89,7 +89,7 @@ export const pageSEO = {
     path: "/privacy",
   },
   portfolio: {
-    title: "Portfolio — Website & Brand Design Work | TrustNova Hyderabad",
+    title: "Portfolio - Website & Brand Design Work | TrustNova Hyderabad",
     description:
       "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries. Based in Hyderabad.",
     keywords: [
@@ -101,7 +101,7 @@ export const pageSEO = {
     path: "/portfolio",
   },
   process: {
-    title: "Our Process — Brand & Website Design | TrustNova",
+    title: "Our Process - Brand & Website Design | TrustNova",
     description:
       "TrustNova's clear, transparent, collaborative process from discovery and design to launch and ongoing support.",
     path: "/process",
@@ -130,7 +130,7 @@ export const PORTFOLIO_OG_IMAGE = {
 
 export const portfolioMetadata: Metadata = {
   title: {
-    absolute: "Portfolio — Website & Brand Design Work | TrustNova Hyderabad",
+    absolute: "Portfolio - Website & Brand Design Work | TrustNova Hyderabad",
   },
   description:
     "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries. Based in Hyderabad.",
@@ -140,7 +140,7 @@ export const portfolioMetadata: Metadata = {
     canonical: `${SITE_URL}/portfolio`,
   },
   openGraph: {
-    title: "Portfolio — Website & Brand Design Work | TrustNova",
+    title: "Portfolio - Website & Brand Design Work | TrustNova",
     description:
       "See TrustNova's portfolio of logo designs, brand identities, and website designs built for Indian businesses across 20+ industries.",
     url: `${SITE_URL}/portfolio`,

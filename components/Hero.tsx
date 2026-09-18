@@ -97,7 +97,7 @@ export default function Hero() {
             <div ref={linesRef} className="mb-8 md:mb-10 space-y-1 md:space-y-2 overflow-hidden">
               <h1 className="font-display font-bold leading-[0.95] tracking-[-0.05em] text-[clamp(2.5rem,5.5vw,7rem)]">
                 {headlineLines.map((line) => (
-                  <div key={line.text} className="overflow-hidden py-0.5">
+                  <div key={line.text} className="overflow-hidden pt-0.5 pb-[0.16em]">
                     <span
                       data-hero-line
                       className={`block ${line.accent ? "text-accent-warm" : "text-brand-white"}`}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -249,7 +249,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
 
       <div
         data-panel-content
-        className="min-h-0 flex-1 overflow-y-auto scrollbar-hide opacity-0 will-change-transform"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain pr-2 opacity-0 will-change-transform"
       >
         <div className="mx-auto mt-6 sm:mt-8 w-full max-w-6xl pb-4">
           <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
@@ -301,10 +301,21 @@ export default function Services() {
   const bgTintRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
   const spineDotRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  // Service pages need to expand naturally: a fixed-height scrollytelling panel
-  // can hide longer deliverable lists on shorter screens.
-  const [useFallback] = useState<boolean>(() => true);
+  const [useFallback, setUseFallback] = useState<boolean | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const check = () => {
+      setUseFallback(
+        window.matchMedia("(max-width: 1023px)").matches ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      );
+    };
+    check();
+    const mq = window.matchMedia("(max-width: 1023px)");
+    mq.addEventListener("change", check);
+    return () => mq.removeEventListener("change", check);
+  }, []);
 
   useLayoutEffect(() => {
     if (useFallback !== false) return;

@@ -42,7 +42,7 @@ function PortfolioProjectCard({
   const card = (
     <>
       <div
-        className="relative flex flex-col overflow-hidden rounded-sm p-3 pt-4 pb-3"
+        className="relative flex h-[clamp(28rem,30vw,36rem)] flex-col overflow-hidden rounded-sm p-3 pt-4 pb-3"
         style={{ backgroundColor: project.panelBg, color: project.panelText }}
       >
         <span className="absolute right-3 top-3 text-[10px] font-bold tracking-[0.2em] opacity-70">
@@ -56,7 +56,7 @@ function PortfolioProjectCard({
           variant={project.variant}
         />
         <span
-          className="mt-3 font-display text-5xl font-bold leading-none opacity-90 md:text-6xl"
+          className="mt-auto pt-3 font-display text-5xl font-bold leading-none opacity-90 md:text-6xl"
           aria-hidden
         >
           {project.number.replace("0", "")}

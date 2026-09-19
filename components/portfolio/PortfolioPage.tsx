@@ -35,14 +35,16 @@ function XIcon({ className }: { className?: string }) {
 function PortfolioProjectCard({
   project,
   index,
+  fixedHeight = false,
 }: {
   project: PortfolioProject;
   index: number;
+  fixedHeight?: boolean;
 }) {
   const card = (
     <>
       <div
-        className="relative flex h-[clamp(28rem,30vw,36rem)] flex-col overflow-hidden rounded-sm p-3 pt-4 pb-3"
+        className={`relative flex flex-col overflow-hidden rounded-sm p-3 pt-4 pb-3 ${fixedHeight ? "h-[clamp(28rem,30vw,36rem)]" : ""}`}
         style={{ backgroundColor: project.panelBg, color: project.panelText }}
       >
         <span className="absolute right-3 top-3 text-[10px] font-bold tracking-[0.2em] opacity-70">
@@ -56,7 +58,7 @@ function PortfolioProjectCard({
           variant={project.variant}
         />
         <span
-          className="mt-auto pt-3 font-display text-5xl font-bold leading-none opacity-90 md:text-6xl"
+          className={`${fixedHeight ? "mt-auto" : "mt-3"} pt-3 font-display text-5xl font-bold leading-none opacity-90 md:text-6xl`}
           aria-hidden
         >
           {project.number.replace("0", "")}
@@ -239,7 +241,7 @@ export default function PortfolioPage() {
             <div>
               <p className="editorial-eyebrow mb-2 text-accent-warm">Selected Projects</p>
               <h1 className="font-display text-2xl font-bold text-brand-white md:text-3xl">
-                Our Work — Brands &amp; Websites We&apos;ve Built
+                Our Work - Brands &amp; Websites We&apos;ve Built
               </h1>
             </div>
             <Link
@@ -254,7 +256,7 @@ export default function PortfolioPage() {
           {/* Featured client work: Vistix & ASMC */}
           <div className="horizontal-scroll -mx-4 mb-12 flex gap-0 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6">
             {featuredProjects.map((project, i) => (
-              <PortfolioProjectCard key={project.id} project={project} index={i} />
+              <PortfolioProjectCard key={project.id} project={project} index={i} fixedHeight />
             ))}
           </div>
 

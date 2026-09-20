@@ -176,21 +176,21 @@ function ServiceEditorial({
         <div className="min-w-0">
           <p
             data-service-subtitle
-            className={`text-base md:text-lg leading-relaxed mb-8 ${accentText[service.accent]}`}
+            className={`text-base leading-relaxed mb-6 lg:mb-5 ${accentText[service.accent]}`}
           >
             {service.subtitle}
           </p>
 
           <div data-service-deliverables>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim mb-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim mb-3 lg:mb-2">
               What&apos;s included
             </p>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2.5 lg:space-y-1.5">
               {service.bullets.map((bullet) => (
                 <li
                   key={bullet}
                   data-service-bullet
-                  className="flex items-start gap-2.5 text-brand-silver text-sm md:text-[15px] leading-relaxed"
+                  className="flex items-start gap-2.5 text-brand-silver text-sm leading-relaxed lg:leading-snug"
                 >
                   <span className={`shrink-0 mt-0.5 text-xs ${accentText[service.accent]}`}>▸</span>
                   {bullet}

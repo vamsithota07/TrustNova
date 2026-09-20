@@ -4,15 +4,6 @@ import { useEffect, useState } from "react";
 
 export type ServiceVisualType = "logo" | "brand" | "website" | "launch" | "maintenance" | "digital";
 
-const visualLabels: Record<ServiceVisualType, string> = {
-  logo: "3 Concepts Delivered",
-  brand: "Complete Brand System",
-  website: "Mobile-First & Responsive",
-  launch: "30-Day Support Included",
-  maintenance: "Monthly Reports Included",
-  digital: "Growth Strategy Included",
-};
-
 function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
 
@@ -398,9 +389,6 @@ export default function ServiceVisual({
   return (
     <div>
       <VisualBody type={type} reduced={reduced} active={active} />
-      <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue lg:hidden">
-        {visualLabels[type]}
-      </p>
     </div>
   );
 }

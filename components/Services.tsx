@@ -231,7 +231,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
           className={`mx-auto mt-4 h-px w-0 max-w-[80px] ${accentLine[service.accent]}`}
           aria-hidden
         />
-        <div className="mt-5 overflow-hidden">
+        <div className="mt-5 -mb-[0.16em] overflow-hidden pb-[0.16em]">
           <h3
             data-service-name
             className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] tracking-[-0.03em] leading-[1.08] text-balance"
@@ -376,7 +376,7 @@ export default function Services() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top top",
+          start: "top top+=72",
           end: () => `+=${totalScroll}`,
           pin: pin,
           scrub: true,

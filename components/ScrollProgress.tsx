@@ -17,7 +17,7 @@ export default function ScrollProgress() {
   if (reduced) return null;
 
   return (
-    <div className="pointer-events-none fixed top-0 left-0 z-[100] h-px w-full">
+    <div className="pointer-events-none fixed left-0 top-3 z-[100] h-px w-full">
       <motion.div className="h-full w-full origin-left bg-brand-blue" style={{ scaleX }} />
       <AnimatePresence>
         {percent > 5 && (

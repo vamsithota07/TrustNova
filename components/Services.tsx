@@ -221,7 +221,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
     <div className="flex h-full min-h-0 flex-col">
       <div
         data-panel-title
-        className="pointer-events-none mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
+        className="pointer-events-none relative mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
       >
         <span data-service-number className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
           Service {service.number}
@@ -241,7 +241,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
         </div>
         <p
           data-scroll-hint
-          className="mt-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
+          className="absolute left-1/2 top-full mt-3 -translate-x-1/2 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
         >
           Scroll to know more
         </p>
@@ -249,16 +249,16 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
 
       <div
         data-panel-content
-        className="min-h-0 flex-1 overflow-y-auto overscroll-contain pr-2 opacity-0 will-change-transform"
+        className="min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-hide opacity-0 will-change-transform"
       >
-        <div className="mx-auto mt-6 sm:mt-8 w-full max-w-6xl pb-4">
+        <div className="mx-auto mt-2 sm:mt-3 w-full max-w-6xl pb-3">
           <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
         </div>
       </div>
 
       <div
         data-panel-footer
-        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-5 pb-6 sm:pb-7 opacity-0"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-3 pb-4 opacity-0"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />
@@ -629,7 +629,7 @@ export default function Services() {
       ) : (
         <div
           ref={pinRef}
-          className="relative flex h-[calc(100dvh-7rem)] flex-col sm:h-[calc(100dvh-8rem)] md:h-[calc(100dvh-9rem)] lg:h-[100dvh] overflow-x-clip bg-brand-black"
+          className="relative flex h-[calc(100dvh-7rem)] flex-col sm:h-[calc(100dvh-8rem)] md:h-[calc(100dvh-9rem)] lg:h-[calc(100dvh-4.5rem)] overflow-x-clip bg-brand-black"
         >
           <div
             ref={bgTintRef}
@@ -646,7 +646,7 @@ export default function Services() {
           </div>
 
           <div
-            className="pointer-events-none absolute left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-10"
+            className="pointer-events-none absolute left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-[max(1.5rem,calc((100vw-104rem)/2))]"
             style={{ height: 240 }}
           >
             <div className="relative flex h-full w-6 flex-col items-center">

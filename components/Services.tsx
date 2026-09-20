@@ -171,8 +171,8 @@ function ServiceEditorial({
   isActive?: boolean;
 }) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
+    <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-16">
+      <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-12 xl:gap-16">
         <div className="min-w-0">
           <p
             data-service-subtitle
@@ -202,8 +202,8 @@ function ServiceEditorial({
           {includeCta && <ServiceCtaRow service={service} className="hidden lg:block pt-8 pb-2" />}
         </div>
 
-        <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-8">
-          <div className="w-full max-w-md" data-service-visual-inner>
+        <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-6">
+          <div className="w-full max-w-md lg:[&>div>div:first-child]:h-[230px]" data-service-visual-inner>
             {isActive ? <ServiceVisual type={service.visual} active /> : (
               <div className="h-[260px] rounded-2xl border border-brand-rule bg-brand-dark/50" />
             )}
@@ -221,7 +221,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
     <div className="flex h-full min-h-0 flex-col">
       <div
         data-panel-title
-        className="pointer-events-none relative mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
+        className="pointer-events-none relative mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-6 pt-3 sm:px-8 sm:pt-4 text-center"
       >
         <span data-service-number className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
           Service {service.number}
@@ -251,14 +251,14 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
         data-panel-content
         className="min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-hide opacity-0 will-change-transform"
       >
-        <div className="mx-auto mt-2 sm:mt-3 w-full max-w-6xl pb-3">
+        <div className="mx-auto mt-3 w-full max-w-6xl pb-5">
           <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
         </div>
       </div>
 
       <div
         data-panel-footer
-        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 py-2 sm:px-6 opacity-0 [&_.btn-magnetic]:min-h-[44px] [&_.btn-magnetic]:px-6 [&_.btn-magnetic]:py-2.5"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-6 py-3 sm:px-8 lg:px-16 opacity-0 [&_.btn-magnetic]:min-h-[44px] [&_.btn-magnetic]:px-6 [&_.btn-magnetic]:py-2.5"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />
@@ -646,7 +646,7 @@ export default function Services() {
           </div>
 
           <div
-            className="pointer-events-none absolute left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-[max(1.5rem,calc((100vw-104rem)/2))]"
+            className="pointer-events-none absolute left-8 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-12 2xl:left-16"
             style={{ height: 240 }}
           >
             <div className="relative flex h-full w-6 flex-col items-center">
@@ -667,7 +667,7 @@ export default function Services() {
                     aria-hidden
                   />
                   {activeIndex === i && (
-                    <span className="absolute left-5 top-1/2 max-w-[140px] -translate-y-1/2 truncate text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
+                    <span className="absolute left-6 top-1/2 max-w-[150px] -translate-y-1/2 truncate text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
                       {s.title.split("&")[0].trim()}
                     </span>
                   )}
@@ -696,7 +696,7 @@ export default function Services() {
 
           <div
             ref={progressRef}
-            className="relative z-40 shrink-0 px-4 sm:px-6 pt-4 pb-3"
+            className="relative z-40 shrink-0 bg-brand-black/95 px-6 pt-5 pb-4 sm:px-8"
           >
             <div className="max-w-md mx-auto">
               <div className="flex items-center justify-between gap-3 mb-3">

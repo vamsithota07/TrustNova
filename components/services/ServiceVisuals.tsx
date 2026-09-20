@@ -398,7 +398,7 @@ export default function ServiceVisual({
   return (
     <div>
       <VisualBody type={type} reduced={reduced} active={active} />
-      <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue">
+      <p className="mt-3 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-blue lg:hidden">
         {visualLabels[type]}
       </p>
     </div>

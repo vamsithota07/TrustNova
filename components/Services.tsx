@@ -258,7 +258,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
 
       <div
         data-panel-footer
-        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-3 pb-4 opacity-0"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 py-2 sm:px-6 opacity-0 [&_.btn-magnetic]:min-h-[44px] [&_.btn-magnetic]:px-6 [&_.btn-magnetic]:py-2.5"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />

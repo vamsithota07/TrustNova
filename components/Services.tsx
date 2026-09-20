@@ -221,27 +221,27 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
     <div className="flex h-full min-h-0 flex-col">
       <div
         data-panel-title
-        className="pointer-events-none mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-1 sm:pt-2 text-center"
+        className="pointer-events-none mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
       >
         <span data-service-number className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
           Service {service.number}
         </span>
         <div
           data-accent-line
-          className={`mx-auto mt-2 h-px w-0 max-w-[80px] ${accentLine[service.accent]}`}
+          className={`mx-auto mt-4 h-px w-0 max-w-[80px] ${accentLine[service.accent]}`}
           aria-hidden
         />
-        <div className="mt-3 overflow-hidden">
+        <div className="mt-5 overflow-hidden">
           <h3
             data-service-name
-            className="font-display font-bold text-brand-white text-[clamp(1.7rem,3.6vw,2.85rem)] tracking-[-0.03em] leading-[1.04] text-balance"
+            className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] tracking-[-0.03em] leading-[1.08] text-balance"
           >
             {service.title}
           </h3>
         </div>
         <p
           data-scroll-hint
-          className="mt-2 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
+          className="mt-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-dim"
         >
           Scroll to know more
         </p>
@@ -251,14 +251,14 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
         data-panel-content
         className="min-h-0 flex-1 overflow-y-auto overscroll-contain pr-2 opacity-0 will-change-transform"
       >
-        <div className="mx-auto mt-3 sm:mt-4 w-full max-w-6xl pb-3">
+        <div className="mx-auto mt-6 sm:mt-8 w-full max-w-6xl pb-4">
           <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
         </div>
       </div>
 
       <div
         data-panel-footer
-        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-3 pb-3 sm:pb-4 opacity-0"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 sm:px-6 pt-5 pb-6 sm:pb-7 opacity-0"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />

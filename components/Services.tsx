@@ -203,7 +203,7 @@ function ServiceEditorial({
         </div>
 
         <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-6">
-          <div className="w-full max-w-md lg:[&>div>div:first-child]:h-[230px]" data-service-visual-inner>
+          <div className="w-full max-w-md" data-service-visual-inner>
             {isActive ? <ServiceVisual type={service.visual} active /> : (
               <div className="h-[260px] rounded-2xl border border-brand-rule bg-brand-dark/50" />
             )}

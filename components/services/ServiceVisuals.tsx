@@ -110,9 +110,9 @@ function BrandVisual({ reduced }: { reduced: boolean }) {
   const colors = ["#0D1117", "#6B8F75", "#5A7A62", "#E8F0EA", "#F4F8F5"];
 
   return (
-    <div className="flex h-[260px] flex-col gap-3.5 overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-7">
+    <div className="flex h-[260px] flex-col gap-2.5 overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-6">
       <div>
-        <p className="mb-2.5 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Colour Palette</p>
+        <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Colour Palette</p>
         <div className="flex gap-2.5">
           {colors.map((c, i) => (
             <div
@@ -125,7 +125,7 @@ function BrandVisual({ reduced }: { reduced: boolean }) {
       </div>
 
       <div>
-        <p className="mb-2.5 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Typography</p>
+        <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Typography</p>
         <p
           className="text-[22px] font-bold tracking-tight text-brand-white"
           style={fadeUpStyle(reduced, "0.3s")}
@@ -138,7 +138,7 @@ function BrandVisual({ reduced }: { reduced: boolean }) {
       </div>
 
       <div>
-        <p className="mb-2.5 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Social Templates</p>
+        <p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-brand-dim">Social Templates</p>
         <div className="flex gap-2">
           {[0, 1, 2, 3, 4].map((i) => (
             <div

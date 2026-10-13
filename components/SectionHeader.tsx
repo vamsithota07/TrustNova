@@ -10,6 +10,8 @@ interface SectionHeaderProps {
   align?: "center" | "left";
   size?: "default" | "large";
   highlight?: string;
+  /** Use "h1" when this is the page's main heading. */
+  as?: "h1" | "h2";
 }
 
 export default function SectionHeader({
@@ -20,6 +22,7 @@ export default function SectionHeader({
   align = "center",
   size = "default",
   highlight,
+  as: Heading = "h2",
 }: SectionHeaderProps) {
   const alignClass = align === "center" ? "text-center" : "text-left";
   const headingSize =
@@ -47,7 +50,7 @@ export default function SectionHeader({
         <p className="editorial-eyebrow mb-4 md:mb-5">{eyebrow}</p>
       </Reveal>
       <Reveal delay={0.08} y={64}>
-        <h2 className={`editorial-heading ${headingSize}`}>{renderHeading()}</h2>
+        <Heading className={`editorial-heading ${headingSize}`}>{renderHeading()}</Heading>
       </Reveal>
       {subtext && (
         <Reveal delay={0.16} y={40}>

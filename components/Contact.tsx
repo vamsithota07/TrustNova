@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE } from "@/lib/constants";
+import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE, STARTING_PRICES } from "@/lib/constants";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -195,9 +195,9 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mt-4 max-w-2xl rounded-xl border border-brand-blue/20 bg-brand-blue/[0.06] px-4 py-3 text-sm text-brand-silver md:text-base"
           >
-            <span className="font-semibold text-brand-white">For pricing, contact us.</span> Every
-            project is different, so we share a tailored quote after a quick discovery call - no
-            hidden fees.
+            <span className="font-semibold text-brand-white">Starting prices:</span> {STARTING_PRICES.map((p) => `${p.label} from ${p.from}`).join(" · ")}.
+            Digital marketing is quoted monthly after a free consultation. You get a fixed quote
+            after a quick discovery call - no hidden fees.
           </motion.p>
           <motion.p
             initial={false}
@@ -206,7 +206,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="mt-3 text-sm text-brand-dim"
           >
-            Currently accepting new projects for 2025
+            Currently accepting new projects for {new Date().getFullYear()}
           </motion.p>
         </Container>
       </header>

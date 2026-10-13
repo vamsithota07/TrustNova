@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "lenis/dist/lenis.css";
 import "./globals.css";
+import Analytics from "@/components/Analytics";
 import JsonLd from "@/components/JsonLd";
 import SiteChrome from "@/components/SiteChrome";
 import { professionalServiceSchema, rootMetadata } from "@/lib/seo";
@@ -22,6 +23,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-brand-black text-brand-silver">
         <SiteChrome>{children}</SiteChrome>
+        <Analytics />
       </body>
     </html>
   );

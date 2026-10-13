@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { EMAIL, PHONE_TEL, PHONE_WHATSAPP, socialLinks } from "@/lib/constants";
+import { EMAIL, PHONE_TEL, socialLinks } from "@/lib/constants";
 
-export const SITE_URL = "https://trustnova.in";
+export const SITE_URL = "https://www.trustnova.in";
 export const SITE_NAME = "TrustNova";
 export const TWITTER_HANDLE = "@trustnovain";
 
@@ -121,6 +121,7 @@ export const sitemapPaths = [
   "/recommend",
   "/about",
   "/contact",
+  "/process",
   "/terms",
   "/privacy",
 ] as const;
@@ -237,6 +238,9 @@ export const rootMetadata: Metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
   openGraph: {
     title: defaultSEO.defaultTitle,
     description: defaultSEO.defaultDescription,
@@ -263,7 +267,7 @@ export function professionalServiceSchema() {
     name: SITE_NAME,
     alternateName: "TrustNova Brand & Creative Studio",
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    logo: `${SITE_URL}/logo-dark.png`,
     image: defaultSEO.defaultOGImage,
     description:
       "TrustNova is a brand, website, and digital marketing studio based in Hyderabad, India.",
@@ -294,11 +298,7 @@ export function professionalServiceSchema() {
       opens: "09:00",
       closes: "19:00",
     },
-    sameAs: [
-      socialLinks.instagram,
-      socialLinks.x,
-      `https://wa.me/${PHONE_WHATSAPP}`,
-    ],
+    sameAs: [socialLinks.instagram, socialLinks.x],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "TrustNova Services",
@@ -356,14 +356,6 @@ export function websiteSchema() {
     "@type": "WebSite",
     name: SITE_NAME,
     url: SITE_URL,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 

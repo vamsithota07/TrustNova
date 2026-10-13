@@ -618,9 +618,9 @@ export default function Services() {
           <Container className="pt-section pb-10 md:pb-12">
             <div className="relative text-center mb-0">
               <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
-              <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
+              <h1 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
-              </h2>
+              </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
                 Explore each service below to see what&apos;s included.
               </p>
@@ -684,9 +684,9 @@ export default function Services() {
           >
             <div className="text-center max-w-3xl w-full">
               <p className="editorial-eyebrow mb-4 md:mb-5">Services</p>
-              <h2 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
+              <h1 className="editorial-heading text-[clamp(2rem,5vw,3.75rem)] md:text-display-sm">
                 What We Offer
-              </h2>
+              </h1>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
                 Scroll through each service to see what&apos;s included.
               </p>

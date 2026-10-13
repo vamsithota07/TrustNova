@@ -22,6 +22,7 @@ export default async function Image() {
       >
         <div
           style={{
+            display: "flex",
             fontSize: 64,
             fontWeight: 900,
             color: "#FFFFFF",
@@ -29,7 +30,7 @@ export default async function Image() {
             marginBottom: 16,
           }}
         >
-          TRUST<span style={{ color: "#5B21B6" }}>NOVA</span>
+          TRUST<span style={{ color: "#A78BFA" }}>NOVA</span>
         </div>
         <div
           style={{
@@ -43,7 +44,7 @@ export default async function Image() {
         <div
           style={{
             fontSize: 22,
-            color: "#5B21B6",
+            color: "#A78BFA",
             letterSpacing: 2,
           }}
         >

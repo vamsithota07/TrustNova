@@ -21,7 +21,7 @@ function displayProgress(value: number) {
 /** First-visit splash runs once per tab session. */
 let initialLoaderComplete = false;
 
-const INITIAL_DURATION = 1500;
+const INITIAL_DURATION = 900;
 const NAV_DURATION = 850;
 
 export default function LoadingScreen() {

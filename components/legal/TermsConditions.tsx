@@ -505,7 +505,7 @@ export default function TermsConditions() {
                       icon: Globe,
                       label: "Website",
                       value: "trustnova.in",
-                      href: "https://trustnova.in",
+                      href: "https://www.trustnova.in",
                     },
                     {
                       icon: MapPin,

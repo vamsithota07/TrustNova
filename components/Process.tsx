@@ -147,6 +147,7 @@ export default function Process() {
       <Container className="pt-section pb-8 lg:pb-12">
         <SectionHeader
           eyebrow="Our Process"
+          as="h1"
           heading="Clear, Transparent, Collaborative"
           subtext="Every project follows a structured process. You always know exactly what happens next."
           align="left"

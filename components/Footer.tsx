@@ -85,8 +85,8 @@ export default function Footer() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left w-full">
             <p className="text-brand-dim text-xs">
-              © 2025 TrustNova. All rights reserved. ·{" "}
-              <a href="https://trustnova.in" className="hover:text-brand-white transition-colors">
+              © {new Date().getFullYear()} TrustNova. All rights reserved. ·{" "}
+              <a href="https://www.trustnova.in" className="hover:text-brand-white transition-colors">
                 trustnova.in
               </a>{" "}
               · Hyderabad, Telangana, India

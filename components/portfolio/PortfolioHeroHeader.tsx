@@ -46,7 +46,7 @@ export default function PortfolioHeroHeader() {
           >
             <div className="relative mx-auto inline-block max-w-full px-2">
               <span className="absolute right-0 -top-1 text-[10px] font-semibold tracking-[0.12em] text-accent-warm sm:right-1 sm:-top-0.5 sm:text-xs">
-                &apos;26
+                &apos;{String(new Date().getFullYear()).slice(-2)}
               </span>
 
               <p

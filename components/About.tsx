@@ -70,11 +70,11 @@ export default function About() {
             viewport={inViewOptions}
             variants={isMobile ? fadeInUp : fadeInLeft}
           >
-            <h2 className="text-brand-white font-bold text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8 leading-tight">
+            <h1 className="text-brand-white font-bold text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8 leading-tight">
               Designed for Indian Businesses.
               <br />
               Built to Scale
-            </h2>
+            </h1>
             <p className="text-brand-silver text-sm md:text-base lg:text-lg leading-relaxed prose-width">
               Our mission is to give every Indian business, small or large, a brand
               identity, online presence, and digital growth strategy that earns trust from day one. Great design is

@@ -40,7 +40,7 @@ export default function Pillars() {
 
         <RevealStagger
           stagger={0.14}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 min-w-0 items-stretch"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 min-w-0 items-stretch"
         >
           {pillars.map((pillar, i) => (
             <article

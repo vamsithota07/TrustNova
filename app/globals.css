@@ -11,13 +11,13 @@
 :root {
   --font-space-grotesk: "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-syne: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --accent: #c4674a;
-  --accent-dim: #7a9e87;
-  --bg-primary: #faf8f5;
-  --bg-secondary: #f3f0ea;
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --border: #e8e4dd;
+  --accent: #5b21b6;
+  --accent-dim: #8b5cf6;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f6f9;
+  --text-primary: #150f26;
+  --text-secondary: #5C566E;
+  --border: #e7e6ee;
 }
 
 html {
@@ -26,7 +26,7 @@ html {
   max-width: 100%;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: rgba(26, 26, 26, 0.15) transparent;
+  scrollbar-color: rgba(21, 15, 38, 0.15) transparent;
 }
 
 html.lenis,
@@ -95,12 +95,12 @@ html:not(.is-loading) #page-loader {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(26, 26, 26, 0.12);
+  background: rgba(21, 15, 38, 0.12);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(26, 26, 26, 0.22);
+  background: rgba(21, 15, 38, 0.22);
 }
 
 @layer base {
@@ -133,7 +133,7 @@ html:not(.is-loading) #page-loader {
 
   .portfolio-outline-text {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(26, 26, 26, 0.08);
+    -webkit-text-stroke: 1px rgba(21, 15, 38, 0.08);
     user-select: none;
   }
 
@@ -150,7 +150,7 @@ html:not(.is-loading) #page-loader {
   }
 
   .hero-dot-grid {
-    background-image: radial-gradient(circle, rgba(26, 26, 26, 0.06) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(21, 15, 38, 0.06) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -237,9 +237,15 @@ html:not(.is-loading) #page-loader {
 
   .horizontal-scroll {
     overscroll-behavior-x: contain;
-    touch-action: pan-x;
+    touch-action: pan-x pan-y;
     -webkit-overflow-scrolling: touch;
   }
+}
+
+body.nav-menu-open .whatsapp-fab {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 @keyframes bounce {
@@ -379,7 +385,7 @@ input[type="button"],
 .hero-services-card {
   position: relative;
   background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
-    conic-gradient(from var(--border-angle, 0deg), #c4674a, transparent 40%, #c4674a) border-box;
+    conic-gradient(from var(--border-angle, 0deg), #5b21b6, transparent 40%, #5b21b6) border-box;
   border: 1.5px solid transparent;
   animation: hero-border-spin 6s linear infinite;
 }

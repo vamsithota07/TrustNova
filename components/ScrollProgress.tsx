@@ -25,7 +25,7 @@ export default function ScrollProgress() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute right-3 top-2 text-[10px] font-semibold tabular-nums text-accent-warm"
+            className="absolute right-3 top-2 hidden text-[10px] font-semibold tabular-nums text-accent-warm sm:inline"
           >
             {percent}%
           </motion.span>

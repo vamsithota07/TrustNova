@@ -147,7 +147,7 @@ export default function IndustriesMobileStory() {
               >
                     <div className="flex items-center gap-3">
                       <div
-                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-rule bg-brand-dark ${accentTextClass[itemAccent]}`}
+                        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-rule bg-brand-muted ${accentTextClass[itemAccent]}`}
                       >
                         <ItemIcon className="h-5 w-5" strokeWidth={1.5} />
                       </div>

@@ -44,13 +44,13 @@ export default function PortfolioHeroHeader() {
             transition={{ duration: 0.7, ease }}
             className="relative z-20 mb-[-0.08em] w-full max-w-full"
           >
-            <div className="relative mx-auto inline-block max-w-full">
-              <span className="absolute -right-5 top-0 text-[11px] font-semibold tracking-[0.12em] text-accent-warm sm:-right-7 sm:text-xs">
+            <div className="relative mx-auto inline-block max-w-full px-2">
+              <span className="absolute right-0 -top-1 text-[10px] font-semibold tracking-[0.12em] text-accent-warm sm:right-1 sm:-top-0.5 sm:text-xs">
                 &apos;26
               </span>
 
               <p
-                className="select-none whitespace-nowrap font-display text-[clamp(1.65rem,9.2vw,9.5rem)] leading-[0.88] text-brand-white"
+                className="select-none font-display text-[clamp(1.5rem,8.5vw,9.5rem)] leading-[0.88] text-brand-white"
                 aria-hidden
               >
                 <span className="inline-block -rotate-[2deg] font-extrabold tracking-[-0.05em]">
@@ -73,11 +73,11 @@ export default function PortfolioHeroHeader() {
           >
             <div className="relative bg-brand-black">
               <div
-                className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[min(70vw,320px)] w-[min(70vw,320px)] -translate-x-1/2 -translate-y-1/2 rounded-[42%] bg-[#EDE6DC] md:h-[360px] md:w-[360px]"
+                className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[min(70vw,320px)] w-[min(70vw,320px)] -translate-x-1/2 -translate-y-1/2 rounded-[42%] bg-[#E6E0F6] md:h-[360px] md:w-[360px]"
                 aria-hidden
               />
               <div
-                className="pointer-events-none absolute left-[54%] top-[48%] -z-10 h-[min(50vw,220px)] w-[min(50vw,220px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F3EDE4]"
+                className="pointer-events-none absolute left-[54%] top-[48%] -z-10 h-[min(50vw,220px)] w-[min(50vw,220px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F0ECFA]"
                 aria-hidden
               />
               <Image

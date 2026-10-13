@@ -19,7 +19,7 @@ export default function IndustryPreviewStage({
   title,
   active = true,
   className = "",
-  tintColor = "#C4674A",
+  tintColor = "#5B21B6",
   shouldLoad = true,
   compact = false,
 }: IndustryPreviewStageProps) {

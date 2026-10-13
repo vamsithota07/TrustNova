@@ -6,6 +6,8 @@ interface LogoProps {
   imageClassName?: string;
   priority?: boolean;
   linked?: boolean;
+  /** Cropped artwork with no empty margin, so the mark fills the height it is given. */
+  tight?: boolean;
 }
 
 export default function Logo({
@@ -13,14 +15,15 @@ export default function Logo({
   imageClassName = "h-8 sm:h-16 md:h-20 lg:h-24 w-auto max-w-[140px] sm:max-w-none",
   priority = false,
   linked = true,
+  tight = false,
 }: LogoProps) {
   const content = (
     <span className={className}>
       <Image
-        src="/logo.png"
+        src={tight ? "/logo-tight.png" : "/logo.png"}
         alt="TrustNova - Brand & Creative Studio"
-        width={280}
-        height={120}
+        width={tight ? 738 : 280}
+        height={tight ? 608 : 120}
         sizes="(max-width: 640px) 160px, 220px"
         className={`${imageClassName} invert object-contain object-left`}
         priority={priority}

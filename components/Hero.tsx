@@ -90,10 +90,10 @@ export default function Hero() {
           <div className="order-1 w-full min-w-0">
             <span
               ref={eyebrowRef}
-              className="inline-flex items-center gap-2.5 px-4 py-2 mb-8 md:mb-10 editorial-eyebrow border border-brand-rule rounded-pill bg-brand-card/80 shadow-soft backdrop-blur-sm"
+              className="inline-flex max-w-full flex-wrap items-center gap-2.5 px-3 py-2 mb-8 md:mb-10 editorial-eyebrow tracking-[0.14em] sm:tracking-[0.22em] border border-brand-rule rounded-pill bg-brand-card/80 shadow-soft backdrop-blur-sm"
             >
               <span className="h-2 w-2 rounded-full bg-accent-warm shrink-0" />
-              India&apos;s Premier Brand & Creative Studio
+              <span className="min-w-0">India&apos;s Premier Brand & Creative Studio</span>
             </span>
 
             <div ref={linesRef} className="mb-8 md:mb-10 space-y-1 md:space-y-2 overflow-hidden">

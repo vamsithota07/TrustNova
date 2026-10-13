@@ -21,7 +21,7 @@ export default function About() {
       <div
         className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, rgba(107,143,117,0.08) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(139,92,246,0.08) 1px, transparent 1px)",
           backgroundSize: "24px 24px",
         }}
       />

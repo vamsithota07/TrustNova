@@ -750,5 +750,5 @@ export const industryTintColors: Record<string, string> = {
 };
 
 export function getIndustryTintColor(id: string): string {
-  return industryTintColors[id] ?? "#C4674A";
+  return industryTintColors[id] ?? "#5B21B6";
 }

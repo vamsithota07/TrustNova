@@ -87,7 +87,7 @@ export default function IndustriesScrollRail({ progress, activeIndex }: Props) {
                   </feMerge>
                 </filter>
                 <linearGradient id="rail-spine-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#C4674A" />
+                  <stop offset="0%" stopColor="#5B21B6" />
                   <stop offset="100%" stopColor={activeTint} />
                 </linearGradient>
               </defs>

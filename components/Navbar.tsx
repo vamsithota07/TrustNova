@@ -35,6 +35,12 @@ export default function Navbar() {
       const y = window.scrollY;
       setScrolled(y > 20);
 
+      if (isOpen) {
+        setHidden(false);
+        lastScrollY.current = y;
+        return;
+      }
+
       const delta = y - lastScrollY.current;
       if (delta > 10) {
         setHidden(true);
@@ -46,7 +52,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) setHidden(false);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -57,11 +67,13 @@ export default function Navbar() {
 
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
+    document.body.classList.add("nav-menu-open");
     getLenisInstance()?.stop();
 
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      document.body.classList.remove("nav-menu-open");
       getLenisInstance()?.start();
     };
   }, [isOpen]);
@@ -97,7 +109,8 @@ export default function Navbar() {
         >
           <Logo
             priority
-            imageClassName="h-9 sm:h-11 md:h-12 lg:h-14 w-auto min-w-[90px] sm:min-w-[120px] max-w-[150px] sm:max-w-[180px] object-contain"
+            tight
+            imageClassName="h-10 sm:h-11 lg:h-8 w-auto object-contain"
           />
 
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 min-w-0 shrink">
@@ -142,7 +155,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 z-40 bg-brand-white/30 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[60] bg-brand-white/30 backdrop-blur-sm lg:hidden"
               onClick={closeDrawer}
             />
             <motion.div
@@ -151,7 +164,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed top-[4.5rem] left-3 right-3 z-50 lg:hidden overflow-hidden rounded-organic border border-brand-rule bg-brand-card/98 backdrop-blur-xl shadow-nav"
+              className="fixed top-[4.75rem] left-3 right-3 z-[70] max-h-[min(70dvh,calc(100dvh-6rem))] overflow-y-auto lg:hidden rounded-organic border border-brand-rule bg-brand-card/98 backdrop-blur-xl shadow-nav"
             >
               <nav className="flex flex-col p-2">
                 {[...navLinks, { label: "Contact", href: "/contact" }].map((link, i) => {

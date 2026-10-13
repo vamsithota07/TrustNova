@@ -49,7 +49,7 @@ function MockupIframe({ industryId }: { industryId: string }) {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#080604]">
+    <div className="absolute inset-0 overflow-hidden bg-[#0B0714]">
       <div
         ref={scalerRef}
         className="iframe-scaler absolute left-1/2 top-1/2 will-change-transform"
@@ -132,7 +132,7 @@ function IndustryPanel({ industry }: { industry: IndustryCard }) {
         href={whatsappFor(industry)}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(196,103,74,0.35)] transition-colors hover:bg-[#B35B3F]"
+        className="inline-flex items-center gap-2 rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(91,33,182,0.35)] transition-colors hover:bg-[#4C1D95]"
       >
         Build My {industry.name} Website →
       </Link>
@@ -491,7 +491,7 @@ export default function IndustriesDesktopStory() {
     <div ref={rootRef} className="relative w-full bg-brand-black">
       <section
         ref={introRef}
-        className="relative z-[5] flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[#F8F5EF] px-10 text-center"
+        className="relative z-[5] flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-[#FBFBFD] px-10 text-center"
       >
         <div ref={introContentRef} className="max-w-[700px]">
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.35em] text-accent-warm">
@@ -514,10 +514,10 @@ export default function IndustriesDesktopStory() {
         </div>
       </section>
 
-      <div ref={storyRef} className="relative bg-[#080604]">
+      <div ref={storyRef} className="relative bg-[#0B0714]">
         <div
           ref={stageRef}
-          className="relative z-10 h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#080604]"
+          className="relative z-10 h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#0B0714]"
         >
           <div className="absolute inset-0 z-0 overflow-hidden">
             {industryCards.map((industry, i) => (
@@ -557,7 +557,7 @@ export default function IndustriesDesktopStory() {
             className="pointer-events-none absolute inset-0 z-[2] opacity-0"
             style={{
               background:
-                "linear-gradient(to right, rgba(8,6,4,0.94) 0%, rgba(8,6,4,0.78) 40%, rgba(8,6,4,0.28) 68%, transparent 100%)",
+                "linear-gradient(to right, rgba(11,7,20,0.94) 0%, rgba(11,7,20,0.78) 40%, rgba(11,7,20,0.28) 68%, transparent 100%)",
             }}
           />
 

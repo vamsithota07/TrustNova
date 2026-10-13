@@ -9,12 +9,12 @@ import { WHATSAPP_URL } from "@/lib/constants";
 import { shouldRenderNearby } from "@/lib/motion/performance";
 
 const SERVICE_TINT_RGB = [
-  "196, 103, 74",
-  "122, 158, 135",
-  "122, 158, 135",
-  "107, 143, 168",
+  "91, 33, 182",
+  "139, 92, 246",
+  "139, 92, 246",
+  "124, 111, 176",
   "154, 139, 180",
-  "196, 103, 74",
+  "91, 33, 182",
 ];
 
 type Service = {
@@ -165,32 +165,34 @@ function ServiceEditorial({
   service,
   includeCta = true,
   isActive = true,
+  nested = false,
 }: {
   service: Service;
   includeCta?: boolean;
   isActive?: boolean;
+  nested?: boolean;
 }) {
   return (
-    <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-16">
-      <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-12 xl:gap-16">
+    <div className={`mx-auto w-full max-w-6xl ${nested ? "px-0" : "px-4 sm:px-6"}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-16 items-start">
         <div className="min-w-0">
           <p
             data-service-subtitle
-            className={`text-base leading-relaxed mb-6 lg:mb-5 ${accentText[service.accent]}`}
+            className={`text-base md:text-lg leading-relaxed mb-8 ${accentText[service.accent]}`}
           >
             {service.subtitle}
           </p>
 
           <div data-service-deliverables>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim mb-3 lg:mb-2">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-dim mb-4">
               What&apos;s included
             </p>
-            <ul className="space-y-2.5 lg:space-y-1.5">
+            <ul className="space-y-2.5">
               {service.bullets.map((bullet) => (
                 <li
                   key={bullet}
                   data-service-bullet
-                  className="flex items-start gap-2.5 text-brand-silver text-sm leading-relaxed lg:leading-snug"
+                  className="flex items-start gap-2.5 text-brand-silver text-sm md:text-[15px] leading-relaxed"
                 >
                   <span className={`shrink-0 mt-0.5 text-xs ${accentText[service.accent]}`}>▸</span>
                   {bullet}
@@ -202,7 +204,7 @@ function ServiceEditorial({
           {includeCta && <ServiceCtaRow service={service} className="hidden lg:block pt-8 pb-2" />}
         </div>
 
-        <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-6">
+        <div data-service-visual className="relative flex items-center justify-center lg:sticky lg:top-8">
           <div className="w-full max-w-md" data-service-visual-inner>
             {isActive ? <ServiceVisual type={service.visual} active /> : (
               <div className="h-[260px] rounded-2xl border border-brand-rule bg-brand-dark/50" />
@@ -221,7 +223,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
     <div className="flex h-full min-h-0 flex-col">
       <div
         data-panel-title
-        className="pointer-events-none relative mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-6 pt-3 sm:px-8 sm:pt-4 text-center"
+        className="pointer-events-none relative mx-auto flex w-full max-w-3xl shrink-0 flex-col items-center px-4 pt-2 sm:pt-4 text-center"
       >
         <span data-service-number className="text-[11px] font-bold tracking-[0.25em] uppercase text-brand-dim">
           Service {service.number}
@@ -231,7 +233,7 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
           className={`mx-auto mt-4 h-px w-0 max-w-[80px] ${accentLine[service.accent]}`}
           aria-hidden
         />
-        <div className="mt-5 overflow-hidden pb-[0.4em]">
+        <div className="mt-5 -mb-[0.16em] overflow-hidden pb-[0.16em]">
           <h3
             data-service-name
             className="font-display font-bold text-brand-white text-[clamp(1.75rem,4.5vw,3.5rem)] tracking-[-0.03em] leading-[1.08] text-balance"
@@ -251,14 +253,14 @@ function ServicePanel({ service, isActive = false }: { service: Service; isActiv
         data-panel-content
         className="min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-hide opacity-0 will-change-transform"
       >
-        <div className="mx-auto mt-3 w-full max-w-6xl pb-5">
+        <div className="mx-auto mt-2 sm:mt-3 w-full max-w-6xl pb-3">
           <ServiceEditorial service={service} includeCta={false} isActive={isActive} />
         </div>
       </div>
 
       <div
         data-panel-footer
-        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-6 py-3 sm:px-8 lg:px-16 opacity-0 [&_.btn-magnetic]:min-h-[44px] [&_.btn-magnetic]:px-6 [&_.btn-magnetic]:py-2.5"
+        className="relative z-20 shrink-0 border-t border-brand-rule/50 bg-brand-black px-4 py-2 sm:px-6 opacity-0 [&_.btn-magnetic]:min-h-[44px] [&_.btn-magnetic]:px-6 [&_.btn-magnetic]:py-2.5"
       >
         <div className="mx-auto w-full max-w-6xl">
           <ServiceCtaRow service={service} />
@@ -281,7 +283,7 @@ function ServicesFallback() {
               {service.title}
             </h3>
           </div>
-          <ServiceEditorial service={service} />
+          <ServiceEditorial service={service} nested />
         </article>
       ))}
     </div>
@@ -599,8 +601,8 @@ export default function Services() {
       const active = i === activeIndex;
       gsap.to(dot, {
         scale: active ? 1.35 : 1,
-        backgroundColor: active ? "#C4674A" : "#DDDDDD",
-        borderColor: active ? "#C4674A" : "rgba(196, 103, 74, 0.4)",
+        backgroundColor: active ? "#5B21B6" : "#DDDDDD",
+        borderColor: active ? "#5B21B6" : "rgba(91, 33, 182, 0.4)",
         duration: 0.4,
         ease: "back.out(2)",
       });
@@ -620,7 +622,7 @@ export default function Services() {
                 What We Offer
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-[1.75] text-brand-silver md:mt-6 md:text-lg">
-                Scroll through each service to see what&apos;s included.
+                Explore each service below to see what&apos;s included.
               </p>
             </div>
           </Container>
@@ -646,7 +648,7 @@ export default function Services() {
           </div>
 
           <div
-            className="pointer-events-none absolute left-8 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-12 2xl:left-16"
+            className="pointer-events-none absolute left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:flex xl:left-[max(1.5rem,calc((100vw-104rem)/2))]"
             style={{ height: 240 }}
           >
             <div className="relative flex h-full w-6 flex-col items-center">
@@ -667,7 +669,7 @@ export default function Services() {
                     aria-hidden
                   />
                   {activeIndex === i && (
-                    <span className="absolute left-6 top-1/2 max-w-[150px] -translate-y-1/2 truncate text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
+                    <span className="absolute left-5 top-1/2 max-w-[140px] -translate-y-1/2 truncate text-[11px] font-semibold uppercase tracking-[0.2em] text-accent-warm">
                       {s.title.split("&")[0].trim()}
                     </span>
                   )}
@@ -696,7 +698,7 @@ export default function Services() {
 
           <div
             ref={progressRef}
-            className="relative z-40 shrink-0 bg-brand-black/95 px-6 pt-5 pb-4 sm:px-8"
+            className="relative z-40 shrink-0 px-4 sm:px-6 pt-4 pb-3"
           >
             <div className="max-w-md mx-auto">
               <div className="flex items-center justify-between gap-3 mb-3">

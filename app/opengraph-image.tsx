@@ -29,7 +29,7 @@ export default async function Image() {
             marginBottom: 16,
           }}
         >
-          TRUST<span style={{ color: "#C4674A" }}>NOVA</span>
+          TRUST<span style={{ color: "#5B21B6" }}>NOVA</span>
         </div>
         <div
           style={{
@@ -43,7 +43,7 @@ export default async function Image() {
         <div
           style={{
             fontSize: 22,
-            color: "#C4674A",
+            color: "#5B21B6",
             letterSpacing: 2,
           }}
         >

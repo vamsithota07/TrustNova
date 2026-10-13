@@ -243,6 +243,13 @@ export default function PortfolioPage() {
               <h1 className="font-display text-2xl font-bold text-brand-white md:text-3xl">
                 Our Work - Brands &amp; Websites We&apos;ve Built
               </h1>
+              <Link
+                href="/industries"
+                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-brand-silver transition-colors hover:text-accent-warm sm:hidden"
+              >
+                View all industries
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
             </div>
             <Link
               href="/industries"
@@ -262,7 +269,7 @@ export default function PortfolioPage() {
 
           <p className="editorial-eyebrow mb-6 text-accent-warm">Industry showcases</p>
 
-          <div className="horizontal-scroll -mx-4 flex gap-0 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-5 md:gap-3 md:overflow-visible md:pb-0 lg:gap-4">
+          <div className="horizontal-scroll -mx-4 flex gap-0 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 md:gap-3 md:overflow-visible md:pb-0 lg:gap-4">
             {portfolioProjects.map((project, i) => (
               <PortfolioProjectCard key={project.id} project={project} index={i} />
             ))}

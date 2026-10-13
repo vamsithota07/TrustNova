@@ -13,7 +13,7 @@ export default function PrivacyPage() {
       <BreadcrumbJsonLd pageName="Privacy Policy" pagePath="/privacy" />
       <LegalPageContent
         title="Privacy Policy"
-        updated="June 2025"
+        updated="October 2026"
         intro="TrustNova respects your privacy. This policy explains what information we collect when you visit trustnova.in or contact us, and how we use it."
         sections={[
           {
@@ -34,6 +34,7 @@ export default function PrivacyPage() {
             title: "Cookies & Analytics",
             paragraphs: [
               "Our website may use cookies and similar technologies to remember preferences and understand how visitors use the site.",
+              "We use Google Analytics to measure visits, such as pages viewed, links clicked, device type, and approximate location. Google processes this data on our behalf; it is not used to identify you personally.",
               "You can control cookies through your browser settings. Disabling cookies may affect some site functionality.",
             ],
           },

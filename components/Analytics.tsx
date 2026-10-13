@@ -1,9 +1,11 @@
 import Script from "next/script";
 
-/** Google Analytics 4. Loads only when NEXT_PUBLIC_GA_ID is set, so nothing is tracked until an ID is added. */
+/** Google Analytics 4 for www.trustnova.in. The measurement ID is public; NEXT_PUBLIC_GA_ID overrides it. */
+const DEFAULT_GA_ID = "G-CXS2SW1NFX";
+
 export default function Analytics() {
-  const id = process.env.NEXT_PUBLIC_GA_ID;
-  if (!id) return null;
+  const id = process.env.NEXT_PUBLIC_GA_ID || DEFAULT_GA_ID;
+  if (process.env.NODE_ENV !== "production") return null;   // keep local development out of the numbers
 
   return (
     <>

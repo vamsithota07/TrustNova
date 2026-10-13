@@ -63,13 +63,12 @@ export const STARTING_PRICES = [
   { label: "Websites", from: "₹25,000" },
 ] as const;
 
-export const LINKEDIN_COMING_SOON_MESSAGE =
-  "We're on our way to launching our LinkedIn profile. Check back soon!";
 
 export const socialLinks = {
   instagram: "https://www.instagram.com/trustnova.in/",
   gmail: `mailto:${EMAIL}`,
   x: "https://x.com/trustnovain",
+  linkedin: "https://www.linkedin.com/company/trustnova-in/",
 };
 
 export const siteMetadata = {

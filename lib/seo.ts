@@ -298,7 +298,7 @@ export function professionalServiceSchema() {
       opens: "09:00",
       closes: "19:00",
     },
-    sameAs: [socialLinks.instagram, socialLinks.x],
+    sameAs: [socialLinks.instagram, socialLinks.x, socialLinks.linkedin],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "TrustNova Services",

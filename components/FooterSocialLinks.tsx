@@ -1,11 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { Instagram, Linkedin, Mail } from "lucide-react";
-import {
-  LINKEDIN_COMING_SOON_MESSAGE,
-  socialLinks,
-} from "@/lib/constants";
+import { socialLinks } from "@/lib/constants";
 
 function XIcon({ className }: { className?: string }) {
   return (
@@ -31,16 +27,14 @@ const externalLinks = [
     label: "TrustNova on X",
     icon: XIcon,
   },
+  {
+    href: socialLinks.linkedin,
+    label: "TrustNova on LinkedIn",
+    icon: Linkedin,
+  },
 ] as const;
 
 export default function FooterSocialLinks() {
-  const [linkedinNotice, setLinkedinNotice] = useState(false);
-
-  const showLinkedinNotice = () => {
-    setLinkedinNotice(true);
-    window.setTimeout(() => setLinkedinNotice(false), 3200);
-  };
-
   return (
     <div className="relative flex items-center justify-center gap-4 md:gap-5 mt-6 md:mt-8">
       {externalLinks.map(({ href, label, icon: Icon }) => (
@@ -59,27 +53,6 @@ export default function FooterSocialLinks() {
           )}
         </a>
       ))}
-
-      <div className="relative">
-        <button
-          type="button"
-          onClick={showLinkedinNotice}
-          aria-label="LinkedIn, profile coming soon"
-          title={LINKEDIN_COMING_SOON_MESSAGE}
-          className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] text-brand-dim transition-colors duration-200 hover:text-brand-silver active:scale-95 cursor-pointer"
-        >
-          <Linkedin className="w-6 h-6 shrink-0" strokeWidth={1.75} />
-        </button>
-
-        {linkedinNotice && (
-          <p
-            role="status"
-            className="absolute bottom-full left-1/2 z-20 mb-2 w-[min(240px,70vw)] -translate-x-1/2 rounded-lg border border-brand-rule bg-brand-card px-3 py-2 text-center text-[11px] leading-snug text-brand-silver shadow-lg"
-          >
-            {LINKEDIN_COMING_SOON_MESSAGE}
-          </p>
-        )}
-      </div>
 
       <a
         href={socialLinks.gmail}

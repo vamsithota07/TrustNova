@@ -19,6 +19,17 @@ const nextConfig = {
         destination: "/contact",
         permanent: true,
       },
+      // The earlier site had a blog; its posts no longer exist, so old links land on the homepage.
+      {
+        source: "/blog",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blog/:path*",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

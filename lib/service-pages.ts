@@ -24,7 +24,7 @@ export const servicePages: ServicePage[] = [
     nav: "Logo design",
     eyebrow: "Logo design · Hyderabad",
     h1: "Logo design in Hyderabad for businesses that want to be remembered",
-    title: "Logo Design in Hyderabad - 3 Concepts, Unlimited Revisions | TrustNova",
+    title: "Logo Design in Hyderabad - Unlimited Revisions | TrustNova",
     description:
       "Custom logo design in Hyderabad. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days. From ₹8,000.",
     keywords: ["logo design hyderabad", "logo designer hyderabad", "logo design company hyderabad", "custom logo design india"],
@@ -73,7 +73,7 @@ export const servicePages: ServicePage[] = [
     nav: "Brand identity",
     eyebrow: "Brand identity · Hyderabad & India",
     h1: "Brand identity design: one consistent look across everything you put out",
-    title: "Brand Identity Design in Hyderabad - Logo, Stationery & Style Guide | TrustNova",
+    title: "Brand Identity Design in Hyderabad | TrustNova",
     description:
       "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide. From ₹18,000. Based in Hyderabad.",
     keywords: ["brand identity design hyderabad", "branding agency hyderabad", "brand identity package india", "business card and letterhead design"],
@@ -122,7 +122,7 @@ export const servicePages: ServicePage[] = [
     nav: "Website design",
     eyebrow: "Website design · Hyderabad",
     h1: "Website design in Hyderabad, built to bring you enquiries",
-    title: "Website Design in Hyderabad - Mobile-First, Live in 2-4 Weeks | TrustNova",
+    title: "Website Design in Hyderabad - Live in 2-4 Weeks | TrustNova",
     description:
       "Custom, mobile-first website design in Hyderabad. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks. From ₹25,000.",
     keywords: ["website design hyderabad", "web designer hyderabad", "website development company hyderabad", "small business website india"],
@@ -173,7 +173,7 @@ export const servicePages: ServicePage[] = [
     nav: "Digital marketing",
     eyebrow: "Digital marketing · Hyderabad",
     h1: "Digital marketing in Hyderabad that aims at enquiries, not just likes",
-    title: "Digital Marketing in Hyderabad - SEO, Google Profile, Social & Ads | TrustNova",
+    title: "Digital Marketing in Hyderabad - SEO, Social & Ads | TrustNova",
     description:
       "Digital marketing for Hyderabad businesses: SEO, Google Business Profile, social media and Google & Meta ads, with clear monthly reporting. Free consultation.",
     keywords: ["digital marketing hyderabad", "seo services hyderabad", "google business profile optimisation", "social media marketing hyderabad"],

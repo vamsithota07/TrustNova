@@ -8,7 +8,7 @@ export const TWITTER_HANDLE = "@trustnovain";
 export const defaultSEO = {
   siteName: SITE_NAME,
   siteUrl: SITE_URL,
-  defaultTitle: "TrustNova - Brand, Website & Digital Marketing Studio in Hyderabad",
+  defaultTitle: "Brand, Website & Digital Marketing Studio, Hyderabad | TrustNova",
   defaultDescription:
     "TrustNova is a brand, website, and digital marketing studio in Hyderabad. We help Indian businesses build trust, get found, and grow.",
   defaultOGImage: `${SITE_URL}/og-image.jpg`,
@@ -24,7 +24,7 @@ export const OG_IMAGE = {
 
 export const pageSEO = {
   home: {
-    title: "TrustNova - Brand, Website & Digital Marketing Studio in Hyderabad",
+    title: "Brand, Website & Digital Marketing Studio, Hyderabad | TrustNova",
     description:
       "We design brands, build conversion-focused websites, and run digital marketing that helps Indian businesses get found and grow. Based in Hyderabad.",
     keywords: [
@@ -93,7 +93,7 @@ export const pageSEO = {
     path: "/privacy",
   },
   portfolio: {
-    title: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova Hyderabad",
+    title: "Portfolio - Brands & Websites We've Built | TrustNova",
     description:
       "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses. Based in Hyderabad.",
     keywords: [
@@ -139,7 +139,7 @@ export const PORTFOLIO_OG_IMAGE = {
 
 export const portfolioMetadata: Metadata = {
   title: {
-    absolute: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova Hyderabad",
+    absolute: "Portfolio - Brands & Websites We've Built | TrustNova",
   },
   description:
     "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses. Based in Hyderabad.",
@@ -149,7 +149,7 @@ export const portfolioMetadata: Metadata = {
     canonical: `${SITE_URL}/portfolio`,
   },
   openGraph: {
-    title: "Portfolio - Brand, Website & Digital Marketing Work | TrustNova",
+    title: "Portfolio - Brands & Websites We've Built | TrustNova",
     description:
       "See TrustNova's portfolio of brand identity, websites, and digital marketing work for Indian businesses.",
     url: `${SITE_URL}/portfolio`,

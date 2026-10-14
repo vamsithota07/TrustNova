@@ -67,9 +67,9 @@ export default function IndustriesMobileStory() {
     <div className="relative bg-brand-black pb-8 pt-28 sm:pt-32">
       <div className="px-4 pt-2 pb-4 text-center">
         <p className="editorial-eyebrow mb-3">Our Expertise</p>
-        <h1 className="editorial-heading text-[clamp(1.75rem,6vw,2.5rem)] text-balance">
+        <p role="heading" aria-level={1} className="editorial-heading text-[clamp(1.75rem,6vw,2.5rem)] text-balance">
           Built for your industry
-        </h1>
+        </p>
         <p className="mt-3 text-sm leading-relaxed text-brand-silver max-w-md mx-auto">
           Swipe through how TrustNova designs for businesses like yours.
         </p>

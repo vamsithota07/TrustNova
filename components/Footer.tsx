@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
 
           <div className="text-center md:text-left lg:border-r lg:border-brand-rule lg:pr-12 xl:pr-16 min-w-0">
-            <h3 className="text-brand-white font-semibold mb-4">Quick Links</h3>
+            <h2 className="text-brand-white font-semibold mb-4">Quick Links</h2>
             <nav className="grid grid-cols-2 gap-x-4 gap-y-1 md:block">
               {navLinks.map((link) => (
                 <Link
@@ -94,7 +94,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left w-full">
             <p className="text-brand-dim text-xs">
               © {new Date().getFullYear()} TrustNova. All rights reserved. ·{" "}
-              <a href="https://www.trustnova.in" className="hover:text-brand-white transition-colors">
+              <a href="https://www.trustnova.in" className="inline-flex min-h-[44px] items-center align-middle hover:text-brand-white transition-colors">
                 trustnova.in
               </a>{" "}
               · Hyderabad, Telangana, India

@@ -9,20 +9,20 @@ export default function FooterNap() {
   return (
     <div className="space-y-8 text-center md:text-left">
       <div>
-        <h3 className={sectionTitle}>TrustNova</h3>
+        <h2 className={sectionTitle}>TrustNova</h2>
         <p className="text-brand-white text-sm font-medium">Brand, Web &amp; Growth Studio</p>
         <p className="mt-2 text-brand-silver text-sm">
-          <Link href="/" className="hover:text-brand-blue transition-colors">
+          <Link href="/" className="inline-flex min-h-[44px] items-center hover:text-brand-blue transition-colors">
             trustnova.in
           </Link>
         </p>
       </div>
 
       <div>
-        <h3 className={sectionTitle}>Email us</h3>
+        <h2 className={sectionTitle}>Email us</h2>
         <a
           href={`mailto:${EMAIL}`}
-          className="inline-flex items-center gap-2 text-brand-white text-sm hover:text-brand-blue transition-colors"
+          className="inline-flex min-h-[44px] items-center gap-2 text-brand-white text-sm hover:text-brand-blue transition-colors"
         >
           <Mail className="w-4 h-4 text-brand-blue shrink-0" strokeWidth={2} />
           {EMAIL}
@@ -33,10 +33,10 @@ export default function FooterNap() {
       </div>
 
       <div>
-        <h3 className={sectionTitle}>Call us</h3>
+        <h2 className={sectionTitle}>Call us</h2>
         <a
           href={PHONE_TEL}
-          className="inline-flex items-center gap-2 text-brand-white text-sm hover:text-brand-blue transition-colors"
+          className="inline-flex min-h-[44px] items-center gap-2 text-brand-white text-sm hover:text-brand-blue transition-colors"
         >
           <Phone className="w-4 h-4 text-brand-blue shrink-0" strokeWidth={2} />
           {PHONE}
@@ -47,7 +47,7 @@ export default function FooterNap() {
       </div>
 
       <div>
-        <h3 className={sectionTitle}>Address</h3>
+        <h2 className={sectionTitle}>Address</h2>
         <p className="text-brand-white text-sm leading-relaxed flex items-start gap-2 justify-center md:justify-start">
           <MapPin className="w-4 h-4 text-brand-blue shrink-0 mt-0.5" strokeWidth={2} />
           <span>Hyderabad, Telangana, India</span>

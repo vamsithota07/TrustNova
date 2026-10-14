@@ -90,6 +90,7 @@ export default function FooterContact() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email address"
+              aria-label="Your email address"
               disabled={status === "loading"}
               required
               className="min-w-0 flex-1 border-none bg-transparent px-4 py-3 text-sm text-brand-white caret-brand-white outline-none placeholder:text-brand-dim/70 disabled:opacity-70"

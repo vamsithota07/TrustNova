@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { servicePages } from "@/lib/service-pages";
 import Image from "next/image";
 import { navLinks } from "@/lib/constants";
 import Container from "@/components/Container";
@@ -62,6 +63,13 @@ export default function Footer() {
         </div>
 
         <div className="relative z-[1] border-t border-brand-rule mt-8 md:mt-12 pt-6 md:pt-8 flex flex-col items-center gap-4 min-w-0">
+          <nav aria-label="Services" className="flex flex-wrap items-center justify-center gap-x-2 text-xs text-brand-dim">
+            {servicePages.map((p) => (
+              <Link key={p.slug} href={`/services/${p.slug}`} className="inline-flex min-h-[44px] items-center px-2 py-1 transition-colors duration-200 hover:text-brand-white">
+                {p.nav}
+              </Link>
+            ))}
+          </nav>
           <nav
             aria-label="Legal policies"
             className="flex flex-wrap items-center justify-center gap-x-3 text-xs text-brand-dim"

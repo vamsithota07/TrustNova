@@ -116,6 +116,10 @@ export const pageSEO = {
 export const sitemapPaths = [
   "",
   "/services",
+  "/services/logo-design-hyderabad",
+  "/services/brand-identity-design",
+  "/services/website-design-hyderabad",
+  "/services/digital-marketing-hyderabad",
   "/industries",
   "/portfolio",
   "/recommend",

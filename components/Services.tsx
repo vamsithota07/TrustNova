@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
 import Container from "@/components/Container";
 import MagneticButton from "@/components/motion/MagneticButton";
@@ -147,9 +148,19 @@ function quoteUrl(title: string) {
   return `${WHATSAPP_URL}?text=${encodeURIComponent(`Hi, I'd like a quote for ${title}`)}`;
 }
 
+/** Services that have a detail page of their own (see lib/service-pages.ts). */
+const DETAIL_PAGE: Record<number, string> = {
+  1: "/services/logo-design-hyderabad",
+  2: "/services/brand-identity-design",
+  3: "/services/website-design-hyderabad",
+  6: "/services/digital-marketing-hyderabad",
+};
+
 function ServiceCtaRow({ service, className = "" }: { service: Service; className?: string }) {
+  const detail = DETAIL_PAGE[service.id];
   return (
     <div data-service-cta className={className}>
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
       <MagneticButton
         href={quoteUrl(service.title)}
         external
@@ -157,6 +168,15 @@ function ServiceCtaRow({ service, className = "" }: { service: Service; classNam
       >
         Get a Quote →
       </MagneticButton>
+      {detail && (
+        <Link
+          href={detail}
+          className="relative z-20 inline-flex min-h-[48px] items-center justify-center text-sm font-semibold text-accent-warm underline underline-offset-4 transition-colors hover:text-brand-white"
+        >
+          Learn more about {service.title.split(" & ")[0].replace("Complete ", "").toLowerCase()}
+        </Link>
+      )}
+      </div>
     </div>
   );
 }

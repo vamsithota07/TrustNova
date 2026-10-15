@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import Pillars from "@/components/Pillars";
+import HomeGuide from "@/components/HomeGuide";
 import SectionSeparator from "@/components/SectionSeparator";
 import JsonLd from "@/components/JsonLd";
 import { createPageMetadata, pageSEO, websiteSchema } from "@/lib/seo";
@@ -18,6 +19,8 @@ export default function Home() {
         <TrustBar />
         <SectionSeparator />
         <Pillars />
+        <SectionSeparator />
+        <HomeGuide />
       </main>
     </>
   );

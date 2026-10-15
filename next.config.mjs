@@ -30,6 +30,12 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      // The earlier site had a /tools page; the interactive package finder is the closest page now.
+      {
+        source: "/tools",
+        destination: "/recommend",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

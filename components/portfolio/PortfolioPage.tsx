@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Instagram, Mail } from "lucide-react";
@@ -103,7 +104,7 @@ function PortfolioProjectCard({
   );
 }
 
-export default function PortfolioPage() {
+export default function PortfolioPage({ children }: { children?: React.ReactNode }) {
   return (
     <div className="overflow-x-clip bg-brand-black">
       <PortfolioHeroHeader />
@@ -276,6 +277,8 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {children}
 
       {/* CTA */}
       <section className="border-t border-brand-rule bg-brand-dark px-4 py-16 sm:px-8 md:py-24">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import InnerPageLayout from "@/components/InnerPageLayout";
 import PortfolioPage from "@/components/portfolio/PortfolioPage";
+import PortfolioGuide from "@/components/portfolio/PortfolioGuide";
 import JsonLd from "@/components/JsonLd";
 import { portfolioCollectionSchema, portfolioMetadata } from "@/lib/seo";
 
@@ -10,7 +11,9 @@ export default function PortfolioRoute() {
   return (
     <InnerPageLayout>
       <JsonLd data={portfolioCollectionSchema()} />
-      <PortfolioPage />
+      <PortfolioPage>
+        <PortfolioGuide />
+      </PortfolioPage>
     </InnerPageLayout>
   );
 }

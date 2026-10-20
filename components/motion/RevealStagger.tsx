@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { revealWhenVisible } from "@/lib/motion/reveal-when-visible";
 
 type RevealStaggerProps = {
   children: ReactNode;
@@ -31,20 +32,11 @@ export default function RevealStagger({
 
     gsap.set(items, { opacity: 0, y: 40 });
 
-    const tween = gsap.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      stagger,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: root,
-        start: "top 85%",
-      },
-    });
+    const tween = gsap.to(items, { opacity: 1, y: 0, duration: 0.9, stagger, ease: "power3.out", paused: true });
+    const stop = revealWhenVisible(root, () => tween.play(), "-15%");
 
     return () => {
-      tween.scrollTrigger?.kill();
+      stop();
       tween.kill();
     };
   }, [stagger]);

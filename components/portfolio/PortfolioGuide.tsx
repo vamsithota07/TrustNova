@@ -1,5 +1,7 @@
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import Reveal from "@/components/motion/Reveal";
+import RevealStagger from "@/components/motion/RevealStagger";
 import { featuredProjects, portfolioProjects } from "@/lib/portfolio";
 import { industryCards } from "@/lib/industries";
 
@@ -38,28 +40,30 @@ export default function PortfolioGuide() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage",
         mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
       <div className="mx-auto max-w-editorial">
-        <p className="editorial-eyebrow mb-2 text-accent-warm">Client work in detail</p>
-        <h2 className="font-display text-2xl font-bold text-brand-white md:text-4xl mb-10">What we did for each client</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-w-0">
+        <Reveal>
+          <p className="editorial-eyebrow mb-2 text-accent-warm">Client work in detail</p>
+          <h2 className="font-display text-2xl font-bold text-brand-white md:text-4xl mb-10">What we did for each client</h2>
+        </Reveal>
+        <RevealStagger stagger={0.14} className="grid grid-cols-1 lg:grid-cols-3 gap-6 min-w-0">
           {featuredProjects.map((p) => {
             const c = CASES[p.id];
             if (!c) return null;
             return (
-              <article key={p.id} className="creative-card p-8 min-w-0 flex flex-col">
+              <article key={p.id} data-reveal-item className="group creative-card p-8 min-w-0 flex flex-col transition-all duration-500 ease-premium hover:shadow-card-hover hover:-translate-y-1">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-dim">{p.category}</p>
                 <h3 className="font-display font-bold text-2xl mt-2 mb-4 tracking-[-0.02em] text-brand-white">{p.title}</h3>
                 <p className="editorial-body text-sm md:text-base leading-[1.75]">{c.client}</p>
                 <p className="editorial-body text-sm md:text-base leading-[1.75] mt-3 flex-1">{c.did}</p>
                 <div className="mt-6 flex flex-wrap gap-x-5 gap-y-1">
-                  <Link href={c.service.href} className="inline-flex min-h-[44px] items-center text-sm font-semibold text-accent-warm hover:underline">{c.service.label} →</Link>
+                  <Link href={c.service.href} className="inline-flex min-h-[44px] items-center text-sm font-semibold text-accent-warm hover:underline">{c.service.label} <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span></Link>
                   {p.href && <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center text-sm font-semibold text-brand-silver hover:underline">Visit the live site ↗</a>}
                 </div>
               </article>
             );
           })}
-        </div>
+        </RevealStagger>
 
-        <div className="mt-20">
+        <Reveal className="mt-20">
           <p className="editorial-eyebrow mb-2 text-accent-warm">Industry showcases</p>
           <h2 className="font-display text-2xl font-bold text-brand-white md:text-4xl mb-4">How we would approach your business</h2>
           <p className="editorial-body max-w-3xl leading-[1.75]">
@@ -77,21 +81,21 @@ export default function PortfolioGuide() {
             {industryCards.map((c, i) => <span key={c.id}>{c.name}{i < industryCards.length - 1 ? ", " : "."}</span>)}{" "}
             <Link href="/industries" className="text-accent-warm font-semibold hover:underline">See every industry</Link>.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-20 max-w-3xl">
           <p className="editorial-eyebrow mb-2 text-accent-warm">Questions</p>
           <h2 className="font-display text-2xl font-bold text-brand-white md:text-4xl mb-8">About our work</h2>
-          <div className="space-y-4">
+          <RevealStagger stagger={0.08} className="space-y-4">
             {FAQS.map((f) => (
-              <details key={f.q} className="creative-card group p-6 md:p-7">
+              <details key={f.q} data-reveal-item className="creative-card group p-6 md:p-7 transition-shadow duration-500 hover:shadow-card-hover">
                 <summary className="cursor-pointer list-none font-display font-bold text-lg text-brand-white min-h-[44px] flex items-center justify-between gap-4">
                   {f.q}<span className="text-accent-warm transition-transform group-open:rotate-45" aria-hidden>+</span>
                 </summary>
                 <p className="editorial-body text-sm md:text-base leading-[1.75] mt-4">{f.a}</p>
               </details>
             ))}
-          </div>
+          </RevealStagger>
         </div>
       </div>
     </section>

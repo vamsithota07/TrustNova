@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, registerGsap, ScrollTrigger } from "@/lib/motion/gsap-register";
+import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { revealWhenVisible } from "@/lib/motion/reveal-when-visible";
 
 type RevealProps = {
   children: ReactNode;
@@ -48,17 +49,11 @@ export default function Reveal({
       to.scale = 1;
     }
 
-    const tween = gsap.fromTo(el, from, {
-      ...to,
-      scrollTrigger: {
-        trigger: el,
-        start: "top 88%",
-        toggleActions: "play none none none",
-      },
-    });
+    const tween = gsap.fromTo(el, from, { ...to, paused: true });
+    const stop = revealWhenVisible(el, () => tween.play());
 
     return () => {
-      tween.scrollTrigger?.kill();
+      stop();
       tween.kill();
     };
   }, [delay, duration, scale, y]);

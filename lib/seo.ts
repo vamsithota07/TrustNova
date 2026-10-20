@@ -66,7 +66,7 @@ export const pageSEO = {
   recommend: {
     title: "Find Your Perfect Package - Website & Brand Design | TrustNova",
     description:
-      "Answer 3 quick questions and find the right TrustNova package for your business stage and budget. Logo from ₹8,000, Website from ₹25,000.",
+      "Answer 3 quick questions and find the right TrustNova package for your business stage and budget.",
     path: "/recommend",
   },
   about: {
@@ -277,8 +277,6 @@ export function professionalServiceSchema() {
       "TrustNova is a brand, website, and digital marketing studio based in Hyderabad, India.",
     telephone: PHONE_TEL.replace("tel:", ""),
     email: EMAIL,
-    priceRange: "₹₹",
-    currenciesAccepted: "INR",
     paymentAccepted: "UPI, Bank Transfer, NEFT, IMPS",
     areaServed: [
       { "@type": "City", name: "Hyderabad" },
@@ -315,8 +313,6 @@ export function professionalServiceSchema() {
             description:
               "Custom logo design with unlimited revisions, brand colour palette, typography, and final files in all formats.",
           },
-          price: "8000",
-          priceCurrency: "INR",
         },
         {
           "@type": "Offer",
@@ -326,8 +322,6 @@ export function professionalServiceSchema() {
             description:
               "Logo design plus business card, letterhead, social media templates, and brand style guide.",
           },
-          price: "18000",
-          priceCurrency: "INR",
         },
         {
           "@type": "Offer",
@@ -337,8 +331,6 @@ export function professionalServiceSchema() {
             description:
               "Custom mobile-first website design and development for Indian businesses. Up to 8 pages with SEO setup.",
           },
-          price: "25000",
-          priceCurrency: "INR",
         },
         {
           "@type": "Offer",

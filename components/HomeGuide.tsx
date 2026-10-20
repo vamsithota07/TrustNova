@@ -12,9 +12,9 @@ import { servicePages } from "@/lib/service-pages";
    Every claim here comes from the service catalogue. */
 
 const SUMMARY: Record<string, string> = {
-  "logo-design-hyderabad": "Three unique concepts, unlimited refinements and every file format, with concepts ready in 3-5 days. From ₹8,000.",
-  "brand-identity-design": "Your logo plus colours, fonts, business cards, letterhead, social media templates and a brand style guide. From ₹18,000.",
-  "website-design-hyderabad": "Custom, mobile-first websites of up to 8 pages with WhatsApp click-to-chat, basic SEO and Google Analytics, live in 2-4 weeks. From ₹25,000.",
+  "logo-design-hyderabad": "Three unique concepts, unlimited refinements and every file format, with concepts ready in 3-5 days.",
+  "brand-identity-design": "Your logo plus colours, fonts, business cards, letterhead, social media templates and a brand style guide.",
+  "website-design-hyderabad": "Custom, mobile-first websites of up to 8 pages with WhatsApp click-to-chat, basic SEO and Google Analytics, live in 2-4 weeks.",
   "digital-marketing-hyderabad": "SEO and Google Business Profile, social media management, Google and Meta ads, and content, on a monthly plan scoped to your goals.",
 };
 
@@ -37,7 +37,7 @@ const PROMISES = [
 ];
 
 export const HOME_FAQS = [
-  { q: "How much does a logo or website cost?", a: "Logo design starts from ₹8,000, the complete brand identity package from ₹18,000 and websites from ₹25,000. Digital marketing is a monthly plan scoped to your goals. After a short free consultation you get one fixed quote, with no hidden charges." },
+  { q: "How much does a logo or website cost?", a: "Every project is different, so we don't use a fixed price list. After a short free consultation you get one fixed quote for exactly what you need, explained clearly, with no hidden charges. Digital marketing is a monthly plan scoped to your goals." },
   { q: "How long does a website take?", a: "A full website is typically live in 2-4 weeks, depending on how quickly content and feedback come in. Logo concepts are ready in 3-5 days." },
   { q: "Do I own the logo, files and website code?", a: "Yes. You own 100% of everything we create: every logo file, the brand assets and the website code. Your domain and hosting are bought in your name, so they stay yours." },
   { q: "How many revisions do I get?", a: "Unlimited. We keep refining until you are happy with the result." },

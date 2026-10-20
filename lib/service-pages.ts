@@ -26,7 +26,7 @@ export const servicePages: ServicePage[] = [
     h1: "Logo design in Hyderabad for businesses that want to be remembered",
     title: "Logo Design in Hyderabad - Unlimited Revisions | TrustNova",
     description:
-      "Custom logo design in Hyderabad. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days. From ₹8,000.",
+      "Custom logo design in Hyderabad. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days.",
     keywords: ["logo design hyderabad", "logo designer hyderabad", "logo design company hyderabad", "custom logo design india"],
     intro: [
       "Your logo is the first thing a customer sees: on your signboard, your bill, your Google listing and your Instagram page. If it looks like everyone else's, people forget it. If it looks considered, they assume the business behind it is too.",
@@ -58,8 +58,7 @@ export const servicePages: ServicePage[] = [
       ],
     },
     timeline: "Logo concepts are ready in 3-5 days. The total time depends on how many rounds of refinement you want.",
-    price: "Logo design starts from ₹8,000. You get a fixed quote after a short discovery call, with no hidden charges.",
-    startingPrice: "8000",
+    price: "You get a fixed quote after a short, free discovery call, with no hidden charges.",
     faqs: [
       { q: "How many concepts will I see?", a: "Three. Each is a different idea, not three versions of the same one." },
       { q: "What if I don't like any of them?", a: "Tell us what is missing and we rework the direction. Revisions are unlimited, so you are not charged for changing your mind." },
@@ -75,7 +74,7 @@ export const servicePages: ServicePage[] = [
     h1: "Brand identity design: one consistent look across everything you put out",
     title: "Brand Identity Design in Hyderabad | TrustNova",
     description:
-      "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide. From ₹18,000. Based in Hyderabad.",
+      "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide. Based in Hyderabad.",
     keywords: ["brand identity design hyderabad", "branding agency hyderabad", "brand identity package india", "business card and letterhead design"],
     intro: [
       "A logo is one mark. A brand identity is the whole system around it: the colours, the fonts, the stationery, the templates and the rules that keep them consistent. Without that system, a business ends up with one look on its board, another on its bill and a third on Instagram.",
@@ -107,8 +106,7 @@ export const servicePages: ServicePage[] = [
       ],
     },
     timeline: "Logo concepts take 3-5 days. The full package follows once the logo is approved; we agree the schedule with you at the start.",
-    price: "The complete brand identity package starts from ₹18,000, with a fixed quote after a discovery call.",
-    startingPrice: "18000",
+    price: "You get a fixed quote for the complete package after a short, free discovery call, with no hidden charges.",
     faqs: [
       { q: "I already have a logo. Can you build the rest around it?", a: "Yes. We can refine the existing logo if needed and design the rest of the identity to match it." },
       { q: "What is a brand style guide?", a: "A short document showing your logo, colours and fonts and how to use them, so that anyone producing material for you keeps it consistent." },
@@ -124,7 +122,7 @@ export const servicePages: ServicePage[] = [
     h1: "Website design in Hyderabad, built to bring you enquiries",
     title: "Website Design in Hyderabad - Live in 2-4 Weeks | TrustNova",
     description:
-      "Custom, mobile-first website design in Hyderabad. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks. From ₹25,000.",
+      "Custom, mobile-first website design in Hyderabad. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks.",
     keywords: ["website design hyderabad", "web designer hyderabad", "website development company hyderabad", "small business website india"],
     intro: [
       "Most of your customers look you up on their phone before they call or visit. If they find a slow, confusing site, or no site at all, they move on to the next result. A website's job is simple: say clearly what you do, look trustworthy, and make it easy to get in touch.",
@@ -158,8 +156,7 @@ export const servicePages: ServicePage[] = [
       ],
     },
     timeline: "A full website is typically live in 2-4 weeks, depending on how quickly content and feedback come in.",
-    price: "Websites start from ₹25,000. Domain and hosting are bought by you and stay in your name; we quote a fixed price for the design and build.",
-    startingPrice: "25000",
+    price: "You get a fixed quote for the design and build after a short, free discovery call. Domain and hosting are bought by you and stay in your name.",
     faqs: [
       { q: "Will I be able to update the site myself?", a: "Yes. We include a handover session, and if you prefer, our monthly maintenance plan covers updates for you." },
       { q: "Who owns the website?", a: "You do: the design, the code and the content. The domain and hosting are in your name, so you are never locked in." },

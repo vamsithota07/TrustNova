@@ -31,7 +31,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   "logo-basic": {
     badge: "RECOMMENDED FOR YOU",
     packageName: "Logo Design & Brand Identity",
-    price: "Starting at ₹8,000",
+    price: "Fixed quote after a free consultation",
     description:
       "You need a strong foundation - a professional logo that makes your business instantly credible. This is the right first step.",
     includes: [
@@ -47,7 +47,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   "brand-identity": {
     badge: "RECOMMENDED FOR YOU",
     packageName: "Complete Brand Identity Package",
-    price: "Starting at ₹18,000",
+    price: "Fixed quote after a free consultation",
     description:
       "You're ready for a full brand system - not just a logo, but a complete visual identity that works everywhere.",
     includes: [
@@ -64,7 +64,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   website: {
     badge: "RECOMMENDED FOR YOU",
     packageName: "Website Design & Development",
-    price: "Starting at ₹25,000",
+    price: "Fixed quote after a free consultation",
     description:
       "Your business needs a website that works as hard as you do - beautiful, fast, mobile-ready, and built to convert.",
     includes: [
@@ -81,7 +81,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   "full-bundle": {
     badge: "BEST VALUE - RECOMMENDED FOR YOU",
     packageName: "Full Brand + Website Bundle",
-    price: "Starting at ₹45,000",
+    price: "Fixed quote after a free consultation",
     description:
       "This is the complete package. Everything you need to launch professionally - logo, brand identity, and a stunning website. Built together, so everything is perfectly consistent.",
     includes: [
@@ -98,7 +98,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   maintenance: {
     badge: "RECOMMENDED FOR YOU",
     packageName: "Website Maintenance & Ongoing Support",
-    price: "Starting at ₹4,000/month",
+    price: "Fixed quote after a free consultation",
     description:
       "Your website needs consistent care to stay fast, secure, and up to date. We handle everything so you can focus on running your business.",
     includes: [
@@ -115,7 +115,7 @@ const results: Record<ResultId, Omit<Recommendation, "id">> = {
   "digital-marketing": {
     badge: "RECOMMENDED FOR YOU",
     packageName: "Digital Marketing & Growth",
-    price: "Tailored monthly plans",
+    price: "Fixed quote after a free consultation",
     description: "You have the foundation. Now you need a focused growth system that makes your business easier to find, follow, and choose.",
     includes: ["Digital growth strategy", "SEO and Google Business Profile optimisation", "Social media content planning", "Meta and Google Ads campaign management", "Monthly reporting and clear next actions"],
     ctaLabel: "Plan My Growth →",

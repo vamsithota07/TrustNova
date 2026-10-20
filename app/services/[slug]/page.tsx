@@ -40,8 +40,8 @@ function schema(page: NonNullable<ReturnType<typeof servicePageBySlug>>) {
         { "@type": "City", name: "Hyderabad" },
         { "@type": "Country", name: "India" },
       ],
-      ...(page.startingPrice
-        ? { offers: { "@type": "Offer", priceCurrency: "INR", price: page.startingPrice, url } }
+      ...(false
+        ? {}
         : {}),
     },
     {

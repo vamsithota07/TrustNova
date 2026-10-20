@@ -5,7 +5,7 @@ import Reveal from "@/components/motion/Reveal";
 import RevealStagger from "@/components/motion/RevealStagger";
 
 /* Helps a visitor pick the right service: situations mapped to services, a comparison of what each includes, how long
-   it takes and where prices start, and the questions people ask before choosing. Rendered on the server so search
+   it takes, and the questions people ask before choosing. Rendered on the server so search
    engines read all of it. Every fact comes from the service catalogue (lib/service-pages.ts). */
 
 const SITUATIONS = [
@@ -17,18 +17,18 @@ const SITUATIONS = [
 ];
 
 const COMPARE = [
-  { service: "Logo design", gets: "Three concepts, unlimited refinements, colour palette, fonts and every file format", time: "Concepts in 3-5 days", price: "From ₹8,000", href: "/services/logo-design-hyderabad" },
-  { service: "Brand identity", gets: "Logo plus business cards, letterhead, social media templates and a brand style guide", time: "Logo first, then the full set", price: "From ₹18,000", href: "/services/brand-identity-design" },
-  { service: "Website design", gets: "Custom, mobile-first site up to 8 pages, contact form, WhatsApp click-to-chat, basic SEO, Google Analytics", time: "Live in 2-4 weeks", price: "From ₹25,000", href: "/services/website-design-hyderabad" },
-  { service: "Launch support", gets: "Domain and DNS setup, deployment, SSL, device testing and 30 days of support after going live", time: "With your website", price: "Included with websites", href: "/services/website-design-hyderabad" },
-  { service: "Website maintenance", gets: "Ongoing updates and support after launch", time: "Monthly", price: "Quoted on request", href: "/contact" },
-  { service: "Digital marketing", gets: "SEO and Google Business Profile, social media management, Google and Meta ads, content", time: "Ads in days; SEO builds over months", price: "Monthly plan, scoped to you", href: "/services/digital-marketing-hyderabad" },
+  { service: "Logo design", gets: "Three concepts, unlimited refinements, colour palette, fonts and every file format", time: "Concepts in 3-5 days", href: "/services/logo-design-hyderabad" },
+  { service: "Brand identity", gets: "Logo plus business cards, letterhead, social media templates and a brand style guide", time: "Logo first, then the full set", href: "/services/brand-identity-design" },
+  { service: "Website design", gets: "Custom, mobile-first site up to 8 pages, contact form, WhatsApp click-to-chat, basic SEO, Google Analytics", time: "Live in 2-4 weeks", href: "/services/website-design-hyderabad" },
+  { service: "Launch support", gets: "Domain and DNS setup, deployment, SSL, device testing and 30 days of support after going live", time: "With your website", href: "/services/website-design-hyderabad" },
+  { service: "Website maintenance", gets: "Ongoing updates and support after launch", time: "Monthly", href: "/contact" },
+  { service: "Digital marketing", gets: "SEO and Google Business Profile, social media management, Google and Meta ads, content", time: "Ads in days; SEO builds over months", href: "/services/digital-marketing-hyderabad" },
 ];
 
 const FAQS = [
-  { q: "Can I hire you for just a logo?", a: "Yes. Logo design is its own service, starting from ₹8,000, with three concepts and unlimited refinements. You can add the full brand identity or a website later." },
+  { q: "Can I hire you for just a logo?", a: "Yes. Logo design is its own service, with three concepts and unlimited refinements. You can add the full brand identity or a website later." },
   { q: "What is the difference between a logo and a brand identity?", a: "A logo is one mark. A brand identity is the whole system around it: colours, fonts, business cards, letterhead, social media templates and a style guide, so everything you put out looks like the same business." },
-  { q: "Are the domain and hosting included in the website price?", a: "Domain and hosting are bought by you, so they stay in your name. We handle the technical setup: DNS, deployment, SSL and testing, plus 30 days of support after launch." },
+  { q: "Are the domain and hosting included?", a: "Domain and hosting are bought by you, so they stay in your name. We handle the technical setup: DNS, deployment, SSL and testing, plus 30 days of support after launch." },
   { q: "Do you offer support after the website goes live?", a: "Every website includes 30 days of post-launch support. After that you can choose a monthly maintenance plan for updates and ongoing help." },
   { q: "Can you market a website you didn't build?", a: "Yes. Digital marketing works with any website. We start with a free consultation, then scope a monthly plan covering SEO, your Google Business Profile, social media or ads, depending on your goals." },
   { q: "Will you guarantee first place on Google?", a: "No one can honestly guarantee rankings. SEO builds gradually over months; we focus on what makes the difference: a complete Google listing, clear pages and steady, useful content." },
@@ -65,7 +65,7 @@ export default function ServicesGuide() {
               <thead>
                 <tr className="text-brand-dim text-xs uppercase tracking-[0.12em]">
                   <th className="py-3 pr-4 font-semibold">Service</th><th className="py-3 pr-4 font-semibold">What you get</th>
-                  <th className="py-3 pr-4 font-semibold">Timeline</th><th className="py-3 font-semibold">Price</th>
+                  <th className="py-3 font-semibold">Timeline</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,8 +73,7 @@ export default function ServicesGuide() {
                   <tr key={c.service} className="border-t border-brand-rule align-top transition-colors duration-300 hover:bg-brand-muted/60">
                     <td className="py-4 pr-4"><Link href={c.href} className="font-semibold text-brand-white hover:text-accent-warm">{c.service}</Link></td>
                     <td className="py-4 pr-4 editorial-body leading-[1.6]">{c.gets}</td>
-                    <td className="py-4 pr-4 editorial-body whitespace-nowrap">{c.time}</td>
-                    <td className="py-4 font-semibold text-brand-white whitespace-nowrap">{c.price}</td>
+                    <td className="py-4 editorial-body whitespace-nowrap">{c.time}</td>
                   </tr>
                 ))}
               </tbody>

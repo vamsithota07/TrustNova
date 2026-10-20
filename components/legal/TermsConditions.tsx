@@ -260,7 +260,7 @@ export default function TermsConditions() {
                 <SubHeading>3.5 Late Payments</SubHeading>
                 <BodyText>
                   If final payment is not received within 14 days of project completion, TrustNova
-                  reserves the right to suspend delivery of final files and charge a holding fee of ₹500
+                  reserves the right to suspend delivery of final files and charge a holding fee, as set out in the project quote,
                   per week until payment is cleared.
                 </BodyText>
                 <SubHeading>3.6 Taxes</SubHeading>
@@ -309,7 +309,7 @@ export default function TermsConditions() {
                 <HighlightBox>
                   <BulletList
                     items={[
-                      "If cancelled before any work has started: Full advance refund minus a ₹1,000 administrative fee.",
+                      "If cancelled before any work has started: Full advance refund minus an administrative fee, as set out in the project quote.",
                       "If cancelled after work has commenced: Refund of the advance payment minus the value of work completed. The cost of completed work will be calculated fairly based on time and effort invested, and communicated to you in writing within 48 hours of cancellation.",
                       "If cancelled after final approval: No refund. Once work has been approved and final files prepared for delivery, the project is considered complete.",
                     ]}

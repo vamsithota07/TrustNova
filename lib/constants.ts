@@ -56,13 +56,6 @@ export const PHONE_WHATSAPP = "919502224444";
 export const WHATSAPP_URL = `https://wa.me/${PHONE_WHATSAPP}`;
 export const EMAIL = "info@trustnova.in";
 
-/** Published starting prices. Keep in step with the offers in lib/seo.ts and public/llms.txt. */
-export const STARTING_PRICES = [
-  { label: "Logo design", from: "₹8,000" },
-  { label: "Brand identity", from: "₹18,000" },
-  { label: "Websites", from: "₹25,000" },
-] as const;
-
 
 export const socialLinks = {
   instagram: "https://www.instagram.com/trustnova.in/",

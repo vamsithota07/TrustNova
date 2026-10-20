@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Container from "@/components/Container";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
-import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE, STARTING_PRICES } from "@/lib/constants";
+import { btnPrimary, fadeInUp, inViewOptions, WHATSAPP_URL, EMAIL, PHONE } from "@/lib/constants";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -37,10 +37,9 @@ const serviceOptions = [
 ];
 
 const budgetOptions = [
-  "Under ₹15,000",
-  "₹15,000 - ₹30,000",
-  "₹30,000 - ₹60,000",
-  "₹60,000+",
+  "Just the essentials",
+  "A standard package",
+  "A complete, premium package",
   "Not sure yet",
 ];
 
@@ -195,9 +194,8 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.12 }}
             className="mt-4 max-w-2xl rounded-xl border border-brand-blue/20 bg-brand-blue/[0.06] px-4 py-3 text-sm text-brand-silver md:text-base"
           >
-            <span className="font-semibold text-brand-white">Starting prices:</span> {STARTING_PRICES.map((p) => `${p.label} from ${p.from}`).join(" · ")}.
-            Digital marketing is quoted monthly after a free consultation. You get a fixed quote
-            after a quick discovery call - no hidden fees.
+            <span className="font-semibold text-brand-white">Pricing:</span> every project gets one fixed quote after a quick, free
+            discovery call, explained clearly with no hidden fees. Digital marketing is a monthly plan scoped to your goals.
           </motion.p>
           <motion.p
             initial={false}

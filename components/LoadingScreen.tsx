@@ -146,11 +146,11 @@ export default function LoadingScreen() {
     >
       <div className="animate-loader-blink">
         <Image
-          src="/logo.png"
-          alt="TrustNova - Brand & Creative Studio"
+          src="/logo-ink.png"
+          alt="TrustNova - brand, website and digital marketing studio, Hyderabad"
           width={320}
           height={320}
-          className="h-40 sm:h-44 md:h-48 w-auto invert object-contain"
+          className="h-40 sm:h-44 md:h-48 w-auto object-contain"
           priority
         />
       </div>

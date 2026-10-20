@@ -20,12 +20,12 @@ export default function Logo({
   const content = (
     <span className={className}>
       <Image
-        src={tight ? "/logo-tight.png" : "/logo.png"}
-        alt="TrustNova - Brand & Creative Studio"
+        src={tight ? "/logo-ink-tight.png" : "/logo-ink.png"}
+        alt="TrustNova - brand, website and digital marketing studio, Hyderabad"
         width={tight ? 738 : 280}
         height={tight ? 608 : 120}
         sizes="(max-width: 640px) 160px, 220px"
-        className={`${imageClassName} invert object-contain object-left`}
+        className={`${imageClassName} object-contain object-left`}
         priority={priority}
       />
     </span>

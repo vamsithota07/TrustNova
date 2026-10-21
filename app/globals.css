@@ -11,13 +11,13 @@
 :root {
   --font-space-grotesk: "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --font-syne: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  --accent: #5b21b6;
-  --accent-dim: #8b5cf6;
+  --accent: #B5482A;
+  --accent-dim: #D07A5A;
   --bg-primary: #ffffff;
-  --bg-secondary: #f6f6f9;
-  --text-primary: #150f26;
-  --text-secondary: #5C566E;
-  --border: #e7e6ee;
+  --bg-secondary: #F8F5F1;
+  --text-primary: #221D1A;
+  --text-secondary: #5E5650;
+  --border: #EAE4DD;
 }
 
 html {
@@ -385,7 +385,7 @@ input[type="button"],
 .hero-services-card {
   position: relative;
   background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
-    conic-gradient(from var(--border-angle, 0deg), #5b21b6, transparent 40%, #5b21b6) border-box;
+    conic-gradient(from var(--border-angle, 0deg), #B5482A, transparent 40%, #B5482A) border-box;
   border: 1.5px solid transparent;
   animation: hero-border-spin 6s linear infinite;
 }

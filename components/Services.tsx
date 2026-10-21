@@ -10,12 +10,12 @@ import { WHATSAPP_URL } from "@/lib/constants";
 import { shouldRenderNearby } from "@/lib/motion/performance";
 
 const SERVICE_TINT_RGB = [
-  "91, 33, 182",
-  "139, 92, 246",
-  "139, 92, 246",
+  "181, 72, 42",
+  "208, 122, 90",
+  "208, 122, 90",
   "124, 111, 176",
   "154, 139, 180",
-  "91, 33, 182",
+  "181, 72, 42",
 ];
 
 type Service = {
@@ -622,8 +622,8 @@ export default function Services() {
       const active = i === activeIndex;
       gsap.to(dot, {
         scale: active ? 1.35 : 1,
-        backgroundColor: active ? "#5B21B6" : "#DDDDDD",
-        borderColor: active ? "#5B21B6" : "rgba(91, 33, 182, 0.4)",
+        backgroundColor: active ? "#B5482A" : "#DDDDDD",
+        borderColor: active ? "#B5482A" : "rgba(181, 72, 42, 0.4)",
         duration: 0.4,
         ease: "back.out(2)",
       });

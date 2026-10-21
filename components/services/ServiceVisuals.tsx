@@ -50,19 +50,19 @@ function LogoVisual({ reduced, active }: { reduced: boolean; active: boolean }) 
       />
 
       <div
-        className="relative z-[1] mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-brand-white shadow-[0_8px_32px_rgba(139,92,246,0.2)]"
+        className="relative z-[1] mb-5 flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-brand-white shadow-[0_8px_32px_rgba(208, 122, 90,0.2)]"
         style={{ animation: anim(reduced, "svc-logo-pulse 3s ease-in-out infinite") }}
       >
         <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden>
           <path
             d="M18 4L32 12V24L18 32L4 24V12L18 4Z"
-            stroke="#8B5CF6"
+            stroke="#D07A5A"
             strokeWidth="1.5"
             fill="none"
           />
           <path
             d="M18 4V18M18 18L4 12M18 18L32 12"
-            stroke="rgba(139,92,246,0.6)"
+            stroke="rgba(208, 122, 90,0.6)"
             strokeWidth="1"
           />
         </svg>
@@ -98,7 +98,7 @@ function LogoVisual({ reduced, active }: { reduced: boolean; active: boolean }) 
 }
 
 function BrandVisual({ reduced }: { reduced: boolean }) {
-  const colors = ["#0D1117", "#8B5CF6", "#6D3FD9", "#EEE8FD", "#F7F4FE"];
+  const colors = ["#0D1117", "#D07A5A", "#C2583A", "#F8EDE6", "#FBF6F2"];
 
   return (
     <div className="flex h-[260px] flex-col gap-2.5 overflow-hidden rounded-2xl border border-brand-rule bg-brand-dark p-6">
@@ -157,7 +157,7 @@ function WebsiteVisual({ reduced }: { reduced: boolean }) {
             <div key={c} className="h-2.5 w-2.5 rounded-full" style={{ background: c }} />
           ))}
         </div>
-        <div className="min-w-0 flex-1 rounded bg-brand-white px-3 py-1 font-mono text-[11px] text-[#A78BFA]">
+        <div className="min-w-0 flex-1 rounded bg-brand-white px-3 py-1 font-mono text-[11px] text-[#E0957A]">
           www.yourbusiness.com
         </div>
       </div>
@@ -167,12 +167,12 @@ function WebsiteVisual({ reduced }: { reduced: boolean }) {
           className="mb-[18px] flex items-center justify-between"
           style={fadeUpStyle(reduced, "0.1s")}
         >
-          <div className="h-2 w-[60px] rounded bg-[#A78BFA]" />
+          <div className="h-2 w-[60px] rounded bg-[#E0957A]" />
           <div className="flex gap-2">
             {[40, 40, 40, 60].map((w, i) => (
               <div
                 key={i}
-                className="h-1.5 rounded-sm bg-[#A78BFA]/30"
+                className="h-1.5 rounded-sm bg-[#E0957A]/30"
                 style={{ width: w }}
               />
             ))}
@@ -183,22 +183,22 @@ function WebsiteVisual({ reduced }: { reduced: boolean }) {
           <div className="mb-2 h-3.5 w-[70%] rounded bg-white" />
           <div className="mb-3 h-3.5 w-[55%] rounded bg-white/50" />
           <div className="flex gap-2">
-            <div className="h-7 w-20 rounded-md bg-[#A78BFA]" />
-            <div className="h-7 w-20 rounded-md border border-[#A78BFA]" />
+            <div className="h-7 w-20 rounded-md bg-[#E0957A]" />
+            <div className="h-7 w-20 rounded-md border border-[#E0957A]" />
           </div>
         </div>
 
         <div className="grid grid-cols-3 gap-2" style={fadeUpStyle(reduced, "0.4s")}>
           {[0, 1, 2].map((i) => (
             <div key={i} className="rounded-lg border border-[#2E3448] bg-[#1A1E28] p-2.5">
-              <div className="mb-1.5 h-1.5 w-full rounded-sm bg-[#A78BFA]/40" />
-              <div className="h-1 w-[70%] rounded-sm bg-[#A78BFA]/20" />
+              <div className="mb-1.5 h-1.5 w-full rounded-sm bg-[#E0957A]/40" />
+              <div className="h-1 w-[70%] rounded-sm bg-[#E0957A]/20" />
             </div>
           ))}
         </div>
 
         <div
-          className="absolute bottom-4 right-5 h-4 w-0.5 bg-[#A78BFA]"
+          className="absolute bottom-4 right-5 h-4 w-0.5 bg-[#E0957A]"
           style={{ animation: anim(reduced, "blink 1s ease infinite") }}
         />
       </div>
@@ -273,11 +273,11 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
         style={fadeUpStyle(reduced, "0.1s")}
       >
         <div>
-          <p className="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A78BFA]">
+          <p className="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#E0957A]">
             Monthly Report
           </p>
           <p className="text-lg font-bold text-white">
-            Site Health: <span className="text-[#A78BFA]">98%</span>
+            Site Health: <span className="text-[#E0957A]">98%</span>
           </p>
         </div>
         <div
@@ -290,7 +290,7 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
         {bars.map((h, i) => (
           <div key={i} className="flex h-full flex-1 flex-col items-center justify-end">
             <div
-              className={`w-full rounded-t ${i === 6 ? "bg-[#A78BFA]" : "bg-[#A78BFA]/30"}`}
+              className={`w-full rounded-t ${i === 6 ? "bg-[#E0957A]" : "bg-[#E0957A]/30"}`}
               style={{
                 height: `${h}%`,
                 transformOrigin: "bottom",
@@ -314,13 +314,13 @@ function MaintenanceVisual({ reduced }: { reduced: boolean }) {
       <div className="grid grid-cols-2 gap-2.5" style={fadeUpStyle(reduced, "0.5s")}>
         {[
           { label: "Uptime", value: "99.9%", color: "#27AE60" },
-          { label: "Backups", value: "Daily", color: "#A78BFA" },
+          { label: "Backups", value: "Daily", color: "#E0957A" },
         ].map((stat) => (
           <div
             key={stat.label}
             className="rounded-lg border border-[#2E3448] bg-[#1A1E28] px-3.5 py-2.5"
           >
-            <p className="mb-0.5 text-[10px] uppercase tracking-wide text-[#A78BFA]">
+            <p className="mb-0.5 text-[10px] uppercase tracking-wide text-[#E0957A]">
               {stat.label}
             </p>
             <p className="text-base font-bold" style={{ color: stat.color }}>

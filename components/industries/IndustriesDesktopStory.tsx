@@ -49,7 +49,7 @@ function MockupIframe({ industryId }: { industryId: string }) {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#0B0714]">
+    <div className="absolute inset-0 overflow-hidden bg-[#141110]">
       <div
         ref={scalerRef}
         className="iframe-scaler absolute left-1/2 top-1/2 will-change-transform"
@@ -132,7 +132,7 @@ function IndustryPanel({ industry }: { industry: IndustryCard }) {
         href={whatsappFor(industry)}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(91,33,182,0.35)] transition-colors hover:bg-[#4C1D95]"
+        className="inline-flex items-center gap-2 rounded-lg bg-accent-warm px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_rgba(181, 72, 42,0.35)] transition-colors hover:bg-[#8E3820]"
       >
         Build My {industry.name} Website →
       </Link>
@@ -514,10 +514,10 @@ export default function IndustriesDesktopStory() {
         </div>
       </section>
 
-      <div ref={storyRef} className="relative bg-[#0B0714]">
+      <div ref={storyRef} className="relative bg-[#141110]">
         <div
           ref={stageRef}
-          className="relative z-10 h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#0B0714]"
+          className="relative z-10 h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#141110]"
         >
           <div className="absolute inset-0 z-0 overflow-hidden">
             {industryCards.map((industry, i) => (

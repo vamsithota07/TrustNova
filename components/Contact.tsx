@@ -214,7 +214,7 @@ export default function Contact() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at top right, rgba(139,92,246,0.06) 0%, transparent 55%)",
+              "radial-gradient(ellipse at top right, rgba(208, 122, 90,0.06) 0%, transparent 55%)",
           }}
         />
 
@@ -391,10 +391,10 @@ export default function Contact() {
                           animate={
                             submitState === "success"
                               ? { scale: [0.8, 1], backgroundColor: "#27AE60" }
-                              : { scale: 1, backgroundColor: "#5B21B6" }
+                              : { scale: 1, backgroundColor: "#B5482A" }
                           }
                           transition={{ type: "spring", stiffness: 400, damping: 22 }}
-                          className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-lg border-none px-9 py-4 text-[15px] font-semibold tracking-[0.3px] text-white shadow-[0_4px_20px_rgba(91,33,182,0.3)] transition-all duration-250 ease-out hover:-translate-y-0.5 hover:bg-[#4C1D95] hover:shadow-[0_8px_28px_rgba(91,33,182,0.4)] active:translate-y-0 active:scale-[0.98] disabled:opacity-80"
+                          className="inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-lg border-none px-9 py-4 text-[15px] font-semibold tracking-[0.3px] text-white shadow-[0_4px_20px_rgba(181, 72, 42,0.3)] transition-all duration-250 ease-out hover:-translate-y-0.5 hover:bg-[#8E3820] hover:shadow-[0_8px_28px_rgba(181, 72, 42,0.4)] active:translate-y-0 active:scale-[0.98] disabled:opacity-80"
                           style={{
                             background: submitState === "success" ? "#27AE60" : undefined,
                           }}
@@ -465,7 +465,7 @@ export default function Contact() {
                 {contactCards.map(({ icon: Icon, label, value, href, hint }) => (
                   <div
                     key={label}
-                    className="rounded-xl border border-brand-rule bg-brand-card p-4 transition-shadow hover:shadow-[0_4px_20px_rgba(139,92,246,0.1)]"
+                    className="rounded-xl border border-brand-rule bg-brand-card p-4 transition-shadow hover:shadow-[0_4px_20px_rgba(208, 122, 90,0.1)]"
                   >
                     <div className="flex items-start gap-3">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-muted">

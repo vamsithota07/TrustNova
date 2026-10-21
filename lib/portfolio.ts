@@ -77,7 +77,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description: "Sample law firm website we designed: authority-led layout, practice areas and consultation flows.",
     industryId: "law",
     imageAlt: "Law firm website design by TrustNova Hyderabad",
-    panelBg: "#E4DFF0",
+    panelBg: "#EFE6DE",
     panelText: "#0D1117",
   },
   {
@@ -99,7 +99,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description: "Sample clinic website we designed: appointments, clear services and patient confidence.",
     industryId: "clinic",
     imageAlt: "Clinic website design by TrustNova Hyderabad",
-    panelBg: "#5B21B6",
+    panelBg: "#B5482A",
     panelText: "#FFFFFF",
   },
   {
@@ -110,7 +110,7 @@ export const portfolioProjects: PortfolioProject[] = [
     description: "Sample photography portfolio we designed: immersive galleries and a premium visual hierarchy.",
     industryId: "photographer",
     imageAlt: "Photography studio website design by TrustNova",
-    panelBg: "#F6F4FC",
+    panelBg: "#FAF6F2",
     panelText: "#0D1117",
   },
 ];

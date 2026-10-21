@@ -732,7 +732,7 @@ export const industryTintColors: Record<string, string> = {
   electronics: "#00BCD4",
   furniture: "#8B6F47",
   restaurant: "#D4883A",
-  catering: "#9B59B6",
+  catering: "#B8735A",
   hotel: "#C9A96E",
   interior: "#8B6845",
   "real-estate": "#2E75B6",
@@ -745,10 +745,10 @@ export const industryTintColors: Record<string, string> = {
   coaching: "#F97316",
   training: "#F97316",
   photographer: "#E8A020",
-  events: "#9B59B6",
+  events: "#B8735A",
   "digital-marketing": "#00BCD4",
 };
 
 export function getIndustryTintColor(id: string): string {
-  return industryTintColors[id] ?? "#5B21B6";
+  return industryTintColors[id] ?? "#B5482A";
 }

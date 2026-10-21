@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
 import RecentWork from "@/components/RecentWork";
+import BrandStory from "@/components/BrandStory";
 import HomeGuide from "@/components/HomeGuide";
 import SectionSeparator from "@/components/SectionSeparator";
 import JsonLd from "@/components/JsonLd";
@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <JsonLd data={websiteSchema()} />
-      <main className="w-full overflow-x-hidden">
-        <Hero />
+      <main className="w-full overflow-x-clip">
+        <BrandStory />
         <SectionSeparator />
         <TrustBar />
         <SectionSeparator />

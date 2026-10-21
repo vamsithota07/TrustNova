@@ -73,11 +73,11 @@ export default function PortfolioHeroHeader() {
           >
             <div className="relative bg-brand-black">
               <div
-                className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[min(70vw,320px)] w-[min(70vw,320px)] -translate-x-1/2 -translate-y-1/2 rounded-[42%] bg-[#E6E0F6] md:h-[360px] md:w-[360px]"
+                className="pointer-events-none absolute left-1/2 top-[55%] -z-10 h-[min(70vw,320px)] w-[min(70vw,320px)] -translate-x-1/2 -translate-y-1/2 rounded-[42%] bg-[#F2E5DC] md:h-[360px] md:w-[360px]"
                 aria-hidden
               />
               <div
-                className="pointer-events-none absolute left-[54%] top-[48%] -z-10 h-[min(50vw,220px)] w-[min(50vw,220px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F0ECFA]"
+                className="pointer-events-none absolute left-[54%] top-[48%] -z-10 h-[min(50vw,220px)] w-[min(50vw,220px)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F7EEE8]"
                 aria-hidden
               />
               <Image

@@ -8,7 +8,7 @@ const signals = [
   { icon: Zap, label: "Fast Delivery" },
   { icon: CheckCircle, label: "No Revision Limits" },
   { icon: Lock, label: "You Own Everything" },
-  { icon: Star, label: "100% Transparent Pricing" },
+  { icon: Star, label: "Fixed Quote, No Hidden Charges" },
 ];
 
 export default function TrustBar() {

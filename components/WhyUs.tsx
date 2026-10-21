@@ -31,7 +31,7 @@ const reasons = [
   },
   {
     title: "Honest Pricing",
-    description: "What you see is what you pay. Transparent, always.",
+    description: "One fixed quote, explained up front. No hidden charges, ever.",
   },
 ];
 

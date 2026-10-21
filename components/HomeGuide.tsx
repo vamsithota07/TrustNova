@@ -33,7 +33,7 @@ const PROMISES = [
   { title: "On-time delivery", text: "We agree the schedule at the start and keep to it." },
   { title: "Unlimited revisions", text: "No counting rounds and no extra invoices for changes." },
   { title: "You own everything", text: "100% of the files and code are yours, with no lock-ins or licence fees." },
-  { title: "Transparent pricing", text: "One clear quote, explained, with no hidden charges." },
+  { title: "A fixed quote", text: "One clear quote, explained up front, with no hidden charges." },
 ];
 
 export const HOME_FAQS = [

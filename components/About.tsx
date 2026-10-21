@@ -8,7 +8,7 @@ import { useIsMobile } from "@/lib/hooks";
 const promises = [
   "Designs delivered on time, every time",
   "Unlimited revisions until you love the result",
-  "Transparent pricing, no hidden charges",
+  "One fixed quote, no hidden charges",
   "You own 100% of everything we create",
   "India-focused design with global standards",
 ];

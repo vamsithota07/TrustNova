@@ -28,7 +28,7 @@ const CASES: Record<string, { client: string; did: string; service: { label: str
 };
 
 const FAQS = [
-  { q: "Are these real client projects?", a: "Milletio Global Grain, Vistix Engineers and ASMC are client projects, and you can visit their live websites. The industry showcases below them are concept websites we designed to show how we would approach each kind of business." },
+  { q: "Are these real client projects?", a: "Milletio Global Grain, Vistix Engineers and ASMC are client projects, and you can visit their live websites. The industry concept designs below them (Spice Route, Veritas Law and the others) are sample websites, not client projects, we designed to show how we would approach each kind of business." },
   { q: "Can you design for my industry?", a: `Yes. We have concept websites for ${industryCards.length} industries, from clinics and restaurants to law firms, real estate and gyms, and every project starts from a brief about your own business, so nothing is copied from a template.` },
   { q: "Do you work with businesses outside Hyderabad?", a: "Yes. We are based in Hyderabad and work with businesses across India, and our clients include a dental clinic group in Oman. Most of the work happens over calls and WhatsApp." },
   { q: "How long does a website like these take?", a: "A full website is typically live in 2-4 weeks, depending on how quickly content and feedback come in. Logo concepts are ready in 3-5 days." },
@@ -64,16 +64,16 @@ export default function PortfolioGuide() {
         </RevealStagger>
 
         <Reveal className="mt-20">
-          <p className="editorial-eyebrow mb-2 text-accent-warm">Industry showcases</p>
+          <p className="editorial-eyebrow mb-2 text-accent-warm">Industry concept designs</p>
           <h2 className="font-display text-2xl font-bold text-brand-white md:text-4xl mb-4">How we would approach your business</h2>
           <p className="editorial-body max-w-3xl leading-[1.75]">
             Alongside client work, we design concept websites for the kinds of businesses we work with most, so you can see how a site for
-            your industry could look and work before we start. The showcases above include a restaurant with a menu and reservations, a law
+            your industry could look and work before we start. These sample designs (not client projects) include a restaurant with a menu and reservations, a law
             firm built around consultations, a jewellery storefront, a clinic focused on appointments and a photography portfolio.
           </p>
           <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 max-w-3xl">
             {portfolioProjects.map((p) => (
-              <li key={p.id} className="editorial-body text-sm leading-[1.7]"><b className="text-brand-white">{p.title}</b> ({p.category}): {p.description}</li>
+              <li key={p.id} className="editorial-body text-sm leading-[1.7]"><b className="text-brand-white">{p.title}</b> <span className="text-brand-dim">(sample, {p.category})</span>: {p.description}</li>
             ))}
           </ul>
           <p className="editorial-body mt-8 leading-[1.75] max-w-3xl">

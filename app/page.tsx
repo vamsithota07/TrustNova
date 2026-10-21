@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
-import Pillars from "@/components/Pillars";
+import RecentWork from "@/components/RecentWork";
 import HomeGuide from "@/components/HomeGuide";
 import SectionSeparator from "@/components/SectionSeparator";
 import JsonLd from "@/components/JsonLd";
@@ -18,7 +18,7 @@ export default function Home() {
         <SectionSeparator />
         <TrustBar />
         <SectionSeparator />
-        <Pillars />
+        <RecentWork />
         <SectionSeparator />
         <HomeGuide />
       </main>

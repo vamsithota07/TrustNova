@@ -95,8 +95,8 @@ export default function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -16 }}
-        animate={mounted ? { opacity: 1, y: hidden ? "-100%" : 0 } : false}
+        initial={false}
+        animate={{ opacity: 1, y: hidden ? "-100%" : 0 }}
         transition={introDone ? { duration: 0.3, ease: "easeOut" } : { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
         className="site-navbar fixed top-0 left-0 right-0 z-[1000] px-3 sm:px-5 pt-3 sm:pt-4 pointer-events-none"
       >
@@ -110,7 +110,7 @@ export default function Navbar() {
           <Logo
             priority
             tight
-            imageClassName="h-10 sm:h-11 lg:h-8 w-auto object-contain"
+            imageClassName="h-10 sm:h-11 lg:h-11 w-auto object-contain"
           />
 
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 min-w-0 shrink">

@@ -262,13 +262,14 @@ export default function PortfolioPage({ children }: { children?: React.ReactNode
           </motion.div>
 
           {/* Featured client work: Vistix & ASMC */}
-          <div className="horizontal-scroll -mx-4 mb-12 flex gap-0 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6">
+          <div className="horizontal-scroll -mx-4 mb-12 flex gap-0 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0 lg:gap-6">
             {featuredProjects.map((project, i) => (
               <PortfolioProjectCard key={project.id} project={project} index={i} fixedHeight />
             ))}
           </div>
 
-          <p className="editorial-eyebrow mb-6 text-accent-warm">Industry showcases</p>
+          <p className="editorial-eyebrow mb-2 text-accent-warm">Industry concept designs</p>
+          <p className="mb-6 text-sm text-brand-silver">Sample websites we designed for different kinds of business, to show what yours could look like.</p>
 
           <div className="horizontal-scroll -mx-4 flex gap-0 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide sm:-mx-8 md:mx-0 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 md:gap-3 md:overflow-visible md:pb-0 lg:gap-4">
             {portfolioProjects.map((project, i) => (

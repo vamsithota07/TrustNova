@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect, useRef } from "react";
-import { gsap, registerGsap } from "@/lib/motion/gsap-register";
+import { useRef } from "react";
 import { btnPrimary, btnSecondary, WHATSAPP_URL } from "@/lib/constants";
 import MagneticButton from "@/components/motion/MagneticButton";
 
@@ -40,30 +39,7 @@ export default function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    registerGsap();
-    const ctx = gsap.context(() => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const lines = linesRef.current?.querySelectorAll("[data-hero-line]");
-      if (!lines?.length) return;
-
-      try {
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-        tl.from(eyebrowRef.current, { opacity: 0, y: 20, duration: 0.7 })
-          .from(lines, { opacity: 0, y: "110%", duration: 1, stagger: 0.11, ease: "power4.out" }, "-=0.35")
-          .from(copyRef.current, { opacity: 0, y: 32, duration: 0.85 }, "-=0.5")
-          .from(ctaRef.current?.children ?? [], { opacity: 0, y: 24, duration: 0.75, stagger: 0.08 }, "-=0.55")
-          .from(cardRef.current, { opacity: 0, y: 60, duration: 1.1, ease: "back.out(1.2)" }, "-=0.65")
-          .from(marqueeRef.current, { opacity: 0, y: 16, duration: 0.7 }, "-=0.4");
-      } catch (error) {
-        console.warn("Hero animation skipped:", error);
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  // The entrance runs in CSS (heroIn in globals.css), so the headline is on screen from the first paint.
 
   return (
     <section
@@ -89,7 +65,7 @@ export default function Hero() {
         >
           <div className="order-1 w-full min-w-0">
             <span
-              ref={eyebrowRef}
+              ref={eyebrowRef} data-hero-in="0"
               className="inline-flex max-w-full flex-wrap items-center gap-2.5 px-3 py-2 mb-8 md:mb-10 editorial-eyebrow tracking-[0.14em] sm:tracking-[0.22em] border border-brand-rule rounded-pill bg-brand-card/80 shadow-soft backdrop-blur-sm"
             >
               <span className="h-2 w-2 rounded-full bg-accent-warm shrink-0" />
@@ -101,7 +77,7 @@ export default function Hero() {
                 {headlineLines.map((line) => (
                   <div key={line.text} className="overflow-hidden pt-0.5 pb-[0.16em]">
                     <span
-                      data-hero-line
+                      data-hero-line data-hero-in="1"
                       className={`block ${line.accent ? "text-accent-warm" : "text-brand-white"}`}
                     >
                       {line.text}
@@ -112,14 +88,14 @@ export default function Hero() {
             </div>
 
             <p
-              ref={copyRef}
+              ref={copyRef} data-hero-in="2"
               className="editorial-body text-base lg:text-xl mb-10 md:mb-12 max-w-xl leading-[1.75]"
             >
               We design logos that stop the scroll, build identities that command
               respect, create websites that convert visitors into clients, and build digital marketing that helps them grow.
             </p>
 
-            <div ref={ctaRef} className="flex flex-col sm:flex-row flex-wrap gap-4 w-full min-w-0">
+            <div ref={ctaRef} data-hero-in="3" className="flex flex-col sm:flex-row flex-wrap gap-4 w-full min-w-0">
               <MagneticButton href={WHATSAPP_URL} external className={btnPrimary}>
                 <span className="relative z-[1]">Start Your Project →</span>
               </MagneticButton>
@@ -130,7 +106,7 @@ export default function Hero() {
           </div>
 
           <div
-            ref={cardRef}
+            ref={cardRef} data-hero-in="4"
             className="hero-card order-2 w-full shrink-0 lg:mt-[4.75rem] lg:w-[300px] lg:min-w-[300px] lg:max-w-[300px] min-[1441px]:mt-20 min-[1441px]:w-[320px] min-[1441px]:min-w-[320px] min-[1441px]:max-w-[320px]"
           >
             <div className="hero-services-card creative-card box-border w-full overflow-hidden p-6 transition-all duration-700 ease-premium hover:shadow-card-hover">
@@ -166,7 +142,7 @@ export default function Hero() {
       </div>
 
       <div
-        ref={marqueeRef}
+        ref={marqueeRef} data-hero-in="5"
         className="relative z-10 w-full border-t border-brand-rule/80 bg-brand-dark/60 py-4 overflow-hidden touch-pause-marquee backdrop-blur-sm"
       >
         <div className="flex marquee-track animate-marquee-mobile md:animate-marquee-tablet lg:animate-marquee hover:[animation-play-state:paused]">

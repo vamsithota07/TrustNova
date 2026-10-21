@@ -36,6 +36,16 @@ const nextConfig = {
         destination: "/recommend",
         permanent: true,
       },
+      // Short tracked links: each one lands on the homepage with tags, so Google Analytics shows where visitors came from
+      // (a click from Instagram's or WhatsApp's in-app browser otherwise shows up as "direct"). Temporary, so they can change.
+      { source: "/mail", destination: "/?utm_source=email&utm_medium=signature", permanent: false },
+      { source: "/wa", destination: "/?utm_source=whatsapp&utm_medium=message", permanent: false },
+      { source: "/ig", destination: "/?utm_source=instagram&utm_medium=bio", permanent: false },
+      { source: "/maps", destination: "/?utm_source=google&utm_medium=business_profile", permanent: false },
+      { source: "/li", destination: "/?utm_source=linkedin&utm_medium=profile", permanent: false },
+      { source: "/x", destination: "/?utm_source=x&utm_medium=post", permanent: false },
+      { source: "/report", destination: "/?utm_source=audit_report&utm_medium=pdf", permanent: false },
+      { source: "/proposal", destination: "/?utm_source=proposal&utm_medium=pdf", permanent: false },
     ];
   },
   async rewrites() {

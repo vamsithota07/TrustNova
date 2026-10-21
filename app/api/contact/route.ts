@@ -5,6 +5,10 @@ const SHEET_URL = getGoogleSheetsUrl();
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Google Sheets treats a value starting with + = - or @ as a formula ("+91 98765..." becomes #ERROR!).
+ *  A leading apostrophe makes the sheet keep it as plain text; the apostrophe itself is not shown. */
+const asText = (value: string) => (/^[=+\-@]/.test(value) ? `'${value}` : value);
+
 export async function POST(request: Request) {
   if (!SHEET_URL || SHEET_URL === "your_script_url_here") {
     return NextResponse.json(
@@ -35,12 +39,12 @@ export async function POST(request: Request) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         type: "contact",
-        name,
+        name: asText(name),
         email,
-        phone,
+        phone: asText(phone),
         service,
         budget,
-        message,
+        message: asText(message),
         source: body.source || "Contact Page",
       }),
       redirect: "follow",

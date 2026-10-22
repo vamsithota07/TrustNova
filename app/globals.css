@@ -392,3 +392,17 @@ input[type="button"],
 
 }
 
+
+/* Homepage title card: words rise in on the first paint (pure CSS, no waiting for JavaScript), then the underline draws */
+@keyframes heroRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes heroWord { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes heroDraw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes heroScroll { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }
+.hero-rise { animation: heroRise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-word { animation: heroWord 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.hero-underline path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: heroDraw 0.9s 0.95s cubic-bezier(0.65, 0, 0.35, 1) forwards; }
+.hero-scroll { animation: heroScroll 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise, .hero-word { animation: none; }
+  .hero-underline path { animation: none; stroke-dashoffset: 0; }
+}

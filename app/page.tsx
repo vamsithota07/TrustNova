@@ -3,6 +3,7 @@ import TrustBar from "@/components/TrustBar";
 import RecentWork from "@/components/RecentWork";
 import BrandStory from "@/components/BrandStory";
 import HomeGuide from "@/components/HomeGuide";
+import Testimonials from "@/components/Testimonials";
 import SectionSeparator from "@/components/SectionSeparator";
 import JsonLd from "@/components/JsonLd";
 import { createPageMetadata, pageSEO, websiteSchema } from "@/lib/seo";
@@ -19,6 +20,7 @@ export default function Home() {
         <TrustBar />
         <SectionSeparator />
         <RecentWork />
+        <Testimonials />
         <SectionSeparator />
         <HomeGuide />
       </main>

@@ -104,12 +104,6 @@ export const pageSEO = {
     ],
     path: "/portfolio",
   },
-  process: {
-    title: "Our Process - Brand & Website Design | TrustNova",
-    description:
-      "TrustNova's clear, transparent, collaborative process from discovery and design to launch and ongoing support.",
-    path: "/process",
-  },
 } as const;
 
 /** Sitemap URLs only (url + lastModified per Google guidance). */
@@ -125,7 +119,6 @@ export const sitemapPaths = [
   "/recommend",
   "/about",
   "/contact",
-  "/process",
   "/terms",
   "/privacy",
 ] as const;

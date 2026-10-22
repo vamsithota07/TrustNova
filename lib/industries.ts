@@ -31,19 +31,6 @@ export type IndustryCategory =
   | "Education"
   | "Creative";
 
-export const filterOptions = [
-  "ALL",
-  "Retail & Products",
-  "Services",
-  "Food & Hospitality",
-  "Professional",
-  "Health & Wellness",
-  "Education",
-  "Creative",
-] as const;
-
-export type FilterOption = (typeof filterOptions)[number];
-
 export interface IndustryCard {
   id: string;
   name: string;
@@ -67,47 +54,6 @@ export const industryCategories: IndustryCategory[] = [
   "Education",
   "Creative",
 ];
-
-export const categoryAccents: Record<
-  IndustryCategory,
-  "warm" | "sage" | "dusty" | "soft"
-> = {
-  "Retail & Products": "warm",
-  "Food & Hospitality": "warm",
-  Services: "sage",
-  Professional: "dusty",
-  "Health & Wellness": "sage",
-  Education: "soft",
-  Creative: "warm",
-};
-
-export function industriesInCategory(category: IndustryCategory): IndustryCard[] {
-  return industryCards.filter((card) => card.category === category);
-}
-
-export function categoryStartIndex(category: IndustryCategory): number {
-  return industryCards.findIndex((card) => card.category === category);
-}
-
-export const accentTextClass: Record<
-  (typeof categoryAccents)[IndustryCategory],
-  string
-> = {
-  warm: "text-accent-warm",
-  sage: "text-accent-sage",
-  dusty: "text-accent-dusty",
-  soft: "text-accent-soft",
-};
-
-export const accentBgClass: Record<
-  (typeof categoryAccents)[IndustryCategory],
-  string
-> = {
-  warm: "bg-accent-warm",
-  sage: "bg-accent-sage",
-  dusty: "bg-accent-dusty",
-  soft: "bg-accent-soft",
-};
 
 export const industryCards: IndustryCard[] = [
   {
@@ -725,30 +671,3 @@ export const industryCards: IndustryCard[] = [
     },
   },
 ];
-
-export const industryTintColors: Record<string, string> = {
-  jewellery: "#C9A96E",
-  clothing: "#E91E8C",
-  electronics: "#00BCD4",
-  furniture: "#8B6F47",
-  restaurant: "#D4883A",
-  catering: "#B8735A",
-  hotel: "#C9A96E",
-  interior: "#8B6845",
-  "real-estate": "#2E75B6",
-  ca: "#2980B9",
-  law: "#C9A96E",
-  architect: "#E74C3C",
-  clinic: "#1ABC9C",
-  gym: "#E74C3C",
-  salon: "#C84890",
-  coaching: "#F97316",
-  training: "#F97316",
-  photographer: "#E8A020",
-  events: "#B8735A",
-  "digital-marketing": "#00BCD4",
-};
-
-export function getIndustryTintColor(id: string): string {
-  return industryTintColors[id] ?? "#B5482A";
-}

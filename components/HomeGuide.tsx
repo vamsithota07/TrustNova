@@ -7,16 +7,9 @@ import Container from "@/components/Container";
 import JsonLd from "@/components/JsonLd";
 import { servicePages } from "@/lib/service-pages";
 
-/* The homepage's plain-words guide: what we do (linked to each service page), how a project runs, what every client
-   gets, and the questions people ask before they get in touch. Rendered on the server so search engines read all of it.
+/* The homepage's plain-words guide: what we do (linked to each service page), how a project runs (/process redirects
+   here) and the questions people ask before they get in touch. Rendered on the server so search engines read all of it.
    Every claim here comes from the service catalogue. */
-
-const SUMMARY: Record<string, string> = {
-  "logo-design-hyderabad": "Three unique concepts, unlimited refinements and every file format, with concepts ready in 3-5 days.",
-  "brand-identity-design": "Your logo plus colours, fonts, business cards, letterhead, social media templates and a brand style guide.",
-  "website-design-hyderabad": "Custom, mobile-first websites of up to 8 pages with WhatsApp click-to-chat, basic SEO and Google Analytics, live in 2-4 weeks.",
-  "digital-marketing-hyderabad": "SEO and Google Business Profile, social media management, Google and Meta ads, and content, on a monthly plan scoped to your goals.",
-};
 
 const ICONS: Record<string, typeof PenTool> = {
   "logo-design-hyderabad": PenTool, "brand-identity-design": Palette, "website-design-hyderabad": MonitorSmartphone, "digital-marketing-hyderabad": TrendingUp,
@@ -27,13 +20,6 @@ const STEPS = [
   { title: "Concepts and a fixed quote", text: "You get a clear price before anything starts, then first concepts or a page plan to react to." },
   { title: "Refine together", text: "We adjust the work until it feels right, with unlimited revisions. You talk directly to the lead designer, not a middleman." },
   { title: "Launch and handover", text: "We handle the launch and hand over every file and all the code. Websites include 30 days of support after going live." },
-];
-
-const PROMISES = [
-  { title: "On-time delivery", text: "We agree the schedule at the start and keep to it." },
-  { title: "Unlimited revisions", text: "No counting rounds and no extra invoices for changes." },
-  { title: "You own everything", text: "100% of the files and code are yours, with no lock-ins or licence fees." },
-  { title: "A fixed quote", text: "One clear quote, explained up front, with no hidden charges." },
 ];
 
 export const HOME_FAQS = [
@@ -54,22 +40,15 @@ export default function HomeGuide() {
         <SectionHeader eyebrow="What we do" heading="Branding, Websites and Marketing for Growing Businesses" highlight="Growing Businesses"
           subtext="TrustNova is a brand, website and digital marketing studio in Hyderabad. We help small and growing businesses look professional, get found online and turn visitors into enquiries." />
 
-        <RevealStagger stagger={0.12} className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 min-w-0">
+        <Reveal className="-mt-4 flex flex-wrap justify-center gap-3 md:-mt-8">
           {servicePages.map((s) => { const Icon = ICONS[s.slug] || PenTool; return (
-            <article key={s.slug} data-reveal-item className="group creative-card p-8 md:p-10 min-w-0 flex flex-col transition-all duration-500 ease-premium hover:shadow-card-hover hover:-translate-y-1">
-              <div className="w-14 h-14 rounded-2xl border border-brand-rule bg-brand-dark flex items-center justify-center mb-6 transition-all duration-500 group-hover:border-accent-warm/30 group-hover:bg-accent-warm/5">
-                <Icon className="w-5 h-5 text-brand-white group-hover:text-accent-warm transition-colors" strokeWidth={1.5} />
-              </div>
-              <h3 className="font-display font-bold text-2xl lg:text-3xl mb-3 tracking-[-0.03em] text-brand-white">{s.nav}</h3>
-              <p className="editorial-body text-sm md:text-base leading-[1.75] flex-1">{SUMMARY[s.slug]}</p>
-              <Link href={`/services/${s.slug}`} className="mt-6 inline-flex min-h-[44px] items-center text-sm font-semibold text-accent-warm hover:underline">
-                {s.nav}: see what is included <span className="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </Link>
-            </article>
+            <Link key={s.slug} href={`/services/${s.slug}`} className="group inline-flex min-h-[44px] items-center gap-2 rounded-pill border border-brand-rule bg-brand-card px-5 text-sm font-semibold text-brand-white transition-colors hover:border-accent-warm/50 hover:text-accent-warm">
+              <Icon className="h-4 w-4" strokeWidth={1.75} />{s.nav} <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            </Link>
           ); })}
-        </RevealStagger>
+        </Reveal>
 
-        <div className="mt-20 md:mt-28">
+        <div id="how-it-works" className="mt-20 md:mt-28 scroll-mt-28">
           <SectionHeader eyebrow="How it works" heading="From First Message to Launch" highlight="Launch" />
           <RevealStagger stagger={0.12} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-w-0">
             {STEPS.map((step, i) => (
@@ -77,18 +56,6 @@ export default function HomeGuide() {
                 <span className="text-[11px] font-semibold text-brand-dim tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-display font-bold text-xl mt-4 mb-3 tracking-[-0.02em] text-brand-white">{step.title}</h3>
                 <p className="editorial-body text-sm leading-[1.75]">{step.text}</p>
-              </div>
-            ))}
-          </RevealStagger>
-        </div>
-
-        <div className="mt-20 md:mt-28">
-          <SectionHeader eyebrow="Our promises" heading="What Every Client Gets" highlight="Every Client" />
-          <RevealStagger stagger={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 min-w-0">
-            {PROMISES.map((p) => (
-              <div key={p.title} data-reveal-item className="creative-card p-8 min-w-0 transition-all duration-500 ease-premium hover:shadow-card-hover hover:-translate-y-1">
-                <h3 className="font-display font-bold text-xl mb-3 tracking-[-0.02em] text-brand-white">{p.title}</h3>
-                <p className="editorial-body text-sm leading-[1.75]">{p.text}</p>
               </div>
             ))}
           </RevealStagger>

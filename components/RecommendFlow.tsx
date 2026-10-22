@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ChevronLeft, Mail, Sparkles } from "lucide-react";
+import { Check, ChevronLeft, Mail, Sparkles, Sprout, Store, TrendingUp, RefreshCw, Palette, Globe, Package, Wrench, Megaphone, type LucideIcon } from "lucide-react";
 import {
   getRecommendation,
   getWhatsAppUrl,
@@ -15,7 +15,7 @@ import MagneticButton from "@/components/motion/MagneticButton";
 
 interface Option {
   id: string;
-  emoji: string;
+  icon: LucideIcon;
   title: string;
   description: string;
   accent: "warm" | "sage" | "dusty" | "soft";
@@ -24,7 +24,7 @@ interface Option {
 const step1Options: Option[] = [
   {
     id: "starting",
-    emoji: "🌱",
+    icon: Sprout,
     title: "Just Starting Out",
     description:
       "I have a business idea or just registered. I need everything built from scratch.",
@@ -32,7 +32,7 @@ const step1Options: Option[] = [
   },
   {
     id: "running",
-    emoji: "🏃",
+    icon: Store,
     title: "Already Running",
     description:
       "My business exists but my branding looks unprofessional or outdated.",
@@ -40,14 +40,14 @@ const step1Options: Option[] = [
   },
   {
     id: "growing",
-    emoji: "📈",
+    icon: TrendingUp,
     title: "Growing Fast",
     description: "We're scaling and need a brand that matches our ambition.",
     accent: "dusty",
   },
   {
     id: "rebranding",
-    emoji: "🔄",
+    icon: RefreshCw,
     title: "Rebranding",
     description: "We have a brand but it no longer represents who we are.",
     accent: "soft",
@@ -57,7 +57,7 @@ const step1Options: Option[] = [
 const step2Options: Option[] = [
   {
     id: "logo",
-    emoji: "🎨",
+    icon: Palette,
     title: "A Logo & Brand Identity",
     description:
       "I need a professional logo and brand that makes me look credible.",
@@ -65,14 +65,14 @@ const step2Options: Option[] = [
   },
   {
     id: "website",
-    emoji: "🌐",
+    icon: Globe,
     title: "A Website",
     description: "I need a website that brings in clients and looks world-class.",
     accent: "dusty",
   },
   {
     id: "both",
-    emoji: "📦",
+    icon: Package,
     title: "Both - Brand + Website",
     description:
       "I need the full package - logo, identity, and a complete website.",
@@ -80,14 +80,14 @@ const step2Options: Option[] = [
   },
   {
     id: "maintenance",
-    emoji: "🔧",
+    icon: Wrench,
     title: "Ongoing Support",
     description: "I already have a site. I just need someone to maintain and grow it.",
     accent: "soft",
   },
   {
     id: "digital-marketing",
-    emoji: "📣",
+    icon: Megaphone,
     title: "Digital Marketing & Growth",
     description: "I need more visibility, qualified leads, and a smarter plan for search, social, or ads.",
     accent: "sage",
@@ -244,7 +244,7 @@ function OptionCard({
         className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl text-2xl md:text-3xl mb-5 transition-transform duration-500 group-hover:scale-110 ${accentEmojiBg[option.accent]}`}
         aria-hidden
       >
-        {option.emoji}
+        <option.icon className="h-6 w-6 md:h-7 md:w-7 text-brand-white" strokeWidth={1.6} />
       </span>
       <h3 className="font-display font-bold text-brand-white text-lg md:text-xl mb-2 tracking-[-0.02em]">
         {option.title}
@@ -342,7 +342,7 @@ export default function RecommendFlow() {
   const stepHeadings = [
     "Where are you right now?",
     "What's your biggest priority right now?",
-    "Your tailored pricing",
+    "Your recommendation",
   ];
 
   const contactWhatsAppUrl = result
@@ -368,8 +368,8 @@ export default function RecommendFlow() {
             <span className="text-accent-warm">Perfect Package</span>
           </h1>
           <p className="editorial-body text-base md:text-lg max-w-2xl mx-auto lg:mx-0 leading-[1.75]">
-            Answer 2 quick questions. We&apos;ll recommend the right package and share
-            tailored pricing for your project.
+            Answer 2 quick questions. We&apos;ll recommend the right package, then
+            you can message us on WhatsApp for one fixed quote.
           </p>
         </div>
       ) : null}

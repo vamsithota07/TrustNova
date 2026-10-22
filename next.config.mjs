@@ -30,6 +30,12 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      // The process now lives on the homepage, under "How it works".
+      {
+        source: "/process",
+        destination: "/#how-it-works",
+        permanent: true,
+      },
       // The earlier site had a /tools page; the interactive package finder is the closest page now.
       {
         source: "/tools",

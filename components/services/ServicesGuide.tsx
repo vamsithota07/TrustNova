@@ -20,8 +20,7 @@ const COMPARE = [
   { service: "Logo design", gets: "Three concepts, unlimited refinements, colour palette, fonts and every file format", time: "Concepts in 3-5 days", href: "/services/logo-design-hyderabad" },
   { service: "Brand identity", gets: "Logo plus business cards, letterhead, social media templates and a brand style guide", time: "Logo first, then the full set", href: "/services/brand-identity-design" },
   { service: "Website design", gets: "Custom, mobile-first site up to 8 pages, contact form, WhatsApp click-to-chat, basic SEO, Google Analytics", time: "Live in 2-4 weeks", href: "/services/website-design-hyderabad" },
-  { service: "Launch support", gets: "Domain and DNS setup, deployment, SSL, device testing and 30 days of support after going live", time: "With your website", href: "/services/website-design-hyderabad" },
-  { service: "Website maintenance", gets: "Ongoing updates and support after launch", time: "Monthly", href: "/contact" },
+  { service: "Launch & website care", gets: "Domain and DNS setup, deployment, SSL, device testing and 30 days of support, then optional monthly updates, backups and uptime checks", time: "With your website, then monthly", href: "/services/website-design-hyderabad" },
   { service: "Digital marketing", gets: "SEO and Google Business Profile, social media management, Google and Meta ads, content", time: "Ads in days; SEO builds over months", href: "/services/digital-marketing-hyderabad" },
 ];
 
@@ -51,10 +50,6 @@ export default function ServicesGuide() {
               <p className="editorial-body text-sm md:text-base leading-[1.7] mt-2"><span className="text-accent-warm font-semibold inline-block transition-transform duration-300 group-hover:translate-x-1">→ </span>{s.pick}</p>
             </Link>
           ))}
-          <Link href="/recommend" data-reveal-item className="group creative-card p-6 md:p-7 min-w-0 block transition-all duration-500 ease-premium hover:shadow-card-hover hover:-translate-y-1">
-            <p className="font-display font-bold text-lg text-brand-white leading-snug">Still not sure?</p>
-            <p className="editorial-body text-sm md:text-base leading-[1.7] mt-2"><span className="text-accent-warm font-semibold inline-block transition-transform duration-300 group-hover:translate-x-1">→ </span>Answer a few quick questions and find your package in a minute.</p>
-          </Link>
         </RevealStagger>
 
         <Reveal className="mt-20">

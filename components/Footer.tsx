@@ -69,6 +69,9 @@ export default function Footer() {
                 {p.nav}
               </Link>
             ))}
+            <Link href="/guides" className="inline-flex min-h-[44px] items-center px-2 py-1 transition-colors duration-200 hover:text-brand-white">
+              Guides
+            </Link>
           </nav>
           <nav
             aria-label="Legal policies"

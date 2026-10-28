@@ -119,6 +119,10 @@ export const sitemapPaths = [
   "/recommend",
   "/about",
   "/contact",
+  "/guides",
+  "/guides/website-cost-small-business-hyderabad",
+  "/guides/website-or-instagram-for-small-business",
+  "/guides/logo-vs-brand-identity",
   "/terms",
   "/privacy",
 ] as const;

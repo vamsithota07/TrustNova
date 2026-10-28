@@ -7,7 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        // /_next/ holds the CSS, JS and optimised images every page needs: Google must be able to fetch them to render
+        // and index the pages (blocking it caused "Blocked by robots.txt" in Search Console, Oct 2026)
+        disallow: ["/api/"],
       },
       {
         userAgent: "GPTBot",

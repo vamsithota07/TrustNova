@@ -40,7 +40,7 @@ export default function About() {
             variants={isMobile ? fadeInUp : fadeInLeft}
           >
             <h1 className="text-brand-white font-bold text-2xl md:text-3xl lg:text-4xl mb-6 md:mb-8 leading-tight">
-              A brand, web and growth studio in Hyderabad
+              A brand, web and growth studio for businesses everywhere
             </h1>
             <p className="text-brand-silver text-sm md:text-base lg:text-lg leading-relaxed prose-width">
               TrustNova designs logos and brand identities, builds websites and runs digital marketing for small and growing
@@ -77,7 +77,7 @@ export default function About() {
                 </li>
               ))}
             </ul>
-            <p className="text-brand-silver text-sm mt-5">Based in Hyderabad, working with businesses across India and abroad.</p>
+            <p className="text-brand-silver text-sm mt-5">Based in Hyderabad, India, working with businesses all over the world.</p>
           </motion.div>
         </div>
       </Container>

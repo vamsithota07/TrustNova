@@ -1,9 +1,10 @@
 # TrustNova
 
 > TrustNova is a brand, website and digital
-> marketing studio based in Hyderabad, India.
+> marketing studio based in Hyderabad, India,
+> working with clients worldwide.
 
-TrustNova helps Indian businesses build
+TrustNova helps businesses anywhere build
 professional brands and websites that earn
 trust, and run digital marketing that helps
 them get found and grow.
@@ -22,7 +23,7 @@ them get found and grow.
 ## Key Facts
 
 - Location: Hyderabad, Telangana, India
-- Serving: All of India (remote)
+- Serving: Clients worldwide (remote)
 - Payment: 50% advance, 50% on delivery
 - Revisions: Unlimited
 - Contact: +91 9502224444

@@ -123,8 +123,8 @@ export default function PortfolioPage({ children }: { children?: React.ReactNode
               <span className="text-accent-warm">TrustNova</span>
             </h2>
             <p className="mt-5 text-base leading-[1.8] text-brand-silver md:text-lg">
-              A Hyderabad-based brand, web &amp; growth studio crafting logos, identities,
-              conversion-focused websites, and digital marketing for Indian businesses. We believe great
+              A brand, web &amp; growth studio crafting logos, identities,
+              conversion-focused websites, and digital marketing for businesses worldwide. We believe great
               design earns trust before a single word is read, and we build every
               project with that principle at the centre.
             </p>

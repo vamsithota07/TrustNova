@@ -65,9 +65,9 @@ export const socialLinks = {
 };
 
 export const siteMetadata = {
-  title: "TrustNova - Brand, Web & Growth Studio | Hyderabad",
+  title: "TrustNova - Brand, Web & Growth Studio",
   description:
-    "TrustNova is a premium brand, website, and digital marketing studio in Hyderabad for Indian businesses.",
+    "TrustNova is a premium brand, website, and digital marketing studio based in Hyderabad, India, working with clients worldwide.",
   keywords: [
     "logo design hyderabad",
     "brand identity india",

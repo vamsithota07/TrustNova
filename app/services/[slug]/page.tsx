@@ -37,8 +37,8 @@ function schema(page: NonNullable<ReturnType<typeof servicePageBySlug>>) {
       url,
       provider: { "@type": "ProfessionalService", "@id": `${SITE_URL}/#organization`, name: SITE_NAME, url: SITE_URL },
       areaServed: [
-        { "@type": "City", name: "Hyderabad" },
         { "@type": "Country", name: "India" },
+        "Worldwide",
       ],
       ...(false
         ? {}

@@ -103,7 +103,7 @@ export default function Footer() {
               · Hyderabad, Telangana, India
             </p>
             <p className="text-brand-blue text-xs">
-              Built with ♥ for Indian businesses
+              Built with ♥ for businesses everywhere
             </p>
           </div>
         </div>

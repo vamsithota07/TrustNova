@@ -18,7 +18,7 @@ export default function IndustriesPage() {
           <div className="mb-10 max-w-3xl md:mb-12">
             <p className="editorial-eyebrow mb-4">Industries we build for</p>
             <h1 className="editorial-heading text-[clamp(2.2rem,5vw,4rem)]">
-              Website designs for <span className="text-accent-warm">20+ industries</span> in Hyderabad
+              Website designs for <span className="text-accent-warm">20+ industries</span>, worldwide
             </h1>
             <p className="editorial-body mt-5 text-base leading-[1.75] md:text-lg">
               Every business needs something different from its website: a menu and table booking for a restaurant, appointments for a

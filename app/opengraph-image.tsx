@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "TrustNova - brand, website and digital marketing studio in Hyderabad";
+export const alt = "TrustNova - brand, website and digital marketing studio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -24,7 +24,7 @@ export default async function Image() {
               Trust<span style={{ color: TERRA }}>Nova</span>
             </div>
             <div style={{ display: "flex", fontSize: 36, fontWeight: 700, color: INK, marginTop: 18 }}>Brand, Website &amp; Digital Marketing Studio</div>
-            <div style={{ display: "flex", fontSize: 28, color: MUTED, marginTop: 10 }}>Hyderabad · Serving businesses across India</div>
+            <div style={{ display: "flex", fontSize: 28, color: MUTED, marginTop: 10 }}>Based in India · Working with clients worldwide</div>
             <div style={{ display: "flex", gap: 10, marginTop: 30 }}>
               {chips.map((c) => (
                 <div key={c} style={{ display: "flex", fontSize: 20, fontWeight: 700, color: TERRA, background: "#FFFFFF",

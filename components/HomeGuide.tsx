@@ -27,7 +27,7 @@ export const HOME_FAQS = [
   { q: "How long does a website take?", a: "A full website is typically live in 2-4 weeks, depending on how quickly content and feedback come in. Logo concepts are ready in 3-5 days." },
   { q: "Do I own the logo, files and website code?", a: "Yes. You own 100% of everything we create: every logo file, the brand assets and the website code. Your domain and hosting are bought in your name, so they stay yours." },
   { q: "How many revisions do I get?", a: "Unlimited. We keep refining until you are happy with the result." },
-  { q: "Do you only work with businesses in Hyderabad?", a: "We are based in Hyderabad and work with businesses across India. Most of the work happens over calls and WhatsApp, so location is never a problem." },
+  { q: "Do you only work with businesses in India?", a: "No. We are based in Hyderabad, India, and work with businesses anywhere in the world. Most of the work happens over calls and WhatsApp, so location is never a problem." },
   { q: "What do I need to get started?", a: "Just a few minutes to tell us about your business. Message us on WhatsApp at +91 95022 24444 or use the contact page, and we will set up a free consultation." },
 ];
 
@@ -38,7 +38,7 @@ export default function HomeGuide() {
         mainEntity: HOME_FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
       <Container>
         <SectionHeader eyebrow="What we do" heading="Branding, Websites and Marketing for Growing Businesses" highlight="Growing Businesses"
-          subtext="TrustNova is a brand, website and digital marketing studio in Hyderabad. We help small and growing businesses look professional, get found online and turn visitors into enquiries." />
+          subtext="TrustNova is a brand, website and digital marketing studio based in Hyderabad, India, working with clients worldwide. We help small and growing businesses look professional, get found online and turn visitors into enquiries." />
 
         <Reveal className="-mt-4 flex flex-wrap justify-center gap-3 md:-mt-8">
           {servicePages.map((s) => { const Icon = ICONS[s.slug] || PenTool; return (

@@ -129,7 +129,7 @@ export default function BrandStory() {
     <div className="max-w-[760px]">
       <p className="hero-rise inline-flex items-center gap-2.5 rounded-full border border-brand-rule bg-white/70 py-1.5 pl-2.5 pr-4 text-[11px] md:text-xs font-semibold uppercase tracking-[0.16em] text-brand-silver backdrop-blur-sm" style={{ animationDelay: "0.05s" }}>
         <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60" style={{ background: TERRA }} /><span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: TERRA }} /></span>
-        <span className="md:hidden">Design studio · Hyderabad</span><span className="hidden md:inline">Brand, web &amp; growth studio · Hyderabad</span>
+        <span className="md:hidden">Design studio · Worldwide</span><span className="hidden md:inline">Brand, web &amp; growth studio · Worldwide</span>
       </p>
       <h1 className="font-display mt-4 md:mt-7 font-bold text-brand-white leading-[0.95] tracking-[-0.055em] text-[clamp(2.9rem,6.6vw,6.9rem)]">
         <span className="block overflow-hidden pb-[0.06em]"><span className="hero-word block" style={{ animationDelay: "0.12s" }}>We build brands</span></span>
@@ -144,7 +144,7 @@ export default function BrandStory() {
             </span>
           </span>
         </span>
-        <span className="sr-only"> TrustNova, brand, website and digital marketing studio in Hyderabad</span>
+        <span className="sr-only"> TrustNova, brand, website and digital marketing studio</span>
       </h1>
       <p className="hero-rise editorial-body mt-4 md:mt-7 max-w-[540px] text-[15px] md:text-lg leading-[1.7]" style={{ animationDelay: "0.4s" }}>
         Logos, brand identities, websites and digital marketing for growing businesses. From the first sketch to your first customers, one studio does it all.

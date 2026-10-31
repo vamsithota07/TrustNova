@@ -30,7 +30,7 @@ const CASES: Record<string, { client: string; did: string; service: { label: str
 const FAQS = [
   { q: "Are these real client projects?", a: "Milletio Global Grain, Vistix Engineers and ASMC are client projects, and you can visit their live websites. The industry concept designs below them (Spice Route, Veritas Law and the others) are sample websites, not client projects, we designed to show how we would approach each kind of business." },
   { q: "Can you design for my industry?", a: `Yes. We have concept websites for ${industryCards.length} industries, from clinics and restaurants to law firms, real estate and gyms, and every project starts from a brief about your own business, so nothing is copied from a template.` },
-  { q: "Do you work with businesses outside Hyderabad?", a: "Yes. We are based in Hyderabad and work with businesses across India, and our clients include a dental clinic group in Oman. Most of the work happens over calls and WhatsApp." },
+  { q: "Do you work with businesses outside India?", a: "Yes. We are based in Hyderabad, India, and work with businesses anywhere in the world; our clients include a dental clinic group in Oman. Most of the work happens over calls and WhatsApp." },
   { q: "How long does a website like these take?", a: "A full website is typically live in 2-4 weeks, depending on how quickly content and feedback come in. Logo concepts are ready in 3-5 days." },
 ];
 

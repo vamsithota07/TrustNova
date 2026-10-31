@@ -21,7 +21,7 @@ export default function Logo({
     <span className={className}>
       <Image
         src={tight ? "/logo-ink-tight.png" : "/logo-ink.png"}
-        alt="TrustNova - brand, website and digital marketing studio, Hyderabad"
+        alt="TrustNova - brand, website and digital marketing studio"
         width={tight ? 738 : 280}
         height={tight ? 608 : 120}
         sizes="(max-width: 640px) 160px, 220px"

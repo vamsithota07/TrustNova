@@ -22,15 +22,15 @@ export const servicePages: ServicePage[] = [
   {
     slug: "logo-design-hyderabad",
     nav: "Logo design",
-    eyebrow: "Logo design · Hyderabad",
-    h1: "Logo design in Hyderabad for businesses that want to be remembered",
-    title: "Logo Design in Hyderabad - Unlimited Revisions | TrustNova",
+    eyebrow: "Logo design · Worldwide",
+    h1: "Logo design for businesses that want to be remembered",
+    title: "Logo Design - Unlimited Revisions | TrustNova",
     description:
-      "Custom logo design in Hyderabad. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days.",
-    keywords: ["logo design hyderabad", "logo designer hyderabad", "logo design company hyderabad", "custom logo design india"],
+      "Custom logo design for businesses anywhere in the world. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days.",
+    keywords: ["logo design hyderabad", "logo designer hyderabad", "logo design company hyderabad", "custom logo design india", "custom logo design online"],
     intro: [
       "Your logo is the first thing a customer sees: on your signboard, your bill, your Google listing and your Instagram page. If it looks like everyone else's, people forget it. If it looks considered, they assume the business behind it is too.",
-      "TrustNova is a brand and website studio based in Hyderabad. We design logos from scratch for shops, clinics, restaurants, consultants and startups across India. No templates and no clip art: you see three different directions, choose one, and we refine it until it feels right.",
+      "TrustNova is a brand and website studio based in Hyderabad, India. We design logos from scratch for shops, clinics, restaurants, consultants and startups, wherever they are. No templates and no clip art: you see three different directions, choose one, and we refine it until it feels right.",
     ],
     includes: {
       heading: "What you get",
@@ -63,18 +63,18 @@ export const servicePages: ServicePage[] = [
       { q: "How many concepts will I see?", a: "Three. Each is a different idea, not three versions of the same one." },
       { q: "What if I don't like any of them?", a: "Tell us what is missing and we rework the direction. Revisions are unlimited, so you are not charged for changing your mind." },
       { q: "Who owns the logo?", a: "You do. You own 100% of the final files, with no licence fees and no lock-in." },
-      { q: "Do you work with businesses outside Hyderabad?", a: "Yes. We are based in Hyderabad and work with clients across India over call, WhatsApp and email." },
+      { q: "Do you work with businesses outside India?", a: "Yes. We are based in Hyderabad, India, and work with clients anywhere in the world over video call, WhatsApp and email." },
     ],
     schemaName: "Logo Design",
   },
   {
     slug: "brand-identity-design",
     nav: "Brand identity",
-    eyebrow: "Brand identity · Hyderabad & India",
+    eyebrow: "Brand identity · Worldwide",
     h1: "Brand identity design: one consistent look across everything you put out",
-    title: "Brand Identity Design in Hyderabad | TrustNova",
+    title: "Brand Identity Design | TrustNova",
     description:
-      "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide. Based in Hyderabad.",
+      "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide, for clients worldwide.",
     keywords: ["brand identity design hyderabad", "branding agency hyderabad", "brand identity package india", "business card and letterhead design"],
     intro: [
       "A logo is one mark. A brand identity is the whole system around it: the colours, the fonts, the stationery, the templates and the rules that keep them consistent. Without that system, a business ends up with one look on its board, another on its bill and a third on Instagram.",
@@ -118,15 +118,15 @@ export const servicePages: ServicePage[] = [
   {
     slug: "website-design-hyderabad",
     nav: "Website design",
-    eyebrow: "Website design · Hyderabad",
-    h1: "Website design in Hyderabad, built to bring you enquiries",
-    title: "Website Design in Hyderabad - Live in 2-4 Weeks | TrustNova",
+    eyebrow: "Website design · Worldwide",
+    h1: "Website design built to bring you enquiries",
+    title: "Website Design - Live in 2-4 Weeks | TrustNova",
     description:
-      "Custom, mobile-first website design in Hyderabad. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks.",
+      "Custom, mobile-first website design for businesses anywhere. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks.",
     keywords: ["website design hyderabad", "web designer hyderabad", "website development company hyderabad", "small business website india"],
     intro: [
       "Most of your customers look you up on their phone before they call or visit. If they find a slow, confusing site, or no site at all, they move on to the next result. A website's job is simple: say clearly what you do, look trustworthy, and make it easy to get in touch.",
-      "We design and build custom websites for businesses in Hyderabad and across India. Each one is designed around your brand, built for phones first, and set up so that a visitor can message you on WhatsApp in one tap.",
+      "We design and build custom websites for businesses in India and around the world. Each one is designed around your brand, built for phones first, and set up so that a visitor can message you on WhatsApp in one tap.",
     ],
     includes: {
       heading: "What is included",
@@ -168,15 +168,15 @@ export const servicePages: ServicePage[] = [
   {
     slug: "digital-marketing-hyderabad",
     nav: "Digital marketing",
-    eyebrow: "Digital marketing · Hyderabad",
-    h1: "Digital marketing in Hyderabad that aims at enquiries, not just likes",
-    title: "Digital Marketing in Hyderabad - SEO, Social & Ads | TrustNova",
+    eyebrow: "Digital marketing · Worldwide",
+    h1: "Digital marketing that aims at enquiries, not just likes",
+    title: "Digital Marketing - SEO, Social & Ads | TrustNova",
     description:
-      "Digital marketing for Hyderabad businesses: SEO, Google Business Profile, social media and Google & Meta ads, with clear monthly reporting. Free consultation.",
+      "Digital marketing for businesses anywhere: SEO, Google Business Profile, social media and Google & Meta ads, with clear monthly reporting. Free consultation.",
     keywords: ["digital marketing hyderabad", "seo services hyderabad", "google business profile optimisation", "social media marketing hyderabad"],
     intro: [
       "A good website still needs people to find it. That takes steady work in a few places: showing up when someone searches on Google, having a complete Google Business Profile, posting consistently, and running ads that are aimed at a result.",
-      "We run digital marketing on monthly plans for businesses in Hyderabad and across India. Every plan starts with a free consultation, because the right mix for a clinic is not the right mix for a restaurant or a coaching centre.",
+      "We run digital marketing on monthly plans for businesses in India and around the world. Every plan starts with a free consultation, because the right mix for a clinic is not the right mix for a restaurant or a coaching centre.",
     ],
     includes: {
       heading: "What we can cover",

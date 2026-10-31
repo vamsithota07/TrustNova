@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Guides for Small Business Owners: Websites, Branding, Google | TrustNova",
   description:
-    "Plain answers to the questions Hyderabad business owners ask about websites, logos, branding and getting found on Google.",
+    "Plain answers to the questions small business owners ask about websites, logos, branding and getting found on Google.",
   path: "/guides",
 });
 

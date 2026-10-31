@@ -21,11 +21,11 @@ export const guides: Guide[] = [
   {
     slug: "website-cost-small-business-hyderabad",
     nav: "What decides a website's cost",
-    title: "What Decides the Cost of a Small Business Website in Hyderabad? | TrustNova",
+    title: "What Decides the Cost of a Small Business Website? | TrustNova",
     description:
       "A website's cost comes down to five things: pages, custom or template design, content, features, and care after launch. What to ask for in a quote, and what to avoid.",
     keywords: ["website cost hyderabad", "website design cost small business india", "how much does a website cost hyderabad"],
-    h1: "What decides the cost of a small business website in Hyderabad?",
+    h1: "What decides the cost of a small business website?",
     answer:
       "Five things decide it: how many pages you need, whether the design is custom or a template, who writes the words and supplies the photos, what the site has to do (forms, bookings, payments), and who looks after it after launch. Get every quote to list all five in writing, and you can compare them fairly.",
     sections: [
@@ -85,7 +85,7 @@ export const guides: Guide[] = [
       { q: "Do I pay for the website every year?", a: "The design and build are paid once. The domain and hosting renew every year, and ongoing care (updates, backups, monitoring) is optional and monthly." },
       { q: "How long does a website take?", a: "With TrustNova, full websites take 2-4 weeks. The homepage design comes first, so you can change it before the rest is built." },
     ],
-    service: { href: "/services/website-design-hyderabad", label: "Website design in Hyderabad" },
+    service: { href: "/services/website-design-hyderabad", label: "Website design" },
     updated: "2026-10-28",
   },
   {
@@ -140,7 +140,7 @@ export const guides: Guide[] = [
       { q: "What should I do first, a website or Google Business Profile?", a: "The Google Business Profile: it's free, and it's how people nearby find you on Maps. Link your website to it once you have one." },
       { q: "Does TrustNova do Instagram as well as websites?", a: "Yes. Our social media management covers a content calendar, post design for Instagram, Facebook and LinkedIn, reels planning, posting and a monthly report." },
     ],
-    service: { href: "/services/digital-marketing-hyderabad", label: "Digital marketing in Hyderabad" },
+    service: { href: "/services/digital-marketing-hyderabad", label: "Digital marketing" },
     updated: "2026-10-28",
   },
   {

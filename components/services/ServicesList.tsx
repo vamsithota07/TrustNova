@@ -31,7 +31,7 @@ export default function ServicesList() {
         <div className="mb-12 max-w-3xl md:mb-16">
           <p className="editorial-eyebrow mb-4">Services</p>
           <h1 className="editorial-heading text-[clamp(2.2rem,5vw,4rem)]">
-            Logo, branding, websites and <span className="text-accent-warm">digital marketing</span> in Hyderabad
+            Logo, branding, websites and <span className="text-accent-warm">digital marketing</span>, worldwide
           </h1>
           <p className="editorial-body mt-5 text-base leading-[1.75] md:text-lg">
             Five services that work on their own or together, from the first sketch of your logo to the customers who find you on Google.

@@ -38,7 +38,7 @@ export const featuredProjects: PortfolioProject[] = [
     description:
       "React + Vite marketing site for HVAC systems, cleanroom solutions, cold rooms, AHU fabrication and pharmaceutical-grade engineering in Hyderabad.",
     image: "/portfolio/vistix-preview.png",
-    imageAlt: "HVAC engineering website design by TrustNova Hyderabad",
+    imageAlt: "HVAC engineering website design by TrustNova",
     href: "https://vistixengineers.com/",
     panelBg: "#1B2A6B",
     panelText: "#FFFFFF",
@@ -76,7 +76,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Professional",
     description: "Sample law firm website we designed: authority-led layout, practice areas and consultation flows.",
     industryId: "law",
-    imageAlt: "Law firm website design by TrustNova Hyderabad",
+    imageAlt: "Law firm website design by TrustNova",
     panelBg: "#EFE6DE",
     panelText: "#0D1117",
   },
@@ -87,7 +87,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Retail & Products",
     description: "Sample jewellery storefront we designed: collection grids and trust-first product presentation.",
     industryId: "jewellery",
-    imageAlt: "Jewellery shop website design by TrustNova Hyderabad",
+    imageAlt: "Jewellery shop website design by TrustNova",
     panelBg: "#9BB5A0",
     panelText: "#FFFFFF",
   },
@@ -98,7 +98,7 @@ export const portfolioProjects: PortfolioProject[] = [
     category: "Health & Wellness",
     description: "Sample clinic website we designed: appointments, clear services and patient confidence.",
     industryId: "clinic",
-    imageAlt: "Clinic website design by TrustNova Hyderabad",
+    imageAlt: "Clinic website design by TrustNova",
     panelBg: "#B5482A",
     panelText: "#FFFFFF",
   },
@@ -116,7 +116,7 @@ export const portfolioProjects: PortfolioProject[] = [
 ];
 
 export const studioExperience = [
-  { period: "2024 - Present", role: "Brand & Creative Studio", org: "TrustNova · Hyderabad" },
+  { period: "2024 - Present", role: "Brand & Creative Studio", org: "TrustNova" },
   { period: "2024", role: "20+ Industry Concept Designs", org: "Sample websites for each sector" },
   { period: "2025", role: "Pan-India Clients", org: "SMEs, startups & local brands" },
 ];

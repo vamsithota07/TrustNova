@@ -68,7 +68,7 @@ const contactCards = [
     icon: MapPin,
     label: "Studio",
     value: "Hyderabad, Telangana, India",
-    hint: "Serving clients across India",
+    hint: "Working with clients worldwide",
   },
   {
     icon: Clock,

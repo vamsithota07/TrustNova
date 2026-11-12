@@ -24,9 +24,9 @@ export const servicePages: ServicePage[] = [
     nav: "Logo design",
     eyebrow: "Logo design · Worldwide",
     h1: "Logo design for businesses that want to be remembered",
-    title: "Logo Design - Unlimited Revisions | TrustNova",
+    title: "Logo Design Studio in Hyderabad, Worldwide | TrustNova",
     description:
-      "Custom logo design for businesses anywhere in the world. Three unique concepts, unlimited refinements, colour palette, fonts and every file format. Concepts in 3-5 days.",
+      "Custom logo design for businesses anywhere: three unique concepts, unlimited refinements and every file format, with concepts ready in 3-5 days.",
     keywords: ["logo design hyderabad", "logo designer hyderabad", "logo design company hyderabad", "custom logo design india", "custom logo design online"],
     intro: [
       "Your logo is the first thing a customer sees: on your signboard, your bill, your Google listing and your Instagram page. If it looks like everyone else's, people forget it. If it looks considered, they assume the business behind it is too.",
@@ -72,7 +72,7 @@ export const servicePages: ServicePage[] = [
     nav: "Brand identity",
     eyebrow: "Brand identity · Worldwide",
     h1: "Brand identity design: one consistent look across everything you put out",
-    title: "Brand Identity Design | TrustNova",
+    title: "Brand Identity Design in Hyderabad & Worldwide | TrustNova",
     description:
       "Complete brand identity package: logo, colours, fonts, business cards, letterhead, social media templates and a brand style guide, for clients worldwide.",
     keywords: ["brand identity design hyderabad", "branding agency hyderabad", "brand identity package india", "business card and letterhead design"],
@@ -120,7 +120,7 @@ export const servicePages: ServicePage[] = [
     nav: "Website design",
     eyebrow: "Website design · Worldwide",
     h1: "Website design built to bring you enquiries",
-    title: "Website Design - Live in 2-4 Weeks | TrustNova",
+    title: "Website Design in Hyderabad, Live in 2-4 Weeks | TrustNova",
     description:
       "Custom, mobile-first website design for businesses anywhere. Up to 8 pages, WhatsApp click-to-chat, basic SEO and Google Analytics. Live in 2-4 weeks.",
     keywords: ["website design hyderabad", "web designer hyderabad", "website development company hyderabad", "small business website india"],
@@ -170,7 +170,7 @@ export const servicePages: ServicePage[] = [
     nav: "Digital marketing",
     eyebrow: "Digital marketing · Worldwide",
     h1: "Digital marketing that aims at enquiries, not just likes",
-    title: "Digital Marketing - SEO, Social & Ads | TrustNova",
+    title: "Digital Marketing in Hyderabad: SEO, Social, Ads | TrustNova",
     description:
       "Digital marketing for businesses anywhere: SEO, Google Business Profile, social media and Google & Meta ads, with clear monthly reporting. Free consultation.",
     keywords: ["digital marketing hyderabad", "seo services hyderabad", "google business profile optimisation", "social media marketing hyderabad"],

@@ -26,7 +26,7 @@ export const pageSEO = {
   home: {
     title: "Brand, Website & Digital Marketing Studio | TrustNova",
     description:
-      "We design brands, build conversion-focused websites, and run digital marketing that helps businesses get found and grow. Based in Hyderabad, India, working with clients worldwide.",
+      "Brand, website and digital marketing studio. We design logos, build websites that bring enquiries and help businesses get found. Hyderabad-based, worldwide.",
     keywords: [
       "logo design hyderabad",
       "website design hyderabad",
@@ -43,7 +43,7 @@ export const pageSEO = {
   services: {
     title: "Our Services - Branding, Websites & Digital Marketing | TrustNova",
     description:
-      "Branding, website design, SEO, social media, Google Business Profile optimisation, and paid digital marketing for businesses anywhere in the world. Based in Hyderabad, India.",
+      "Logo and brand identity design, websites, SEO, Google Business Profile, social media and ads for small businesses. Based in Hyderabad, working worldwide.",
     keywords: [
       "logo design india",
       "website design india",
@@ -74,13 +74,13 @@ export const pageSEO = {
   about: {
     title: "About TrustNova - Brand & Creative Studio",
     description:
-      "TrustNova is a Brand and Creative Studio founded in Hyderabad, India, to help businesses everywhere build powerful brands and professional websites that earn trust and drive growth.",
+      "TrustNova is a brand, website and digital marketing studio founded by Vamsi Thota in Hyderabad. You work directly with the person designing your work.",
     path: "/about",
   },
   contact: {
     title: "Contact TrustNova - Start Your Brand or Website Project",
     description:
-      "Get in touch with TrustNova to start your logo, brand identity, or website project. Based in Hyderabad, India, working with clients worldwide. WhatsApp: +91 9502224444. Email: info@trustnova.in",
+      "Start your logo, brand or website project with TrustNova. WhatsApp +91 95022 24444 or email info@trustnova.in. Based in Hyderabad, working worldwide.",
     path: "/contact",
   },
   terms: {
@@ -299,6 +299,13 @@ export function professionalServiceSchema() {
       closes: "19:00",
     },
     sameAs: [socialLinks.instagram, socialLinks.x, socialLinks.linkedin],
+    founder: {
+      "@type": "Person",
+      name: "Vamsi Thota",
+      jobTitle: "Founder",
+      image: `${SITE_URL}/avatar.png`,
+      url: `${SITE_URL}/about`,
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "TrustNova Services",

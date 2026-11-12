@@ -6,8 +6,13 @@ import Container from "@/components/Container";
 import { fadeInLeft, fadeInRight, fadeInUp, inViewOptions } from "@/lib/constants";
 import { useIsMobile } from "@/lib/hooks";
 
-/** The person visitors will work with. Shown as soon as it is filled in (photo in /public/team/). */
-const FOUNDER: { name: string; role: string; photo: string; line: string } | null = null;
+/** The person visitors will work with (the same picture as on the portfolio page). */
+const FOUNDER: { name: string; role: string; photo: string; line: string } | null = {
+  name: "Vamsi Thota",
+  role: "Founder, TrustNova",
+  photo: "/avatar.png",
+  line: "Message me directly on WhatsApp: +91 95022 24444",
+};
 
 const clients = [
   { name: "Milletio Global Grain", what: "Digital marketing" },

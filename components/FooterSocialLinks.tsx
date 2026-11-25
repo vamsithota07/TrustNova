@@ -1,6 +1,6 @@
 "use client";
 
-import { Instagram, Linkedin, Mail } from "lucide-react";
+import { Instagram, Linkedin, Mail, Youtube } from "lucide-react";
 import { socialLinks } from "@/lib/constants";
 
 function XIcon({ className }: { className?: string }) {
@@ -31,6 +31,11 @@ const externalLinks = [
     href: socialLinks.linkedin,
     label: "TrustNova on LinkedIn",
     icon: Linkedin,
+  },
+  {
+    href: socialLinks.youtube,
+    label: "TrustNova on YouTube",
+    icon: Youtube,
   },
 ] as const;
 

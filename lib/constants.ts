@@ -62,6 +62,7 @@ export const socialLinks = {
   gmail: `mailto:${EMAIL}`,
   x: "https://x.com/trustnovain",
   linkedin: "https://www.linkedin.com/company/trustnova-in/",
+  youtube: "https://www.youtube.com/@trustnovain",
 };
 
 export const siteMetadata = {
